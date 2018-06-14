@@ -1,0 +1,5 @@
+src
+coverage
+.travis.yml
+.idea
+.eslintignore
