@@ -1,12 +1,15 @@
 import Log from './cmp/infrastructure/Log'
-import ConsentManagementProvider from './cmp/application/ConsentManagementProvider'
 import IABConsentManagementProviderV1 from './cmp/infrastructure/controller/IABConsentManagementProviderV1'
 import commandConsumer from './cmp/infrastructure/controller/commandConsumer'
+import PingUseCase from './cmp/application/PingUseCase'
 
 const log = new Log({console})
-const cmp = new ConsentManagementProvider()
+
+// Supported use cases
+const pingUseCase = new PingUseCase()
+
 const iabCMP = new IABConsentManagementProviderV1({
-  consentManagementProvider: cmp
+  pingUseCase
 })
 
 window.__cmp = window.__cmp || commandConsumer(log)(iabCMP)
