@@ -1,3 +1,5 @@
+import Ping from '../domain/ping/Ping'
+
 export default class PingUseCase {
   /**
    * The "ping" command invokes the callback immediately with information about whether the main CMP script
@@ -5,9 +7,12 @@ export default class PingUseCase {
    * command's implementation and this configuration to be in the stub).
    */
   ping() {
-    return Promise.resolve().then(() => ({
-      gdprAppliesGlobally: false, // TODO global feature not supported yet
-      cmpLoaded: true
-    }))
+    return Promise.resolve().then(
+      () =>
+        new Ping({
+          gdprAppliesGlobally: false, // TODO global feature not supported yet
+          cmpLoaded: true
+        })
+    )
   }
 }
