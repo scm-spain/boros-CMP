@@ -8,8 +8,8 @@
     "prepublishOnly": "npm run cleanDistFolder && npm run build",
     "build": "npm run cleanDistFolder && babel src --ignore test --out-dir dist ",
     "test": "mocha --recursive --require babel-polyfill --compilers js:babel-register \"test/**/*.js\"",
-    "coverage": "istanbul cover --report html _mocha -- ./src/*test --recursive --compilers js:babel-register",
-    "coverage:ci": "istanbul cover _mocha -- ./src/*test --recursive --compilers js:babel-register && codecov",
+    "coverage": "istanbul cover --report html _mocha -- ./test --recursive --compilers js:babel-register",
+    "coverage:ci": "istanbul cover _mocha -- ./test --recursive --compilers js:babel-register && codecov",
     "lint": "sui-lint js"
   },
   "repository": {
