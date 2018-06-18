@@ -1,11 +1,15 @@
-const commandConsumer = log => cmp => (command, parameters, observer) => {
+const commandConsumer = log => controller => (
+  command,
+  parameters,
+  observer
+) => {
   return Promise.resolve()
     .then(() => log.debug('Received command:', command))
     .then(() => {
-      if (command && typeof cmp[command] === 'function') {
-        return Promise.resolve(cmp[command](parameters))
-          .then(result => observer(...result))
-          .then(null)
+      if (command && typeof controller[command] === 'function') {
+        return Promise.resolve(controller[command](parameters, observer)).then(
+          null
+        )
       } else {
         return Promise.reject(new Error('Unexisting command: ' + command))
       }
