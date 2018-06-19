@@ -52,5 +52,7 @@
       "./node_modules/@s-ui/lint/eslintrc.js"
     ]
   },
-  "dependencies": {}
+  "dependencies": {
+    "whatwg-fetch": "^2.0.4"
+  }
 }

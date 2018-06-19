@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import {expect} from 'chai'
-import PingUseCase from "../../../src/cmp/application/PingUseCase";
+import PingUseCase from '../../../src/cmp/application/PingUseCase'
 
 describe('Ping Use Case', () => {
     it('Should return directly with the IAB PingReturn specification', done => {
