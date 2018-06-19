@@ -1,6 +1,3 @@
-/* eslint-disable no-undef */
-import 'whatwg-fetch'
-
 export default class GetVendorListUseCase {
   constructor({vendorRepository}) {
     this._vendorRepository = vendorRepository
