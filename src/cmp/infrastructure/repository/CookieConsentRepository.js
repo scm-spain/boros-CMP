@@ -2,9 +2,9 @@
  * @class
  * @implements ConsentRepository
  */
-export default class LocalConsentRepository {
-  constructor({document}) {
-    this._document = document
+export default class CookieConsentRepository {
+  constructor({dom}) {
+    this._dom = dom
   }
 
   getConsentData() {
@@ -15,7 +15,7 @@ export default class LocalConsentRepository {
   }
 
   _readCookie(name) {
-    const value = `; ${this._document.cookie}`
+    const value = `; ${this._dom.cookie}`
     const parts = value.split(`; ${name}=`)
     if (parts.length === 2) {
       return parts

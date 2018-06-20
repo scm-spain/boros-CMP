@@ -1,8 +1,8 @@
 /* eslint-disable prettier/prettier */
-import LocalConsentRepository from '../../../../src/cmp/infrastructure/repository/LocalConsentRepository'
 import {expect} from 'chai'
+import CookieConsentRepository from '../../../../src/cmp/infrastructure/repository/CookieConsentRepository'
 
-describe('LocalConsentRepository test', () => {
+describe('CookieConsentRepository test', () => {
   describe('getConsentData method', () => {
     it('Should return the consent data from vendor cookie', done => {
       const expectedEuconsent = 'BOPVloMOPi60FABABAENBA-AAAAcF7_______9______9uz_Gv_r_f__33e8_39v_h_7_-___m_-3zV4-_lvR11yPA1OrfIrwFhiAwAA'
@@ -11,11 +11,11 @@ describe('LocalConsentRepository test', () => {
         cookie: givenCookieValue
       }
 
-      const localConsentRepository = new LocalConsentRepository({
-        document: documentMock
+      const repository = new CookieConsentRepository({
+        dom: documentMock
       })
 
-      localConsentRepository.getConsentData()
+      repository.getConsentData()
         .then(result => {
           expect(result, 'result should be the expected consent data from the cookie').to.deep.equal(expectedEuconsent)
          })
@@ -27,11 +27,11 @@ describe('LocalConsentRepository test', () => {
         cookie: ""
       }
 
-      const localConsentRepository = new LocalConsentRepository({
-        document: documentMock
+      const repository = new CookieConsentRepository({
+        dom: documentMock
       })
 
-      localConsentRepository.getConsentData()
+      repository.getConsentData()
         .then(result => {
           expect(result, 'result should be the expected consent data from the cookie').to.deep.equal(undefined)
         })
