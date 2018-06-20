@@ -8,21 +8,23 @@ export default class CookieConsentRepository {
   }
 
   getConsentData() {
-    return Promise.resolve().then(() => {
-      const cookie = this._readCookie(VENDOR_CONSENT_COOKIE_NAME)
-      return cookie
-    })
+    return Promise.resolve().then(() =>
+      this._readCookie({cookieName: VENDOR_CONSENT_COOKIE_NAME})
+    )
   }
 
-  _readCookie(name) {
-    const value = `; ${this._dom.cookie}`
-    const parts = value.split(`; ${name}=`)
-    if (parts.length === 2) {
-      return parts
-        .pop()
-        .split(';')
-        .shift()
-    }
+  _readCookie({cookieName}) {
+    return Promise.resolve()
+      .then(() => `; ${this._dom.cookie}`.split(`; ${cookieName}=`))
+      .then(
+        cookieParts =>
+          (cookieParts.length === 2 &&
+            cookieParts
+              .pop()
+              .split(';')
+              .shift()) ||
+          undefined
+      )
   }
 }
 const VENDOR_CONSENT_COOKIE_NAME = 'euconsent'

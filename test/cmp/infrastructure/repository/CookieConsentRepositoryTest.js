@@ -33,7 +33,7 @@ describe('CookieConsentRepository test', () => {
 
       repository.getConsentData()
         .then(result => {
-          expect(result, 'result should be the expected consent data from the cookie').to.deep.equal(undefined)
+          expect(result, 'result should be the expected consent data from the cookie').to.undefined
         })
         .then(() => done())
         .catch(e => done(e))
