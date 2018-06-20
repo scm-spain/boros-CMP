@@ -2,6 +2,7 @@
 import GetConsentDataUseCase from '../../../src/cmp/application/GetConsentDataUseCase'
 import sinon from 'sinon'
 import {expect} from 'chai'
+import VendorConsentData from '../../../src/cmp/domain/VendorConsentData'
 
 describe('GetConsentDataUseCase test', () => {
   describe('getConsentData method', () => {
@@ -23,17 +24,14 @@ describe('GetConsentDataUseCase test', () => {
         hasGlobalScope: givenHasGlobalScope
       })
 
-      const expectedResult = {
-        gdprApplies: givenGdprApplies,
-        hasGlobalScope: givenHasGlobalScope,
-        consentData: givenConsentData
-      }
-
       getConsentDataUseCase
         .getConsentData()
         .then(result => {
           expect(getConsentDataRepositorySpy.calledOnce, 'getConsentData should be called once').to.be.true
-          expect(result, 'expected result does not match with the current result.').to.deep.equal(expectedResult)
+          expect(result).to.be.an.instanceOf(VendorConsentData)
+          expect(result.consentData, 'Value does not match with the expected.').equal(givenConsentData)
+          expect(result.hasGlobalScope, 'Value does not match with the expected.').equal(givenHasGlobalScope)
+          expect(result.gdprApplies, 'Value does not match with the expected.').equal(givenGdprApplies)
         })
         .then(() => done())
         .catch(e => done(e))
