@@ -14,14 +14,14 @@ export default class GetConsentDataUseCase {
    */
   getConsentData({consentStringVersion = null} = {}) {
     // TODO: support consentStringVersion.
-    return Promise.resolve().then(() =>
-      this._consentRepository.getConsentData().then(consentData => {
+    return Promise.resolve()
+      .then(() => this._consentRepository.getConsentData())
+      .then(consentData => {
         return new VendorConsentData({
           hasGlobalScope: this._hasGlobalScope,
           gdprApplies: this._gdprApplies,
           consentData: consentData
         })
       })
-    )
   }
 }
