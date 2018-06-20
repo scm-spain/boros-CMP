@@ -50,4 +50,19 @@ describe('IAB Consent Management Provider V1', () => {
                 .catch(e => done(e))
         })
     })
+  describe('getConsentStatus method', ()=>{
+    it('Should return the consent status', done => {
+      const expectedResult = 'ACCEPTED'
+      const consentStatusUseCaseMock = {
+        getConsentStatus: () => Promise.resolve().then(() => expectedResult)
+      }
+      const iabCMP = new IABConsentManagementProviderV1({getConsentStatusUseCase: consentStatusUseCaseMock})
+      iabCMP.getConsentStatus()
+        .then(result => {
+          expect(result, 'Should be ACCEPTED').equal(expectedResult)
+          done()
+        })
+        .catch(e => done(e))
+    })
+  })
 })

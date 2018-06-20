@@ -4,6 +4,7 @@ import commandConsumer from './cmp/infrastructure/controller/commandConsumer'
 import PingUseCase from './cmp/application/PingUseCase'
 import GetConsentDataUseCase from './cmp/application/GetConsentDataUseCase'
 import LocalConsentRepository from './cmp/infrastructure/repository/LocalConsentRepository'
+import GetConsentStatusUseCase from './cmp/application/GetConsentStatusUseCase'
 
 const log = new Log({console})
 
@@ -23,10 +24,14 @@ const getConsentDataUseCase = new GetConsentDataUseCase({
   hasGlobalScope: DEFAULT_HAS_GLOBAL_SCOPE,
   gdprApplies: DEFAULT_GDPR_APPLIES
 })
+const getConsentStatusUseCase = new GetConsentStatusUseCase({
+  consentRepository: consentRepository
+})
 
 const iabCMP = new IABConsentManagementProviderV1({
   pingUseCase,
-  getConsentDataUseCase
+  getConsentDataUseCase,
+  getConsentStatusUseCase
 })
 
 window.__cmp = window.__cmp || commandConsumer(log)(iabCMP)
