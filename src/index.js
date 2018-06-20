@@ -3,7 +3,7 @@ import IABConsentManagementProviderV1 from './cmp/infrastructure/controller/IABC
 import commandConsumer from './cmp/infrastructure/controller/commandConsumer'
 import PingUseCase from './cmp/application/PingUseCase'
 import GetConsentDataUseCase from './cmp/application/GetConsentDataUseCase'
-import LocalConsentRepository from './cmp/infrastructure/repository/LocalConsentRepository'
+import CookieConsentRepository from './cmp/infrastructure/repository/CookieConsentRepository'
 import GetConsentStatusUseCase from './cmp/application/GetConsentStatusUseCase'
 
 const log = new Log({console})
@@ -13,8 +13,8 @@ const DEFAULT_GDPR_APPLIES = true
 const DEFAULT_HAS_GLOBAL_SCOPE = false
 
 // Resolve dependencies
-const consentRepository = new LocalConsentRepository({
-  document: window.document
+const consentRepository = new CookieConsentRepository({
+  dom: window.document
 })
 
 // Supported use cases
