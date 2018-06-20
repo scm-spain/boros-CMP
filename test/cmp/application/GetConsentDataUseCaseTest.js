@@ -6,9 +6,11 @@ import {expect} from 'chai'
 describe('GetConsentDataUseCase test', () => {
   describe('getConsentData method', () => {
     it('Should return the consent data', done => {
-      const expectedConsentData = '{ "1" : true }'
+      const givenGdprApplies = true
+      const givenHasGlobalScope = false
+      const givenConsentData = '{ "1" : true }'
       const consentRepositoryMock = {
-        getConsentData: () => Promise.resolve(expectedConsentData)
+        getConsentData: () => Promise.resolve(givenConsentData)
       }
       const getConsentDataRepositorySpy = sinon.spy(
         consentRepositoryMock,
@@ -16,14 +18,22 @@ describe('GetConsentDataUseCase test', () => {
       )
 
       const getConsentDataUseCase = new GetConsentDataUseCase({
-        consentRepository: consentRepositoryMock
+        consentRepository: consentRepositoryMock,
+        gdprApplies: givenGdprApplies,
+        hasGlobalScope: givenHasGlobalScope
       })
+
+      const expectedResult = {
+        gdprApplies: givenGdprApplies,
+        hasGlobalScope: givenHasGlobalScope,
+        consentData: givenConsentData
+      }
 
       getConsentDataUseCase
         .getConsentData()
         .then(result => {
           expect(getConsentDataRepositorySpy.calledOnce, 'getConsentData should be called once').to.be.true
-          expect(result, 'result should be the expected consent data returned by the repository').to.deep.equal(expectedConsentData)
+          expect(result, 'expected result does not match with the current result.').to.deep.equal(expectedResult)
         })
         .then(() => done())
         .catch(e => done(e))
