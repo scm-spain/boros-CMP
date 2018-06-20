@@ -53,6 +53,7 @@
     ]
   },
   "dependencies": {
+    "consent-string": "^1.2.4",
     "whatwg-fetch": "^2.0.4"
   }
 }
