@@ -13,20 +13,6 @@ export default class CookieConsentRepository {
     )
   }
 
-  setConsentData({consentData}) {
-    return Promise.resolve()
-      .then(() => {
-        this._writeCookie({
-          cookieName: VENDOR_CONSENT_COOKIE_NAME,
-          consentData
-        })
-      })
-      .then(() => {
-        return null
-      })
-      .catch(e => {})
-  }
-
   _readCookie({cookieName}) {
     return Promise.resolve()
       .then(() => `; ${this._dom.cookie}`.split(`; ${cookieName}=`))
@@ -40,7 +26,5 @@ export default class CookieConsentRepository {
           undefined
       )
   }
-
-  _writeCookie({cookieName, consentData}) {}
 }
 const VENDOR_CONSENT_COOKIE_NAME = 'euconsent'
