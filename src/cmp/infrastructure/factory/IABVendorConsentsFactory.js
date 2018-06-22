@@ -17,7 +17,7 @@ export default class IABVendorConsentsFactory {
         ).then(vendorIds => {
           let vendorConsents = {}
           vendorIds.forEach(id => {
-            vendorConsents.id = consent.isVendorAllowed(id)
+            vendorConsents[id] = consent.isVendorAllowed(id)
           })
           return vendorConsents
         }),
@@ -25,7 +25,7 @@ export default class IABVendorConsentsFactory {
           purposeIds => {
             let purposeConsents = {}
             purposeIds.forEach(id => {
-              purposeConsents.id = consent.isPurposeAllowed(id)
+              purposeConsents[id] = consent.isPurposeAllowed(id)
             })
             return purposeConsents
           }

@@ -27,13 +27,13 @@
 export default class VendorConsents {
   constructor({
     metadata,
-    gdrpApplies,
+    gdprApplies,
     hasGlobalScope,
     purposeConsents,
     vendorConsents
   }) {
     this._metadata = metadata
-    this._gdrpApplies = gdrpApplies
+    this._gdprApplies = gdprApplies
     this._hasGlobalScope = hasGlobalScope
     this._purposeConsents = purposeConsents
     this._vendorConsents = vendorConsents
@@ -43,8 +43,8 @@ export default class VendorConsents {
     return this._metadata
   }
 
-  get gdrpApplies() {
-    return this._gdrpApplies
+  get gdprApplies() {
+    return this._gdprApplies
   }
 
   get hasGlobalScope() {
