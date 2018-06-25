@@ -5,7 +5,7 @@ import VendorConsents from '../../domain/VendorConsents'
  * @implements VendorConsentsFactory
  */
 export default class IABVendorConsentsFactory {
-  constructor({gdprApplies, storeConsentGlobally}) {
+  constructor({gdprApplies = true, storeConsentGlobally = false} = {}) {
     this._gdprApplies = gdprApplies
     this._storeConsentGlobally = storeConsentGlobally
   }
@@ -13,7 +13,11 @@ export default class IABVendorConsentsFactory {
     return Promise.resolve().then(() =>
       Promise.all([
         Promise.resolve(
-          allowedVendorIds || globalVendorList.vendors.map(v => v.id)
+          (allowedVendorIds &&
+            globalVendorList.vendors
+              .map(v => v.id)
+              .filter(id => allowedVendorIds.indexOf(id) !== -1)) ||
+            globalVendorList.vendors.map(v => v.id)
         ).then(vendorIds => {
           let vendorConsents = {}
           vendorIds.forEach(id => {
