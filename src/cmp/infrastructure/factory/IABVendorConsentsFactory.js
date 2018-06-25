@@ -40,7 +40,7 @@ export default class IABVendorConsentsFactory {
       ]).then(
         ([vendorConsents, purposeConsents]) =>
           new VendorConsents({
-            gdrpApplies: this._gdprApplies,
+            gdprApplies: this._gdprApplies,
             hasGlobalScope: this._storeConsentGlobally,
             metadata: consent.getMetadataString(),
             vendorConsents,

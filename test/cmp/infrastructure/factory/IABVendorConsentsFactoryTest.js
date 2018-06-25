@@ -62,7 +62,7 @@ describe('IAB VendorConsents Factory', () => {
       const givenGlobalVendorList = require('./../../resources/globalvendorlist.json')
       const givenPurposesAllowed = [1, 2]
       const givenVendorsAllowed = [1, 6]
-      const givenAllowedVendorsIds = [1, 5, 6]
+      const givenAllowedVendorIds = [1, 5, 6]
 
       const givenConsent = new ConsentString()
       givenConsent.setPurposesAllowed(givenPurposesAllowed)
@@ -77,13 +77,39 @@ describe('IAB VendorConsents Factory', () => {
         .createVendorConsents({
           globalVendorList: givenGlobalVendorList,
           consent: givenConsent,
-          allowedVendorIds: givenAllowedVendorsIds
+          allowedVendorIds: givenAllowedVendorIds
         })
         .then(vendorConsents => {
           expect(
             Object.keys(vendorConsents.vendorConsents).length,
             'the vendor consents should contain 2 elements'
           ).to.be.equal(2)
+        })
+        .then(() => done())
+        .catch(e => done(e))
+    })
+    it('Should return the appropiate metadata info into the consents object', done => {
+      const givenGlobalVendorList = require('./../../resources/globalvendorlist.json')
+
+      const givenConsent = new ConsentString()
+      givenConsent.setGlobalVendorList(givenGlobalVendorList)
+      givenConsent.setCmpId(1)
+      givenConsent.setCmpVersion(2)
+      givenConsent.setConsentScreen(3)
+
+      const factory = new IABVendorConsentsFactory()
+
+      factory
+        .createVendorConsents({
+          globalVendorList: givenGlobalVendorList,
+          consent: givenConsent
+        })
+        .then(vendorConsents =>
+          ConsentString.decodeMetadataString(vendorConsents.metadata)
+        )
+        .then(metadata => {
+          expect(metadata.cmpId, 'Metadata has invalid cmpId').to.equal(1)
+          expect(metadata.vendorListVersion, 'Metadata has invalid vendorListVersion').to.equal(givenGlobalVendorList.vendorListVersion)
         })
         .then(() => done())
         .catch(e => done(e))
