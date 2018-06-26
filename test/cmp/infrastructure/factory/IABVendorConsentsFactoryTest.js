@@ -109,7 +109,10 @@ describe('IAB VendorConsents Factory', () => {
         )
         .then(metadata => {
           expect(metadata.cmpId, 'Metadata has invalid cmpId').to.equal(1)
-          expect(metadata.vendorListVersion, 'Metadata has invalid vendorListVersion').to.equal(givenGlobalVendorList.vendorListVersion)
+          expect(
+            metadata.vendorListVersion,
+            'Metadata has invalid vendorListVersion'
+          ).to.equal(givenGlobalVendorList.vendorListVersion)
         })
         .then(() => done())
         .catch(e => done(e))
