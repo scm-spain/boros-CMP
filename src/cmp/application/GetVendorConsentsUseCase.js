@@ -12,13 +12,13 @@ export default class GetVendorConsentsUseCase {
     this._consentFactory = consentFactory
     this._vendorConsentsFactory = vendorConsentsFactory
   }
-  getVendorConsents({vendorIds}) {
+  getVendorConsents({vendorIds} = {}) {
     return Promise.resolve()
       .then(() =>
         Promise.all([
           this._consentRepository
             .getConsentData()
-            .then(consentString => this._filterConsentMustExist),
+            .then(this._filterConsentMustExist),
           this._vendorRepository.getGlobalVendorList()
         ])
       )
