@@ -7,38 +7,55 @@ export default class GetVendorConsentsUseCase {
     consentFactory,
     vendorConsentsFactory
   }) {
-    this._consentRepository = consentRepository
-    this._vendorRepository = vendorRepository
-    this._consentFactory = consentFactory
-    this._vendorConsentsFactory = vendorConsentsFactory
+    this._getStoredConsentData = getStoredConsentData({consentRepository})
+    this._getGlobalVendorList = getGlobalVendorList({vendorRepository})
+    this._createVendorConsents = createVendorConsents({
+      consentFactory,
+      vendorConsentsFactory
+    })
   }
+
   getVendorConsents({vendorIds} = {}) {
     return Promise.resolve()
       .then(() =>
         Promise.all([
-          this._consentRepository
-            .getConsentData()
-            .then(this._filterConsentMustExist),
-          this._vendorRepository.getGlobalVendorList()
+          this._getStoredConsentData().then(filterConsentMustExist),
+          this._getGlobalVendorList()
         ])
       )
       .then(([consentString, globalVendorList]) =>
-        this._consentFactory
-          .createConsent({consentString, globalVendorList})
-          .then(consent =>
-            this._vendorConsentsFactory.createVendorConsents({
-              consent,
-              globalVendorList,
-              allowedVendorIds: vendorIds
-            })
-          )
+        this._createVendorConsents({
+          consentString,
+          globalVendorList,
+          allowedVendorIds: vendorIds
+        })
       )
   }
+}
+const getStoredConsentData = ({consentRepository}) => () =>
+  Promise.resolve().then(() => consentRepository.getConsentData())
 
-  _filterConsentMustExist(consent) {
-    if (!consent) {
-      throw new UnexistingConsentDataError()
-    }
-    return consent
+const getGlobalVendorList = ({vendorRepository}) => () =>
+  Promise.resolve().then(() => vendorRepository.getGlobalVendorList())
+
+const createVendorConsents = ({consentFactory, vendorConsentsFactory}) => ({
+  consentString,
+  globalVendorList,
+  allowedVendorIds
+}) =>
+  Promise.resolve()
+    .then(() => consentFactory.createConsent({consentString, globalVendorList}))
+    .then(consent =>
+      vendorConsentsFactory.createVendorConsents({
+        consent,
+        globalVendorList,
+        allowedVendorIds
+      })
+    )
+
+const filterConsentMustExist = consent => {
+  if (!consent) {
+    throw new UnexistingConsentDataError()
   }
+  return consent
 }
