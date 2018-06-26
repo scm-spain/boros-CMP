@@ -5,12 +5,14 @@ export default class IABConsentManagementProviderV1 {
     getVendorConsentsUseCase,
     getConsentDataUseCase,
     pingUseCase,
-    getVendorListUseCase
+    getVendorListUseCase,
+    getConsentStatusUseCase
   }) {
     this._getVendorConsentsUseCase = getVendorConsentsUseCase
     this._getConsentDataUseCase = getConsentDataUseCase
     this._pingUseCase = pingUseCase
     this._getVendorListUseCase = getVendorListUseCase
+    this._getConsentStatusUseCase = getConsentStatusUseCase
   }
 
   getVendorConsents(vendorIds, observer) {
@@ -41,5 +43,11 @@ export default class IABConsentManagementProviderV1 {
             ? observer(null, false)
             : Promise.reject(e)
       )
+  }
+
+  getConsentStatus() {
+    return this._getConsentStatusUseCase
+      .getConsentStatus()
+      .then(result => result)
   }
 }
