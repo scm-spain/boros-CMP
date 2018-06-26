@@ -12,31 +12,13 @@ export default class IABVendorConsentsFactory {
   createVendorConsents({consent, globalVendorList, allowedVendorIds} = {}) {
     return Promise.resolve().then(() =>
       Promise.all([
-        Promise.resolve()
-          .then(
-            () =>
-              (allowedVendorIds &&
-                globalVendorList.vendors
-                  .map(v => v.id)
-                  .filter(id => allowedVendorIds.indexOf(id) !== -1)) ||
-              globalVendorList.vendors.map(v => v.id)
-          )
-          .then(vendorIds => {
-            let vendorConsents = {}
-            vendorIds.forEach(id => {
-              vendorConsents[id] = consent.isVendorAllowed(id)
-            })
-            return vendorConsents
-          }),
-        Promise.resolve(globalVendorList.purposes.map(p => p.id)).then(
-          purposeIds => {
-            let purposeConsents = {}
-            purposeIds.forEach(id => {
-              purposeConsents[id] = consent.isPurposeAllowed(id)
-            })
-            return purposeConsents
-          }
-        )
+        filterAllowedVendorIdsFromGlobalList({
+          globalVendorList,
+          allowedVendorIds
+        }).then(filteredVendorIds =>
+          createVendorConsents({consent, vendorIds: filteredVendorIds})
+        ),
+        createPurposeConsents({consent, globalVendorList})
       ]).then(
         ([vendorConsents, purposeConsents]) =>
           new VendorConsents({
@@ -50,3 +32,37 @@ export default class IABVendorConsentsFactory {
     )
   }
 }
+
+const filterAllowedVendorIdsFromGlobalList = ({
+  globalVendorList,
+  allowedVendorIds
+}) => {
+  return Promise.resolve().then(
+    () =>
+      (allowedVendorIds &&
+        globalVendorList.vendors
+          .map(v => v.id)
+          .filter(id => allowedVendorIds.indexOf(id) !== -1)) ||
+      globalVendorList.vendors.map(v => v.id)
+  )
+}
+
+const createVendorConsents = ({consent, vendorIds = []} = {}) =>
+  Promise.resolve().then(() => {
+    let vendorConsents = {}
+    vendorIds.forEach(id => {
+      vendorConsents[id] = consent.isVendorAllowed(id)
+    })
+    return vendorConsents
+  })
+
+const createPurposeConsents = ({consent, globalVendorList}) =>
+  Promise.resolve()
+    .then(() => globalVendorList.purposes.map(p => p.id))
+    .then(purposeIds => {
+      let purposeConsents = {}
+      purposeIds.forEach(id => {
+        purposeConsents[id] = consent.isPurposeAllowed(id)
+      })
+      return purposeConsents
+    })
