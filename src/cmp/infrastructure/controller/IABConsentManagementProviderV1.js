@@ -1,4 +1,5 @@
 import InvalidVendorListVersionError from '../../domain/InvalidVendorListVersionError'
+import UnexistingConsentDataError from '../../domain/UnexistingConsentDataError'
 
 export default class IABConsentManagementProviderV1 {
   constructor({
@@ -19,6 +20,12 @@ export default class IABConsentManagementProviderV1 {
     return this._getVendorConsentsUseCase
       .getVendorConsents({vendorIds})
       .then(vendorConsents => observer(vendorConsents, true))
+      .catch(
+        e =>
+          e instanceof UnexistingConsentDataError
+            ? observer(null, false)
+            : Promise.reject(e)
+      )
   }
 
   getConsentData(consentStringVersion, observer) {
