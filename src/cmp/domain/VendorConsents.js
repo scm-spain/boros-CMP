@@ -9,12 +9,12 @@
     ?
   },
   vendorConsents: {
-    *vendorId* : *c**onsentBoolean*,
+    *vendorId* : *consentBoolean*,
     ?
   },
 }
 
- where vendorId and purposeId are the keys and *consentBoolean *are the values for the consent (false="No Consent?, true=?Consent?). The *gdprApplies *field will be true if the user is determined (by geo-IP lookup) to be in the EU, or the publisher has configured the CMP (via a CMP-specific method not specified by this spec) that they are a EU publisher and thus the CMP UI should be shown for everyone. The metadata will be the base64url-encoded value of the following "header" information described in the cookie format:
+ Where vendorId and purposeId are the keys and *consentBoolean *are the values for the consent (false="No Consent?, true=?Consent?). The *gdprApplies *field will be true if the user is determined (by geo-IP lookup) to be in the EU, or the publisher has configured the CMP (via a CMP-specific method not specified by this spec) that they are a EU publisher and thus the CMP UI should be shown for everyone. The metadata will be the base64url-encoded value of the following "header" information described in the cookie format:
  -Cookie Version
  -Created Timestamp
  -Last Updated Timestamp
