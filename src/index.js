@@ -69,3 +69,7 @@ const iabCMP = new IABConsentManagementProviderV1({
 })
 
 window.__cmp = window.__cmp || commandConsumer(log)(iabCMP)
+
+// Launch event as CMP is ready
+const event = new window.CustomEvent('cmpReady', {})
+window.document.dispatchEvent(event)
