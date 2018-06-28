@@ -1,6 +1,6 @@
 export default class GetVendorListUseCase {
-  constructor({vendorRepository}) {
-    this._vendorRepository = vendorRepository
+  constructor({vendorListRepository}) {
+    this._vendorListRepository = vendorListRepository
   }
   /**
    * The result will be the GlobalVendorList being the vendor list object of the requested version.
@@ -12,7 +12,7 @@ export default class GetVendorListUseCase {
    */
   getVendorList({vendorListVersion = null} = {}) {
     return Promise.resolve().then(() =>
-      this._vendorRepository.getGlobalVendorList()
+      this._vendorListRepository.getGlobalVendorList()
     )
   }
 }
