@@ -2,8 +2,8 @@ import {expect} from 'chai'
 import {ConsentString} from 'consent-string'
 import IABVendorConsentsFactory from '../../../../src/cmp/infrastructure/factory/IABVendorConsentsFactory'
 
-describe('IAB VendorConsents Factory', () => {
-  describe('createVendorConsents method', () => {
+describe('IABVendorConsentsFactory', () => {
+  describe('createVendorConsents', () => {
     it('Should return a VendorConsents with all vendors and purposes if no ids restriction is set', done => {
       const givenGdprApplies = true
       const givenStoreConsentGlobally = false

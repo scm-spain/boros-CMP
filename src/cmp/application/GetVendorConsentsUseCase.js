@@ -1,4 +1,4 @@
-import UnexistingConsentDataError from '../domain/UnexistingConsentDataError'
+import filterConsentMustExist from '../domain/filterConsentMustExist'
 
 export default class GetVendorConsentsUseCase {
   constructor({vendorConsentsRepository}) {
@@ -20,10 +20,3 @@ const getStoredVendorConsents = ({vendorConsentsRepository}) => ({
   Promise.resolve().then(() =>
     vendorConsentsRepository.getVendorConsents({allowedVendorIds})
   )
-
-const filterConsentMustExist = consent => {
-  if (!consent) {
-    throw new UnexistingConsentDataError()
-  }
-  return consent
-}
