@@ -17,8 +17,11 @@ export default class CookieConsentRepository {
       .then(() =>
         Promise.all([this._readVendorCookie(), this._getGlobalVendorList()])
       )
-      .then(([encodedConsent, globalVendorList]) =>
-        this._createConsent({encodedConsent, globalVendorList})
+      .then(
+        ([encodedConsent, globalVendorList]) =>
+          (encodedConsent &&
+            this._createConsent({encodedConsent, globalVendorList})) ||
+          undefined
       )
   }
 }

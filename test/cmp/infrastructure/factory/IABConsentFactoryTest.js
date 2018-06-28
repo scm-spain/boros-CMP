@@ -6,7 +6,7 @@ describe('IABConsentFactory', () => {
     it('Should return a ConsentString with a globalVendorList', done => {
       const givenGlobalVendorList = require('./../../resources/globalvendorlist.json')
       const givenConsentStringData =
-        'BOPVloMOPi60FABABAENBA-AAAAcF7_______9______9uz_Gv_r_f__33e8_39v_h_7_-___m_-3zV4-_lvR11yPA1OrfIrwFhiAwAA'
+        'BOPmXwlOQETrjABABAESBK-AAAAcd7vf____79n_____9uz_Gv_rvf__33e8_39v_h_r_-___mf-3zV4-91vV11yPg1urXIr1FpjQ6MGgA'
       const factory = new IABConsentFactory()
       factory
         .createConsent({
@@ -17,7 +17,7 @@ describe('IABConsentFactory', () => {
           expect(
             consent.getVendorListVersion(),
             'consent has no valid vendor list version'
-          ).to.equal(67)
+          ).to.equal(74)
           expect(
             consent.getCmpId(),
             'consent has not parsed the string data'
