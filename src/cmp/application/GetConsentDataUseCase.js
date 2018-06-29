@@ -21,7 +21,7 @@ export default class GetConsentDataUseCase {
   getConsentData({consentStringVersion = null} = {}) {
     // TODO: support consentStringVersion.
     return Promise.resolve()
-      .then(() => this._getStoredConsent())
+      .then(this._getStoredConsent)
       .then(filterConsentMustExist)
       .then(consent => ({
         gdprApplies: this._gdprApplies,
@@ -32,4 +32,4 @@ export default class GetConsentDataUseCase {
 }
 
 const getStoredConsent = ({consentRepository}) => () =>
-  Promise.resolve().then(() => consentRepository.getConsent())
+  consentRepository.getConsent()
