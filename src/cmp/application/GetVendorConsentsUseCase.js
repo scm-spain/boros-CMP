@@ -16,7 +16,4 @@ export default class GetVendorConsentsUseCase {
 
 const getStoredVendorConsents = ({vendorConsentsRepository}) => ({
   allowedVendorIds
-}) =>
-  Promise.resolve().then(() =>
-    vendorConsentsRepository.getVendorConsents({allowedVendorIds})
-  )
+}) => vendorConsentsRepository.getVendorConsents({allowedVendorIds})

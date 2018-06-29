@@ -29,25 +29,20 @@ export default class CookieConsentRepository {
 const VENDOR_CONSENT_COOKIE_NAME = 'euconsent'
 
 const readCookie = ({dom, cookieName}) => () =>
-  Promise.resolve()
-    .then(() => `; ${dom.cookie}`.split(`; ${cookieName}=`))
-    .then(
-      cookieParts =>
-        (cookieParts.length === 2 &&
-          cookieParts
-            .pop()
-            .split(';')
-            .shift()) ||
-        undefined
-    )
+  Promise.resolve(`; ${dom.cookie}`.split(`; ${cookieName}=`)).then(
+    cookieParts =>
+      (cookieParts.length === 2 &&
+        cookieParts
+          .pop()
+          .split(';')
+          .shift()) ||
+      undefined
+  )
 
 const getGlobalVendorList = ({vendorListRepository}) => () =>
-  Promise.resolve().then(() => vendorListRepository.getGlobalVendorList())
+  vendorListRepository.getGlobalVendorList()
 
 const createConsent = ({consentFactory}) => ({
   encodedConsent,
   globalVendorList
-}) =>
-  Promise.resolve().then(() =>
-    consentFactory.createConsent({encodedConsent, globalVendorList})
-  )
+}) => consentFactory.createConsent({encodedConsent, globalVendorList})

@@ -36,16 +36,14 @@ export default class IABVendorConsentsFactory {
 const filterAllowedVendorIdsFromGlobalList = ({
   globalVendorList,
   allowedVendorIds
-}) => {
-  return Promise.resolve().then(
-    () =>
-      (allowedVendorIds &&
-        globalVendorList.vendors
-          .map(v => v.id)
-          .filter(id => allowedVendorIds.indexOf(id) !== -1)) ||
+}) =>
+  Promise.resolve(
+    (allowedVendorIds &&
+      globalVendorList.vendors
+        .map(v => v.id)
+        .filter(id => allowedVendorIds.indexOf(id) !== -1)) ||
       globalVendorList.vendors.map(v => v.id)
   )
-}
 
 const createVendorConsents = ({consent, vendorIds = []} = {}) =>
   Promise.resolve().then(() => {
@@ -57,12 +55,10 @@ const createVendorConsents = ({consent, vendorIds = []} = {}) =>
   })
 
 const createPurposeConsents = ({consent, globalVendorList}) =>
-  Promise.resolve()
-    .then(() => globalVendorList.purposes.map(p => p.id))
-    .then(purposeIds => {
-      let purposeConsents = {}
-      purposeIds.forEach(id => {
-        purposeConsents[id] = consent.isPurposeAllowed(id)
-      })
-      return purposeConsents
+  Promise.resolve(globalVendorList.purposes.map(p => p.id)).then(purposeIds => {
+    let purposeConsents = {}
+    purposeIds.forEach(id => {
+      purposeConsents[id] = consent.isPurposeAllowed(id)
     })
+    return purposeConsents
+  })

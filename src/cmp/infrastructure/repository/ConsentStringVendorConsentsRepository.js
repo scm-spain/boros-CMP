@@ -43,13 +43,11 @@ const createVendorConsents = ({vendorConsentsFactory}) => ({
   globalVendorList,
   allowedVendorIds
 }) =>
-  Promise.resolve().then(() =>
-    vendorConsentsFactory.createFromConsent({
-      consent,
-      globalVendorList,
-      allowedVendorIds
-    })
-  )
+  vendorConsentsFactory.createFromConsent({
+    consent,
+    globalVendorList,
+    allowedVendorIds
+  })
 
 const getGlobalVendorList = ({vendorListRepository}) => () =>
-  Promise.resolve().then(() => vendorListRepository.getGlobalVendorList())
+  vendorListRepository.getGlobalVendorList()
