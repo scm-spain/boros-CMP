@@ -5,9 +5,9 @@ import {ConsentString} from 'consent-string'
  * @implements ConsentFactory
  */
 export default class IABConsentFactory {
-  createConsent({consentString, globalVendorList}) {
+  createConsent({encodedConsent, globalVendorList}) {
     return Promise.resolve()
-      .then(() => new ConsentString(consentString))
+      .then(() => new ConsentString(encodedConsent))
       .then(consent => {
         consent.setGlobalVendorList(globalVendorList)
         return consent

@@ -3,9 +3,9 @@ import 'whatwg-fetch'
 
 /**
  * @class
- * @implements VendorRepository
+ * @implements VendorListRepository
  */
-export default class HttpVendorRepository {
+export default class HttpVendorListRepository {
   constructor({
     globalVendorListLocation = 'https://vendorlist.consensu.org/vendorlist.json'
   } = {}) {

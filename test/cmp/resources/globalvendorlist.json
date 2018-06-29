@@ -1,6 +1,6 @@
 {
-  "vendorListVersion": 67,
-  "lastUpdated": "2018-06-20T16:00:16Z",
+  "vendorListVersion": 74,
+  "lastUpdated": "2018-06-27T16:00:15Z",
   "purposes": [
     {
       "id": 1,
@@ -73,7 +73,9 @@
         3,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         3
       ]
@@ -86,7 +88,9 @@
         1,
         3
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         3
       ]
@@ -102,7 +106,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1,
         2,
@@ -117,8 +123,12 @@
         1,
         2
       ],
-      "legIntPurposeIds": [],
-      "featureIds": []
+      "legIntPurposeIds": [
+
+      ],
+      "featureIds": [
+
+      ]
     },
     {
       "id": 25,
@@ -149,8 +159,12 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
-      "featureIds": []
+      "legIntPurposeIds": [
+
+      ],
+      "featureIds": [
+
+      ]
     },
     {
       "id": 1,
@@ -163,8 +177,12 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
-      "featureIds": []
+      "legIntPurposeIds": [
+
+      ],
+      "featureIds": [
+
+      ]
     },
     {
       "id": 6,
@@ -177,8 +195,12 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
-      "featureIds": []
+      "legIntPurposeIds": [
+
+      ],
+      "featureIds": [
+
+      ]
     },
     {
       "id": 30,
@@ -226,7 +248,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1
       ]
@@ -235,7 +259,9 @@
       "id": 39,
       "name": "ADITION technologies AG",
       "policyUrl": "adition.com/datenschutz",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         2,
@@ -276,8 +302,12 @@
         2,
         3
       ],
-      "legIntPurposeIds": [],
-      "featureIds": []
+      "legIntPurposeIds": [
+
+      ],
+      "featureIds": [
+
+      ]
     },
     {
       "id": 4,
@@ -290,7 +320,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         2,
         3
@@ -309,7 +341,9 @@
       "legIntPurposeIds": [
         1
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 2,
@@ -337,7 +371,9 @@
         3,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1,
         2
@@ -352,7 +388,9 @@
         2,
         3
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         2,
         3
@@ -371,7 +409,9 @@
       "legIntPurposeIds": [
         3
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 32,
@@ -395,7 +435,9 @@
       "purposeIds": [
         1
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         2,
         3
@@ -404,7 +446,7 @@
     {
       "id": 57,
       "name": "ADARA MEDIA UNLIMITED",
-      "policyUrl": "https://adara.com/2018/04/10/adara-gdpr-faq/",
+      "policyUrl": "https://adara.com/privacy-promise/",
       "purposeIds": [
         1,
         2,
@@ -412,7 +454,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1,
         2
@@ -422,12 +466,16 @@
       "id": 63,
       "name": "Avocet Systems Limited",
       "policyUrl": "http://www.avocet.io/privacy-policy",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         3
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 51,
@@ -440,7 +488,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1,
         2,
@@ -509,7 +559,9 @@
         3,
         5
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 71,
@@ -520,7 +572,9 @@
         2,
         3
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1,
         2,
@@ -555,7 +609,9 @@
         2,
         3
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1,
         2
@@ -572,7 +628,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1,
         2,
@@ -590,8 +648,12 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
-      "featureIds": []
+      "legIntPurposeIds": [
+
+      ],
+      "featureIds": [
+
+      ]
     },
     {
       "id": 86,
@@ -604,7 +666,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         3
       ]
@@ -620,7 +684,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1,
         2,
@@ -656,8 +722,12 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
-      "featureIds": []
+      "legIntPurposeIds": [
+
+      ],
+      "featureIds": [
+
+      ]
     },
     {
       "id": 33,
@@ -672,13 +742,17 @@
         1,
         5
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 20,
       "name": "N Technologies Inc.",
       "policyUrl": "https://n.rich/privacy-notice",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         2,
@@ -694,7 +768,9 @@
       "id": 55,
       "name": "Madison Logic, Inc.",
       "policyUrl": "https://www.madisonlogic.com/privacy/",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         2,
@@ -735,7 +811,9 @@
         2,
         3
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1,
         2,
@@ -772,8 +850,12 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
-      "featureIds": []
+      "legIntPurposeIds": [
+
+      ],
+      "featureIds": [
+
+      ]
     },
     {
       "id": 19,
@@ -800,7 +882,9 @@
         1,
         3
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         3
       ]
@@ -835,7 +919,9 @@
       "legIntPurposeIds": [
         1
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 81,
@@ -848,7 +934,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1,
         2,
@@ -885,7 +973,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         3
       ]
@@ -901,7 +991,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         2
       ]
@@ -916,7 +1008,9 @@
         3,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         3
       ]
@@ -925,7 +1019,9 @@
       "id": 40,
       "name": "Active Agent AG",
       "policyUrl": "http://www.active-agent.com/de/unternehmen/datenschutzerklaerung/",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         2,
@@ -951,7 +1047,9 @@
         4,
         5
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 89,
@@ -995,7 +1093,9 @@
         3,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1,
         2,
@@ -1005,13 +1105,15 @@
     {
       "id": 105,
       "name": "Impression Desk Technologies Limited",
-      "policyUrl": "impressiondesk.com",
+      "policyUrl": "https://impressiondesk.com/privacy-policy/",
       "purposeIds": [
         1,
         3,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         2,
         3
@@ -1028,7 +1130,9 @@
         1,
         3
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 3,
@@ -1040,8 +1144,12 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
-      "featureIds": []
+      "legIntPurposeIds": [
+
+      ],
+      "featureIds": [
+
+      ]
     },
     {
       "id": 82,
@@ -1054,7 +1162,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         3
       ]
@@ -1082,7 +1192,9 @@
       "id": 70,
       "name": "Yieldlab AG",
       "policyUrl": "http://www.yieldlab.de/meta-navigation/datenschutz/",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         3
@@ -1120,7 +1232,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1,
         2,
@@ -1139,7 +1253,9 @@
       "legIntPurposeIds": [
         5
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 21,
@@ -1161,16 +1277,17 @@
     {
       "id": 110,
       "name": "Hottraffic BV (DMA Institute)",
-      "policyUrl": "https://www.dma-institute.com/additional-information-for-data-subjects/",
-      "purposeIds": [],
-      "legIntPurposeIds": [
+      "policyUrl": "https://www.dma-institute.com/privacy-compliancy/",
+      "purposeIds": [
         1,
-        2,
-        3,
-        4,
         5
       ],
-      "featureIds": []
+      "legIntPurposeIds": [
+
+      ],
+      "featureIds": [
+
+      ]
     },
     {
       "id": 42,
@@ -1201,8 +1318,12 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
-      "featureIds": []
+      "legIntPurposeIds": [
+
+      ],
+      "featureIds": [
+
+      ]
     },
     {
       "id": 77,
@@ -1212,7 +1333,9 @@
         1,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         2
       ]
@@ -1227,7 +1350,9 @@
         3,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1,
         2,
@@ -1238,7 +1363,9 @@
       "id": 120,
       "name": "Eyeota Ptd Ltd",
       "policyUrl": "https://www.eyeota.com/privacy-policy/",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         2
@@ -1251,11 +1378,15 @@
       "id": 93,
       "name": "Adloox SA",
       "policyUrl": "http://adloox.com/disclaimer",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         5
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 132,
@@ -1285,7 +1416,9 @@
         4,
         5
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 102,
@@ -1298,7 +1431,9 @@
       "legIntPurposeIds": [
         3
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 108,
@@ -1311,7 +1446,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         3
       ]
@@ -1325,8 +1462,12 @@
         2,
         3
       ],
-      "legIntPurposeIds": [],
-      "featureIds": []
+      "legIntPurposeIds": [
+
+      ],
+      "featureIds": [
+
+      ]
     },
     {
       "id": 68,
@@ -1354,8 +1495,12 @@
         2,
         3
       ],
-      "legIntPurposeIds": [],
-      "featureIds": []
+      "legIntPurposeIds": [
+
+      ],
+      "featureIds": [
+
+      ]
     },
     {
       "id": 97,
@@ -1368,7 +1513,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1,
         2
@@ -1382,8 +1529,12 @@
         1,
         3
       ],
-      "legIntPurposeIds": [],
-      "featureIds": []
+      "legIntPurposeIds": [
+
+      ],
+      "featureIds": [
+
+      ]
     },
     {
       "id": 138,
@@ -1395,7 +1546,9 @@
       "legIntPurposeIds": [
         3
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 95,
@@ -1408,21 +1561,29 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
-      "featureIds": []
+      "legIntPurposeIds": [
+
+      ],
+      "featureIds": [
+
+      ]
     },
     {
       "id": 72,
       "name": "Nano Interactive GmbH",
       "policyUrl": "http://www.nanointeractive.com/privacy",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         2,
         3,
         5
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 127,
@@ -1443,9 +1604,11 @@
     },
     {
       "id": 136,
-      "name": "Ströer SSP GmbH",
+      "name": "Str\u00f6er SSP GmbH",
       "policyUrl": "https://www.stroeer.de/fileadmin/user_upload/Datenschutz.pdf",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         2,
@@ -1461,7 +1624,9 @@
       "id": 111,
       "name": "ShowHeroes GmbH",
       "policyUrl": "http://showheroes.com/privacy",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         5
       ],
@@ -1476,7 +1641,9 @@
       "purposeIds": [
         1
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1
       ]
@@ -1491,7 +1658,9 @@
         3,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         3
       ]
@@ -1522,7 +1691,9 @@
         3,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         3
       ]
@@ -1538,7 +1709,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1,
         2,
@@ -1557,13 +1730,17 @@
       "legIntPurposeIds": [
         5
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 151,
       "name": "Admedo Ltd",
       "policyUrl": "https://www.admedo.com/privacy-policy",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         2,
@@ -1601,8 +1778,12 @@
         3,
         5
       ],
-      "legIntPurposeIds": [],
-      "featureIds": []
+      "legIntPurposeIds": [
+
+      ],
+      "featureIds": [
+
+      ]
     },
     {
       "id": 157,
@@ -1614,7 +1795,9 @@
       "legIntPurposeIds": [
         3
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 145,
@@ -1624,8 +1807,12 @@
         1,
         5
       ],
-      "legIntPurposeIds": [],
-      "featureIds": []
+      "legIntPurposeIds": [
+
+      ],
+      "featureIds": [
+
+      ]
     },
     {
       "id": 131,
@@ -1634,8 +1821,12 @@
       "purposeIds": [
         1
       ],
-      "legIntPurposeIds": [],
-      "featureIds": []
+      "legIntPurposeIds": [
+
+      ],
+      "featureIds": [
+
+      ]
     },
     {
       "id": 158,
@@ -1648,7 +1839,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1,
         2,
@@ -1664,8 +1857,12 @@
         2,
         3
       ],
-      "legIntPurposeIds": [],
-      "featureIds": []
+      "legIntPurposeIds": [
+
+      ],
+      "featureIds": [
+
+      ]
     },
     {
       "id": 130,
@@ -1694,7 +1891,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1,
         2,
@@ -1712,7 +1911,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1,
         2,
@@ -1730,7 +1931,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1,
         2,
@@ -1774,7 +1977,9 @@
       "id": 163,
       "name": "Bombora Inc.",
       "policyUrl": "https://bombora.com/privacy",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         2,
@@ -1798,7 +2003,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1,
         2,
@@ -1816,7 +2023,9 @@
         2,
         3
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 78,
@@ -1825,8 +2034,12 @@
       "purposeIds": [
         1
       ],
-      "legIntPurposeIds": [],
-      "featureIds": []
+      "legIntPurposeIds": [
+
+      ],
+      "featureIds": [
+
+      ]
     },
     {
       "id": 59,
@@ -1837,7 +2050,9 @@
         2,
         3
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         3
       ]
@@ -1854,7 +2069,9 @@
       "legIntPurposeIds": [
         5
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 175,
@@ -1867,8 +2084,12 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
-      "featureIds": []
+      "legIntPurposeIds": [
+
+      ],
+      "featureIds": [
+
+      ]
     },
     {
       "id": 133,
@@ -1879,7 +2100,9 @@
         3,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1,
         2,
@@ -1897,7 +2120,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         2,
         3
@@ -1945,7 +2170,9 @@
         3,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         2
       ]
@@ -1961,8 +2188,12 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
-      "featureIds": []
+      "legIntPurposeIds": [
+
+      ],
+      "featureIds": [
+
+      ]
     },
     {
       "id": 90,
@@ -1977,7 +2208,9 @@
         4,
         5
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 141,
@@ -2032,7 +2265,9 @@
       "id": 195,
       "name": "advanced store GmbH",
       "policyUrl": "http://www.advanced-store.com/de/datenschutz/",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         2,
@@ -2051,8 +2286,12 @@
         3,
         5
       ],
-      "legIntPurposeIds": [],
-      "featureIds": []
+      "legIntPurposeIds": [
+
+      ],
+      "featureIds": [
+
+      ]
     },
     {
       "id": 190,
@@ -2065,20 +2304,28 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
-      "featureIds": []
+      "legIntPurposeIds": [
+
+      ],
+      "featureIds": [
+
+      ]
     },
     {
       "id": 84,
       "name": "Semasio GmbH",
       "policyUrl": "http://www.semasio.com/privacy-policy/",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         2,
         5
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 65,
@@ -2091,7 +2338,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1,
         2,
@@ -2109,7 +2358,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1
       ]
@@ -2118,7 +2369,9 @@
       "id": 200,
       "name": "Tapjoy, Inc.",
       "policyUrl": "https://www.tapjoy.com/legal/#privacy-policy",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         2,
@@ -2126,13 +2379,17 @@
         4,
         5
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 188,
       "name": "Sellpoints Inc.",
       "policyUrl": "https://retargeter.com/service-privacy-policy/",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         2,
@@ -2150,12 +2407,16 @@
       "id": 217,
       "name": "2KDirect, Inc. (dba iPromote)",
       "policyUrl": "https://www.ipromote.com/privacy-policy/",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         3
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 156,
@@ -2185,13 +2446,17 @@
       "legIntPurposeIds": [
         1
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 226,
       "name": "Publicis Media GmbH",
       "policyUrl": "https://www.publicismedia.de/datenschutz/",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         2,
@@ -2211,8 +2476,12 @@
         1,
         3
       ],
-      "legIntPurposeIds": [],
-      "featureIds": []
+      "legIntPurposeIds": [
+
+      ],
+      "featureIds": [
+
+      ]
     },
     {
       "id": 227,
@@ -2237,7 +2506,9 @@
       "id": 225,
       "name": "Ligatus GmbH",
       "policyUrl": "https://www.ligatus.com/en/privacy-policy",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         2,
@@ -2252,12 +2523,16 @@
       "id": 205,
       "name": "Adssets AB",
       "policyUrl": "http://adssets.com/policy/",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         3,
         5
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 179,
@@ -2270,7 +2545,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1,
         2,
@@ -2289,13 +2566,17 @@
       "legIntPurposeIds": [
         5
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 92,
       "name": "1plusX AG",
       "policyUrl": "https://www.1plusx.com/privacy-policy/",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         2,
@@ -2318,7 +2599,9 @@
         2,
         3
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         2
       ]
@@ -2343,14 +2626,18 @@
     },
     {
       "id": 126,
-      "name": "DoubleVerify Inc.​",
+      "name": "DoubleVerify Inc.\u200b",
       "policyUrl": "https://www.doubleverify.com/privacy/",
       "purposeIds": [
         1,
         5
       ],
-      "legIntPurposeIds": [],
-      "featureIds": []
+      "legIntPurposeIds": [
+
+      ],
+      "featureIds": [
+
+      ]
     },
     {
       "id": 193,
@@ -2360,7 +2647,9 @@
         1,
         3
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         3
       ]
@@ -2369,7 +2658,9 @@
       "id": 245,
       "name": "IgnitionOne",
       "policyUrl": "https://www.ignitionone.com/privacy-policy/",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         2,
@@ -2386,7 +2677,9 @@
       "id": 213,
       "name": "emetriq GmbH",
       "policyUrl": "https://www.emetriq.com/datenschutz/",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         2,
@@ -2409,7 +2702,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1,
         2
@@ -2436,12 +2731,16 @@
       "id": 174,
       "name": "A Million Ads Limited",
       "policyUrl": "https://www.amillionads.com/privacy-policy",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         3
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 192,
@@ -2454,14 +2753,20 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
-      "featureIds": []
+      "legIntPurposeIds": [
+
+      ],
+      "featureIds": [
+
+      ]
     },
     {
       "id": 232,
       "name": "Rockerbox, Inc",
       "policyUrl": "http://rockerbox.com/privacy",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         3,
@@ -2510,11 +2815,15 @@
       "id": 246,
       "name": "Smartology Limited",
       "policyUrl": "https://www.smartology.net/privacy-policy/",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         5
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 241,
@@ -2539,7 +2848,9 @@
       "id": 254,
       "name": "LiquidM Technology GmbH",
       "policyUrl": "https://liquidm.com/privacy-policy/",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         2,
@@ -2575,7 +2886,9 @@
         1,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1,
         2,
@@ -2586,13 +2899,17 @@
       "id": 240,
       "name": "7Hops.com Inc. (ZergNet)",
       "policyUrl": "zergnet.com/privacy",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         4,
         5
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 235,
@@ -2623,7 +2940,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1,
         2
@@ -2633,7 +2952,9 @@
       "id": 258,
       "name": "Adello Group AG",
       "policyUrl": "https://www.adello.com/privacy-policy/",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         2,
@@ -2670,7 +2991,9 @@
         2,
         3
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1,
         2,
@@ -2688,7 +3011,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1,
         2,
@@ -2708,18 +3033,24 @@
         4,
         5
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 273,
       "name": "Bannerflow AB",
       "policyUrl": "bannerflow.com/privacy",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         3
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 104,
@@ -2750,7 +3081,9 @@
         3,
         5
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 249,
@@ -2763,7 +3096,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         2,
         3
@@ -2773,14 +3108,18 @@
       "id": 113,
       "name": "iotec global Ltd.",
       "policyUrl": "https://www.iotecglobal.com/privacy-policy/",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         2,
         3,
         5
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 125,
@@ -2791,14 +3130,20 @@
         3,
         5
       ],
-      "legIntPurposeIds": [],
-      "featureIds": []
+      "legIntPurposeIds": [
+
+      ],
+      "featureIds": [
+
+      ]
     },
     {
       "id": 170,
       "name": "Goodway Group, Inc.",
       "policyUrl": "https://goodwaygroup.com/privacy-policy/",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         2,
@@ -2823,7 +3168,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1,
         2,
@@ -2838,7 +3185,9 @@
         1,
         3
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         3
       ]
@@ -2854,7 +3203,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         3
       ]
@@ -2889,7 +3240,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         3
       ]
@@ -2923,7 +3276,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1,
         2,
@@ -2942,13 +3297,17 @@
       "legIntPurposeIds": [
         1
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 203,
       "name": "Revcontent, LLC",
       "policyUrl": "https://faq.revcontent.com/customer/en/portal/articles/2703838-revcontent-s-privacy-and-cookie-policy",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         2,
@@ -2956,7 +3315,9 @@
         4,
         5
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 260,
@@ -2978,7 +3339,9 @@
       "id": 237,
       "name": "LKQD, a division of Nexstar Digital, LLC.",
       "policyUrl": "http://www.lkqd.com/privacy-policy/",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         2,
@@ -3002,14 +3365,20 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
-      "featureIds": []
+      "legIntPurposeIds": [
+
+      ],
+      "featureIds": [
+
+      ]
     },
     {
       "id": 280,
       "name": "Spot.IM Ltd.",
       "policyUrl": "http://spot.im/privacy",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         2,
@@ -3017,20 +3386,26 @@
         4,
         5
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 239,
       "name": "Triton Digital Canada Inc.",
       "policyUrl": "https://www.tritondigital.com/privacy-policies",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         3,
         4,
         5
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 177,
@@ -3045,13 +3420,17 @@
       "legIntPurposeIds": [
         5
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 201,
       "name": "TimeOne",
       "policyUrl": "https://www.timeonegroup.com/en/privacy-policies/",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         2,
         3,
@@ -3072,13 +3451,17 @@
       "legIntPurposeIds": [
         1
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 252,
       "name": "Jaduda GmbH",
       "policyUrl": "https://www.jadudamobile.com/datenschutzerklaerung/",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         2,
@@ -3118,7 +3501,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1,
         2,
@@ -3132,27 +3517,37 @@
       "purposeIds": [
         1
       ],
-      "legIntPurposeIds": [],
-      "featureIds": []
+      "legIntPurposeIds": [
+
+      ],
+      "featureIds": [
+
+      ]
     },
     {
       "id": 228,
       "name": "McCann Discipline LTD",
       "policyUrl": "https://www.primis.tech/wp-content/uploads/2018/02/primisPrivacyPolicy2018.pdf",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         3,
         4,
         5
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 299,
       "name": "AdClear GmbH",
       "policyUrl": "https://www.adclear.de/datenschutzerklaerung/",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         2,
@@ -3193,8 +3588,12 @@
         3,
         4
       ],
-      "legIntPurposeIds": [],
-      "featureIds": []
+      "legIntPurposeIds": [
+
+      ],
+      "featureIds": [
+
+      ]
     },
     {
       "id": 289,
@@ -3207,7 +3606,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         3
       ]
@@ -3223,7 +3624,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1,
         2,
@@ -3241,8 +3644,12 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
-      "featureIds": []
+      "legIntPurposeIds": [
+
+      ],
+      "featureIds": [
+
+      ]
     },
     {
       "id": 253,
@@ -3255,7 +3662,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         2,
         3
@@ -3272,7 +3681,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1,
         2,
@@ -3288,8 +3699,12 @@
         2,
         3
       ],
-      "legIntPurposeIds": [],
-      "featureIds": []
+      "legIntPurposeIds": [
+
+      ],
+      "featureIds": [
+
+      ]
     },
     {
       "id": 257,
@@ -3298,7 +3713,9 @@
       "purposeIds": [
         1
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1,
         2
@@ -3315,7 +3732,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         2,
         3
@@ -3325,11 +3744,15 @@
       "id": 278,
       "name": "Integral Ad Science, Inc.",
       "policyUrl": "https://integralads.com/privacy-policy/",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         5
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 291,
@@ -3344,7 +3767,9 @@
         3,
         5
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 295,
@@ -3356,7 +3781,9 @@
         3,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         2
       ]
@@ -3369,7 +3796,9 @@
         1,
         3
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         3
       ]
@@ -3381,8 +3810,12 @@
       "purposeIds": [
         1
       ],
-      "legIntPurposeIds": [],
-      "featureIds": []
+      "legIntPurposeIds": [
+
+      ],
+      "featureIds": [
+
+      ]
     },
     {
       "id": 47,
@@ -3395,8 +3828,12 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
-      "featureIds": []
+      "legIntPurposeIds": [
+
+      ],
+      "featureIds": [
+
+      ]
     },
     {
       "id": 134,
@@ -3407,7 +3844,9 @@
         2,
         3
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1,
         2
@@ -3417,7 +3856,9 @@
       "id": 325,
       "name": "Knorex Pte Ltd",
       "policyUrl": "https://www.knorex.com/privacy",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         2,
@@ -3442,7 +3883,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         3
       ]
@@ -3460,7 +3903,9 @@
         1,
         5
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 199,
@@ -3473,8 +3918,12 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
-      "featureIds": []
+      "legIntPurposeIds": [
+
+      ],
+      "featureIds": [
+
+      ]
     },
     {
       "id": 236,
@@ -3497,7 +3946,9 @@
       "id": 294,
       "name": "Jivox Corp",
       "policyUrl": "http://www.jivox.com/privacy",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         2,
@@ -3520,8 +3971,12 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
-      "featureIds": []
+      "legIntPurposeIds": [
+
+      ],
+      "featureIds": [
+
+      ]
     },
     {
       "id": 297,
@@ -3536,12 +3991,14 @@
         4,
         5
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 319,
       "name": "Clipcentric, Inc.",
-      "policyUrl": "https://peter.clipcentric.com/privacy05252018.bhtml",
+      "policyUrl": "https://clipcentric.com/privacy.bhtml",
       "purposeIds": [
         1,
         3
@@ -3564,8 +4021,12 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
-      "featureIds": []
+      "legIntPurposeIds": [
+
+      ],
+      "featureIds": [
+
+      ]
     },
     {
       "id": 323,
@@ -3612,7 +4073,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         3
       ]
@@ -3621,7 +4084,9 @@
       "id": 212,
       "name": "usemax advertisement (Emego GmbH)",
       "policyUrl": "http://www.usemax.de/?l=privacy",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         2,
@@ -3629,7 +4094,9 @@
         4,
         5
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 264,
@@ -3642,7 +4109,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         2
       ]
@@ -3651,7 +4120,9 @@
       "id": 309,
       "name": "Videology Ltd.",
       "policyUrl": "https://videologygroup.com/en/privacy-policy",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         2,
@@ -3665,7 +4136,7 @@
     {
       "id": 44,
       "name": "The ADEX GmbH",
-      "policyUrl": "www.theadex.com",
+      "policyUrl": "https://www.theadex.com/privacy-opt-out/",
       "purposeIds": [
         1
       ],
@@ -3685,17 +4156,23 @@
       "id": 282,
       "name": "Welect GmbH",
       "policyUrl": "https://www.welect.de/datenschutz",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         5
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 238,
       "name": "StackAdapt",
       "policyUrl": "www.stackadapt.com/privacy",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         2,
@@ -3713,7 +4190,9 @@
       "id": 284,
       "name": "WEBORAMA",
       "policyUrl": "https://weborama.com/privacy_en/",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         2,
@@ -3734,7 +4213,9 @@
       "purposeIds": [
         1
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         2
       ]
@@ -3746,14 +4227,20 @@
       "purposeIds": [
         1
       ],
-      "legIntPurposeIds": [],
-      "featureIds": []
+      "legIntPurposeIds": [
+
+      ],
+      "featureIds": [
+
+      ]
     },
     {
       "id": 301,
       "name": "zeotap GmbH",
       "policyUrl": "https://www.zeotap.com/privacy_policy/",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         2,
@@ -3775,7 +4262,9 @@
         2,
         3
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1,
         3
@@ -3785,11 +4274,15 @@
       "id": 310,
       "name": "Schibsted Classified Media Spain, S.L.",
       "policyUrl": "https://www.vibbo.com/privacidad.htm?ca=0_s",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         4
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 139,
@@ -3800,7 +4293,9 @@
         2,
         3
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1,
         2,
@@ -3820,7 +4315,9 @@
         2,
         4
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 262,
@@ -3829,7 +4326,9 @@
       "purposeIds": [
         3
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         3
       ]
@@ -3861,7 +4360,9 @@
         3,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1,
         2,
@@ -3879,7 +4380,9 @@
         2,
         3
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 270,
@@ -3889,8 +4392,12 @@
         1,
         3
       ],
-      "legIntPurposeIds": [],
-      "featureIds": []
+      "legIntPurposeIds": [
+
+      ],
+      "featureIds": [
+
+      ]
     },
     {
       "id": 333,
@@ -3903,7 +4410,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1,
         2,
@@ -3921,7 +4430,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1,
         2,
@@ -3939,7 +4450,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         2
       ]
@@ -3948,7 +4461,9 @@
       "id": 281,
       "name": "Wizaly",
       "policyUrl": "https://www.wizaly.com/terms-of-use#privacy-policy",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         5
@@ -3971,7 +4486,9 @@
         4,
         5
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 320,
@@ -3982,7 +4499,9 @@
         2,
         3
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         2,
         3
@@ -3999,7 +4518,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1,
         2,
@@ -4019,7 +4540,9 @@
         1,
         5
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 349,
@@ -4031,7 +4554,9 @@
         3,
         4
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         2
       ]
@@ -4049,7 +4574,9 @@
         4,
         5
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 266,
@@ -4062,7 +4589,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1
       ]
@@ -4080,7 +4609,9 @@
       "legIntPurposeIds": [
         1
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 303,
@@ -4091,8 +4622,12 @@
         2,
         3
       ],
-      "legIntPurposeIds": [],
-      "featureIds": []
+      "legIntPurposeIds": [
+
+      ],
+      "featureIds": [
+
+      ]
     },
     {
       "id": 261,
@@ -4105,7 +4640,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1,
         2
@@ -4118,14 +4655,20 @@
       "purposeIds": [
         1
       ],
-      "legIntPurposeIds": [],
-      "featureIds": []
+      "legIntPurposeIds": [
+
+      ],
+      "featureIds": [
+
+      ]
     },
     {
       "id": 343,
       "name": "DIGITEKA Technologies",
-      "policyUrl": "https://www.ultimedia.com/default/presentation/cgu",
-      "purposeIds": [],
+      "policyUrl": "https://www.ultimedia.com/POLICY.html",
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         2,
@@ -4150,7 +4693,9 @@
         4,
         5
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 231,
@@ -4163,14 +4708,20 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
-      "featureIds": []
+      "legIntPurposeIds": [
+
+      ],
+      "featureIds": [
+
+      ]
     },
     {
       "id": 216,
       "name": "Mindlytix SAS",
       "policyUrl": "http://mindlytix.com/privacy/",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         2,
@@ -4178,13 +4729,17 @@
         4,
         5
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 360,
       "name": "Permutive, Inc.",
       "policyUrl": "https://permutive.com/privacy",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1
       ],
@@ -4197,7 +4752,9 @@
       "id": 361,
       "name": "Onlysix Limited",
       "policyUrl": "https://permutive.com/privacy",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1
       ],
@@ -4217,7 +4774,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         3
       ]
@@ -4233,7 +4792,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1
       ]
@@ -4242,20 +4803,26 @@
       "id": 152,
       "name": "Meetrics GmbH",
       "policyUrl": "https://www.meetrics.com/en/data-privacy/",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         3,
         4,
         5
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 251,
       "name": "Yieldlove GmbH",
       "policyUrl": "http://www.yieldlove.com/cookie-policy",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         2,
@@ -4263,13 +4830,17 @@
         4,
         5
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 371,
       "name": "Seeding Alliance GmbH",
       "policyUrl": "http://seeding-alliance.de/datenschutz",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         2,
@@ -4294,7 +4865,9 @@
         2,
         4
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 347,
@@ -4308,13 +4881,17 @@
       "legIntPurposeIds": [
         1
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 218,
       "name": "Bigabid Media Ltd",
       "policyUrl": "http://www.bigabid.com/data-protection/gdpr",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         2,
@@ -4393,7 +4970,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         3
       ]
@@ -4420,11 +4999,15 @@
       "id": 378,
       "name": "communicationAds GmbH &amp; Co. KG",
       "policyUrl": "https://www.communicationads.net/aboutus/privacy/",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 369,
@@ -4433,8 +5016,12 @@
       "purposeIds": [
         1
       ],
-      "legIntPurposeIds": [],
-      "featureIds": []
+      "legIntPurposeIds": [
+
+      ],
+      "featureIds": [
+
+      ]
     },
     {
       "id": 184,
@@ -4466,7 +5053,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1,
         2,
@@ -4498,8 +5087,12 @@
         2,
         3
       ],
-      "legIntPurposeIds": [],
-      "featureIds": []
+      "legIntPurposeIds": [
+
+      ],
+      "featureIds": [
+
+      ]
     },
     {
       "id": 388,
@@ -4532,13 +5125,17 @@
       "legIntPurposeIds": [
         1
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 223,
       "name": "Audience Trading Platform Ltd.",
       "policyUrl": "https://atp.io/privacy-policy",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         2,
@@ -4554,12 +5151,16 @@
       "id": 384,
       "name": "Pixalate, Inc.",
       "policyUrl": "http://pixalate.com/privacypolicy/",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         5
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 387,
@@ -4570,8 +5171,12 @@
         3,
         5
       ],
-      "legIntPurposeIds": [],
-      "featureIds": []
+      "legIntPurposeIds": [
+
+      ],
+      "featureIds": [
+
+      ]
     },
     {
       "id": 312,
@@ -4581,14 +5186,20 @@
         1,
         5
       ],
-      "legIntPurposeIds": [],
-      "featureIds": []
+      "legIntPurposeIds": [
+
+      ],
+      "featureIds": [
+
+      ]
     },
     {
       "id": 178,
       "name": "Affectv Ltd",
       "policyUrl": "https://affectv.com/privacy-policy",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         2,
@@ -4596,7 +5207,9 @@
         4,
         5
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 377,
@@ -4607,7 +5220,9 @@
         3,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         3
       ]
@@ -4616,15 +5231,18 @@
       "id": 382,
       "name": "The Reach Group GmbH",
       "policyUrl": "https://www.reachgroup.com/en/privacy-statement/",
-      "purposeIds": [],
-      "legIntPurposeIds": [
+      "purposeIds": [
         1,
         2,
-        3,
         4,
         5
       ],
-      "featureIds": []
+      "legIntPurposeIds": [
+        3
+      ],
+      "featureIds": [
+
+      ]
     },
     {
       "id": 206,
@@ -4637,7 +5255,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1,
         2,
@@ -4654,7 +5274,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         3
       ]
@@ -4680,12 +5302,16 @@
       "id": 404,
       "name": "Duplo Media AS",
       "policyUrl": "https://www.easy-ads.com/privacypolicy.htm",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         5
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 242,
@@ -4715,7 +5341,9 @@
         3,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1,
         2,
@@ -4726,12 +5354,16 @@
       "id": 402,
       "name": "Effiliation",
       "policyUrl": "https://inter.effiliation.com/politique-confidentialite.html",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         3
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 413,
@@ -4744,7 +5376,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1,
         2
@@ -4754,7 +5388,9 @@
       "id": 391,
       "name": "Seenergy Netherlands B.V.",
       "policyUrl": "http://seenergy.com/privacy.html",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         2,
@@ -4776,7 +5412,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         2,
         3
@@ -4785,7 +5423,7 @@
     {
       "id": 171,
       "name": "Webedia",
-      "policyUrl": "http://www.webedia-group.com/site/cookies",
+      "policyUrl": "http://www.webedia-group.com/site/privacy-policy",
       "purposeIds": [
         1,
         2,
@@ -4793,8 +5431,12 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
-      "featureIds": []
+      "legIntPurposeIds": [
+
+      ],
+      "featureIds": [
+
+      ]
     },
     {
       "id": 398,
@@ -4807,7 +5449,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         3
       ]
@@ -4816,17 +5460,23 @@
       "id": 415,
       "name": "Seenthis AB",
       "policyUrl": "https://seenthis.co/privacy-notice-2018-04-18.pdf",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 263,
       "name": "Nativo, Inc.",
       "policyUrl": "https://www.nativo.com/interest-based-ads",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         2,
@@ -4834,18 +5484,24 @@
         4,
         5
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 329,
       "name": "Browsi Mobile Ltd",
       "policyUrl": "http://gobrowsi.com/browsi-privacy-policy/",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         5
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 390,
@@ -4874,8 +5530,12 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
-      "featureIds": []
+      "legIntPurposeIds": [
+
+      ],
+      "featureIds": [
+
+      ]
     },
     {
       "id": 337,
@@ -4888,7 +5548,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1,
         2
@@ -4901,14 +5563,20 @@
       "purposeIds": [
         1
       ],
-      "legIntPurposeIds": [],
-      "featureIds": []
+      "legIntPurposeIds": [
+
+      ],
+      "featureIds": [
+
+      ]
     },
     {
       "id": 421,
       "name": "LeftsnRight, Inc. dba LIQWID",
       "policyUrl": "https://liqwid.solutions/privacy-policy",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         2,
@@ -4924,7 +5592,9 @@
       "id": 426,
       "name": "TradeTracker",
       "policyUrl": "https://tradetracker.com/privacy-policy/",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         3,
@@ -4939,10 +5609,10 @@
       "name": "AudienceProject Aps",
       "policyUrl": "privacy.audienceproject.com",
       "purposeIds": [
+        1,
         2
       ],
       "legIntPurposeIds": [
-        1,
         3,
         4,
         5
@@ -4956,7 +5626,9 @@
       "id": 287,
       "name": "Avazu Inc.",
       "policyUrl": "http://avazuinc.com/opt-out/",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         3,
@@ -4977,7 +5649,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1,
         2
@@ -4987,7 +5661,9 @@
       "id": 338,
       "name": "dunnhumby Germany GmbH",
       "policyUrl": "https://www.sociomantic.com/privacy/en/",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         2,
@@ -5005,7 +5681,9 @@
       "id": 405,
       "name": "IgnitionAi Ltd",
       "policyUrl": "https://www.isitelab.io/default.aspx",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         3,
@@ -5027,7 +5705,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1,
         2,
@@ -5060,7 +5740,9 @@
         2,
         3
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1,
         3
@@ -5070,7 +5752,9 @@
       "id": 409,
       "name": "Arrivalist Co.",
       "policyUrl": "https://www.arrivalist.com/privacy",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         3,
@@ -5091,7 +5775,9 @@
         3,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         2
       ]
@@ -5126,8 +5812,12 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
-      "featureIds": []
+      "legIntPurposeIds": [
+
+      ],
+      "featureIds": [
+
+      ]
     },
     {
       "id": 362,
@@ -5140,7 +5830,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1,
         2,
@@ -5165,7 +5857,9 @@
       "id": 449,
       "name": "Mobile Journey B.V.",
       "policyUrl": "https://mobilejourney.com/Privacy-Policy",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         3,
@@ -5179,7 +5873,9 @@
       "id": 443,
       "name": "Tradedoubler AB",
       "policyUrl": "https://www.tradedoubler.com/en/privacy-policy/",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         5
@@ -5199,7 +5895,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         2,
         3
@@ -5209,14 +5907,18 @@
       "id": 335,
       "name": "Beachfront Media LLC",
       "policyUrl": "http://beachfront.com/privacy-policy/",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         3,
         4,
         5
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 407,
@@ -5248,7 +5950,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         3
       ]
@@ -5263,7 +5967,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1,
         2
@@ -5278,7 +5984,9 @@
         2,
         3
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         2,
         3
@@ -5295,7 +6003,9 @@
         4,
         5
       ],
-      "legIntPurposeIds": [],
+      "legIntPurposeIds": [
+
+      ],
       "featureIds": [
         1,
         3
@@ -5312,7 +6022,9 @@
         3,
         5
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 444,
@@ -5335,14 +6047,18 @@
       "id": 412,
       "name": "Cxense ASA",
       "policyUrl": "https://www.cxense.com/about-us/privacy-policy",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         2,
         4,
         5
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
     },
     {
       "id": 454,
@@ -5362,12 +6078,202 @@
       "id": 293,
       "name": "SpringServe, LLC",
       "policyUrl": "https://springserve.com/privacy-policy/",
-      "purposeIds": [],
+      "purposeIds": [
+
+      ],
       "legIntPurposeIds": [
         1,
         3
       ],
-      "featureIds": []
+      "featureIds": [
+
+      ]
+    },
+    {
+      "id": 455,
+      "name": "GDMServices, Inc. d/b/a FiksuDSP",
+      "policyUrl": "https://fiksu.com/privacy-policy/",
+      "purposeIds": [
+        1,
+        2,
+        3
+      ],
+      "legIntPurposeIds": [
+
+      ],
+      "featureIds": [
+        2,
+        3
+      ]
+    },
+    {
+      "id": 298,
+      "name": "Cuebiq Inc.",
+      "policyUrl": "https://www.cuebiq.com/privacypolicy/",
+      "purposeIds": [
+        1,
+        2,
+        3,
+        5
+      ],
+      "legIntPurposeIds": [
+
+      ],
+      "featureIds": [
+        3
+      ]
+    },
+    {
+      "id": 423,
+      "name": "travel audience GmbH",
+      "policyUrl": "https://travelaudience.com/product-privacy-policy/",
+      "purposeIds": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "legIntPurposeIds": [
+
+      ],
+      "featureIds": [
+
+      ]
+    },
+    {
+      "id": 397,
+      "name": "Demandbase, Inc. ",
+      "policyUrl": "https://www.demandbase.com/privacy-policy/",
+      "purposeIds": [
+        1,
+        2
+      ],
+      "legIntPurposeIds": [
+        3,
+        4,
+        5
+      ],
+      "featureIds": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "id": 381,
+      "name": "Solocal",
+      "policyUrl": "https://client.adhslx.com/privacy.html ",
+      "purposeIds": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "legIntPurposeIds": [
+
+      ],
+      "featureIds": [
+
+      ]
+    },
+    {
+      "id": 425,
+      "name": "ADRINO Sp. z o.o.",
+      "policyUrl": "http://www.adrino.pl/ciasteczkowa-polityka/",
+      "purposeIds": [
+
+      ],
+      "legIntPurposeIds": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "featureIds": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "id": 365,
+      "name": "Forensiq LLC",
+      "policyUrl": "https://impact.com/privacy-policy/",
+      "purposeIds": [
+
+      ],
+      "legIntPurposeIds": [
+        1,
+        5
+      ],
+      "featureIds": [
+
+      ]
+    },
+    {
+      "id": 447,
+      "name": "Adludio Ltd",
+      "policyUrl": "https://adludio.com/privacypolicy",
+      "purposeIds": [
+
+      ],
+      "legIntPurposeIds": [
+        5
+      ],
+      "featureIds": [
+
+      ]
+    },
+    {
+      "id": 410,
+      "name": "Adtelligent Inc.",
+      "policyUrl": "https://adtelligent.com/privacy-policy/",
+      "purposeIds": [
+        1,
+        3
+      ],
+      "legIntPurposeIds": [
+
+      ],
+      "featureIds": [
+
+      ]
+    },
+    {
+      "id": 137,
+      "name": "mbr targeting GmbH",
+      "policyUrl": "https://privacy.mbr-targeting.com/?optedIn=true",
+      "purposeIds": [
+
+      ],
+      "legIntPurposeIds": [
+        1,
+        2,
+        3
+      ],
+      "featureIds": [
+
+      ]
+    },
+    {
+      "id": 395,
+      "name": "PREX Programmatic Exchange GmbH&amp;Co KG",
+      "policyUrl": "http://www.programmatic-exchange.com/privacy",
+      "purposeIds": [
+
+      ],
+      "legIntPurposeIds": [
+        1,
+        2,
+        3,
+        5
+      ],
+      "featureIds": [
+
+      ]
     }
   ]
 }

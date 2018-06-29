@@ -2,7 +2,7 @@
  * @interface
  */
 export default class ConsentRepository {
-  getConsentData() {
-    throw new Error('ConsentRepository#getConsentData must be implemented')
+  getConsent() {
+    throw new Error('ConsentRepository#getConsent')
   }
 }

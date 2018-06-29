@@ -3,28 +3,46 @@
  * @implements ConsentRepository
  */
 export default class CookieConsentRepository {
-  constructor({dom}) {
-    this._dom = dom
+  constructor({dom, consentFactory, vendorListRepository}) {
+    this._readVendorCookie = readCookie({
+      dom,
+      cookieName: VENDOR_CONSENT_COOKIE_NAME
+    })
+    this._createConsent = createConsent({consentFactory})
+    this._getGlobalVendorList = getGlobalVendorList({vendorListRepository})
   }
 
-  getConsentData() {
-    return Promise.resolve().then(() =>
-      this._readCookie({cookieName: VENDOR_CONSENT_COOKIE_NAME})
-    )
-  }
-
-  _readCookie({cookieName}) {
+  getConsent() {
     return Promise.resolve()
-      .then(() => `; ${this._dom.cookie}`.split(`; ${cookieName}=`))
+      .then(() =>
+        Promise.all([this._readVendorCookie(), this._getGlobalVendorList()])
+      )
       .then(
-        cookieParts =>
-          (cookieParts.length === 2 &&
-            cookieParts
-              .pop()
-              .split(';')
-              .shift()) ||
+        ([encodedConsent, globalVendorList]) =>
+          (encodedConsent &&
+            this._createConsent({encodedConsent, globalVendorList})) ||
           undefined
       )
   }
 }
+
 const VENDOR_CONSENT_COOKIE_NAME = 'euconsent'
+
+const readCookie = ({dom, cookieName}) => () =>
+  Promise.resolve(`; ${dom.cookie}`.split(`; ${cookieName}=`)).then(
+    cookieParts =>
+      (cookieParts.length === 2 &&
+        cookieParts
+          .pop()
+          .split(';')
+          .shift()) ||
+      undefined
+  )
+
+const getGlobalVendorList = ({vendorListRepository}) => () =>
+  vendorListRepository.getGlobalVendorList()
+
+const createConsent = ({consentFactory}) => ({
+  encodedConsent,
+  globalVendorList
+}) => consentFactory.createConsent({encodedConsent, globalVendorList})

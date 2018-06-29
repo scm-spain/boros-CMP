@@ -1,10 +1,16 @@
-import VendorConsentData from '../domain/VendorConsentData'
+import filterConsentMustExist from '../domain/filterConsentMustExist'
 
 export default class GetConsentDataUseCase {
-  constructor({consentRepository, gdprApplies, hasGlobalScope}) {
-    this._consentRepository = consentRepository
+  constructor({
+    gdprApplies = true,
+    hasGlobalScope = false,
+    consentRepository
+  } = {}) {
     this._gdprApplies = gdprApplies
     this._hasGlobalScope = hasGlobalScope
+    this._getStoredConsent = getStoredConsent({
+      consentRepository
+    })
   }
 
   /**
@@ -15,13 +21,15 @@ export default class GetConsentDataUseCase {
   getConsentData({consentStringVersion = null} = {}) {
     // TODO: support consentStringVersion.
     return Promise.resolve()
-      .then(() => this._consentRepository.getConsentData())
-      .then(consentData => {
-        return new VendorConsentData({
-          hasGlobalScope: this._hasGlobalScope,
-          gdprApplies: this._gdprApplies,
-          consentData: consentData
-        })
-      })
+      .then(this._getStoredConsent)
+      .then(filterConsentMustExist)
+      .then(consent => ({
+        gdprApplies: this._gdprApplies,
+        hasGlobalScope: this._hasGlobalScope,
+        consentData: consent.getConsentString(false)
+      }))
   }
 }
+
+const getStoredConsent = ({consentRepository}) => () =>
+  consentRepository.getConsent()

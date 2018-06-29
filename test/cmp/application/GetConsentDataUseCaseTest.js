@@ -1,22 +1,20 @@
-/* eslint-disable prettier/prettier */
 import GetConsentDataUseCase from '../../../src/cmp/application/GetConsentDataUseCase'
 import sinon from 'sinon'
 import {expect} from 'chai'
-import VendorConsentData from '../../../src/cmp/domain/VendorConsentData'
 
-describe('GetConsentDataUseCase test', () => {
-  describe('getConsentData method', () => {
-    it('Should return the consent data', done => {
+describe('GetConsentDataUseCase', () => {
+  describe('getConsentData', () => {
+    it('Should return the stored consent string', done => {
       const givenGdprApplies = true
       const givenHasGlobalScope = false
-      const givenConsentData = '{ "1" : true }'
-      const consentRepositoryMock = {
-        getConsentData: () => Promise.resolve(givenConsentData)
+      const givenConsentString = 'whatever'
+      const givenConsent = {
+        getConsentString: () => givenConsentString
       }
-      const getConsentDataRepositorySpy = sinon.spy(
-        consentRepositoryMock,
-        'getConsentData'
-      )
+      const consentRepositoryMock = {
+        getConsent: () => Promise.resolve(givenConsent)
+      }
+      const getConsentSpy = sinon.spy(consentRepositoryMock, 'getConsent')
 
       const getConsentDataUseCase = new GetConsentDataUseCase({
         consentRepository: consentRepositoryMock,
@@ -27,11 +25,22 @@ describe('GetConsentDataUseCase test', () => {
       getConsentDataUseCase
         .getConsentData()
         .then(result => {
-          expect(getConsentDataRepositorySpy.calledOnce, 'getConsentData should be called once').to.be.true
-          expect(result).to.be.an.instanceOf(VendorConsentData)
-          expect(result.consentData, 'Value does not match with the expected.').equal(givenConsentData)
-          expect(result.hasGlobalScope, 'Value does not match with the expected.').equal(givenHasGlobalScope)
-          expect(result.gdprApplies, 'Value does not match with the expected.').equal(givenGdprApplies)
+          expect(
+            getConsentSpy.calledOnce,
+            'should have retrieved the consent from the repository'
+          ).to.be.true
+          expect(
+            result.consentData,
+            'Value does not match with the expected.'
+          ).equal(givenConsentString)
+          expect(
+            result.hasGlobalScope,
+            'Value does not match with the expected.'
+          ).equal(givenHasGlobalScope)
+          expect(
+            result.gdprApplies,
+            'Value does not match with the expected.'
+          ).equal(givenGdprApplies)
         })
         .then(() => done())
         .catch(e => done(e))
