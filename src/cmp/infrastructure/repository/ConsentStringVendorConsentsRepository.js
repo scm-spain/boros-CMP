@@ -6,14 +6,14 @@ import {ConsentString} from 'consent-string'
  */
 export default class ConsentStringVendorConsentsRepository {
   constructor({
-    cmpId,
-    cmpVersion,
-    consentScreen,
-    consentLanguage,
+    cmpId = 1,
+    cmpVersion = 1,
+    consentScreen = 1,
+    consentLanguage = 'EN',
     vendorConsentsFactory,
     consentRepository,
     vendorListRepository
-  }) {
+  } = {}) {
     this._getStoredConsent = getStoredConsent({consentRepository})
     this._saveConsent = saveConsent({consentRepository})
     this._createVendorConsents = createVendorConsents({vendorConsentsFactory})
@@ -85,7 +85,7 @@ const mapVendorConsentsToConsent = ({
   consentLanguage
 }) => ({vendorConsents}) => {
   let consent = new ConsentString()
-  consent.setVendorAllowed(vendorConsents.vendorConsents)
+  consent.setVendorsAllowed(vendorConsents.vendorConsents)
   consent.setPurposesAllowed(vendorConsents.purposeConsents)
   consent.setCmpId(cmpId)
   consent.setCmpVersion(cmpVersion)
