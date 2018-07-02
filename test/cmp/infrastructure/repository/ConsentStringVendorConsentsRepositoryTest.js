@@ -93,7 +93,7 @@ describe('ConsentStringVendorConsentsRepository', () => {
       const givenCmpVersion = 1
       const givenConsentLanguage = 'es'
       const givenConsentScreen = 0
-      const givenGlobalVendorList = require('./../../resources/globalvendorlist.json')
+      const givenGlobalVendorList = require('../../../resources/globalvendorlist.json')
       const givenDisallowedVendors = [
         9,
         14,

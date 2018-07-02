@@ -11,6 +11,7 @@ import GetVendorConsentsUseCase from './cmp/application/GetVendorConsentsUseCase
 import ConsentStringVendorConsentsRepository from './cmp/infrastructure/repository/ConsentStringVendorConsentsRepository'
 import IABVendorConsentsFactory from './cmp/infrastructure/factory/IABVendorConsentsFactory'
 import GetVendorListUseCase from './cmp/application/GetVendorListUseCase'
+import SetVendorConsentsUseCase from './cmp/application/SetVendorConsentsUseCase'
 
 const log = new Log({console})
 
@@ -60,12 +61,17 @@ const getVendorListUseCase = new GetVendorListUseCase({
 
 const pingUseCase = new PingUseCase()
 
+const setVendorConsentsUseCase = new SetVendorConsentsUseCase({
+  vendorConsentsRepository
+})
+
 const iabCMP = new IABConsentManagementProviderV1({
   getConsentDataUseCase,
   getConsentStatusUseCase,
   getVendorConsentsUseCase,
   getVendorListUseCase,
-  pingUseCase
+  pingUseCase,
+  setVendorConsentsUseCase
 })
 
 window.__cmp = window.__cmp || commandConsumer(log)(iabCMP)
