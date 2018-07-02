@@ -75,6 +75,61 @@ describe('IAB Consent Management Provider V1', () => {
         .catch(e => done(e))
     })
   })
+
+  describe('getConsentStatus method', () => {
+    it('Should return the consent status', done => {
+      const expectedResult = 'ACCEPTED'
+      const consentStatusUseCaseMock = {
+        getConsentStatus: () => Promise.resolve().then(() => expectedResult)
+      }
+      const iabCMP = new IABConsentManagementProviderV1({
+        getConsentStatusUseCase: consentStatusUseCaseMock
+      })
+      iabCMP
+        .getConsentStatus()
+        .then(result => {
+          expect(result, 'Should be ACCEPTED').equal(expectedResult)
+          done()
+        })
+        .catch(e => done(e))
+    })
+  })
+  describe('getVendorList method', () => {
+    it('Should call get vendor list use case and call the observer with success value', done => {
+      const givenVendorListVersion = 999
+      const expectedResult = 'expected result'
+      const getVendorListUseCaseMock = {
+        getVendorList: () => Promise.resolve(expectedResult)
+      }
+      const getVendorListSpy = sinon.spy(
+        getVendorListUseCaseMock,
+        'getVendorList'
+      )
+      const observerSpy = sinon.spy()
+
+      const iabCMP = new IABConsentManagementProviderV1({
+        getVendorListUseCase: getVendorListUseCaseMock
+      })
+      iabCMP
+        .getVendorList(givenVendorListVersion, observerSpy)
+        .then(() => {
+          expect(
+            getVendorListSpy.calledOnce,
+            'get vendor list shoud have been called'
+          ).to.be.true
+          expect(
+            getVendorListSpy.args[0][0],
+            'get vendor list should have received only the business parameters'
+          ).to.deep.equals({vendorListVersion: givenVendorListVersion})
+          expect(observerSpy.calledOnce, 'observer should have been called').to
+            .be.true
+          expect(observerSpy.args[0][0]).to.deep.equals(expectedResult)
+          expect(observerSpy.args[0][1]).to.be.true
+        })
+        .then(() => done())
+        .catch(e => done(e))
+    })
+  })
   describe('ping method', () => {
     it('Should call the ping use case and call the observer with success value', done => {
       const expectedResult = 'expected result'
@@ -100,21 +155,40 @@ describe('IAB Consent Management Provider V1', () => {
         .catch(e => done(e))
     })
   })
-  describe('getConsentStatus method', () => {
-    it('Should return the consent status', done => {
-      const expectedResult = 'ACCEPTED'
-      const consentStatusUseCaseMock = {
-        getConsentStatus: () => Promise.resolve().then(() => expectedResult)
+  describe('setVendorConsents method', () => {
+    it('Should call set vendor consents use case and call the observer with success value', done => {
+      const givenVendorConsents = {
+        vendorConsents: [1, 2],
+        purposeConsents: [1, 2, 3, 4, 5]
       }
+      const setVendorConsentsUseCaseMock = {
+        setVendorConsents: () => Promise.resolve()
+      }
+      const setVendorConsentsSpy = sinon.spy(
+        setVendorConsentsUseCaseMock,
+        'setVendorConsents'
+      )
+      const observerSpy = sinon.spy()
+
       const iabCMP = new IABConsentManagementProviderV1({
-        getConsentStatusUseCase: consentStatusUseCaseMock
+        setVendorConsentsUseCase: setVendorConsentsUseCaseMock
       })
       iabCMP
-        .getConsentStatus()
-        .then(result => {
-          expect(result, 'Should be ACCEPTED').equal(expectedResult)
-          done()
+        .setVendorConsents(givenVendorConsents, observerSpy)
+        .then(() => {
+          expect(
+            setVendorConsentsSpy.calledOnce,
+            'set vendor consents shoud have been called'
+          ).to.be.true
+          expect(
+            setVendorConsentsSpy.args[0][0],
+            'set vendor consents should have received only the business parameters'
+          ).to.deep.equals({vendorConsents: givenVendorConsents})
+          expect(observerSpy.calledOnce, 'observer should have been called').to
+            .be.true
+          expect(observerSpy.args[0][1]).to.be.true
         })
+        .then(() => done())
         .catch(e => done(e))
     })
   })
