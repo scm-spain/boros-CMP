@@ -8,6 +8,11 @@ export default class CookieConsentRepository {
       dom,
       cookieName: VENDOR_CONSENT_COOKIE_NAME
     })
+    this._writeVendorCookie = writeCookie({
+      dom,
+      cookieName: VENDOR_CONSENT_COOKIE_NAME,
+      maxAgeSeconds: VENDOR_CONSENT_COOKIE_MAX_AGE
+    })
     this._createConsent = createConsent({consentFactory})
     this._getGlobalVendorList = getGlobalVendorList({vendorListRepository})
   }
@@ -24,9 +29,16 @@ export default class CookieConsentRepository {
           undefined
       )
   }
+
+  saveConsent({consent}) {
+    return Promise.resolve()
+      .then(() => consent.getConsentString())
+      .then(encodedConsent => this._writeVendorCookie({value: encodedConsent}))
+  }
 }
 
 const VENDOR_CONSENT_COOKIE_NAME = 'euconsent'
+const VENDOR_CONSENT_COOKIE_MAX_AGE = 33696000
 
 const readCookie = ({dom, cookieName}) => () =>
   Promise.resolve(`; ${dom.cookie}`.split(`; ${cookieName}=`)).then(
@@ -38,6 +50,13 @@ const readCookie = ({dom, cookieName}) => () =>
           .shift()) ||
       undefined
   )
+
+const writeCookie = ({dom, cookieName, maxAgeSeconds, path = '/'} = {}) => ({
+  value
+}) =>
+  Promise.resolve(maxAgeSeconds ? `;max-age=${maxAgeSeconds}` : '')
+    .then(maxAge => `${cookieName}=${value};path=${path}${maxAge}`)
+    .then(cookieValue => (document.cookie = cookieValue))
 
 const getGlobalVendorList = ({vendorListRepository}) => () =>
   vendorListRepository.getGlobalVendorList()
