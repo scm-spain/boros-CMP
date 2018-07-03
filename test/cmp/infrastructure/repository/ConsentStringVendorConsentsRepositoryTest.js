@@ -170,9 +170,9 @@ describe('ConsentStringVendorConsentsRepository', () => {
             'should have received the string consent as parameter'
           ).to.not.undefined
           expect(
-            saveConsentSpy.args[0][0].consent.endsWith(
-              expectedConsentStringShoudEndWith
-            ),
+            saveConsentSpy.args[0][0].consent
+              .getConsentString()
+              .endsWith(expectedConsentStringShoudEndWith),
             'should receive a consent having the correct encoded metadata, purposes and vendors (aware of the update date)'
           ).to.not.undefined
         })
