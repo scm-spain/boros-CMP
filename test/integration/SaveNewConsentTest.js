@@ -1,4 +1,3 @@
-import {expect} from 'chai'
 import {CMP} from './testinit'
 import {
   CONSENT_STATUS_ACCEPTED,
