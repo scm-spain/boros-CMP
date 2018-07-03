@@ -1,7 +1,6 @@
 import {expect} from 'chai'
 import sinon from 'sinon'
 import ConsentStringVendorConsentsRepository from '../../../../src/cmp/infrastructure/repository/ConsentStringVendorConsentsRepository'
-import VendorConsents from '../../../../src/cmp/domain/VendorConsents'
 
 describe('ConsentStringVendorConsentsRepository', () => {
   describe('getVendorConsents', () => {
