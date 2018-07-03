@@ -7,7 +7,7 @@ describe('IABVendorConsentsFactory', () => {
     it('Should return a VendorConsents with all vendors and purposes if no ids restriction is set', done => {
       const givenGdprApplies = true
       const givenStoreConsentGlobally = false
-      const givenGlobalVendorList = require('./../../resources/globalvendorlist.json')
+      const givenGlobalVendorList = require('../../../resources/globalvendorlist.json')
       const givenPurposesAllowed = [1, 2]
       const givenVendorsAllowed = [1, 6]
 
@@ -59,7 +59,7 @@ describe('IABVendorConsentsFactory', () => {
     it('Should return a VendorConsents with only the existing vendors included in the given vendorIds', done => {
       const givenGdprApplies = true
       const givenStoreConsentGlobally = false
-      const givenGlobalVendorList = require('./../../resources/globalvendorlist.json')
+      const givenGlobalVendorList = require('../../../resources/globalvendorlist.json')
       const givenPurposesAllowed = [1, 2]
       const givenVendorsAllowed = [1, 6]
       const givenAllowedVendorIds = [1, 5, 6]
@@ -89,7 +89,7 @@ describe('IABVendorConsentsFactory', () => {
         .catch(e => done(e))
     })
     it('Should return the appropiate metadata info into the consents object', done => {
-      const givenGlobalVendorList = require('./../../resources/globalvendorlist.json')
+      const givenGlobalVendorList = require('../../../resources/globalvendorlist.json')
 
       const givenConsent = new ConsentString()
       givenConsent.setGlobalVendorList(givenGlobalVendorList)

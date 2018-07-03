@@ -35,7 +35,7 @@ describe('CookieConsentRepositoryTest', () => {
     })
     it('Should return the ConsentString restored from the cookie which consent string is the cookie value', done => {
       const givenAllowedVendorIds = [1]
-      const givenGlobalVendorList = require('./../../resources/globalvendorlist.json')
+      const givenGlobalVendorList = require('../../../resources/globalvendorlist.json')
       const givenEuConsent =
         'BOPmXwlOQETrjABABAESBK-AAAAcd7vf____79n_____9uz_Gv_rvf__33e8_39v_h_r_-___mf-3zV4-91vV11yPg1urXIr1FpjQ6MGgA'
       const givenCookieValue =
