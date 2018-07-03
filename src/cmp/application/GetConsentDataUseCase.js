@@ -3,11 +3,11 @@ import filterConsentMustExist from '../domain/filterConsentMustExist'
 export default class GetConsentDataUseCase {
   constructor({
     gdprApplies = true,
-    hasGlobalScope = false,
+    storeConsentGlobally = false,
     consentRepository
   } = {}) {
     this._gdprApplies = gdprApplies
-    this._hasGlobalScope = hasGlobalScope
+    this._storeConsentGlobally = storeConsentGlobally
     this._getStoredConsent = getStoredConsent({
       consentRepository
     })
@@ -25,7 +25,7 @@ export default class GetConsentDataUseCase {
       .then(filterConsentMustExist)
       .then(consent => ({
         gdprApplies: this._gdprApplies,
-        hasGlobalScope: this._hasGlobalScope,
+        hasGlobalScope: this._storeConsentGlobally,
         consentData: consent.getConsentString(false)
       }))
   }

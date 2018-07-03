@@ -1,24 +1,28 @@
-import {CMP} from './testinit'
 import {
   CONSENT_STATUS_ACCEPTED,
   CONSENT_STATUS_NOT_ACCEPTED
 } from '../../src/cmp/domain/consentStatus'
-import CMPFacade from './application/CMPFacade'
-
-const cmpClient = new CMPFacade({cmp: CMP})
+import initializeTestClientCMP from './initializeTestClientCMP'
 
 describe('Save New Consent', () => {
   it('Should accept a new Vendor Consents object', done => {
+    const saveConsent = ({cmpClient}) =>
+      Promise.resolve()
+        .then(() => cmpClient.getConsentStatus())
+        .then(consentStatus =>
+          filterConsentStatus(consentStatus, CONSENT_STATUS_NOT_ACCEPTED)
+        )
+        .then(() =>
+          cmpClient.setVendorConsents(sampleVendorConsentsEditedInAnUI)
+        )
+        .then(() => cmpClient.getConsentStatus())
+        .then(consentStatus =>
+          filterConsentStatus(consentStatus, CONSENT_STATUS_ACCEPTED)
+        )
+
     Promise.resolve()
-      .then(() => cmpClient.getConsentStatus())
-      .then(consentStatus =>
-        filterConsentStatus(consentStatus, CONSENT_STATUS_NOT_ACCEPTED)
-      )
-      .then(() => cmpClient.setVendorConsents(sampleVendorConsentsEditedInAnUI))
-      .then(() => cmpClient.getConsentStatus())
-      .then(consentStatus =>
-        filterConsentStatus(consentStatus, CONSENT_STATUS_ACCEPTED)
-      )
+      .then(() => initializeTestClientCMP())
+      .then(cmpClient => saveConsent({cmpClient}))
       .then(() => done())
       .catch(e => done(e))
   })

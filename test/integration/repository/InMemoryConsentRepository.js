@@ -3,9 +3,9 @@
  * @implements ConsentRepository
  */
 export default class InMemoryConsentRepository {
-  constructor({store = {}, log, consentFactory, vendorListRepository} = {}) {
-    this._read = read({store, log})
-    this._write = write({store, log})
+  constructor({store = {}, consentFactory, vendorListRepository} = {}) {
+    this._read = read({store})
+    this._write = write({store})
     this._createConsent = createConsent({consentFactory})
     this._getGlobalVendorList = getGlobalVendorList({vendorListRepository})
   }
@@ -28,8 +28,8 @@ export default class InMemoryConsentRepository {
   }
 }
 
-const read = ({store, log}) => () => Promise.resolve(store.value)
-const write = ({store, log}) => ({value}) =>
+const read = ({store}) => () => Promise.resolve(store.value)
+const write = ({store}) => ({value}) =>
   Promise.resolve().then(() => (store.value = value))
 
 const getGlobalVendorList = ({vendorListRepository}) => () =>
