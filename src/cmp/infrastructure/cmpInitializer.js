@@ -12,6 +12,8 @@ import SetVendorConsentsUseCase from '../application/SetVendorConsentsUseCase'
 import IABConsentManagementProviderV1 from './controller/IABConsentManagementProviderV1'
 import commandConsumer from './controller/commandConsumer'
 import Log from './Log'
+import ChainedVendorListRepository from './repository/ChainedVendorListRepository'
+import InMemoryVendorListRepository from './repository/InMemoryVendorListRepository'
 
 const initializeCMP = ({
   storeConsentGlobally = false,
@@ -37,8 +39,13 @@ const initializeCMP = ({
 
       const _consentFactory = consentFactory || new IABConsentFactory()
 
-      const _vendorListRepository =
+      const _remoteVendorListRepository =
         vendorListRepository || new HttpVendorListRepository()
+      const _inMemoryVendorListRepository = new InMemoryVendorListRepository()
+      const _vendorListRepository = new ChainedVendorListRepository({
+        inMemoryVendorListRepository: _inMemoryVendorListRepository,
+        httpVendorListRepository: _remoteVendorListRepository
+      })
 
       const _consentRepository =
         consentRepository ||
