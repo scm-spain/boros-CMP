@@ -12,8 +12,8 @@ export default class InMemoryVendorListRepository {
   }
 
   setGlobalVendorList({globalVendorList}) {
-    return Promise.resolve()
-      .then(() => (this._globalVendorList = globalVendorList))
-      .then(() => this._globalVendorList)
+    return Promise.resolve().then(
+      () => (this._globalVendorList = globalVendorList)
+    )
   }
 }
