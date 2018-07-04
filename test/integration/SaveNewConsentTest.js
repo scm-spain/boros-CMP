@@ -7,48 +7,45 @@ import initializeTestClientCMP from './initializeTestClientCMP'
 
 describe('Save New Consent', () => {
   it('Should accept a new Vendor Consents object and then modifying it', done => {
-    const saveConsent = ({cmpClient}) =>
-      Promise.resolve()
-        // client should check the status of the consent
-        .then(() => cmpClient.getConsentStatus())
-        // the first time, the consent should return NOT_ACCEPTED
-        .then(consentStatusResult =>
-          filterConsentStatus(
-            consentStatusResult.result,
-            CONSENT_STATUS_NOT_ACCEPTED
-          )
-        )
-        // in that case, the client should get the global vendor list to show the UI tool to edit the consent and show it
-        .then(() =>
-          cmpClient.getVendorList().then(globalVendorListResult =>
-            Promise.resolve()
-              // after editing the consents, the client should save the vendor consents
-              .then(() =>
-                cmpClient.setVendorConsents(sampleVendorConsentsEditedInAnUI)
-              )
-              // just for validation, now the consent status should be ACCEPTED
-              .then(() => cmpClient.getConsentStatus())
-              .then(consentStatusResult =>
-                filterConsentStatus(
-                  consentStatusResult.result,
-                  CONSENT_STATUS_ACCEPTED
-                )
-              )
-              // any Advertising SDK that wants to get the consent, now will have it accessible getting the encoded consent data
-              .then(() => cmpClient.getConsentData())
-              .then(consentDataResult =>
-                checkEncodedConsent({
-                  encodedConsent: consentDataResult.result.consentData,
-                  acceptedConsents: sampleVendorConsentsEditedInAnUI,
-                  globalVendorList: globalVendorListResult.result
-                })
-              )
-          )
-        )
+    const cmpClient = initializeTestClientCMP()
 
     Promise.resolve()
-      .then(() => initializeTestClientCMP())
-      .then(cmpClient => saveConsent({cmpClient}))
+      // client should check the status of the consent
+      .then(() => cmpClient.getConsentStatus())
+      // the first time, the consent should return NOT_ACCEPTED
+      .then(consentStatusResult =>
+        filterConsentStatus(
+          consentStatusResult.result,
+          CONSENT_STATUS_NOT_ACCEPTED
+        )
+      )
+      // in that case, the client should get the global vendor list to show the UI tool to edit the consent and show it
+      .then(() =>
+        cmpClient.getVendorList().then(globalVendorListResult =>
+          Promise.resolve()
+            // after editing the consents, the client should save the vendor consents
+            .then(() =>
+              cmpClient.setVendorConsents(sampleVendorConsentsEditedInAnUI)
+            )
+            // just for validation, now the consent status should be ACCEPTED
+            .then(() => cmpClient.getConsentStatus())
+            .then(consentStatusResult =>
+              filterConsentStatus(
+                consentStatusResult.result,
+                CONSENT_STATUS_ACCEPTED
+              )
+            )
+            // any Advertising SDK that wants to get the consent, now will have it accessible getting the encoded consent data
+            .then(() => cmpClient.getConsentData())
+            .then(consentDataResult =>
+              checkEncodedConsent({
+                encodedConsent: consentDataResult.result.consentData,
+                acceptedConsents: sampleVendorConsentsEditedInAnUI,
+                globalVendorList: globalVendorListResult.result
+              })
+            )
+        )
+      )
       .then(() => done())
       .catch(e => done(e))
   })

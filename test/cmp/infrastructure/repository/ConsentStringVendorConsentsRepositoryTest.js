@@ -1,5 +1,6 @@
 import {expect} from 'chai'
 import sinon from 'sinon'
+import GlobalVendorList from '../../../resources/globalvendorlist.json'
 import ConsentStringVendorConsentsRepository from '../../../../src/cmp/infrastructure/repository/ConsentStringVendorConsentsRepository'
 
 describe('ConsentStringVendorConsentsRepository', () => {
@@ -92,7 +93,7 @@ describe('ConsentStringVendorConsentsRepository', () => {
       const givenCmpVersion = 1
       const givenConsentLanguage = 'es'
       const givenConsentScreen = 0
-      const givenGlobalVendorList = require('../../../resources/globalvendorlist.json')
+      const givenGlobalVendorList = GlobalVendorList
       const givenDisallowedVendors = [
         9,
         14,
