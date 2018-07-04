@@ -32,6 +32,8 @@ describe('InMemoryVendorListRepository', () => {
         .then(() => done())
         .catch(e => done(e))
     })
+  })
+  describe('setGlobalVendorList', () => {
     it('Should update the stored global vendor list', done => {
       const givenInitialGlobalVendorList = {what: 'ever'}
       const givenUpdatedGlobalVendorList = {what: 'ever', up: 'dated'}
