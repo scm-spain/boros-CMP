@@ -1,6 +1,5 @@
 import {expect} from 'chai'
 import sinon from 'sinon'
-import HttpVendorListRepository from '../../../../src/cmp/infrastructure/repository/HttpVendorListRepository'
 import ChainedVendorListRepository from '../../../../src/cmp/infrastructure/repository/ChainedVendorListRepository'
 
 describe('ChainedVendorListRepository', () => {
