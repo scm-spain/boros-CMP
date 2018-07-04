@@ -11,11 +11,13 @@ const consentRepository = new InMemoryConsentRepository({
   vendorListRepository
 })
 
-const initializeTestClientCMP = () =>
-  Promise.resolve()
-    .then(() =>
-      initializeCMP({consentFactory, vendorListRepository, consentRepository})
-    )
-    .then(cmp => new CMPFacade({cmp}))
+const initializeTestClientCMP = () => {
+  const cmp = initializeCMP({
+    consentFactory,
+    vendorListRepository,
+    consentRepository
+  })
+  return new CMPFacade({cmp})
+}
 
 export default initializeTestClientCMP
