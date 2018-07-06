@@ -10,24 +10,20 @@ class Log {
     return this._level
   }
   debug(...args) {
-    if (this._level <= LEVEL.debug) {
+    this._level <= LEVEL.debug &&
       this._print({logMethod: this._console.log, level: 'DEBUG', args})
-    }
   }
   info(...args) {
-    if (this._level <= LEVEL.info) {
+    this._level <= LEVEL.info &&
       this._print({logMethod: this._console.info, level: 'INFO', args})
-    }
   }
   warn(...args) {
-    if (this._level <= LEVEL.warn) {
+    this._level <= LEVEL.warn &&
       this._print({logMethod: this._console.warn, level: 'WARN', args})
-    }
   }
   error(...args) {
-    if (this._level <= LEVEL.error) {
+    this._level <= LEVEL.error &&
       this._print({logMethod: this._console.error, level: 'ERROR', args})
-    }
   }
   _print({logMethod, level, args}) {
     const [message, ...rest] = [...args]
