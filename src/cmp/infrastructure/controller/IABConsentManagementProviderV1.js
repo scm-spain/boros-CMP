@@ -60,9 +60,9 @@ export default class IABConsentManagementProviderV1 {
       )
   }
 
-  getConsentStatus() {
+  getConsentStatus(_, observer) {
     return this._getConsentStatusUseCase
       .getConsentStatus()
-      .then(result => result)
+      .then(consentStatus => observer(consentStatus, true))
   }
 }

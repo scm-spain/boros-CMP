@@ -1,5 +1,6 @@
 import {expect} from 'chai'
 import sinon from 'sinon'
+import GlobalVendorList from '../../../resources/globalvendorlist.json'
 import ConsentStringVendorConsentsRepository from '../../../../src/cmp/infrastructure/repository/ConsentStringVendorConsentsRepository'
 
 describe('ConsentStringVendorConsentsRepository', () => {
@@ -92,7 +93,7 @@ describe('ConsentStringVendorConsentsRepository', () => {
       const givenCmpVersion = 1
       const givenConsentLanguage = 'es'
       const givenConsentScreen = 0
-      const givenGlobalVendorList = require('./../../resources/globalvendorlist.json')
+      const givenGlobalVendorList = GlobalVendorList
       const givenDisallowedVendors = [
         9,
         14,
@@ -170,9 +171,9 @@ describe('ConsentStringVendorConsentsRepository', () => {
             'should have received the string consent as parameter'
           ).to.not.undefined
           expect(
-            saveConsentSpy.args[0][0].consent.endsWith(
-              expectedConsentStringShoudEndWith
-            ),
+            saveConsentSpy.args[0][0].consent
+              .getConsentString()
+              .endsWith(expectedConsentStringShoudEndWith),
             'should receive a consent having the correct encoded metadata, purposes and vendors (aware of the update date)'
           ).to.not.undefined
         })

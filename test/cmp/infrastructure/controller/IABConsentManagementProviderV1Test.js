@@ -85,10 +85,14 @@ describe('IAB Consent Management Provider V1', () => {
       const iabCMP = new IABConsentManagementProviderV1({
         getConsentStatusUseCase: consentStatusUseCaseMock
       })
+      const observerSpy = sinon.spy()
       iabCMP
-        .getConsentStatus()
+        .getConsentStatus(null, observerSpy)
         .then(result => {
-          expect(result, 'Should be ACCEPTED').equal(expectedResult)
+          expect(observerSpy.calledOnce, 'observer should have been called').to
+            .be.true
+          expect(observerSpy.args[0][0]).to.deep.equals(expectedResult)
+          expect(observerSpy.args[0][1]).to.be.true
           done()
         })
         .catch(e => done(e))

@@ -9,7 +9,7 @@ export default class ConsentStringVendorConsentsRepository {
     cmpId = 1,
     cmpVersion = 1,
     consentScreen = 1,
-    consentLanguage = 'EN',
+    consentLanguage = 'en',
     vendorConsentsFactory,
     consentRepository,
     vendorListRepository
@@ -51,7 +51,7 @@ export default class ConsentStringVendorConsentsRepository {
       ])
         .then(([consent, globalVendorList]) => {
           consent.setGlobalVendorList(globalVendorList)
-          return consent.getConsentString()
+          return consent
         })
         .then(consent => this._saveConsent({consent}))
     )
