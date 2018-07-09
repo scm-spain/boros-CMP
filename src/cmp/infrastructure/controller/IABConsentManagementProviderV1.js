@@ -1,4 +1,5 @@
 import InvalidVendorListVersionError from '../../domain/InvalidVendorListVersionError'
+import UnexistingConsentDataError from '../../domain/UnexistingConsentDataError'
 
 export default class IABConsentManagementProviderV1 {
   constructor({
@@ -6,19 +7,33 @@ export default class IABConsentManagementProviderV1 {
     getConsentDataUseCase,
     pingUseCase,
     getVendorListUseCase,
-    getConsentStatusUseCase
+    getConsentStatusUseCase,
+    setVendorConsentsUseCase
   }) {
     this._getVendorConsentsUseCase = getVendorConsentsUseCase
     this._getConsentDataUseCase = getConsentDataUseCase
     this._pingUseCase = pingUseCase
     this._getVendorListUseCase = getVendorListUseCase
     this._getConsentStatusUseCase = getConsentStatusUseCase
+    this._setVendorConsentsUseCase = setVendorConsentsUseCase
   }
 
   getVendorConsents(vendorIds, observer) {
     return this._getVendorConsentsUseCase
       .getVendorConsents({vendorIds})
       .then(vendorConsents => observer(vendorConsents, true))
+      .catch(
+        e =>
+          e instanceof UnexistingConsentDataError
+            ? observer(null, false)
+            : Promise.reject(e)
+      )
+  }
+
+  setVendorConsents(vendorConsents, observer) {
+    return this._setVendorConsentsUseCase
+      .setVendorConsents({vendorConsents})
+      .then(() => observer(null, true))
   }
 
   getConsentData(consentStringVersion, observer) {
@@ -45,9 +60,9 @@ export default class IABConsentManagementProviderV1 {
       )
   }
 
-  getConsentStatus() {
+  getConsentStatus(_, observer) {
     return this._getConsentStatusUseCase
       .getConsentStatus()
-      .then(result => result)
+      .then(consentStatus => observer(consentStatus, true))
   }
 }

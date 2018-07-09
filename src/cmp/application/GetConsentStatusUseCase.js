@@ -1,3 +1,8 @@
+import {
+  CONSENT_STATUS_ACCEPTED,
+  CONSENT_STATUS_NOT_ACCEPTED
+} from '../domain/consentStatus'
+
 export default class GetConsentStatusUseCase {
   constructor({consentRepository}) {
     this._consentRepository = consentRepository
@@ -9,14 +14,10 @@ export default class GetConsentStatusUseCase {
    */
   getConsentStatus() {
     return Promise.resolve()
-      .then(() => this._consentRepository.getConsentData())
-      .then(consentData => {
-        return consentData === undefined
-          ? CONSENT_STATUS_NOT_ACCEPTED
-          : CONSENT_STATUS_ACCEPTED
-      })
+      .then(() => this._consentRepository.getConsent())
+      .then(
+        consent =>
+          consent ? CONSENT_STATUS_ACCEPTED : CONSENT_STATUS_NOT_ACCEPTED
+      )
   }
 }
-
-const CONSENT_STATUS_NOT_ACCEPTED = 'NOT_ACCEPTED'
-const CONSENT_STATUS_ACCEPTED = 'ACCEPTED'
