@@ -10,8 +10,8 @@
     "coverage": "istanbul cover --report html _mocha -- ./test --recursive --compilers js:babel-register",
     "coverage:ci": "istanbul cover _mocha -- ./test --recursive --compilers js:babel-register && codecov",
     "lint": "sui-lint js",
-    "dev": "npm run cleanDistFolder && webpack --module-bind js=babel-loader --mode=development --output dist/cmp.dev.js",
-    "build": "npm run cleanDistFolder && webpack --module-bind js=babel-loader --mode=production --output dist/cmp.pro.js"
+    "dev": "npm run cleanDistFolder && webpack --module-bind js=babel-loader --mode=development --output-library-target=umd --output dist/cmp.dev.js",
+    "build": "npm run cleanDistFolder && webpack --module-bind js=babel-loader --mode=production --output-library-target=umd --output dist/cmp.pro.js"
   },
   "repository": {
     "type": "git",
