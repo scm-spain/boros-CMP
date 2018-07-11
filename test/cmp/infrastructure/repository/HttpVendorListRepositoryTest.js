@@ -1,7 +1,6 @@
 import {expect} from 'chai'
 import sinon from 'sinon'
 import HttpVendorListRepository from '../../../../src/cmp/infrastructure/repository/HttpVendorListRepository'
-import GlobalVendorListAccessError from '../../../../src/cmp/domain/GlobalVendorListAccessError'
 
 describe('HttpVendorListRepository', () => {
   describe('getGlobalVendorList', () => {
