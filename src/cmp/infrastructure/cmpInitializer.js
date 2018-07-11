@@ -11,7 +11,7 @@ import PingUseCase from '../application/PingUseCase'
 import SetVendorConsentsUseCase from '../application/SetVendorConsentsUseCase'
 import IABConsentManagementProviderV1 from './controller/IABConsentManagementProviderV1'
 import commandConsumer from './controller/commandConsumer'
-import Log from './Log'
+import {LEVEL, Log} from './Log'
 
 const initializeCMP = ({
   storeConsentGlobally = false,
@@ -24,7 +24,7 @@ const initializeCMP = ({
   log
 } = {}) => {
   // Resolve dependencies
-  const _log = log || new Log({console})
+  const _log = log || new Log({level: LEVEL.error, console: console})
 
   const _vendorConsentsFactory =
     vendorConsentsFactory ||
