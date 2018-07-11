@@ -13,26 +13,29 @@ export default class ChainedVendorListRepository {
     })
   }
 
-  getGlobalVendorList() {
+  getGlobalVendorList({vendorListVersion} = {}) {
     return Promise.resolve()
-      .then(this._getLocalVendorList)
+      .then(() => this._getLocalVendorList({vendorListVersion}))
       .then(
         globalVendorList =>
           globalVendorList ||
-          this._getRemoteVendorList().then(globalVendorList =>
-            this._saveRemoteVendorListToLocal({globalVendorList}).then(
-              () => globalVendorList
-            )
+          this._getRemoteVendorList({vendorListVersion}).then(
+            globalVendorList =>
+              this._saveRemoteVendorListToLocal({globalVendorList}).then(
+                () => globalVendorList
+              )
           )
       )
   }
 }
 
-const getLocalVendorList = ({inMemoryVendorListRepository}) => () =>
-  inMemoryVendorListRepository.getGlobalVendorList()
+const getLocalVendorList = ({inMemoryVendorListRepository}) => ({
+  vendorListVersion
+}) => inMemoryVendorListRepository.getGlobalVendorList({vendorListVersion})
 
-const getRemoteVendorList = ({httpVendorListRepository}) => () =>
-  httpVendorListRepository.getGlobalVendorList()
+const getRemoteVendorList = ({httpVendorListRepository}) => ({
+  vendorListVersion
+}) => httpVendorListRepository.getGlobalVendorList({vendorListVersion})
 
 const saveRemoteVendorListToLocal = ({inMemoryVendorListRepository}) => ({
   globalVendorList
