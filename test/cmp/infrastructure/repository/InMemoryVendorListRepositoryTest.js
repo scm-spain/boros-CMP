@@ -16,9 +16,9 @@ describe('InMemoryVendorListRepository', () => {
         .catch(e => done(e))
     })
     it('Should return the stored globalVendorList if is set', done => {
-      const givenGlobalVendorList = {what: 'ever'}
+      const givenGlobalVendorList = {vendorListVersion: 1}
       const repository = new InMemoryVendorListRepository({
-        globalVendorList: givenGlobalVendorList
+        initialVendorList: givenGlobalVendorList
       })
 
       repository
@@ -32,13 +32,30 @@ describe('InMemoryVendorListRepository', () => {
         .then(() => done())
         .catch(e => done(e))
     })
+    it('Should return the global vendor list with a specific version number', done => {
+      const givenGlobalVendorList = {vendorListVersion: 4}
+      const repository = new InMemoryVendorListRepository({
+        initialVendorList: givenGlobalVendorList
+      })
+
+      repository
+        .getGlobalVendorList({vendorListVersion: 4})
+        .then(result => {
+          expect(
+            result,
+            'the global vendor list should be the given vendor list'
+          ).to.deep.equal(givenGlobalVendorList)
+        })
+        .then(() => done())
+        .catch(e => done(e))
+    })
   })
   describe('setGlobalVendorList', () => {
     it('Should update the stored global vendor list', done => {
-      const givenInitialGlobalVendorList = {what: 'ever'}
-      const givenUpdatedGlobalVendorList = {what: 'ever', up: 'dated'}
+      const givenInitialGlobalVendorList = {vendorListVersion: 1}
+      const givenUpdatedGlobalVendorList = {vendorListVersion: 2}
       const repository = new InMemoryVendorListRepository({
-        globalVendorList: givenInitialGlobalVendorList
+        initialVendorList: givenInitialGlobalVendorList
       })
 
       repository
