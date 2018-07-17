@@ -1,5 +1,5 @@
-import InvalidVendorListVersionError from '../../domain/InvalidVendorListVersionError'
 import UnexistingConsentDataError from '../../domain/UnexistingConsentDataError'
+import GlobalVendorListAccessError from '../../domain/GlobalVendorListAccessError'
 
 export default class IABConsentManagementProviderV1 {
   constructor({
@@ -54,7 +54,7 @@ export default class IABConsentManagementProviderV1 {
       .then(globalVendorList => observer(globalVendorList, true))
       .catch(
         e =>
-          e instanceof InvalidVendorListVersionError
+          e instanceof GlobalVendorListAccessError
             ? observer(null, false)
             : Promise.reject(e)
       )

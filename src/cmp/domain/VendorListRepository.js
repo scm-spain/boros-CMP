@@ -2,7 +2,7 @@
  * @interface
  */
 export default class VendorListRepository {
-  getGlobalVendorList() {
+  getGlobalVendorList({vendorListVersion}) {
     throw new Error('VendorListRepository#getGlobalVendorList')
   }
 }

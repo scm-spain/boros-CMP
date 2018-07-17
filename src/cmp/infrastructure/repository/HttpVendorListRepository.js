@@ -1,5 +1,10 @@
 /* eslint-disable no-undef */
 import 'whatwg-fetch'
+import GlobalVendorListAccessError from '../../domain/GlobalVendorListAccessError'
+import {
+  latestVendorListLocator,
+  versionVendorListLocator
+} from '../../domain/iabVendorListLocator'
 
 /**
  * @class
@@ -7,14 +12,36 @@ import 'whatwg-fetch'
  */
 export default class HttpVendorListRepository {
   constructor({
-    globalVendorListLocation = 'https://vendorlist.consensu.org/vendorlist.json'
+    latestLocator = latestVendorListLocator,
+    versionLocator = versionVendorListLocator
   } = {}) {
-    this._globalVendorListLocation = globalVendorListLocation
+    this._loadLatestVendorList = loadLatestVendorList({latestLocator})
+    this._loadVendorListVersion = loadVendorListVersion({versionLocator})
   }
 
-  getGlobalVendorList() {
+  getGlobalVendorList({vendorListVersion} = {}) {
     return Promise.resolve()
-      .then(() => fetch(this._globalVendorListLocation))
+      .then(
+        () =>
+          (vendorListVersion &&
+            this._loadVendorListVersion({vendorListVersion})) ||
+          this._loadLatestVendorList()
+      )
+      .then(filterOkFetchResponse)
       .then(fetchResponse => fetchResponse.json())
   }
+}
+
+const loadLatestVendorList = ({latestLocator}) => () => fetch(latestLocator())
+
+const loadVendorListVersion = ({versionLocator}) => ({vendorListVersion}) =>
+  fetch(versionLocator({vendorListVersion}))
+
+const filterOkFetchResponse = fetchResponse => {
+  if (!fetchResponse.ok) {
+    throw new GlobalVendorListAccessError(
+      'Invalid response fetching the global vendor list'
+    )
+  }
+  return fetchResponse
 }

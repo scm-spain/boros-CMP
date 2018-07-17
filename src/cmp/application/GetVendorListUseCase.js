@@ -12,7 +12,7 @@ export default class GetVendorListUseCase {
    */
   getVendorList({vendorListVersion = null} = {}) {
     return Promise.resolve().then(() =>
-      this._vendorListRepository.getGlobalVendorList()
+      this._vendorListRepository.getGlobalVendorList({vendorListVersion})
     )
   }
 }
