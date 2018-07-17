@@ -10,8 +10,9 @@ export default class InMemoryVendorListRepository {
         initialVendorList.vendorListVersion,
         initialVendorList
       )
-      this._latestVersion = initialVendorList.vendorListVersion
     }
+    this._latestVersion =
+      (initialVendorList && initialVendorList.vendorListVersion) || undefined
   }
 
   getGlobalVendorList({vendorListVersion = this._latestVersion} = {}) {
