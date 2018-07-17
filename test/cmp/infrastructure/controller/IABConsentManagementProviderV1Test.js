@@ -4,7 +4,7 @@ import IABConsentManagementProviderV1 from '../../../../src/cmp/infrastructure/c
 
 describe('IAB Consent Management Provider V1', () => {
   describe('getVendorConsents method', () => {
-    it('Should call get vendor consents use case and call the observer with success value', done => {
+    it('Should call get vendor consents use case', done => {
       const givenVendorIds = [1, 2]
       const expectedResult = 'expected result'
       const getVendorConsentsUseCaseMock = {
@@ -14,13 +14,12 @@ describe('IAB Consent Management Provider V1', () => {
         getVendorConsentsUseCaseMock,
         'getVendorConsents'
       )
-      const observerSpy = sinon.spy()
 
       const iabCMP = new IABConsentManagementProviderV1({
         getVendorConsentsUseCase: getVendorConsentsUseCaseMock
       })
       iabCMP
-        .getVendorConsents(givenVendorIds, observerSpy)
+        .getVendorConsents(givenVendorIds)
         .then(() => {
           expect(
             getVendorConsentsSpy.calledOnce,
@@ -30,40 +29,14 @@ describe('IAB Consent Management Provider V1', () => {
             getVendorConsentsSpy.args[0][0],
             'get vendor consents should have received only the business parameters'
           ).to.deep.equals({vendorIds: givenVendorIds})
-          expect(observerSpy.calledOnce, 'observer should have been called').to
-            .be.true
-          expect(observerSpy.args[0][0]).to.deep.equals(expectedResult)
-          expect(observerSpy.args[0][1]).to.be.true
-        })
-        .then(() => done())
-        .catch(e => done(e))
-    })
-    it('Should call the callback with false success if any error is thrown', done => {
-      const getVendorConsentsUseCaseMock = {
-        getVendorConsents: () =>
-          Promise.reject(new Error('It is an error for the test'))
-      }
-      const observerSpy = sinon.spy()
-
-      const iabCMP = new IABConsentManagementProviderV1({
-        getVendorConsentsUseCase: getVendorConsentsUseCaseMock
-      })
-      iabCMP
-        .getVendorConsents(null, observerSpy)
-        .then(() => {
-          expect(observerSpy.calledOnce, 'the observer shoud have been called')
-            .to.be.true
-          expect(
-            observerSpy.args[0][1],
-            'the success parameter should be false'
-          ).to.be.false
         })
         .then(() => done())
         .catch(e => done(e))
     })
   })
+
   describe('getConsentData method', () => {
-    it('Should call get consent data use case and call the observer with success value', done => {
+    it('Should call get consent data use case', done => {
       const givenConsentStringVersion = 'whatever'
       const expectedResult = 'expected result'
       const getConsentDataUseCaseMock = {
@@ -73,13 +46,12 @@ describe('IAB Consent Management Provider V1', () => {
         getConsentDataUseCaseMock,
         'getConsentData'
       )
-      const observerSpy = sinon.spy()
 
       const iabCMP = new IABConsentManagementProviderV1({
         getConsentDataUseCase: getConsentDataUseCaseMock
       })
       iabCMP
-        .getConsentData(givenConsentStringVersion, observerSpy)
+        .getConsentData(givenConsentStringVersion)
         .then(() => {
           expect(
             getConsentDataSpy.calledOnce,
@@ -89,33 +61,6 @@ describe('IAB Consent Management Provider V1', () => {
             getConsentDataSpy.args[0][0],
             'get consent data should have received only the business parameters'
           ).to.deep.equals({consentStringVersion: givenConsentStringVersion})
-          expect(observerSpy.calledOnce, 'observer should have been called').to
-            .be.true
-          expect(observerSpy.args[0][0]).to.deep.equals(expectedResult)
-          expect(observerSpy.args[0][1]).to.be.true
-        })
-        .then(() => done())
-        .catch(e => done(e))
-    })
-    it('Should call the callback with false success if any error is thrown', done => {
-      const getConsentDataUseCaseMock = {
-        getConsentData: () =>
-          Promise.reject(new Error('It is an error for the test'))
-      }
-      const observerSpy = sinon.spy()
-
-      const iabCMP = new IABConsentManagementProviderV1({
-        getConsentDataUseCase: getConsentDataUseCaseMock
-      })
-      iabCMP
-        .getConsentData(null, observerSpy)
-        .then(() => {
-          expect(observerSpy.calledOnce, 'the observer shoud have been called')
-            .to.be.true
-          expect(
-            observerSpy.args[0][1],
-            'the success parameter should be false'
-          ).to.be.false
         })
         .then(() => done())
         .catch(e => done(e))
@@ -131,43 +76,14 @@ describe('IAB Consent Management Provider V1', () => {
       const iabCMP = new IABConsentManagementProviderV1({
         getConsentStatusUseCase: consentStatusUseCaseMock
       })
-      const observerSpy = sinon.spy()
       iabCMP
-        .getConsentStatus(null, observerSpy)
-        .then(result => {
-          expect(observerSpy.calledOnce, 'observer should have been called').to
-            .be.true
-          expect(observerSpy.args[0][0]).to.deep.equals(expectedResult)
-          expect(observerSpy.args[0][1]).to.be.true
-          done()
-        })
-        .catch(e => done(e))
-    })
-    it('Should call the callback with false success if any error is thrown', done => {
-      const consentStatusUseCaseMock = {
-        getConsentStatus: () =>
-          Promise.reject(new Error('It is an error for the test'))
-      }
-      const iabCMP = new IABConsentManagementProviderV1({
-        getConsentStatusUseCase: consentStatusUseCaseMock
-      })
-      const observerSpy = sinon.spy()
-      iabCMP
-        .getConsentStatus(null, observerSpy)
-        .then(() => {
-          expect(observerSpy.calledOnce, 'the observer shoud have been called')
-            .to.be.true
-          expect(
-            observerSpy.args[0][1],
-            'the success parameter should be false'
-          ).to.be.false
-        })
+        .getConsentStatus(null)
         .then(() => done())
         .catch(e => done(e))
     })
   })
   describe('getVendorList method', () => {
-    it('Should call get vendor list use case and call the observer with success value', done => {
+    it('Should call get vendor list use case', done => {
       const givenVendorListVersion = 999
       const expectedResult = 'expected result'
       const getVendorListUseCaseMock = {
@@ -177,13 +93,12 @@ describe('IAB Consent Management Provider V1', () => {
         getVendorListUseCaseMock,
         'getVendorList'
       )
-      const observerSpy = sinon.spy()
 
       const iabCMP = new IABConsentManagementProviderV1({
         getVendorListUseCase: getVendorListUseCaseMock
       })
       iabCMP
-        .getVendorList(givenVendorListVersion, observerSpy)
+        .getVendorList(givenVendorListVersion)
         .then(() => {
           expect(
             getVendorListSpy.calledOnce,
@@ -193,33 +108,6 @@ describe('IAB Consent Management Provider V1', () => {
             getVendorListSpy.args[0][0],
             'get vendor list should have received only the business parameters'
           ).to.deep.equals({vendorListVersion: givenVendorListVersion})
-          expect(observerSpy.calledOnce, 'observer should have been called').to
-            .be.true
-          expect(observerSpy.args[0][0]).to.deep.equals(expectedResult)
-          expect(observerSpy.args[0][1]).to.be.true
-        })
-        .then(() => done())
-        .catch(e => done(e))
-    })
-    it('Should call the callback with false success if any error is thrown', done => {
-      const getVendorListUseCaseMock = {
-        getVendorList: () =>
-          Promise.reject(new Error('It is an error for the test'))
-      }
-      const observerSpy = sinon.spy()
-
-      const iabCMP = new IABConsentManagementProviderV1({
-        getVendorListUseCase: getVendorListUseCaseMock
-      })
-      iabCMP
-        .getVendorList(null, observerSpy)
-        .then(() => {
-          expect(observerSpy.calledOnce, 'the observer shoud have been called')
-            .to.be.true
-          expect(
-            observerSpy.args[0][1],
-            'the success parameter should be false'
-          ).to.be.false
         })
         .then(() => done())
         .catch(e => done(e))
@@ -232,41 +120,14 @@ describe('IAB Consent Management Provider V1', () => {
         ping: () => Promise.resolve().then(() => expectedResult)
       }
       const pingSpy = sinon.spy(pingUseCaseMock, 'ping')
-      const observerSpy = sinon.spy()
 
       const iabCMP = new IABConsentManagementProviderV1({
         pingUseCase: pingUseCaseMock
       })
       iabCMP
-        .ping(null, observerSpy)
+        .ping(null)
         .then(() => {
           expect(pingSpy.calledOnce, 'ping shoud have been called').to.be.true
-          expect(observerSpy.calledOnce, 'observer should have been called').to
-            .be.true
-          expect(observerSpy.args[0][0]).to.deep.equals(expectedResult)
-          expect(observerSpy.args[0][1]).to.be.true
-        })
-        .then(() => done())
-        .catch(e => done(e))
-    })
-    it('Should call the callback with false success if any error is thrown', done => {
-      const pingUseCaseMock = {
-        ping: () => Promise.reject(new Error('It is an error for the test'))
-      }
-      const observerSpy = sinon.spy()
-
-      const iabCMP = new IABConsentManagementProviderV1({
-        pingUseCase: pingUseCaseMock
-      })
-      iabCMP
-        .ping(null, observerSpy)
-        .then(() => {
-          expect(observerSpy.calledOnce, 'the observer shoud have been called')
-            .to.be.true
-          expect(
-            observerSpy.args[0][1],
-            'the success parameter should be false'
-          ).to.be.false
         })
         .then(() => done())
         .catch(e => done(e))
@@ -285,13 +146,12 @@ describe('IAB Consent Management Provider V1', () => {
         setVendorConsentsUseCaseMock,
         'setVendorConsents'
       )
-      const observerSpy = sinon.spy()
 
       const iabCMP = new IABConsentManagementProviderV1({
         setVendorConsentsUseCase: setVendorConsentsUseCaseMock
       })
       iabCMP
-        .setVendorConsents(givenVendorConsents, observerSpy)
+        .setVendorConsents(givenVendorConsents)
         .then(() => {
           expect(
             setVendorConsentsSpy.calledOnce,
@@ -301,32 +161,6 @@ describe('IAB Consent Management Provider V1', () => {
             setVendorConsentsSpy.args[0][0],
             'set vendor consents should have received only the business parameters'
           ).to.deep.equals({vendorConsents: givenVendorConsents})
-          expect(observerSpy.calledOnce, 'observer should have been called').to
-            .be.true
-          expect(observerSpy.args[0][1]).to.be.true
-        })
-        .then(() => done())
-        .catch(e => done(e))
-    })
-    it('Should call the callback with false success if any error is thrown', done => {
-      const setVendorConsentsUseCaseMock = {
-        setVendorConsents: () =>
-          Promise.reject(new Error('It is an error for the test'))
-      }
-      const observerSpy = sinon.spy()
-
-      const iabCMP = new IABConsentManagementProviderV1({
-        setVendorConsentsUseCase: setVendorConsentsUseCaseMock
-      })
-      iabCMP
-        .setVendorConsents(null, observerSpy)
-        .then(() => {
-          expect(observerSpy.calledOnce, 'the observer shoud have been called')
-            .to.be.true
-          expect(
-            observerSpy.args[0][1],
-            'the success parameter should be false'
-          ).to.be.false
         })
         .then(() => done())
         .catch(e => done(e))

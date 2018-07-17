@@ -8,45 +8,37 @@ describe('commandConsumer', () => {
     error: () => null
   })
   describe('Given an executable command', () => {
-    it('Should call the valid CMP controller command without errors', done => {
+    it('Should call the valid CMP controller command without errors and call the observer with success value and result value', done => {
       const logMock = createLogMock()
+      const expectedResultValue = 'result value'
       const controllerMock = {
-        anyIABmethod: () => Promise.resolve()
+        anyIABmethod: () => Promise.resolve(expectedResultValue)
       }
       const methodSpy = sinon.spy(controllerMock, 'anyIABmethod')
       const parameters = {
         key: 'value'
       }
-      const observer = () => null
       const __cmp = commandConsumer(logMock)(controllerMock)
 
-      __cmp('anyIABmethod', parameters, observer)
-        .then(
-          result =>
+      const observer = (result, success) => {
+        Promise.resolve()
+          .then(() => {
             expect(
               result,
-              'output value should be true when no errors are found'
-            ).to.be.true
-        )
-        .then(
-          () =>
+              'received result should be the expected result'
+            ).to.equal(result)
+            expect(success, 'success value should be true').to.be.true
             expect(methodSpy.calledOnce, 'CMP method shoud be called').to.be
               .true
-        )
-        .then(() =>
-          expect(
-            methodSpy.args[0][0],
-            'CMP call should recieve the parameters'
-          ).to.deep.equals(parameters)
-        )
-        .then(() =>
-          expect(
-            methodSpy.args[0][1],
-            'CMP call should recieve the callback'
-          ).to.equals(observer)
-        )
-        .then(() => done())
-        .catch(e => done(e))
+            expect(
+              methodSpy.args[0][0],
+              'CMP call should recieve the parameters'
+            ).to.deep.equals(parameters)
+            done()
+          })
+          .catch(e => done(e))
+      }
+      __cmp('anyIABmethod', parameters, observer).catch(e => done(e))
     })
   })
   describe('Given an inexisting command', () => {
@@ -57,22 +49,16 @@ describe('commandConsumer', () => {
       const observer = () => 'whatever'
       const logErrorSpy = sinon.spy(logMock, 'error')
       commandConsumer(logMock)(controllerMock)('whatever', parameters, observer)
-        .then(
-          result =>
-            expect(result, 'output value should be false when an error occurs')
-              .to.be.false
-        )
-        .then(
-          () =>
-            expect(logErrorSpy.calledOnce, 'Should have logged the error').to.be
-              .true
-        )
-        .then(() =>
+        .then(result => {
+          expect(result, 'output value should be false when an error occurs').to
+            .be.false
+          expect(logErrorSpy.calledOnce, 'Should have logged the error').to.be
+            .true
           expect(
             logErrorSpy.args[0].join(),
             'The error should indicate that the command does not exist'
           ).to.include('Unexisting command')
-        )
+        })
         .then(() => done())
         .catch(e => done(e))
     })

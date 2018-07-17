@@ -1,19 +1,38 @@
 const commandConsumer = log => controller => (
   command,
   parameters,
-  observer = () => null
+  observer
 ) => {
   return Promise.resolve()
     .then(() => log.debug('Received command:', command))
     .then(() => filterCommandIsFunction({controller, command}))
-    .then(validCommand => controller[validCommand](parameters, observer))
-    .then(() => true)
+    .then(() =>
+      Promise.race([
+        Promise.resolve(true),
+        callCommand({log, controller, command, parameters, observer})
+      ])
+    )
     .catch(e => {
-      log.error('Error executing command:', command, '-', e.message)
+      log.error('Error:', command, '-', e.message)
       return false
     })
 }
 export default commandConsumer
+
+const callCommand = ({
+  log,
+  controller,
+  command,
+  parameters,
+  observer = () => null
+} = {}) =>
+  Promise.resolve()
+    .then(() => controller[command](parameters))
+    .then(result => observer(result, true))
+    .catch(e => {
+      log.error('Error calling command:', command, '-', e.message)
+      observer(null, false)
+    })
 
 const filterCommandIsFunction = ({controller, command}) => {
   if (command && typeof controller[command] === 'function') {
