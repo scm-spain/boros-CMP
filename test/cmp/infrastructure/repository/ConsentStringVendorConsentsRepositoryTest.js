@@ -17,7 +17,11 @@ describe('ConsentStringVendorConsentsRepository', () => {
       const repository = new ConsentStringVendorConsentsRepository({
         vendorConsentsFactory: vendorConsentsFactoryMock,
         consentRepository: consentRepositoryMock,
-        vendorListRepository: vendorListRepositoryMock
+        vendorListRepository: vendorListRepositoryMock,
+        cmpId: 1,
+        cmpVersion: 1,
+        consentScreen: 3,
+        consentLanguage: 'en'
       })
 
       repository
@@ -59,7 +63,11 @@ describe('ConsentStringVendorConsentsRepository', () => {
       const repository = new ConsentStringVendorConsentsRepository({
         vendorConsentsFactory: vendorConsentsFactoryMock,
         consentRepository: consentRepositoryMock,
-        vendorListRepository: vendorListRepositoryMock
+        vendorListRepository: vendorListRepositoryMock,
+        cmpId: 1,
+        cmpVersion: 1,
+        consentScreen: 3,
+        consentLanguage: 'en'
       })
 
       repository

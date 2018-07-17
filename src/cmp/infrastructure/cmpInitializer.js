@@ -11,13 +11,13 @@ import PingUseCase from '../application/PingUseCase'
 import SetVendorConsentsUseCase from '../application/SetVendorConsentsUseCase'
 import IABConsentManagementProviderV1 from './controller/IABConsentManagementProviderV1'
 import commandConsumer from './controller/commandConsumer'
-import {LEVEL, Log} from './Log'
+import {Log} from './Log'
 import ChainedVendorListRepository from './repository/ChainedVendorListRepository'
 import InMemoryVendorListRepository from './repository/InMemoryVendorListRepository'
+import Configuration from './configuration/Configuration'
 
 const initializeCMP = ({
-  storeConsentGlobally = false,
-  gdprApplies = true,
+  configuration = {},
   vendorConsentsFactory,
   consentFactory,
   vendorListRepository,
@@ -25,21 +25,36 @@ const initializeCMP = ({
   vendorConsentsRepository,
   log
 } = {}) => {
+  // Configuration
+  const _configuration = new Configuration({
+    gdpr: configuration.gdpr,
+    consent: configuration.consent,
+    httpVendorList: configuration.httpVendorList,
+    log: configuration.log
+  })
+
   // Resolve dependencies
-  const _log = log || new Log({level: LEVEL.error, console: console})
+  const _log =
+    log || new Log({level: _configuration.log.level, console: console})
 
   const _vendorConsentsFactory =
     vendorConsentsFactory ||
     new IABVendorConsentsFactory({
-      gdprApplies,
-      storeConsentGlobally
+      gdprApplies: _configuration.gdpr.gdprApplies,
+      storeConsentGlobally: _configuration.gdpr.storeConsentGlobally
     })
 
   const _consentFactory = consentFactory || new IABConsentFactory()
 
   const _remoteVendorListRepository =
-    vendorListRepository || new HttpVendorListRepository()
+    vendorListRepository ||
+    new HttpVendorListRepository({
+      latestLocator: _configuration.httpVendorList.latestLocator,
+      versionLocator: _configuration.httpVendorList.versionLocator
+    })
+
   const _inMemoryVendorListRepository = new InMemoryVendorListRepository()
+
   const _vendorListRepository = new ChainedVendorListRepository({
     inMemoryVendorListRepository: _inMemoryVendorListRepository,
     httpVendorListRepository: _remoteVendorListRepository
@@ -56,6 +71,10 @@ const initializeCMP = ({
   const _vendorConsentsRepository =
     vendorConsentsRepository ||
     new ConsentStringVendorConsentsRepository({
+      cmpId: _configuration.consent.cmpId,
+      cmpVersion: _configuration.consent.cmpVersion,
+      consentScreen: _configuration.consent.consentScreen,
+      consentLanguage: _configuration.consent.consentLanguage,
       vendorListRepository: _vendorListRepository,
       consentRepository: _consentRepository,
       vendorConsentsFactory: _vendorConsentsFactory
@@ -64,8 +83,8 @@ const initializeCMP = ({
   // Supported use cases
   const getConsentDataUseCase = new GetConsentDataUseCase({
     consentRepository: _consentRepository,
-    storeConsentGlobally,
-    gdprApplies
+    storeConsentGlobally: _configuration.gdpr.storeConsentGlobally,
+    gdprApplies: _configuration.gdpr.gdprApplies
   })
 
   const getConsentStatusUseCase = new GetConsentStatusUseCase({

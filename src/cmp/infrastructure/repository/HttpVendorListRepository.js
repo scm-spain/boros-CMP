@@ -1,20 +1,13 @@
 /* eslint-disable no-undef */
 import 'whatwg-fetch'
 import GlobalVendorListAccessError from '../../domain/GlobalVendorListAccessError'
-import {
-  latestVendorListLocator,
-  versionVendorListLocator
-} from '../../domain/iabVendorListLocator'
 
 /**
  * @class
  * @implements VendorListRepository
  */
 export default class HttpVendorListRepository {
-  constructor({
-    latestLocator = latestVendorListLocator,
-    versionLocator = versionVendorListLocator
-  } = {}) {
+  constructor({latestLocator, versionLocator}) {
     this._loadLatestVendorList = loadLatestVendorList({latestLocator})
     this._loadVendorListVersion = loadVendorListVersion({versionLocator})
   }
