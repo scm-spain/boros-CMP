@@ -12,7 +12,8 @@ describe('HttpVendorListRepository', () => {
       }
       const fetchMock = {
         fetch: () => ({
-          json: () => expectedResult
+          json: () => expectedResult,
+          ok: true
         })
       }
       const fetchSpy = sinon.spy(fetchMock, 'fetch')
@@ -38,15 +39,16 @@ describe('HttpVendorListRepository', () => {
         .catch(e => done(e))
     })
     it('Should fetch the remote vendor list JSON, using the given vendor list location', done => {
-      const givenVendorListLocation =
+      const givenVendorListLocator = () =>
         'http://whatever.consent/location/list.json'
       const repository = new HttpVendorListRepository({
-        globalVendorListLocation: givenVendorListLocation
+        latestLocator: givenVendorListLocator
       })
 
       const fetchMock = {
         fetch: () => ({
-          json: () => null
+          json: () => null,
+          ok: true
         })
       }
       const fetchSpy = sinon.spy(fetchMock, 'fetch')
@@ -62,9 +64,40 @@ describe('HttpVendorListRepository', () => {
           expect(
             fetchSpy.args[0][0],
             'should retrieve the IAB vendor list by default'
-          ).to.equal(givenVendorListLocation)
+          ).to.equal(givenVendorListLocator())
         })
         .then(() => done())
+        .catch(e => done(e))
+    })
+    it('Should throw a GlobalVendorListAccessError if the global vendor list cannot be fetched', done => {
+      const repository = new HttpVendorListRepository()
+
+      const fetchMock = {
+        fetch: () => ({
+          json: () => null,
+          ok: false
+        })
+      }
+      global.fetch = fetchMock.fetch
+
+      repository
+        .getGlobalVendorList()
+        .then(() =>
+          done(
+            new Error(
+              'should throw an error because the fetch response is not ok'
+            )
+          )
+        )
+        .catch(e => {
+          if (e.name === 'GlobalVendorListAccessError') {
+            done()
+          } else {
+            throw new Error(
+              `should throw a GlobalVendorListAccessError instead of ${e.name}`
+            )
+          }
+        })
         .catch(e => done(e))
     })
   })
