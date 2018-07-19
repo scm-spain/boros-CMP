@@ -1,6 +1,3 @@
-import UnexistingConsentDataError from '../../domain/UnexistingConsentDataError'
-import GlobalVendorListAccessError from '../../domain/GlobalVendorListAccessError'
-
 export default class IABConsentManagementProviderV1 {
   constructor({
     getVendorConsentsUseCase,
@@ -18,51 +15,27 @@ export default class IABConsentManagementProviderV1 {
     this._setVendorConsentsUseCase = setVendorConsentsUseCase
   }
 
-  getVendorConsents(vendorIds, observer) {
-    return this._getVendorConsentsUseCase
-      .getVendorConsents({vendorIds})
-      .then(vendorConsents => observer(vendorConsents, true))
-      .catch(
-        e =>
-          e instanceof UnexistingConsentDataError
-            ? observer(null, false)
-            : Promise.reject(e)
-      )
+  getVendorConsents(vendorIds) {
+    return this._getVendorConsentsUseCase.getVendorConsents({vendorIds})
   }
 
-  setVendorConsents(vendorConsents, observer) {
-    return this._setVendorConsentsUseCase
-      .setVendorConsents({vendorConsents})
-      .then(() => observer(null, true))
+  setVendorConsents(vendorConsents) {
+    return this._setVendorConsentsUseCase.setVendorConsents({vendorConsents})
   }
 
-  getConsentData(consentStringVersion, observer) {
-    return this._getConsentDataUseCase
-      .getConsentData({consentStringVersion})
-      .then(vendorConsentData => observer(vendorConsentData, true))
+  getConsentData(consentStringVersion) {
+    return this._getConsentDataUseCase.getConsentData({consentStringVersion})
   }
 
-  ping(_, observer) {
-    return this._pingUseCase
-      .ping()
-      .then(pingReturn => observer(pingReturn, true))
+  ping(_) {
+    return this._pingUseCase.ping()
   }
 
-  getVendorList(vendorListVersion, observer) {
-    return this._getVendorListUseCase
-      .getVendorList({vendorListVersion})
-      .then(globalVendorList => observer(globalVendorList, true))
-      .catch(
-        e =>
-          e instanceof GlobalVendorListAccessError
-            ? observer(null, false)
-            : Promise.reject(e)
-      )
+  getVendorList(vendorListVersion) {
+    return this._getVendorListUseCase.getVendorList({vendorListVersion})
   }
 
-  getConsentStatus(_, observer) {
-    return this._getConsentStatusUseCase
-      .getConsentStatus()
-      .then(consentStatus => observer(consentStatus, true))
+  getConsentStatus(_) {
+    return this._getConsentStatusUseCase.getConsentStatus()
   }
 }
