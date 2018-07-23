@@ -1,11 +1,18 @@
 import {expect} from 'chai'
 import sinon from 'sinon'
 import HttpVendorListRepository from '../../../../src/cmp/infrastructure/repository/HttpVendorListRepository'
+import {
+  latestVendorListLocator,
+  versionVendorListLocator
+} from '../../../../src/cmp/domain/iabVendorListLocator'
 
 describe('HttpVendorListRepository', () => {
   describe('getGlobalVendorList', () => {
     it('Should fetch the remote vendor list JSON, using the default location if none is given', done => {
-      const repository = new HttpVendorListRepository()
+      const repository = new HttpVendorListRepository({
+        latestLocator: latestVendorListLocator,
+        versionLocator: versionVendorListLocator
+      })
 
       const expectedResult = {
         key: 'value'
@@ -70,7 +77,10 @@ describe('HttpVendorListRepository', () => {
         .catch(e => done(e))
     })
     it('Should throw a GlobalVendorListAccessError if the global vendor list cannot be fetched', done => {
-      const repository = new HttpVendorListRepository()
+      const repository = new HttpVendorListRepository({
+        latestLocator: latestVendorListLocator,
+        versionLocator: versionVendorListLocator
+      })
 
       const fetchMock = {
         fetch: () => ({

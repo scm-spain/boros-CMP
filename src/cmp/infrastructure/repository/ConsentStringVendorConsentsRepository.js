@@ -6,10 +6,10 @@ import {ConsentString} from 'consent-string'
  */
 export default class ConsentStringVendorConsentsRepository {
   constructor({
-    cmpId = 1,
-    cmpVersion = 1,
-    consentScreen = 1,
-    consentLanguage = 'en',
+    cmpId = requiredArg('cmpId'),
+    cmpVersion = requiredArg('cmpVersion'),
+    consentScreen = requiredArg('consentScreen'),
+    consentLanguage = requiredArg('consentLanguage'),
     vendorConsentsFactory,
     consentRepository,
     vendorListRepository
@@ -92,4 +92,8 @@ const mapVendorConsentsToConsent = ({
   consent.setConsentScreen(consentScreen)
   consent.setConsentLanguage(consentLanguage)
   return consent
+}
+
+const requiredArg = fieldName => {
+  throw new Error(`Error: ${fieldName} is required`)
 }
