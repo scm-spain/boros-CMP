@@ -3,7 +3,7 @@ import {JSDOM} from 'jsdom'
 import registerIframeCommunication from '../../../../src/cmp/infrastructure/controller/iframeCommunicationRegistry'
 
 const fixJsdomPostMessageWithEventSource = window => {
-  window.postMessage = (message) => {
+  window.postMessage = message => {
     const event = new window.MessageEvent('message', {
       data: message,
       source: window

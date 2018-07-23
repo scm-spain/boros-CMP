@@ -6,7 +6,7 @@ import registerIframeCommunication from './cmp/infrastructure/controller/iframeC
 initializeCMP({configuration: window.__cmp_config})
   .then(cmp =>
     Promise.all([
-      registerWindowCMP({cmp}),
+      registerWindowCMP({cmp, window}),
       registerIframeCommunication({cmp, window})
     ])
   )
