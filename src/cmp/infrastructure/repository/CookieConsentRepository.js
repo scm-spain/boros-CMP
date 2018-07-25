@@ -3,13 +3,13 @@
  * @implements ConsentRepository
  */
 export default class CookieConsentRepository {
-  constructor({dom, consentFactory, vendorListRepository}) {
+  constructor({cookieHandler, consentFactory, vendorListRepository}) {
     this._readVendorCookie = readCookie({
-      dom,
+      cookieHandler,
       cookieName: VENDOR_CONSENT_COOKIE_NAME
     })
     this._writeVendorCookie = writeCookie({
-      dom,
+      cookieHandler,
       cookieName: VENDOR_CONSENT_COOKIE_NAME,
       maxAgeSeconds: VENDOR_CONSENT_COOKIE_MAX_AGE
     })
@@ -40,23 +40,23 @@ export default class CookieConsentRepository {
 const VENDOR_CONSENT_COOKIE_NAME = 'euconsent'
 const VENDOR_CONSENT_COOKIE_MAX_AGE = 33696000
 
-const readCookie = ({dom, cookieName}) => () =>
-  Promise.resolve(`; ${dom.cookie}`.split(`; ${cookieName}=`)).then(
-    cookieParts =>
-      (cookieParts.length === 2 &&
-        cookieParts
-          .pop()
-          .split(';')
-          .shift()) ||
-      undefined
-  )
+const readCookie = ({cookieHandler, cookieName}) => () =>
+  cookieHandler.read({cookieName})
 
-const writeCookie = ({dom, cookieName, maxAgeSeconds, path = '/'} = {}) => ({
-  value
-}) =>
-  Promise.resolve(maxAgeSeconds ? `;max-age=${maxAgeSeconds}` : '')
-    .then(maxAge => `${cookieName}=${value};path=${path}${maxAge}`)
-    .then(cookieValue => (document.cookie = cookieValue))
+const writeCookie = ({
+  cookieHandler,
+  cookieName,
+  maxAgeSeconds,
+  path = '/'
+} = {}) => ({value}) =>
+  cookieHandler
+    .write({
+      cookieName,
+      value,
+      maxAgeSeconds,
+      path
+    })
+    .then(() => true)
 
 const getGlobalVendorList = ({vendorListRepository}) => () =>
   vendorListRepository.getGlobalVendorList()

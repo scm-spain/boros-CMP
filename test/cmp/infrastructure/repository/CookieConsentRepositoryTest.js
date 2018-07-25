@@ -3,6 +3,7 @@ import sinon from 'sinon'
 import GlobalVendorList from '../../../resources/globalvendorlist.json'
 import CookieConsentRepository from '../../../../src/cmp/infrastructure/repository/CookieConsentRepository'
 import IABConsentFactory from '../../../../src/cmp/infrastructure/factory/IABConsentFactory'
+import CookieHandler from '../../../../src/cmp/infrastructure/service/CookieHandler'
 
 describe('CookieConsentRepositoryTest', () => {
   describe('getConsent', () => {
@@ -12,13 +13,16 @@ describe('CookieConsentRepositoryTest', () => {
       const documentMock = {
         cookie: givenCookieValue
       }
+      const cookieHandler = new CookieHandler({
+        dom: documentMock
+      })
       const vendorListRepositoryMock = {
         getGlobalVendorList: sinon.spy()
       }
       const consentFactoryMock = {}
 
       const repository = new CookieConsentRepository({
-        dom: documentMock,
+        cookieHandler: cookieHandler,
         consentFactory: consentFactoryMock,
         vendorListRepository: vendorListRepositoryMock
       })
@@ -45,6 +49,11 @@ describe('CookieConsentRepositoryTest', () => {
       const documentMock = {
         cookie: givenCookieValue
       }
+
+      const cookieHandler = new CookieHandler({
+        dom: documentMock
+      })
+
       const vendorListRepositoryMock = {
         getGlobalVendorList: () => givenGlobalVendorList
       }
@@ -52,7 +61,7 @@ describe('CookieConsentRepositoryTest', () => {
       const consentFactory = new IABConsentFactory()
 
       const repository = new CookieConsentRepository({
-        dom: documentMock,
+        cookieHandler: cookieHandler,
         consentFactory: consentFactory,
         vendorListRepository: vendorListRepositoryMock
       })
@@ -67,6 +76,50 @@ describe('CookieConsentRepositoryTest', () => {
         })
         .then(() => done())
         .catch(e => done(e))
+    })
+  })
+  describe('saveConsent', () => {
+    it('Should return true after cookie consent has been stored', done => {
+      const givenGlobalVendorList = GlobalVendorList
+      const givenEuConsent =
+        'BOPmXwlOQETrjABABAESBK-AAAAcd7vf____79n_____9uz_Gv_rvf__33e8_39v_h_r_-___mf-3zV4-91vV11yPg1urXIr1FpjQ6MGgA'
+      let documentMock = {
+        cookie: ''
+      }
+
+      const cookieHandler = new CookieHandler({
+        dom: documentMock
+      })
+      const vendorListRepositoryMock = {
+        getGlobalVendorList: () => givenGlobalVendorList
+      }
+
+      const consentMock = {
+        getConsentString: () => givenEuConsent
+      }
+
+      const consentFactory = new IABConsentFactory()
+
+      const repository = new CookieConsentRepository({
+        cookieHandler: cookieHandler,
+        consentFactory: consentFactory,
+        vendorListRepository: vendorListRepositoryMock
+      })
+
+      const expectedCookieValue =
+        'euconsent=BOPmXwlOQETrjABABAESBK-AAAAcd7vf____79n_____9uz_Gv_rvf__33e8_39v_h_r_-___mf-3zV4-91vV11yPg1urXIr1FpjQ6MGgA;path=/;max-age=33696000'
+
+      repository
+        .saveConsent({
+          consent: consentMock
+        })
+        .then(data => {
+          expect(data).to.be.true
+          expect(documentMock.cookie).to.equal(expectedCookieValue)
+          done()
+        })
+
+        .catch(e => done(new Error(e)))
     })
   })
 })
