@@ -5,13 +5,14 @@
   "main": "src/index.js",
   "scripts": {
     "cleanDistFolder": "rm -Rf ./dist",
+    "build": "npm run cleanDistFolder & webpack --config ./src/build/webpack.config.babel.js --progress --profile --colors --display-error-details --display-cached",
     "prepublishOnly": "npm run cleanDistFolder && npm run build",
     "test": "mocha --recursive --require babel-polyfill --compilers js:babel-register \"test/**/*.js\"",
     "coverage": "istanbul cover --report html _mocha -- ./test --recursive --compilers js:babel-register",
     "coverage:ci": "istanbul cover _mocha -- ./test --recursive --compilers js:babel-register && codecov",
     "lint": "sui-lint js",
-    "dev": "npm run cleanDistFolder && webpack --module-bind js=babel-loader --mode=development --output-library-target=umd --output dist/cmp.dev.js",
-    "build": "npm run cleanDistFolder && webpack --module-bind js=babel-loader --mode=production --output-library-target=umd --output dist/cmp.pro.js"
+    "pro": "NODE_ENV=production npm run build",
+    "dev": "NODE_ENV=development npm run build"
   },
   "repository": {
     "type": "git",
