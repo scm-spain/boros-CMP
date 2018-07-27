@@ -15,12 +15,14 @@ import {Log} from './Log'
 import ChainedVendorListRepository from './repository/ChainedVendorListRepository'
 import InMemoryVendorListRepository from './repository/InMemoryVendorListRepository'
 import Configuration from './configuration/Configuration'
+import CookieHandler from './service/CookieHandler'
 
 const initializeCMP = ({
   configuration = {},
   vendorConsentsFactory,
   consentFactory,
   vendorListRepository,
+  cookieHandler,
   consentRepository,
   vendorConsentsRepository,
   log
@@ -60,10 +62,13 @@ const initializeCMP = ({
     httpVendorListRepository: _remoteVendorListRepository
   })
 
+  const _cookieHandler =
+    cookieHandler || new CookieHandler({dom: window.document})
+
   const _consentRepository =
     consentRepository ||
     new CookieConsentRepository({
-      dom: window.document,
+      cookieHandler: _cookieHandler,
       consentFactory: _consentFactory,
       vendorListRepository: _vendorListRepository
     })
