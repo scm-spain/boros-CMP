@@ -1,4 +1,3 @@
-import getDomainFactory from './globalstorage/infrastructure/service/getDomain'
 import globalStorageControllerRegistry from './globalstorage/infrastructure/controller/globalStorageController'
 import CookieHandler from './cmp/infrastructure/service/CookieHandler'
 import ReadCookieUseCase from './globalstorage/application/ReadCookieUseCase'
@@ -11,7 +10,7 @@ Promise.resolve(window)
       createReadCookieUseCase({cookieHandler}),
       createWriteCookieUseCase({
         cookieHandler,
-        getDomain: getDomainFactory({window})
+        domain: window.location.hostname
       })
     ]).then(([readCookieUseCase, writeCookieUseCase]) =>
       globalStorageControllerRegistry({
@@ -42,7 +41,5 @@ const createCookieHandler = ({dom}) => new CookieHandler({dom})
 const createReadCookieUseCase = ({cookieHandler}) =>
   new ReadCookieUseCase({cookieHandler})
 
-const createWriteCookieUseCase = ({cookieHandler, getDomain}) =>
-  Promise.resolve(getDomain()).then(
-    domain => new WriteCookieUseCase({cookieHandler, domain})
-  )
+const createWriteCookieUseCase = ({cookieHandler, domain}) =>
+  new WriteCookieUseCase({cookieHandler, domain})

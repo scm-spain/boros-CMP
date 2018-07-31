@@ -13,12 +13,11 @@ export default class WriteCookieUseCase {
   }
 }
 
-const setCookieValue = ({cookieHandler}) => ({
+const setCookieValue = ({cookieHandler, domain}) => ({
   name,
   value,
   path,
-  maxAgeSeconds,
-  domain
+  maxAgeSeconds
 } = {}) =>
   cookieHandler.write({
     cookieName: name,
