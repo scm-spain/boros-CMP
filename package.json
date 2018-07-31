@@ -1,6 +1,6 @@
 {
   "name": "@schibstedspain/cmp",
-  "version": "0.0.1",
+  "version": "1.0.1",
   "description": "GDPR - Consent Management Provider",
   "main": "src/index.js",
   "scripts": {
@@ -10,8 +10,8 @@
     "coverage": "istanbul cover --report html _mocha -- ./test --recursive --compilers js:babel-register",
     "coverage:ci": "istanbul cover _mocha -- ./test --recursive --compilers js:babel-register && codecov",
     "lint": "sui-lint js",
-    "dev": "npm run cleanDistFolder && webpack --module-bind js=babel-loader --mode=development --output-library-target=umd --output dist/cmp.dev.js",
-    "build": "npm run cleanDistFolder && webpack --module-bind js=babel-loader --mode=production --output-library-target=umd --output dist/cmp.pro.js"
+    "dev": "npm run cleanDistFolder && webpack --module-bind js=babel-loader --mode=development --output-library-target=umd --output dist/cmp.dev.js --define process.env.npm_package_version=${npm_package_version}",
+    "build": "npm run cleanDistFolder && webpack --module-bind js=babel-loader --mode=production --output-library-target=umd --output dist/cmp.pro.js --define process.env.npm_package_version=${npm_package_version}"
   },
   "repository": {
     "type": "git",
