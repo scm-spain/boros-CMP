@@ -89,7 +89,6 @@ describe('registerIframeCommunication', () => {
             },
             '*'
           )
-          setTimeout(() => done(new Error('should call the cmp function')), 200)
         })
     })
   })
