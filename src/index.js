@@ -11,7 +11,8 @@ initializeCMP({
   .then(cmp =>
     Promise.all([
       registerWindowCMP({cmp, window}),
-      registerIframeCommunication({cmp, window})
+      registerIframeCommunication({cmp, window}) // TODO: should write the __cmpLocator
+      // TODO: should register the iframe for global cooke storage if configuration tells so
     ])
   )
   .then(() => createEvent({name: 'cmpReady'}))
