@@ -25,14 +25,16 @@ const initializeCMP = ({
   cookieHandler,
   consentRepository,
   vendorConsentsRepository,
-  log
+  log,
+  cmpVersion
 } = {}) => {
   // Configuration
   const _configuration = new Configuration({
     gdpr: configuration.gdpr,
     consent: configuration.consent,
     httpVendorList: configuration.httpVendorList,
-    log: configuration.log
+    log: configuration.log,
+    cmpVersion: cmpVersion
   })
 
   // Resolve dependencies

@@ -23,7 +23,8 @@ const initializeTestClientCMP = () => {
     consentFactory,
     vendorListRepository,
     cookieHandler,
-    consentRepository
+    consentRepository,
+    cmpVersion: '1'
   })
   return new CMPFacade({cmp})
 }

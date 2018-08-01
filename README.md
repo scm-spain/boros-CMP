@@ -49,4 +49,6 @@ This project follows standard code style rules proposed by Schisbted Spain, , to
 npm run lint
 ```
 
+## CMP version
 
+CMP version is set according to the version defined inside the _package.json_ file. IAB standard uses only one number to define this version, so only the major version (first digit) will be used.
