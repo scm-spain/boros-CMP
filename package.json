@@ -4,14 +4,13 @@
   "description": "GDPR - Consent Management Provider",
   "main": "src/index.js",
   "scripts": {
-    "cleanDistFolder": "rm -Rf ./dist",
-    "prepublishOnly": "npm run cleanDistFolder && npm run build",
+    "prepublishOnly": "npm run build",
     "test": "mocha --recursive --require babel-polyfill --compilers js:babel-register \"test/**/*.js\"",
     "coverage": "istanbul cover --report html _mocha -- ./test --recursive --compilers js:babel-register",
     "coverage:ci": "istanbul cover _mocha -- ./test --recursive --compilers js:babel-register && codecov",
     "lint": "sui-lint js",
-    "dev": "npm run cleanDistFolder && webpack --module-bind js=babel-loader --mode=development --output-library-target=umd --output dist/cmp.dev.js --define process.env.npm_package_version=${npm_package_version}",
-    "build": "npm run cleanDistFolder && webpack --module-bind js=babel-loader --mode=production --output-library-target=umd --output dist/cmp.pro.js --define process.env.npm_package_version=${npm_package_version}"
+    "dev": "webpack --config webpack.config.babel.js --mode=development",
+    "build": "NODE_ENV=pro webpack --config webpack.config.babel.js --mode=production"
   },
   "repository": {
     "type": "git",
@@ -33,6 +32,7 @@
     "babel-preset-sui": "1",
     "babel-register": "^6.24.0",
     "chai": "^4.0.2",
+    "clean-webpack-plugin": "^0.1.19",
     "codecov": "^3.0.2",
     "istanbul": "^1.1.0-alpha.1",
     "jsdom": "^11.11.0",
