@@ -2,17 +2,15 @@ import webpack from 'webpack'
 import path from 'path'
 import CleanWebpackPlugin from 'clean-webpack-plugin'
 
-const nodeEnv = process.env.NODE_ENV || 'dev'
-
 const getMajorVersionFromPackageJsonVersion = () => {
   return JSON.stringify(process.env.npm_package_version.split('.')[0])
 }
 
-module.exports = {
+let webpackConfig = {
   entry: './src/index.js',
   output: {
     path: path.resolve('dist'),
-    filename: 'cmp.' + nodeEnv.replace(/"/g, '') + '.js',
+    filename: 'cmp.dev.js',
     libraryTarget: 'umd'
   },
   module: {
@@ -32,4 +30,11 @@ module.exports = {
     }),
     new CleanWebpackPlugin(['dist'], {verbose: true})
   ]
+}
+
+module.exports = (env, argv) => {
+  if (argv.mode === 'production') {
+    webpackConfig.output.filename = 'cmp.pro.js'
+  }
+  return webpackConfig
 }

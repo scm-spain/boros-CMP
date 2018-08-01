@@ -10,7 +10,7 @@
     "coverage:ci": "istanbul cover _mocha -- ./test --recursive --compilers js:babel-register && codecov",
     "lint": "sui-lint js",
     "dev": "webpack --config webpack.config.babel.js --mode=development",
-    "build": "NODE_ENV=pro webpack --config webpack.config.babel.js --mode=production"
+    "build": "webpack --config webpack.config.babel.js --mode=production"
   },
   "repository": {
     "type": "git",
