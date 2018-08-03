@@ -3,7 +3,8 @@ import Configuration from '../../../../src/cmp/infrastructure/configuration/Conf
 import {
   DEFAULT_CONSENT_LANGUAGE,
   DEFAULT_CONSENT_SCREEN,
-  DEFAULT_GDPR_APPLIES, DEFAULT_GDPR_GLOBAL_CONSENT_LOCATION,
+  DEFAULT_GDPR_APPLIES,
+  DEFAULT_GDPR_GLOBAL_CONSENT_LOCATION,
   DEFAULT_GDPR_STORE_CONSENT_GLOBALLY,
   DEFAULT_LOG_LEVEL
 } from '../../../../src/cmp/infrastructure/configuration/defaults'
