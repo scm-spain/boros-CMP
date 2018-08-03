@@ -3,7 +3,7 @@ import Configuration from '../../../../src/cmp/infrastructure/configuration/Conf
 import {
   DEFAULT_CONSENT_LANGUAGE,
   DEFAULT_CONSENT_SCREEN,
-  DEFAULT_GDPR_APPLIES,
+  DEFAULT_GDPR_APPLIES, DEFAULT_GDPR_GLOBAL_CONSENT_LOCATION,
   DEFAULT_GDPR_STORE_CONSENT_GLOBALLY,
   DEFAULT_LOG_LEVEL
 } from '../../../../src/cmp/infrastructure/configuration/defaults'
@@ -23,6 +23,7 @@ describe('Configuration', () => {
       const expectedConfiguration = {
         gdpr: {
           gdprApplies: DEFAULT_GDPR_APPLIES,
+          globalConsentLocation: DEFAULT_GDPR_GLOBAL_CONSENT_LOCATION,
           storeConsentGlobally: DEFAULT_GDPR_STORE_CONSENT_GLOBALLY
         },
         consent: {
@@ -61,10 +62,12 @@ describe('Configuration', () => {
     it('Should be initialized with the received values', () => {
       const givenGdpr = {
         gdprApplies: true,
+        globalConsentLocation: DEFAULT_GDPR_GLOBAL_CONSENT_LOCATION,
         storeConsentGlobally: true
       }
       const givenConsent = {
         consentScreen: 3,
+        globalConsentLocation: DEFAULT_GDPR_GLOBAL_CONSENT_LOCATION,
         consentLanguage: 'es'
       }
       const givenHttpVendorList = {
@@ -122,6 +125,7 @@ describe('Configuration', () => {
       const expectedConfiguration = {
         gdpr: {
           gdprApplies: DEFAULT_GDPR_APPLIES,
+          globalConsentLocation: DEFAULT_GDPR_GLOBAL_CONSENT_LOCATION,
           storeConsentGlobally: givenGdpr.storeConsentGlobally
         },
         consent: {

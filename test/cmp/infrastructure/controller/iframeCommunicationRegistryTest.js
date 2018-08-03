@@ -71,11 +71,12 @@ describe('registerIframeCommunication', () => {
         }
       }
 
+      givenWindow.__cmp = cmpMock
+
       Promise.resolve()
         .then(() =>
           registerIframeCommunication({
-            window: givenWindow,
-            cmp: cmpMock
+            window: givenWindow
           })
         )
         .then(() => {
