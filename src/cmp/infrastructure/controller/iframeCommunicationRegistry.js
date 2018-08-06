@@ -1,5 +1,5 @@
-const registerIframeCommunication = ({cmp, window}) =>
-  Promise.resolve(cmpCallConsumerFactory({cmp})).then(cmpCallConsumer => {
+const registerIframeCommunication = ({window}) =>
+  Promise.resolve(cmpCallConsumerFactory({window})).then(cmpCallConsumer => {
     window.addEventListener('message', event => {
       if (event && event.source && event.data && event.data.__cmpCall) {
         cmpCallConsumer({
@@ -10,8 +10,8 @@ const registerIframeCommunication = ({cmp, window}) =>
     })
   })
 
-const cmpCallConsumerFactory = ({cmp}) => ({cmpCall, source}) =>
-  cmp(cmpCall.command, cmpCall.parameter, (result, success) =>
+const cmpCallConsumerFactory = ({window}) => ({cmpCall, source}) =>
+  window.__cmp(cmpCall.command, cmpCall.parameter, (result, success) =>
     source.postMessage({
       __cmpReturn: {
         returnValue: result,

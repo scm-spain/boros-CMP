@@ -16,6 +16,10 @@ import ChainedVendorListRepository from './repository/ChainedVendorListRepositor
 import InMemoryVendorListRepository from './repository/InMemoryVendorListRepository'
 import Configuration from './configuration/Configuration'
 import CookieHandler from './service/CookieHandler'
+import globalConsentStorageFactory from './service/globalConsentStorage'
+
+const GLOBAL_CONSENT_STORE_INITIALIZATION_ERROR =
+  'Error initializing global storage:'
 
 const initializeCMP = ({
   configuration = {},
@@ -26,7 +30,8 @@ const initializeCMP = ({
   consentRepository,
   vendorConsentsRepository,
   log,
-  cmpVersion
+  cmpVersion,
+  window
 } = {}) => {
   // Configuration
   const _configuration = new Configuration({
@@ -120,6 +125,14 @@ const initializeCMP = ({
     pingUseCase,
     setVendorConsentsUseCase
   })
+
+  if (_configuration.gdpr.storeConsentGlobally) {
+    return globalConsentStorageFactory(window)(
+      _configuration.gdpr.globalConsentLocation
+    ).catch(error =>
+      log.error(GLOBAL_CONSENT_STORE_INITIALIZATION_ERROR, error)
+    )
+  }
 
   return commandConsumer(_log)(cmpProvider)
 }
