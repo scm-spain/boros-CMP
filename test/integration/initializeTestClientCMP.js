@@ -1,32 +1,24 @@
 import {JSDOM} from 'jsdom'
-import FileVendorListRepository from './repository/FileVendorListRepository'
-import IABConsentFactory from '../../src/cmp/infrastructure/factory/IABConsentFactory'
-import initializeCMP from '../../src/cmp/infrastructure/cmpInitializer'
 import CMPFacade from './application/CMPFacade'
-import CookieConsentRepository from '../../src/cmp/infrastructure/repository/CookieConsentRepository'
-import CookieHandler from '../../src/cmp/infrastructure/service/CookieHandler'
-
-const consentFactory = new IABConsentFactory()
-const vendorListRepository = new FileVendorListRepository()
-const cookieHandler = new CookieHandler({
-  dom: new JSDOM('<!DOCTYPE html><div id="forlayo">I\'m BATMAN!</div>').window
-    .document
-})
-const consentRepository = new CookieConsentRepository({
-  cookieHandler,
-  consentFactory,
-  vendorListRepository
-})
+import TestBootstrap from '../cmp/infrastructure/bootstrap/TestBootstrap'
 
 const initializeTestClientCMP = () => {
-  const cmp = initializeCMP({
-    consentFactory,
-    vendorListRepository,
-    cookieHandler,
-    consentRepository,
-    cmpVersion: '1'
-  })
-  return new CMPFacade({cmp})
+  return TestBootstrap.init({
+    window: new JSDOM('<!DOCTYPE html><div id="forlayo">I\'m BATMAN!</div>')
+      .window,
+    config: {
+      consent: {
+        cmpId: 42,
+        cmpVersion: '1',
+        consentScreen: 1,
+        consentLanguage: 'es'
+      },
+      gdpr: {
+        gdprApplies: true,
+        storeConsentGlobally: false
+      }
+    }
+  }).then(cmp => new CMPFacade({cmp}))
 }
 
 export default initializeTestClientCMP

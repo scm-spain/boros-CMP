@@ -1,6 +1,6 @@
 import {expect} from 'chai'
 import {JSDOM} from 'jsdom'
-import iFrameRegistryFactory from '../../../../src/cmp/infrastructure/service/iFrameRegistry'
+import IframeRegistry from '../../../../src/cmp/infrastructure/service/IframeRegistry'
 
 describe('IFrameRegistry', () => {
   describe('Given a window document', () => {
@@ -9,9 +9,8 @@ describe('IFrameRegistry', () => {
         '<!DOCTYPE html><div id="fear">I\'m BATMAN!</div>'
       ).window.document
 
-      const iFrameRegistry = iFrameRegistryFactory(givenDOM)
-
-      iFrameRegistry('www.google.es')
+      new IframeRegistry({dom: givenDOM})
+        .register({hostLocation: 'www.google.es'})
         .then(iFrame => {
           expect(iFrame.id).to.equal('cmp-frame')
           expect(givenDOM.getElementById('cmp-frame').src).to.equal(iFrame.src)

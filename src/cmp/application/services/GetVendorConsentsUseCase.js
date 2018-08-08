@@ -1,4 +1,4 @@
-import filterConsentMustExist from '../domain/filterConsentMustExist'
+import filterConsentMustExist from '../../domain/filterConsentMustExist'
 
 export default class GetVendorConsentsUseCase {
   constructor({vendorConsentsRepository}) {

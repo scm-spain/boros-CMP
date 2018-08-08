@@ -1,6 +1,6 @@
 import {expect} from 'chai'
 import {JSDOM} from 'jsdom'
-import registerIframeCommunication from '../../../../src/cmp/infrastructure/controller/iframeCommunicationRegistry'
+import IframeCommunication from '../../../../src/cmp/infrastructure/controller/IframeCommunication'
 
 const fixJsdomPostMessageWithEventSource = window => {
   window.postMessage = message => {
@@ -75,9 +75,9 @@ describe('registerIframeCommunication', () => {
 
       Promise.resolve()
         .then(() =>
-          registerIframeCommunication({
+          new IframeCommunication({
             window: givenWindow
-          })
+          }).register()
         )
         .then(() => {
           givenWindow.postMessage(

@@ -1,6 +1,6 @@
 import {expect} from 'chai'
 import sinon from 'sinon'
-import SetVendorConsentsUseCase from '../../../src/cmp/application/SetVendorConsentsUseCase'
+import SetVendorConsentsUseCase from '../../../src/cmp/application/services/SetVendorConsentsUseCase'
 
 describe('SetVendorConsentsUseCase', () => {
   it('Should save the received VendorConsents', done => {
