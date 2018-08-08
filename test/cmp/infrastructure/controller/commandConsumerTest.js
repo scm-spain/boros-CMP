@@ -1,6 +1,6 @@
 import {expect} from 'chai'
 import sinon from 'sinon'
-import commandConsumer from '../../../../src/cmp/infrastructure/controller/commandConsumer'
+import commandConsumer from '../../../../src/cmp/application/services/commandConsumer'
 
 describe('commandConsumer', () => {
   const createLogMock = () => ({

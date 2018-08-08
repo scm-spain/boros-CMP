@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import GetConsentStatusUseCase from '../../../src/cmp/application/GetConsentStatusUseCase'
+import GetConsentStatusUseCase from '../../../src/cmp/application/services/GetConsentStatusUseCase'
 
 describe('GetConsentStatusUseCase', () => {
   describe('getConsentStatus', () => {

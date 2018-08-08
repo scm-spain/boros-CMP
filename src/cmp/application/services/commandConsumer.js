@@ -1,33 +1,29 @@
-const commandConsumer = log => controller => (
-  command,
-  parameters,
-  observer
-) => {
-  return Promise.resolve()
+const commandConsumer = log => cmpFacade => (command, parameters, observer) =>
+  Promise.resolve()
     .then(() => log.debug('Received command:', command))
-    .then(() => filterCommandIsFunction({controller, command}))
+    .then(() => filterCommandIsFunction({controller: cmpFacade, command}))
     .then(() =>
       Promise.race([
         Promise.resolve(true),
-        callCommand({log, controller, command, parameters, observer})
+        callCommand({log, cmpFacade, command, parameters, observer})
       ])
     )
     .catch(e => {
       log.error('Error:', command, '-', e.message)
       return false
     })
-}
+
 export default commandConsumer
 
 const callCommand = ({
   log,
-  controller,
+  cmpFacade,
   command,
   parameters,
   observer = () => null
 } = {}) =>
   Promise.resolve()
-    .then(() => controller[command](parameters))
+    .then(() => cmpFacade[command](parameters))
     .then(result => observer(result, true))
     .catch(e => {
       log.error('Error calling command:', command, '-', e.message)
