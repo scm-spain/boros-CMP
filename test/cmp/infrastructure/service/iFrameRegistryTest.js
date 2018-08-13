@@ -10,13 +10,27 @@ describe('IFrameRegistry', () => {
       ).window.document
 
       new IframeRegistry({dom: givenDOM})
-        .register({hostLocation: 'www.google.es'})
+        .register({url: 'htt://what.ever.com/iframe.html'})
         .then(iFrame => {
           expect(iFrame.id).to.equal('cmp-frame')
           expect(givenDOM.getElementById('cmp-frame').src).to.equal(iFrame.src)
           done()
         })
         .catch(error => done(new Error(error)))
+    })
+    it('Should fail registering without a source URL', done => {
+      const givenDOM = new JSDOM(
+        '<!DOCTYPE html><div id="fear">I\'m BATMAN!</div>'
+      ).window.document
+
+      new IframeRegistry({dom: givenDOM})
+        .register({})
+        .then(() => done(new Error('should fail')))
+        .catch(e => {
+          expect(e.message).to.include('source URL of global storage')
+          done()
+        })
+        .catch(e => done(e))
     })
   })
 })

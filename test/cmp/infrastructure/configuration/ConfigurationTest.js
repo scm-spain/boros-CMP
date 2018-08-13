@@ -4,7 +4,6 @@ import {
   DEFAULT_CONSENT_LANGUAGE,
   DEFAULT_CONSENT_SCREEN,
   DEFAULT_GDPR_APPLIES,
-  DEFAULT_GDPR_GLOBAL_CONSENT_LOCATION,
   DEFAULT_GDPR_STORE_CONSENT_GLOBALLY,
   DEFAULT_LOG_LEVEL
 } from '../../../../src/cmp/infrastructure/configuration/defaults'
@@ -24,7 +23,7 @@ describe('Configuration', () => {
       const expectedConfiguration = {
         gdpr: {
           gdprApplies: DEFAULT_GDPR_APPLIES,
-          globalConsentLocation: DEFAULT_GDPR_GLOBAL_CONSENT_LOCATION,
+          globalConsentLocation: undefined,
           storeConsentGlobally: DEFAULT_GDPR_STORE_CONSENT_GLOBALLY
         },
         consent: {
@@ -63,12 +62,11 @@ describe('Configuration', () => {
     it('Should be initialized with the received values', () => {
       const givenGdpr = {
         gdprApplies: true,
-        globalConsentLocation: DEFAULT_GDPR_GLOBAL_CONSENT_LOCATION,
+        globalConsentLocation: 'https://what.ever.com/iframe.html',
         storeConsentGlobally: true
       }
       const givenConsent = {
         consentScreen: 3,
-        globalConsentLocation: DEFAULT_GDPR_GLOBAL_CONSENT_LOCATION,
         consentLanguage: 'es'
       }
       const givenHttpVendorList = {
@@ -114,7 +112,8 @@ describe('Configuration', () => {
     })
     it('Should be fill missing values with defaults', () => {
       const givenGdpr = {
-        storeConsentGlobally: true
+        storeConsentGlobally: true,
+        globalConsentLocation: 'https://what.ever.com/iframe.html'
       }
       const givenConsent = {
         consentLanguage: 'es'
@@ -126,7 +125,7 @@ describe('Configuration', () => {
       const expectedConfiguration = {
         gdpr: {
           gdprApplies: DEFAULT_GDPR_APPLIES,
-          globalConsentLocation: DEFAULT_GDPR_GLOBAL_CONSENT_LOCATION,
+          globalConsentLocation: 'https://what.ever.com/iframe.html',
           storeConsentGlobally: givenGdpr.storeConsentGlobally
         },
         consent: {
