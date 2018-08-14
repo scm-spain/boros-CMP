@@ -42,8 +42,6 @@ export default class IframeRegistry {
         iframe.style.height = IFRAME_STYLE_HEIGHT
         iframe.style.border = IFRAME_STYLE_BORDER
         dom.body.appendChild(iframe)
-
-        resolve(iframe)
       } else {
         resolve(iframe)
       }

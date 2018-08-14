@@ -10,7 +10,7 @@ describe('IFrameRegistry', () => {
       ).window.document
 
       new IframeRegistry({dom: givenDOM})
-        .register({url: 'htt://what.ever.com/iframe.html'})
+        .register({url: 'whatever.html'})
         .then(iFrame => {
           expect(iFrame.id).to.equal('cmp-frame')
           expect(givenDOM.getElementById('cmp-frame').src).to.equal(iFrame.src)
