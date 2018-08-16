@@ -45,7 +45,7 @@ const registerIframe = window => config =>
   new IframeRegistry({
     dom: window.document
   })
-    .register({hostLocation: config.gdpr.globalConsentLocation})
+    .register({url: config.gdpr.globalConsentLocation})
     .catch(error =>
       console.error(GLOBAL_CONSENT_STORE_INITIALIZATION_ERROR, error)
     )

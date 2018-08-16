@@ -1,7 +1,6 @@
 import {expect} from 'chai'
 import {READ_CONSENT_COMMAND} from '../../../../../src/cmp/infrastructure/configuration/iframeConsentCommands'
-import IframeCommunicationClient
-  from '../../../../../src/cmp/infrastructure/service/iframe_communication/IframeCommunicationClient'
+import IframeCommunicationClient from '../../../../../src/cmp/infrastructure/service/iframe_communication/IframeCommunicationClient'
 import {JSDOM} from 'jsdom'
 import fixJsdomPostMessageWithEventSource from '../../controller/fixJSDOMPostMessage'
 import responseBuilder from '../../../../../src/cmp/infrastructure/service/iframe_communication/responseBuilder'
