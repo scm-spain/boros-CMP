@@ -35,7 +35,7 @@ const registerIframeCommunication = container =>
 const registerIframe = container => config =>
   container
     .getInstance({key: 'IframeRegistry'})
-    .register({hostLocation: config.gdpr.globalConsentLocation})
+    .register({url: config.gdpr.globalConsentLocation})
     .catch(error =>
       container
         .getInstance({key: 'Log'})

@@ -3,7 +3,6 @@ import {
   DEFAULT_CONSENT_SCREEN,
   DEFAULT_GDPR_APPLIES,
   DEFAULT_GDPR_STORE_CONSENT_GLOBALLY,
-  DEFAULT_GDPR_GLOBAL_CONSENT_LOCATION,
   DEFAULT_LOG_LEVEL,
   DEFAULT_VENDOR_LIST_LATEST_LOCATOR,
   DEFAULT_VENDOR_LIST_VERSION_LOCATOR
@@ -23,8 +22,7 @@ export default class Configuration {
     this._gdpr.storeConsentGlobally =
       gdpr.storeConsentGlobally || DEFAULT_GDPR_STORE_CONSENT_GLOBALLY
 
-    this._gdpr.globalConsentLocation =
-      gdpr.globalConsentLocation || DEFAULT_GDPR_GLOBAL_CONSENT_LOCATION
+    this._gdpr.globalConsentLocation = gdpr.globalConsentLocation
 
     this._consent = {}
     this._consent.cmpId = CMP_ID
