@@ -2,21 +2,10 @@
 import CookieConsentRepository from '../repository/CookieConsentRepository'
 import CookieHandler from '../service/CookieHandler'
 import BaseConsentContainer from './BaseConsentContainer'
-import Configuration from '../configuration/Configuration'
 
 export default class LocalConsentContainer extends BaseConsentContainer {
-  constructor({config, window, eager = true} = {}) {
-    super({
-      config: new Configuration({
-        gdpr: config.gdpr,
-        consent: config.consent,
-        httpVendorList: config.httpVendorList,
-        log: config.log,
-        cmpVersion: CMP_VERSION
-      }),
-      window,
-      eager: false
-    })
+  constructor({config, window, cmpVersion = CMP_VERSION, eager = true} = {}) {
+    super({config, cmpVersion, window, eager: false})
     if (eager) this._buildEagerSingletonInstances()
   }
 

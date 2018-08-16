@@ -3,53 +3,71 @@ import {
   CONSENT_STATUS_ACCEPTED,
   CONSENT_STATUS_NOT_ACCEPTED
 } from '../../src/cmp/domain/consentStatus'
-import initializeTestClientCMP from './initializeTestClientCMP'
+import {
+  initializeGlobalStoreTestClientCMP,
+  initializeLocalStoreTestClientCMP
+} from './initializeTestClientCMP'
 
-describe('Save New Consent', () => {
+describe('Local Store Save New Consent', () => {
   it('Should accept a new Vendor Consents object and then modifying it', done => {
     Promise.resolve()
-      .then(() => initializeTestClientCMP())
+      .then(() => initializeLocalStoreTestClientCMP())
       // client should check the status of the consent
-      .then(cmpClient =>
-        cmpClient
-          .getConsentStatus()
-          // the first time, the consent should return NOT_ACCEPTED
-          .then(consentStatusResult =>
-            filterConsentStatus(
-              consentStatusResult.result,
-              CONSENT_STATUS_NOT_ACCEPTED
-            )
-          )
-          // in that case, the client should get the global vendor list to show the UI tool to edit the consent and show it
-          .then(() =>
-            cmpClient.getVendorList().then(globalVendorListResult =>
-              // after editing the consents, the client should save the vendor consents
-              cmpClient
-                .setVendorConsents(sampleVendorConsentsEditedInAnUI)
-                // just for validation, now the consent status should be ACCEPTED
-                .then(() => cmpClient.getConsentStatus())
-                .then(consentStatusResult =>
-                  filterConsentStatus(
-                    consentStatusResult.result,
-                    CONSENT_STATUS_ACCEPTED
-                  )
-                )
-                // any Advertising SDK that wants to get the consent, now will have it accessible getting the encoded consent data
-                .then(() => cmpClient.getConsentData())
-                .then(consentDataResult =>
-                  checkEncodedConsent({
-                    encodedConsent: consentDataResult.result.consentData,
-                    acceptedConsents: sampleVendorConsentsEditedInAnUI,
-                    globalVendorList: globalVendorListResult.result
-                  })
-                )
-            )
-          )
-          .then(() => done())
-          .catch(e => done(e))
-      )
+      .then(cmpClient => doTheJob({cmpClient, done}))
+      .catch(e => done(e))
   })
 })
+
+describe('Global Store Save New Consent', () => {
+  it('Should accept a new Vendor Consents object and then modifying it', done => {
+    Promise.resolve()
+      .then(() => initializeGlobalStoreTestClientCMP())
+      // client should check the status of the consent
+      .then(cmpClient => doTheJob({cmpClient, done}))
+      .catch(e => done(e))
+  })
+})
+
+const doTheJob = ({cmpClient, done}) => {
+  return (
+    cmpClient
+      .getConsentStatus()
+      // the first time, the consent should return NOT_ACCEPTED
+      .then(consentStatusResult =>
+        filterConsentStatus(
+          consentStatusResult.result,
+          CONSENT_STATUS_NOT_ACCEPTED
+        )
+      )
+      // in that case, the client should get the global vendor list to show the UI tool to edit the consent and show it
+      .then(() =>
+        cmpClient.getVendorList().then(globalVendorListResult =>
+          // after editing the consents, the client should save the vendor consents
+          cmpClient
+            .setVendorConsents(sampleVendorConsentsEditedInAnUI)
+            // just for validation, now the consent status should be ACCEPTED
+            .then(() => cmpClient.getConsentStatus())
+            .then(consentStatusResult =>
+              filterConsentStatus(
+                consentStatusResult.result,
+                CONSENT_STATUS_ACCEPTED
+              )
+            )
+            // any Advertising SDK that wants to get the consent, now will have it accessible getting the encoded consent data
+            .then(() => cmpClient.getConsentData())
+            .then(consentDataResult =>
+              checkEncodedConsent({
+                encodedConsent: consentDataResult.result.consentData,
+                acceptedConsents: sampleVendorConsentsEditedInAnUI,
+                globalVendorList: globalVendorListResult.result
+              })
+            )
+        )
+      )
+      .then(() => done())
+      .catch(e => done(e))
+  )
+}
 
 const filterConsentStatus = (consentStatus, status) => {
   if (consentStatus !== status) {

@@ -1,26 +1,17 @@
 import {expect} from 'chai'
 import {JSDOM} from 'jsdom'
 import IframeCommunication from '../../../../src/cmp/infrastructure/controller/IframeCommunication'
-
-const fixJsdomPostMessageWithEventSource = window => {
-  window.postMessage = message => {
-    const event = new window.MessageEvent('message', {
-      data: message,
-      source: window
-    })
-    event.initEvent('message', false, false)
-    setTimeout(() => {
-      window.dispatchEvent(event)
-    }, 0)
-  }
-}
+import fixJsdomPostMessageWithEventSource from './fixJSDOMPostMessage'
 
 describe('registerIframeCommunication', () => {
   describe('Given a cmp instance and a window object', () => {
     it('Should register a window listener to consume post messages from iframe and delegate them to the cmp', done => {
       const givenWindow = new JSDOM('<!DOCTYPE html><div>Hello world</div>')
         .window
-      fixJsdomPostMessageWithEventSource(givenWindow)
+      fixJsdomPostMessageWithEventSource({
+        origin: givenWindow,
+        target: givenWindow
+      })
 
       const givenCommand = 'test'
       const givenParameter = {what: 'ever'}

@@ -57,6 +57,7 @@
   },
   "dependencies": {
     "consent-string": "^1.2.4",
+    "uuid": "^3.3.2",
     "whatwg-fetch": "^2.0.4"
   }
 }

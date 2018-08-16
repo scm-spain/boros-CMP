@@ -17,6 +17,10 @@ export default class CookieConsentRepository {
     this._getGlobalVendorList = getGlobalVendorList({vendorListRepository})
   }
 
+  /**
+   *
+   * @returns {Promise<ConsentString | undefined>}
+   */
   getConsent() {
     return Promise.resolve()
       .then(() =>

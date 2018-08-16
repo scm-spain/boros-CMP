@@ -1,7 +1,8 @@
 /* eslint-disable no-undef */
-import './event-polyfill'
+import customEventPolyfill from './event-polyfill'
 
-const createEvent = ({name, detail = {}} = {}) => {
+const createEvent = ({window, name, detail = {}} = {}) => {
+  customEventPolyfill(window)
   window.document.dispatchEvent(new CustomEvent(name, {detail}))
 }
 
