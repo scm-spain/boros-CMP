@@ -9,15 +9,21 @@
  *
  * @param writeCookieUseCase
  */
-const VENDOR_CONSENT_COOKIE_NAME = 'euconsent'
+
+import {
+  VENDOR_CONSENT_COOKIE_DEFAULT_PATH,
+  VENDOR_CONSENT_COOKIE_MAX_AGE,
+  VENDOR_CONSENT_COOKIE_NAME
+} from '../../../cmp/infrastructure/configuration/cookie'
+
 const writeCookieCommandFactory = ({writeCookieUseCase}) => ({input}) =>
   Promise.resolve()
     .then(() =>
       writeCookieUseCase.writeCookie({
         name: VENDOR_CONSENT_COOKIE_NAME,
         value: input.value,
-        path: input.path,
-        maxAgeSeconds: input.maxAgeSeconds
+        path: VENDOR_CONSENT_COOKIE_DEFAULT_PATH,
+        maxAgeSeconds: VENDOR_CONSENT_COOKIE_MAX_AGE
       })
     )
     .then(value => ({

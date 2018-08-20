@@ -2,6 +2,7 @@ import EventFormatError from '../infrastructure/event/EventFormatError'
 import CommandNotFoundError from '../infrastructure/event/CommandNotFoundError'
 import writeCookieCommandFactory from '../infrastructure/command/writeCookieCommandFactory'
 import readCookieCommandFactory from '../infrastructure/command/readCookieCommandFactory'
+import {POST_MESSAGE_TARGET_ORIGIN} from '../../cmp/infrastructure/configuration/postMessage'
 
 const globalStorage = ({window, readCookieUseCase, writeCookieUseCase}) =>
   Promise.all([
@@ -25,7 +26,9 @@ const globalStorage = ({window, readCookieUseCase, writeCookieUseCase}) =>
               }
             })
           )
-          .then(response => event.source.postMessage(response, '*'))
+          .then(response =>
+            event.source.postMessage(response, POST_MESSAGE_TARGET_ORIGIN)
+          )
           .catch(error => sendError({error, event}))
       })
     })
@@ -70,6 +73,8 @@ const sendError = ({error, event}) =>
         callId: error.callId
       }
     }))
-    .then(response => event.source.postMessage(response, '*'))
+    .then(response =>
+      event.source.postMessage(response, POST_MESSAGE_TARGET_ORIGIN)
+    )
 
 export default globalStorage

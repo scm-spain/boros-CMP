@@ -6,7 +6,9 @@
  *
  * @param readCookieUseCase
  */
-const VENDOR_CONSENT_COOKIE_NAME = 'euconsent'
+
+import {VENDOR_CONSENT_COOKIE_NAME} from '../../../cmp/infrastructure/configuration/cookie'
+
 const readCookieCommandFactory = ({readCookieUseCase}) => ({input}) =>
   Promise.resolve()
     .then(() =>

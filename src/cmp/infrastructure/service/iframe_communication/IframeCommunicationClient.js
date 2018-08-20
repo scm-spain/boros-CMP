@@ -1,10 +1,11 @@
 import requestBuilder from './requestBuilder'
 import responseBuilder from './responseBuilder'
 import RequestTimeoutError from './RequestTimeoutError'
-
-const POST_MESSAGE_ID = 'message'
-const POST_MESSAGE_TARGET_ORIGIN = '*'
-const REQUEST_TIMEOUT = 200
+import {
+  POST_MESSAGE_DEFAULT_REQUEST_TIMEOUT,
+  POST_MESSAGE_ID,
+  POST_MESSAGE_TARGET_ORIGIN
+} from '../../configuration/postMessage'
 
 export default class IframeCommunicationClient {
   constructor({origin, target, idGenerator}) {
@@ -50,7 +51,7 @@ export default class IframeCommunicationClient {
       let wait = setTimeout(() => {
         clearTimeout(wait)
         reject(new RequestTimeoutError(transactionId))
-      }, REQUEST_TIMEOUT)
+      }, POST_MESSAGE_DEFAULT_REQUEST_TIMEOUT)
     })
   }
 }
