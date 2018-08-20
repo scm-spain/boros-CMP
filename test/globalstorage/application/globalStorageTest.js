@@ -9,6 +9,10 @@ import {
   READ_CONSENT_COMMAND,
   WRITE_CONSENT_COMMAND
 } from '../../../src/cmp/infrastructure/configuration/iframeConsentCommands'
+import {
+  VENDOR_CONSENT_COOKIE_DEFAULT_PATH,
+  VENDOR_CONSENT_COOKIE_MAX_AGE
+} from '../../../src/cmp/infrastructure/configuration/cookie'
 
 describe('globalStorage', () => {
   let givenWindowHost
@@ -194,14 +198,11 @@ describe('globalStorage', () => {
     it('Should dispatch a success event with the same callId', done => {
       const givenCommand = WRITE_CONSENT_COMMAND
       const givenParameter = {
-        value: 'Kill!',
-        path: 'inYourHouse',
-        maxAgeSeconds: 3600
+        value: 'Kill!'
       }
       const givenCallId = 3
       const expectedCmpSuccess = true
-      const expectedCmpReturnValue =
-        'euconsent=Kill!;path=inYourHouse;max-age=3600'
+      const expectedCmpReturnValue = `euconsent=Kill!;path=${VENDOR_CONSENT_COOKIE_DEFAULT_PATH};max-age=${VENDOR_CONSENT_COOKIE_MAX_AGE}`
       const expectedCookieStored = 'euconsent=Kill!'
 
       const writeCookieUseCaseMock = new WriteCookieUseCase({
