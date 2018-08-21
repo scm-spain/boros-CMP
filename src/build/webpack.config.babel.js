@@ -3,22 +3,26 @@ import path from 'path'
 import CleanWebpackPlugin from 'clean-webpack-plugin'
 
 const WEBPACK_MODE_PRODUCTION = 'production'
-const OUTPUT_CMP_FILENAME_DEV = 'cmp.dev.js'
-const OUTPUT_CMP_FILENAME_PRO = 'cmp.pro.js'
-const OUTPUT_GLOBAL_FILENAME_DEV = 'global.dev.js'
-const OUTPUT_GLOBAL_FILENAME_PRO = 'global.pro.js'
 const OUTPUT_DIST_FOLDER = 'dist'
+const ENTRY_PATH_CMP = './src/index.js'
+const ENTRY_PATH_GLOBAL = './src/global.js'
+const OUTPUT_FILENAME_CMP = 'cmp'
+const OUTPUT_FILENAME_GLOBAL = 'global'
+const OUTPUT_FILENAME_TERMINATION_DEV = '.dev.js'
+const OUTPUT_FILENAME_TERMINATION_PRO = '.pro.js'
 
 const getMajorVersionFromPackageJsonVersion = () => {
   return JSON.stringify(process.env.npm_package_version.split('.')[0])
 }
 
-// Following config object is related with index.js building process.
-let indexConfig = {
-  entry: './src/index.js',
+// Notice that we are defining multiple entries so naming in output will be processed using [name] substitution by webpack.
+let webpackConfig = {
+  entry: {
+    // This will be set afterwards to be able to use constants when defining the entry keys.
+  },
   output: {
     path: path.resolve(OUTPUT_DIST_FOLDER),
-    filename: OUTPUT_CMP_FILENAME_DEV,
+    filename: '[name]' + OUTPUT_FILENAME_TERMINATION_DEV,
     libraryTarget: 'umd'
   },
   module: {
@@ -42,32 +46,12 @@ let indexConfig = {
     })
   ]
 }
-
-// Following config object is related with global.js building process.
-let globalConfig = {
-  entry: './src/global.js',
-  output: {
-    path: path.resolve(OUTPUT_DIST_FOLDER),
-    filename: OUTPUT_GLOBAL_FILENAME_DEV,
-    libraryTarget: 'umd'
-  },
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        exclude: /(node_modules)/,
-        use: {
-          loader: 'babel-loader'
-        }
-      }
-    ]
-  }
-}
+webpackConfig.entry[OUTPUT_FILENAME_CMP] = ENTRY_PATH_CMP
+webpackConfig.entry[OUTPUT_FILENAME_GLOBAL] = ENTRY_PATH_GLOBAL
 
 module.exports = (env, argv) => {
   if (argv.mode === WEBPACK_MODE_PRODUCTION) {
-    indexConfig.output.filename = OUTPUT_CMP_FILENAME_PRO
-    globalConfig.output.filename = OUTPUT_GLOBAL_FILENAME_PRO
+    webpackConfig.output.filename = '[name]' + OUTPUT_FILENAME_TERMINATION_PRO
   }
-  return [indexConfig, globalConfig]
+  return webpackConfig
 }
