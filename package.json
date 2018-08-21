@@ -9,8 +9,10 @@
     "coverage": "istanbul cover --report html _mocha -- ./test --recursive --compilers js:babel-register",
     "coverage:ci": "istanbul cover _mocha -- ./test --recursive --compilers js:babel-register && codecov",
     "lint": "sui-lint js",
-    "dev": "webpack --config src/build/webpack.config.babel.js --mode=development",
-    "build": "webpack --config src/build/webpack.config.babel.js --mode=production"
+    "dev-cmp": "webpack --config src/cmp/infrastructure/build/webpack.config.babel.js --mode=development",
+    "build-cmp": "webpack --config src/cmp/infrastructure/build/webpack.config.babel.js --mode=production",
+    "dev-global": "webpack --config src/globalstorage/infrastructure/build/webpack.config.babel.js --mode=development",
+    "build-global": "webpack --config src/globalstorage/infrastructure/build/webpack.config.babel.js --mode=production"
   },
   "repository": {
     "type": "git",
