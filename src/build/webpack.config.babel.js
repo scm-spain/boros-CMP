@@ -1,62 +1,73 @@
-const webpack = require('webpack')
-const path = require('path')
+import webpack from 'webpack'
+import path from 'path'
+import CleanWebpackPlugin from 'clean-webpack-plugin'
 
-const ENV = process.env.NODE_ENV || 'development'
+const WEBPACK_MODE_PRODUCTION = 'production'
+const OUTPUT_CMP_FILENAME_DEV = 'cmp.dev.js'
+const OUTPUT_CMP_FILENAME_PRO = 'cmp.pro.js'
+const OUTPUT_GLOBAL_FILENAME_DEV = 'global.dev.js'
+const OUTPUT_GLOBAL_FILENAME_PRO = 'global.pro.js'
+const OUTPUT_DIST_FOLDER = 'dist'
 
-const commonConfig = {
-  mode: ENV,
-  context: path.resolve(__dirname, './../..'),
-  resolve: {
-    extensions: ['.js'],
-    modules: [
-      path.resolve(__dirname, 'src'),
-      path.resolve(__dirname, 'node_modules'),
-      'node_modules'
-    ]
-  },
-  optimization: {
-    minimize: ENV === 'production'
+const getMajorVersionFromPackageJsonVersion = () => {
+  return JSON.stringify(process.env.npm_package_version.split('.')[0])
+}
+
+// Following config object is related with index.js building process.
+let indexConfig = {
+  entry: './src/index.js',
+  output: {
+    path: path.resolve(OUTPUT_DIST_FOLDER),
+    filename: OUTPUT_CMP_FILENAME_DEV,
+    libraryTarget: 'umd'
   },
   module: {
     rules: [
       {
         test: /\.js$/,
-        exclude: /(node_modules|src\/webpack)/,
+        exclude: /(node_modules)/,
         use: {
           loader: 'babel-loader'
         }
       }
     ]
   },
-
-  stats: {colors: true}
+  plugins: [
+    new webpack.DefinePlugin({
+      CMP_VERSION: getMajorVersionFromPackageJsonVersion()
+    }),
+    new CleanWebpackPlugin([OUTPUT_DIST_FOLDER], {
+      verbose: true,
+      root: process.cwd()
+    })
+  ]
 }
 
-module.exports = [
-  // CMP config
-  {
-    entry: {
-      cmp: './src/index.js'
-    },
-
-    output: {
-      path: path.resolve(commonConfig.context, 'dist'),
-      filename: '[name]' + (ENV === 'development' ? '.dev' : '') + '.js'
-    },
-    ...commonConfig,
-    plugins: [new webpack.NoEmitOnErrorsPlugin()]
+// Following config object is related with global.js building process.
+let globalConfig = {
+  entry: './src/global.js',
+  output: {
+    path: path.resolve(OUTPUT_DIST_FOLDER),
+    filename: OUTPUT_GLOBAL_FILENAME_DEV,
+    libraryTarget: 'umd'
   },
-  // GLOBAL mediator config
-  {
-    entry: {
-      global: './src/global.js'
-    },
-
-    output: {
-      path: path.resolve(commonConfig.context, 'dist'),
-      filename: '[name]' + (ENV === 'development' ? '.dev' : '') + '.js'
-    },
-    ...commonConfig,
-    plugins: [new webpack.NoEmitOnErrorsPlugin()]
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /(node_modules)/,
+        use: {
+          loader: 'babel-loader'
+        }
+      }
+    ]
   }
-]
+}
+
+module.exports = (env, argv) => {
+  if (argv.mode === WEBPACK_MODE_PRODUCTION) {
+    indexConfig.output.filename = OUTPUT_CMP_FILENAME_PRO
+    globalConfig.output.filename = OUTPUT_GLOBAL_FILENAME_PRO
+  }
+  return [indexConfig, globalConfig]
+}
