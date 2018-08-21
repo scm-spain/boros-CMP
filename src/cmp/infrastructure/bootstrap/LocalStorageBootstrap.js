@@ -18,6 +18,6 @@ export default class LocalStorageBootstrap {
         cmp => registerWindowCMP({cmp, window})
         // TODO: should write the __cmpLocator
       )
-      .then(() => createEvent({name: 'cmpReady'}))
+      .then(() => createEvent({window, name: 'cmpReady'}))
   }
 }

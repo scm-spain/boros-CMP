@@ -5,9 +5,9 @@
   "main": "src/index.js",
   "scripts": {
     "prepublishOnly": "npm run build",
-    "test": "mocha --recursive --require babel-polyfill --require babel-core/register \"test/**/*.js\"",
+    "test": "mocha --recursive --require babel-polyfill --require babel-core/register \"src/test/**/*.js\"",
     "coverage": "istanbul cover --report html _mocha -- ./test --recursive --compilers js:babel-register",
-    "coverage:ci": "istanbul cover _mocha -- ./test --recursive --compilers js:babel-register && codecov",
+    "coverage:ci": "istanbul cover _mocha -- ./src/test --recursive --compilers js:babel-register && codecov",
     "lint": "sui-lint js",
     "dev-cmp": "webpack --config src/cmp/infrastructure/build/webpack.config.babel.js --mode=development",
     "build-cmp": "webpack --config src/cmp/infrastructure/build/webpack.config.babel.js --mode=production",
@@ -59,6 +59,7 @@
   },
   "dependencies": {
     "consent-string": "^1.2.4",
+    "uuid": "^3.3.2",
     "whatwg-fetch": "^2.0.4"
   }
 }

@@ -11,10 +11,17 @@ import GetVendorConsentsUseCase from '../../application/services/GetVendorConsen
 import GetVendorListUseCase from '../../application/services/GetVendorListUseCase'
 import PingUseCase from '../../application/services/PingUseCase'
 import SetVendorConsentsUseCase from '../../application/services/SetVendorConsentsUseCase'
+import Configuration from '../configuration/Configuration'
 
 export default class BaseConsentContainer {
-  constructor({config, window, eager = true} = {}) {
-    this._config = config
+  constructor({config, cmpVersion, window, eager = true} = {}) {
+    this._config = new Configuration({
+      gdpr: config.gdpr,
+      consent: config.consent,
+      httpVendorList: config.httpVendorList,
+      log: config.log,
+      cmpVersion: cmpVersion
+    })
     this._window = window
     this._instances = new Map()
     if (eager) this._buildEagerSingletonInstances()
