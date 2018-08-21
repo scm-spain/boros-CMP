@@ -2,6 +2,12 @@
  * @class
  * @implements ConsentRepository
  */
+import {
+  VENDOR_CONSENT_COOKIE_DEFAULT_PATH,
+  VENDOR_CONSENT_COOKIE_MAX_AGE,
+  VENDOR_CONSENT_COOKIE_NAME
+} from '../configuration/cookie'
+
 export default class CookieConsentRepository {
   constructor({cookieHandler, consentFactory, vendorListRepository}) {
     this._readVendorCookie = readCookie({
@@ -17,6 +23,10 @@ export default class CookieConsentRepository {
     this._getGlobalVendorList = getGlobalVendorList({vendorListRepository})
   }
 
+  /**
+   *
+   * @returns {Promise<ConsentString | undefined>}
+   */
   getConsent() {
     return Promise.resolve()
       .then(() =>
@@ -37,9 +47,6 @@ export default class CookieConsentRepository {
   }
 }
 
-const VENDOR_CONSENT_COOKIE_NAME = 'euconsent'
-const VENDOR_CONSENT_COOKIE_MAX_AGE = 33696000
-
 const readCookie = ({cookieHandler, cookieName}) => () =>
   cookieHandler.read({cookieName})
 
@@ -47,7 +54,7 @@ const writeCookie = ({
   cookieHandler,
   cookieName,
   maxAgeSeconds,
-  path = '/'
+  path = VENDOR_CONSENT_COOKIE_DEFAULT_PATH
 } = {}) => ({value}) =>
   cookieHandler
     .write({

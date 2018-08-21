@@ -1,0 +1,3 @@
+export const VENDOR_CONSENT_COOKIE_NAME = 'euconsent'
+export const VENDOR_CONSENT_COOKIE_MAX_AGE = 33696000
+export const VENDOR_CONSENT_COOKIE_DEFAULT_PATH = '/'
