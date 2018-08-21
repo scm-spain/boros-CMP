@@ -4,7 +4,7 @@ import CleanWebpackPlugin from 'clean-webpack-plugin'
 
 const WEBPACK_MODE_PRODUCTION = 'production'
 const OUTPUT_DIST_FOLDER = 'dist'
-const ENTRY_PATH_CMP = './src/index.js'
+const ENTRY_PATH = './src/index.js'
 const OUTPUT_FILENAME_DEV = 'cmp.dev.js'
 const OUTPUT_FILENAME_PRO = 'cmp.pro.js'
 
@@ -13,7 +13,7 @@ const getMajorVersionFromPackageJsonVersion = () => {
 }
 
 let webpackConfig = {
-  entry: ENTRY_PATH_CMP,
+  entry: ENTRY_PATH,
   output: {
     path: path.resolve(OUTPUT_DIST_FOLDER),
     filename: OUTPUT_FILENAME_DEV,
