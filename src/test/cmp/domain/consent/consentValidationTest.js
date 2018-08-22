@@ -1,12 +1,12 @@
 import {expect} from 'chai'
 import {ConsentString} from 'consent-string'
-import GlobalVendorList from '../../resources/globalvendorlist.json'
+import GlobalVendorList from '../../../resources/globalvendorlist.json'
 import {
   ALL_ALLOWED,
   ALL_DISALLOWED,
   consentHasAllInStatus,
   CUSTOM_ALLOWED
-} from '../../../cmp/domain/consentValidation'
+} from '../../../../cmp/domain/consent/consentValidation'
 
 describe('consentValidation', () => {
   describe('Given a consent and a globalVendor list, consentHasAllInStatus', () => {
