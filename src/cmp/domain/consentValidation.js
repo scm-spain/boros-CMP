@@ -1,7 +1,9 @@
 /**
  * Return ALL_ALLOWED, ALL_DISALLOWED, CUSTOM_ALLOWED depending on the consent to have
  * all the globalVendorList vendors (accepted in the allowedVendorList) to be all
- * allowed, none allowed or some vendors allowed and others not, respectively
+ * allowed, none allowed or some vendors allowed and others not, respectively.
+ * Note that ALL_ALLOWED may mean that ALL the vendors from the 'allowedVendorIds'
+ * were allowed (so they are not the 'all' from the global vendor list)
  * @param consent
  * @param globalVendorList
  * @param allowedVendorIds
