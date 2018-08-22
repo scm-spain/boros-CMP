@@ -1,6 +1,6 @@
 import FileVendorListRepository from '../../../integration/repository/FileVendorListRepository'
 import {LEVEL, Log} from '../../../../cmp/infrastructure/Log'
-import GlobalConsentContainer from '../../../../cmp/infrastructure/container/GlobalConsentContainer'
+import GlobalConsentContainer from '../../../../cmp/infrastructure/container/global/GlobalConsentContainer'
 
 export default class TestGlobalStoreContainer extends GlobalConsentContainer {
   constructor({config, window, iframe}) {

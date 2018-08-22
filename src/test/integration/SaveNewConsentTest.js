@@ -2,7 +2,7 @@ import {ConsentString} from 'consent-string'
 import {
   CONSENT_STATUS_ACCEPTED,
   CONSENT_STATUS_NOT_ACCEPTED
-} from '../../cmp/domain/consentStatus'
+} from '../../cmp/domain/consent/consentStatus'
 import {
   initializeGlobalStoreTestClientCMP,
   initializeLocalStoreTestClientCMP
