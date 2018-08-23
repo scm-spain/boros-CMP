@@ -1,41 +1,52 @@
+import {ConsentString} from 'consent-string'
 import {consentHasAllInStatus} from './consentValidation'
 
 export default class UpdateConsentVendorsService {
   constructor({
     vendorListRepository,
-    consentRepository,
-    newVendorsStatusResolverFactory
+    newVendorsStatusResolverFactory,
+    vendorConsentsRepository
   }) {
     this._getGlobalVendorList = getGlobalVendorList({vendorListRepository})
-    this._saveConsent = saveConsent({consentRepository})
+    this._saveVendorConsents = saveVendorConsents({vendorConsentsRepository})
     this._updateConsentWithNewGlobalVendorList = updateConsentWithNewGlobalVendorList(
       {newVendorsStatusResolverFactory}
     )
   }
 
   updateConsentVendorList({
-    consent,
+    encodedConsent,
     currentGlobalVendorList,
     allowedVendorIds
   }) {
-    return Promise.resolve()
+    return Promise.resolve(new ConsentString(encodedConsent))
       .then(
-        () =>
+        consent =>
           consent.getVendorListVersion() ===
           currentGlobalVendorList.vendorListVersion
             ? Promise.resolve()
             : this._getGlobalVendorList({
                 vendorListVersion: consent.getVendorListVersion()
-              }).then(oldGlobalVendorList =>
-                this._updateConsentWithNewGlobalVendorList({
-                  consent,
-                  newGlobalVendorList: currentGlobalVendorList,
-                  oldGlobalVendorList,
-                  allowedVendorIds
-                })
-              )
+              })
+                .then(oldGlobalVendorList =>
+                  this._updateConsentWithNewGlobalVendorList({
+                    consent,
+                    newGlobalVendorList: currentGlobalVendorList,
+                    oldGlobalVendorList,
+                    allowedVendorIds
+                  })
+                )
+                .then(consent =>
+                  mapConsentToVendorConsents({
+                    consent,
+                    globalVendorList: currentGlobalVendorList,
+                    allowedVendorIds
+                  })
+                )
+                .then(vendorConsents =>
+                  this._saveVendorConsents({vendorConsents})
+                )
       )
-      .then(consent => this._saveConsent({consent}))
       .then(null)
   }
 }
@@ -85,5 +96,16 @@ const getGlobalVendorList = ({vendorListRepository}) => ({
   vendorListVersion
 } = {}) => vendorListRepository.getGlobalVendorList({vendorListVersion})
 
-const saveConsent = ({consentRepository}) => ({consent}) =>
-  consentRepository.saveConsent({consent})
+const saveVendorConsents = ({vendorConsentsRepository}) => ({vendorConsents}) =>
+  vendorConsentsRepository.saveVendorConsents({vendorConsents})
+
+const mapConsentToVendorConsents = ({
+  consent,
+  globalVendorList,
+  allowedVendorIds
+}) => ({
+  purposeConsents: consent.getPurposesAllowed(),
+  vendorConsents: globalVendorList.vendors
+    .map(vendor => vendor.id)
+    .filter(id => consent.isVendorAllowed(id))
+})
