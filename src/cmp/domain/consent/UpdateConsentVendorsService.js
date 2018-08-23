@@ -4,13 +4,13 @@ import {consentHasAllInStatus} from './consentValidation'
 export default class UpdateConsentVendorsService {
   constructor({
     vendorListRepository,
-    newVendorsStatusResolverFactory,
+    newVendorsStatusFactory,
     vendorConsentsRepository
   }) {
     this._getGlobalVendorList = getGlobalVendorList({vendorListRepository})
     this._saveVendorConsents = saveVendorConsents({vendorConsentsRepository})
     this._updateConsentWithNewGlobalVendorList = updateConsentWithNewGlobalVendorList(
-      {newVendorsStatusResolverFactory}
+      {newVendorsStatusFactory}
     )
   }
 
@@ -51,16 +51,19 @@ export default class UpdateConsentVendorsService {
   }
 }
 
-const updateConsentWithNewGlobalVendorList = ({
-  newVendorsAcceptationStatusFactory
-}) => ({consent, oldGlobalVendorList, newGlobalVendorList, allowedVendorIds}) =>
+const updateConsentWithNewGlobalVendorList = ({newVendorsStatusFactory}) => ({
+  consent,
+  oldGlobalVendorList,
+  newGlobalVendorList,
+  allowedVendorIds
+}) =>
   Promise.all([
     consentHasAllInStatus({
       consent,
       globalVendorList: oldGlobalVendorList,
       allowedVendorIds
     }).then(acceptationStatus =>
-      newVendorsAcceptationStatusFactory.from({acceptationStatus})
+      newVendorsStatusFactory.from({acceptationStatus})
     ),
     Promise.resolve(
       oldGlobalVendorList.vendors
