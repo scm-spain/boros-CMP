@@ -12,6 +12,7 @@ import GetVendorListUseCase from '../../application/services/GetVendorListUseCas
 import PingUseCase from '../../application/services/PingUseCase'
 import SetVendorConsentsUseCase from '../../application/services/SetVendorConsentsUseCase'
 import Configuration from '../configuration/Configuration'
+import {errorObserverFactory} from '../observer/errorObserverFactory'
 
 export default class BaseConsentContainer {
   constructor({config, cmpVersion, window, eager = true} = {}) {
@@ -32,7 +33,9 @@ export default class BaseConsentContainer {
       try {
         this._instances.set(key, this['_build' + key]())
       } catch (e) {
-        throw new Error(`Error creating instance: ${key}`, e)
+        throw new Error(
+          `Error creating instance: ${key}, detailed message:${e.message}`
+        )
       }
     }
     return this._instances.get(key)
@@ -125,6 +128,11 @@ export default class BaseConsentContainer {
         key: 'VendorConsentsRepository'
       })
     })
+  }
+
+  _buildErrorObserverFactory() {
+    const logger = this.getInstance({key: 'Log'})
+    return errorObserverFactory(logger)
   }
 
   _buildEagerSingletonInstances() {}
