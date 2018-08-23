@@ -1,8 +1,8 @@
 const CMP_LOCATOR_NAME = '__cmpLocator'
 
 const registerCmpLocator = ({dom}) => {
-  return Promise.resolve(CMP_LOCATOR_NAME)
-    .then(name => dom.getElementsByName(name))
+  return Promise.resolve()
+    .then(() => dom.getElementsByName(CMP_LOCATOR_NAME))
     .then(elements => {
       if (elements && elements.length) {
         return elements[0]
