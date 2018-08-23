@@ -12,11 +12,11 @@ export default class GlobalStorageBootstrap {
       .then(config =>
         Promise.all([
           registerIframe(window)(config),
-          registerCmpLocator({window})
+          registerCmpLocator({dom: window.document})
         ])
       )
       .then(
-        ([iframe, undefined]) =>
+        ([iframe, cmpLocatorIframe]) =>
           new GlobalConsentContainer({
             config,
             window,

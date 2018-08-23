@@ -15,10 +15,10 @@ export default class LocalStorageBootstrap {
               window
             })
           }).commandConsumer(),
-          registerCmpLocator({window})
+          registerCmpLocator({dom: window.document})
         ])
       )
-      .then(([cmp, undefined]) => registerWindowCMP({cmp, window}))
+      .then(([cmp, cmpLocatorIframe]) => registerWindowCMP({cmp, window}))
       .then(() => createEvent({window, name: 'cmpReady'}))
   }
 }
