@@ -15,23 +15,39 @@ npm install
 
 ###  Build
 
-To generate the final distribution file, run the following command:
+To generate the final distribution file of CMP application, run the following command:
 
 ```bash
-npm run build
+npm run build-cmp
 ```
 
-This command will generate a _pro_ (minified) version (cmp.pro.js) inside _dist_ folder.
+This command will generate a _pro_ (minified) version (cmp.pro.js) inside a cleaned _dist_ folder.
+
+To generate the final distribution file of Global Storage application, run the following command:
+
+```bash
+npm run build-global
+```
+
+This command will generate a _pro_ (minified) version (global.pro.js) inside a cleaned _dist_ folder.
 
 ###  Dev
 
-To generate a development distribution file, run the following command:
+To generate a development distribution file of CMP application, run the following command:
 
 ```bash
-npm run dev
+npm run dev-cmp
 ```
 
-This command will generate a _dev_ (bundle) version (cmp.dev.js) inside _dist_ folder.
+This command will generate a _dev_ (bundle) version (cmp.dev.js) inside a cleaned _dist_ folder.
+
+To generate a development distribution file of Global Storage application, run the following command:
+
+```bash
+npm run dev-global
+```
+
+This command will generate a _dev_ (bundle) version (global.dev.js) inside a cleaned _dist_ folder.
 
 ###  Tests
 
