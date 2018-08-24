@@ -1,4 +1,3 @@
-import {ConsentString} from 'consent-string'
 import {consentHasAllInStatus} from './consentValidation'
 
 export default class UpdateConsentVendorsService {
@@ -15,36 +14,34 @@ export default class UpdateConsentVendorsService {
   }
 
   updateConsentVendorList({
-    encodedConsent,
+    consentAcceptedVendors,
+    consentAcceptedPurposes,
+    consentGlobalVendorListVersion,
     currentGlobalVendorList,
     allowedVendorIds
   }) {
-    return Promise.resolve(new ConsentString(encodedConsent))
+    return Promise.resolve()
       .then(
-        consent =>
-          consent.getVendorListVersion() ===
+        () =>
+          consentGlobalVendorListVersion ===
           currentGlobalVendorList.vendorListVersion
             ? Promise.resolve()
             : this._getGlobalVendorList({
-                vendorListVersion: consent.getVendorListVersion()
+                vendorListVersion: consentGlobalVendorListVersion
               })
                 .then(oldGlobalVendorList =>
                   this._updateConsentWithNewGlobalVendorList({
-                    consent,
+                    acceptedVendorIds: consentAcceptedVendors,
                     newGlobalVendorList: currentGlobalVendorList,
                     oldGlobalVendorList,
                     allowedVendorIds
                   })
                 )
-                .then(consent =>
-                  mapConsentToVendorConsents({
-                    consent,
-                    globalVendorList: currentGlobalVendorList,
-                    allowedVendorIds
+                .then(newAcceptedVendorIds =>
+                  this._saveVendorConsents({
+                    purposeConsents: consentAcceptedPurposes,
+                    vendorConsents: newAcceptedVendorIds
                   })
-                )
-                .then(vendorConsents =>
-                  this._saveVendorConsents({vendorConsents})
                 )
       )
       .then(null)
@@ -52,14 +49,14 @@ export default class UpdateConsentVendorsService {
 }
 
 const updateConsentWithNewGlobalVendorList = ({newVendorsStatusFactory}) => ({
-  consent,
+  acceptedVendorIds,
   oldGlobalVendorList,
   newGlobalVendorList,
   allowedVendorIds
 }) =>
   Promise.all([
     consentHasAllInStatus({
-      consent,
+      acceptedVendorIds,
       globalVendorList: oldGlobalVendorList,
       allowedVendorIds
     }).then(acceptationStatus =>
@@ -73,11 +70,7 @@ const updateConsentWithNewGlobalVendorList = ({newVendorsStatusFactory}) => ({
     Promise.resolve(
       newGlobalVendorList.vendors
         .map(vendor => vendor.id)
-        .filter(
-          id =>
-            oldGlobalVendorList.vendors.indexOf(id) < 0 &&
-            (!allowedVendorIds || allowedVendorIds.indexOf(id) >= 0)
-        )
+        .filter(id => oldGlobalVendorList.vendors.indexOf(id) < 0)
     )
   ]).then(
     ([
@@ -85,13 +78,17 @@ const updateConsentWithNewGlobalVendorList = ({newVendorsStatusFactory}) => ({
       oldIdsNotInNewGlobalVendors,
       newIdsNotInOldGlobalVendors
     ]) => {
-      oldIdsNotInNewGlobalVendors.forEach(id => {
-        consent.setVendorAllowed(id, false)
-      })
-      newIdsNotInOldGlobalVendors.forEach(id => {
-        consent.setVendorAllowed(id, newVendorsAcceptationStatus)
-      })
-      return consent
+      let newAcceptedVendorIds = acceptedVendorIds.filter(
+        id =>
+          oldIdsNotInNewGlobalVendors.indexOf(id) < 0 &&
+          ((allowedVendorIds && allowedVendorIds.indexOf(id) >= 0) || true)
+      )
+      if (newVendorsAcceptationStatus) {
+        newIdsNotInOldGlobalVendors.forEach(id => newAcceptedVendorIds.push(id))
+      }
+      return newAcceptedVendorIds.filter(
+        id => (allowedVendorIds && allowedVendorIds.indexOf(id) >= 0) || true
+      )
     }
   )
 
@@ -101,14 +98,3 @@ const getGlobalVendorList = ({vendorListRepository}) => ({
 
 const saveVendorConsents = ({vendorConsentsRepository}) => ({vendorConsents}) =>
   vendorConsentsRepository.saveVendorConsents({vendorConsents})
-
-const mapConsentToVendorConsents = ({
-  consent,
-  globalVendorList,
-  allowedVendorIds
-}) => ({
-  purposeConsents: consent.getPurposesAllowed(),
-  vendorConsents: globalVendorList.vendors
-    .map(vendor => vendor.id)
-    .filter(id => consent.isVendorAllowed(id))
-})

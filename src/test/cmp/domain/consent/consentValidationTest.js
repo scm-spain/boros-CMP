@@ -11,15 +11,13 @@ import {
 describe('consentValidation', () => {
   describe('Given a consent and a globalVendor list, consentHasAllInStatus', () => {
     it('Should return ALL_ALLOWED if all vendors from the global vendor list are allowed in the consent', done => {
-      const givenConsent = new ConsentString()
       const givenGlobalVendorList = GlobalVendorList
-      givenConsent.setGlobalVendorList(givenGlobalVendorList)
-      givenConsent.setVendorsAllowed(
-        givenGlobalVendorList.vendors.map(vendor => vendor.id)
+      const givenAcceptedVendorIds = givenGlobalVendorList.vendors.map(
+        vendor => vendor.id
       )
 
       consentHasAllInStatus({
-        consent: givenConsent,
+        acceptedVendorIds: givenAcceptedVendorIds,
         globalVendorList: givenGlobalVendorList
       })
         .then(value => {
@@ -29,12 +27,11 @@ describe('consentValidation', () => {
         .catch(e => done(e))
     })
     it('Should return ALL_DISALLOWED if none of the vendors from the global vendor list are allowed in the consent', done => {
-      const givenConsent = new ConsentString()
       const givenGlobalVendorList = GlobalVendorList
-      givenConsent.setGlobalVendorList(givenGlobalVendorList)
+      const givenAcceptedVendorIds = []
 
       consentHasAllInStatus({
-        consent: givenConsent,
+        acceptedVendorIds: givenAcceptedVendorIds,
         globalVendorList: givenGlobalVendorList
       })
         .then(value => {
@@ -44,13 +41,13 @@ describe('consentValidation', () => {
         .catch(e => done(e))
     })
     it('Should return CUSTOM_ALLOWED if some of but not all the vendors from the global vendor list are allowed in the consent', done => {
-      const givenConsent = new ConsentString()
       const givenGlobalVendorList = GlobalVendorList
-      givenConsent.setGlobalVendorList(givenGlobalVendorList)
-      givenConsent.setVendorAllowed(givenGlobalVendorList.vendors[0].id, true)
+      const givenAcceptedVendorIds = givenGlobalVendorList.vendors
+        .map(vendor => vendor.id)
+        .slice(0, 10)
 
       consentHasAllInStatus({
-        consent: givenConsent,
+        acceptedVendorIds: givenAcceptedVendorIds,
         globalVendorList: givenGlobalVendorList
       })
         .then(value => {
@@ -62,18 +59,14 @@ describe('consentValidation', () => {
   })
   describe('Given a consent and a globalVendor list and a subset of allowed vendor ids, consentHasAllInStatus', () => {
     it('Should return ALL_ALLOWED if all accepted vendors from the global vendor list are allowed in the consent', done => {
-      const givenConsent = new ConsentString()
       const givenGlobalVendorList = GlobalVendorList
       const givenAllowedVendorIds = givenGlobalVendorList.vendors
         .map(vendor => vendor.id)
         .slice(0, 10)
-      givenConsent.setGlobalVendorList(givenGlobalVendorList)
-      givenConsent.setVendorsAllowed(
-        givenGlobalVendorList.vendors.map(vendor => vendor.id)
-      )
+      const givenAcceptedVendorIds = givenAllowedVendorIds
 
       consentHasAllInStatus({
-        consent: givenConsent,
+        acceptedVendorIds: givenAcceptedVendorIds,
         globalVendorList: givenGlobalVendorList,
         allowedVendorIds: givenAllowedVendorIds
       })
@@ -84,15 +77,14 @@ describe('consentValidation', () => {
         .catch(e => done(e))
     })
     it('Should return ALL_DISALLOWED if none of the accepted vendors from the global vendor list are allowed in the consent', done => {
-      const givenConsent = new ConsentString()
       const givenGlobalVendorList = GlobalVendorList
       const givenAllowedVendorIds = givenGlobalVendorList.vendors
         .map(vendor => vendor.id)
         .slice(0, 10)
-      givenConsent.setGlobalVendorList(givenGlobalVendorList)
+      const givenAcceptedVendorIds = []
 
       consentHasAllInStatus({
-        consent: givenConsent,
+        acceptedVendorIds: givenAcceptedVendorIds,
         globalVendorList: givenGlobalVendorList,
         allowedVendorIds: givenAllowedVendorIds
       })
@@ -103,16 +95,14 @@ describe('consentValidation', () => {
         .catch(e => done(e))
     })
     it('Should return CUSTOM_ALLOWED if some of but not all the accepted vendors from the global vendor list are allowed in the consent', done => {
-      const givenConsent = new ConsentString()
       const givenGlobalVendorList = GlobalVendorList
       const givenAllowedVendorIds = givenGlobalVendorList.vendors
         .map(vendor => vendor.id)
         .slice(0, 10)
-      givenConsent.setGlobalVendorList(givenGlobalVendorList)
-      givenConsent.setVendorAllowed(givenAllowedVendorIds[0], true)
+      const givenAcceptedVendorIds = givenAllowedVendorIds.slice(0, 5)
 
       consentHasAllInStatus({
-        consent: givenConsent,
+        acceptedVendorIds: givenAcceptedVendorIds,
         globalVendorList: givenGlobalVendorList,
         allowedVendorIds: givenAllowedVendorIds
       })

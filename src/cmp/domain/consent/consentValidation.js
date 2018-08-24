@@ -1,31 +1,39 @@
 /**
- * Return ALL_ALLOWED, ALL_DISALLOWED, CUSTOM_ALLOWED depending on the consent to have
- * all the globalVendorList vendors (accepted in the allowedVendorList) to be all
+ * Return ALL_ALLOWED, ALL_DISALLOWED, CUSTOM_ALLOWED depending on the consent acceptedVendorIds
+ * to have all the globalVendorList vendors (accepted in the allowedVendorList) to be all
  * allowed, none allowed or some vendors allowed and others not, respectively.
  * Note that ALL_ALLOWED may mean that ALL the vendors from the 'allowedVendorIds'
  * were allowed (so they are not the 'all' from the global vendor list)
- * @param consent
+ * @param acceptedVendorIds
  * @param globalVendorList
  * @param allowedVendorIds
  */
-const consentHasAllInStatus = ({consent, globalVendorList, allowedVendorIds}) =>
+const consentHasAllInStatus = ({
+  acceptedVendorIds,
+  globalVendorList,
+  allowedVendorIds
+}) =>
   Promise.resolve()
     .then(() => globalVendorList.vendors.map(vendor => vendor.id))
     .then(globalVendorIds =>
       globalVendorIds.filter(
-        id => (allowedVendorIds && allowedVendorIds.indexOf(id) >= 0) || true
+        id =>
+          !allowedVendorIds ||
+          (allowedVendorIds && allowedVendorIds.indexOf(id) >= 0)
       )
     )
-    .then(acceptedVendorIds =>
+    .then(allowedGlobalVendorIds =>
       Promise.resolve(
-        acceptedVendorIds.reduce(
+        allowedGlobalVendorIds.reduce(
           (totalAllowed, id) =>
-            consent.isVendorAllowed(id) ? totalAllowed + 1 : totalAllowed,
+            acceptedVendorIds.indexOf(id) >= 0
+              ? totalAllowed + 1
+              : totalAllowed,
           0
         )
-      ).then(totalAllowed => {
-        if (totalAllowed === 0) return ALL_DISALLOWED
-        if (totalAllowed === acceptedVendorIds.length) return ALL_ALLOWED
+      ).then(count => {
+        if (count === 0) return ALL_DISALLOWED
+        if (count === allowedGlobalVendorIds.length) return ALL_ALLOWED
         return CUSTOM_ALLOWED
       })
     )

@@ -1,10 +1,8 @@
 import GetConsentDataUseCase from '../../application/services/GetConsentDataUseCase'
-import IABConsentFactory from '../factory/IABConsentFactory'
 import ChainedVendorListRepository from '../repository/ChainedVendorListRepository'
 import InMemoryVendorListRepository from '../repository/InMemoryVendorListRepository'
 import HttpVendorListRepository from '../repository/HttpVendorListRepository'
 import {Log} from '../Log'
-import IABVendorConsentsFactory from '../factory/IABVendorConsentsFactory'
 import ConsentStringVendorConsentsRepository from '../repository/ConsentStringVendorConsentsRepository'
 import GetConsentStatusUseCase from '../../application/services/GetConsentStatusUseCase'
 import GetVendorConsentsUseCase from '../../application/services/GetVendorConsentsUseCase'
@@ -12,6 +10,8 @@ import GetVendorListUseCase from '../../application/services/GetVendorListUseCas
 import PingUseCase from '../../application/services/PingUseCase'
 import SetVendorConsentsUseCase from '../../application/services/SetVendorConsentsUseCase'
 import Configuration from '../configuration/Configuration'
+import ConsentFactory from '../../domain/consent/ConsentFactory'
+import VendorConsentsFactory from '../../domain/vendor_consents/VendorConsentsFactory'
 
 export default class BaseConsentContainer {
   constructor({config, cmpVersion, window, eager = true} = {}) {
@@ -39,7 +39,7 @@ export default class BaseConsentContainer {
   }
 
   _buildConsentFactory() {
-    return new IABConsentFactory()
+    return new ConsentFactory()
   }
 
   _buildVendorListRepository() {
@@ -69,7 +69,7 @@ export default class BaseConsentContainer {
   }
 
   _buildVendorConsentsFactory() {
-    return new IABVendorConsentsFactory({
+    return new VendorConsentsFactory({
       gdprApplies: this._config.gdpr.gdprApplies,
       storeConsentGlobally: this._config.gdpr.storeConsentGlobally
     })
