@@ -1,9 +1,10 @@
 import Cmp from '../../application/Cmp'
 import registerWindowCMP from '../controller/windowCommunicationRegistry'
 import createEvent from '../createEvent'
-import GlobalConsentContainer from '../container/GlobalConsentContainer'
 import IframeRegistry from '../service/IframeRegistry'
 import registerCmpLocator from '../controller/registerCmpLocator'
+import ContextGlobalConsentContainer from '../container/global/ContextGlobalConsentContainer'
+
 const GLOBAL_CONSENT_STORE_INITIALIZATION_ERROR =
   'Error initializing global storage:'
 export default class GlobalStorageBootstrap {
@@ -15,13 +16,12 @@ export default class GlobalStorageBootstrap {
           registerCmpLocator({dom: window.document})
         ])
       )
-      .then(
-        ([iframe, cmpLocatorIframe]) =>
-          new GlobalConsentContainer({
-            config,
-            window,
-            iframe
-          })
+      .then(([iframe, cmpLocatorIframe]) =>
+        ContextGlobalConsentContainer.context({
+          window,
+          config,
+          iframe
+        })
       )
       .then(container =>
         Promise.all([

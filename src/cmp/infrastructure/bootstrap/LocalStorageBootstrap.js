@@ -1,7 +1,7 @@
 import Cmp from '../../application/Cmp'
 import registerWindowCMP from '../controller/windowCommunicationRegistry'
 import createEvent from '../createEvent'
-import LocalConsentContainer from '../container/LocalConsentContainer'
+import ContextLocalConsentContainer from '../container/local/ContextLocalConsentContainer'
 import registerCmpLocator from '../controller/registerCmpLocator'
 
 export default class LocalStorageBootstrap {
@@ -10,10 +10,7 @@ export default class LocalStorageBootstrap {
       .then(() =>
         Promise.all([
           new Cmp({
-            container: new LocalConsentContainer({
-              config,
-              window
-            })
+            container: ContextLocalConsentContainer.context({config, window})
           }).commandConsumer(),
           registerCmpLocator({dom: window.document})
         ])

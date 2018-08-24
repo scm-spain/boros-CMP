@@ -4,7 +4,7 @@ import HttpVendorListRepository from '../../../../cmp/infrastructure/repository/
 import {
   latestVendorListLocator,
   versionVendorListLocator
-} from '../../../../cmp/domain/iabVendorListLocator'
+} from '../../../../cmp/domain/vendor_list/iabVendorListLocator'
 
 describe('HttpVendorListRepository', () => {
   describe('getGlobalVendorList', () => {

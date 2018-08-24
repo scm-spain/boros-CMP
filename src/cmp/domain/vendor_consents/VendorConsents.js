@@ -1,3 +1,5 @@
+import DomainEventBus from '../event_bus/DomainEventBus'
+import {vendorConsentsCreated} from './vendorConsentsCreated'
 /**
  * This object contains the global purposes, and vendors, consented to by the user:
 {
@@ -37,6 +39,16 @@ export default class VendorConsents {
     this._hasGlobalScope = hasGlobalScope
     this._purposeConsents = purposeConsents
     this._vendorConsents = vendorConsents
+
+    DomainEventBus.raise({
+      domainEvent: vendorConsentsCreated({
+        metadata: this._metadata,
+        gdprApplies: this._gdprApplies,
+        hasGlobalScope: this._hasGlobalScope,
+        purposeConsents: this._purposeConsents,
+        vendorConsents: this._vendorConsents
+      })
+    })
   }
 
   get metadata() {

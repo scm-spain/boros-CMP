@@ -14,7 +14,7 @@ import {
 import {
   latestVendorListLocator,
   versionVendorListLocator
-} from '../../../../cmp/domain/iabVendorListLocator'
+} from '../../../../cmp/domain/vendor_list/iabVendorListLocator'
 
 describe('Configuration', () => {
   describe('given an empty configuration objects', () => {

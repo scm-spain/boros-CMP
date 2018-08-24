@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import 'whatwg-fetch'
-import GlobalVendorListAccessError from '../../domain/GlobalVendorListAccessError'
+import GlobalVendorListAccessError from '../../domain/vendor_list/GlobalVendorListAccessError'
 
 /**
  * @class

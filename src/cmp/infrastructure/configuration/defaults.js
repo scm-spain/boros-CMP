@@ -1,7 +1,7 @@
 import {
   latestVendorListLocator,
   versionVendorListLocator
-} from '../../domain/iabVendorListLocator'
+} from '../../domain/vendor_list/iabVendorListLocator'
 import {LEVEL} from '../Log'
 
 const DEFAULT_CONSENT_SCREEN = 1
@@ -11,6 +11,7 @@ const DEFAULT_GDPR_APPLIES = true
 const DEFAULT_GDPR_STORE_CONSENT_GLOBALLY = false
 const DEFAULT_VENDOR_LIST_LATEST_LOCATOR = latestVendorListLocator
 const DEFAULT_VENDOR_LIST_VERSION_LOCATOR = versionVendorListLocator
+const DEFAULT_DEBUG_KEYWORD = 'cmp_debug'
 
 export {
   DEFAULT_CONSENT_SCREEN,
@@ -19,5 +20,6 @@ export {
   DEFAULT_GDPR_APPLIES,
   DEFAULT_GDPR_STORE_CONSENT_GLOBALLY,
   DEFAULT_VENDOR_LIST_LATEST_LOCATOR,
-  DEFAULT_VENDOR_LIST_VERSION_LOCATOR
+  DEFAULT_VENDOR_LIST_VERSION_LOCATOR,
+  DEFAULT_DEBUG_KEYWORD
 }

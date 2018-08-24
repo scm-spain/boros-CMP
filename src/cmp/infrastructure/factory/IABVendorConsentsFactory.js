@@ -1,4 +1,4 @@
-import VendorConsents from '../../domain/VendorConsents'
+import VendorConsents from '../../domain/vendor_consents/VendorConsents'
 
 /**
  * @class
