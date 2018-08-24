@@ -1,8 +1,8 @@
 {
   "name": "@schibstedspain/cmp",
-  "version": "0.0.1",
-  "description": "GDPR - Consent Management Provider",
-  "main": "src/index.js",
+  "version": "1.0.0",
+  "description": "Schibsted GDPR - Consent Management Provider - Standalone",
+  "main": "dist/cmp.pro.js",
   "scripts": {
     "prepublishOnly": "npm run build",
     "test": "mocha --recursive --require babel-polyfill --require babel-core/register \"src/test/**/*.js\"",
@@ -23,10 +23,12 @@
     "advertising",
     "schibsted",
     "gdpr",
-    "cmp"
+    "cmp",
+    "consent-string",
+    "iab"
   ],
-  "author": "The Mighty Ducks of Advertising",
-  "license": "ISC",
+  "author": "One Punch Team",
+  "license": "MIT",
   "devDependencies": {
     "@s-ui/lint": "^2.13.0",
     "babel-cli": "^6.24.0",
