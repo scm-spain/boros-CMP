@@ -2,6 +2,7 @@ import Cmp from '../../application/Cmp'
 import registerWindowCMP from '../controller/windowCommunicationRegistry'
 import createEvent from '../createEvent'
 import IframeRegistry from '../service/IframeRegistry'
+import registerCmpLocator from '../controller/registerCmpLocator'
 import ContextGlobalConsentContainer from '../container/global/ContextGlobalConsentContainer'
 
 const GLOBAL_CONSENT_STORE_INITIALIZATION_ERROR =
@@ -9,8 +10,13 @@ const GLOBAL_CONSENT_STORE_INITIALIZATION_ERROR =
 export default class GlobalStorageBootstrap {
   static init({window, config}) {
     Promise.resolve(config)
-      .then(config => registerIframe(window)(config))
-      .then(iframe =>
+      .then(config =>
+        Promise.all([
+          registerIframe(window)(config),
+          registerCmpLocator({dom: window.document})
+        ])
+      )
+      .then(([iframe, cmpLocatorIframe]) =>
         ContextGlobalConsentContainer.context({
           window,
           config,
@@ -23,10 +29,7 @@ export default class GlobalStorageBootstrap {
           registerIframeCommunication(container)
         ])
       )
-      .then(
-        ([cmp, undefined]) => registerWindowCMP({cmp, window})
-        // TODO: should write the __cmpLocator
-      )
+      .then(([cmp, undefined]) => registerWindowCMP({cmp, window}))
       .then(() => createEvent({window, name: 'cmpReady'}))
   }
 }
@@ -42,4 +45,5 @@ const registerIframe = window => config =>
     .catch(error =>
       console.error(GLOBAL_CONSENT_STORE_INITIALIZATION_ERROR, error)
     )
+
 const CMPFunctionalFacade = container => new Cmp({container}).commandConsumer()
