@@ -4,8 +4,8 @@ import CookieHandler from '../../service/CookieHandler'
 import BaseConsentContainer from '../BaseConsentContainer'
 
 export default class LocalConsentContainer extends BaseConsentContainer {
-  constructor({config, window, cmpVersion = CMP_VERSION, eager = true} = {}) {
-    super({config, cmpVersion, window, eager: false})
+  constructor({config, window, cmpVersion = CMP_VERSION, eager} = {}) {
+    super({config, cmpVersion, window})
     if (eager) this._buildEagerSingletonInstances()
   }
 

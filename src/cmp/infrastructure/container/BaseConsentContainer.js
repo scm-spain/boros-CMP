@@ -11,12 +11,13 @@ import GetVendorListUseCase from '../../application/services/GetVendorListUseCas
 import PingUseCase from '../../application/services/PingUseCase'
 import SetVendorConsentsUseCase from '../../application/services/SetVendorConsentsUseCase'
 import Configuration from '../configuration/Configuration'
+import {errorObserverFactory} from '../observer/errorObserverFactory'
+import {obsoleteVendorsListVersionObserverFactory} from '../observer/obsoleteVendorsListVersionObserverFactory'
+import {NewVendorsStatusFactory} from '../../domain/vendor_consents/NewVendorsStatusFactory'
+import UpdateConsentVendorsService from '../../domain/consent/UpdateConsentVendorsService'
+import {OBSOLETE_VENDORS_LIST_VERSION} from '../../domain/consent/obsoleteVendorsListVersion'
 import ConsentFactory from '../../domain/consent/ConsentFactory'
 import VendorConsentsFactory from '../../domain/vendor_consents/VendorConsentsFactory'
-import {OBSOLETE_VENDORS_LIST_VERSION} from '../../domain/consent/obsoleteVendorsListVersion'
-import {obsoleteVendorsListVersionObserverFactory} from '../observer/obsoleteVendorsListVersionObserverFactory'
-import UpdateConsentVendorsService from '../../domain/consent/UpdateConsentVendorsService'
-import {NewVendorsStatusFactory} from '../../domain/vendor_consents/NewVendorsStatusFactory'
 
 export default class BaseConsentContainer {
   constructor({config, cmpVersion, window, eager = true} = {}) {
@@ -37,7 +38,9 @@ export default class BaseConsentContainer {
       try {
         this._instances.set(key, this['_build' + key]())
       } catch (e) {
-        throw new Error(`Error creating instance: ${key}`, e)
+        throw new Error(
+          `Error creating instance: ${key}, detailed message:${e.message}`
+        )
       }
     }
     return this._instances.get(key)
@@ -132,6 +135,11 @@ export default class BaseConsentContainer {
         key: 'VendorConsentsRepository'
       })
     })
+  }
+
+  _buildErrorObserverFactory() {
+    const logger = this.getInstance({key: 'Log'})
+    return errorObserverFactory(logger)
   }
 
   _buildUpdateConsentVendorsService() {

@@ -7,14 +7,8 @@ import UUIDV4Generator from '../../service/UUIDV4Generator'
 import uuidv4 from 'uuid/v4'
 
 export default class GlobalConsentContainer extends BaseConsentContainer {
-  constructor({
-    config,
-    window,
-    iframe,
-    cmpVersion = CMP_VERSION,
-    eager = true
-  } = {}) {
-    super({config, cmpVersion, window, eager: false})
+  constructor({config, window, iframe, cmpVersion = CMP_VERSION, eager} = {}) {
+    super({config, cmpVersion, window})
     this._iframe = iframe
     if (eager) this._buildEagerSingletonInstances()
   }
