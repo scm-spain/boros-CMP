@@ -2,7 +2,7 @@ import {
   latestVendorListLocator,
   versionVendorListLocator
 } from '../../domain/vendor_list/iabVendorListLocator'
-import {LEVEL} from '../Log'
+import {LEVEL} from '../service/log/Log'
 
 const DEFAULT_CONSENT_SCREEN = 1
 const DEFAULT_CONSENT_LANGUAGE = 'en'

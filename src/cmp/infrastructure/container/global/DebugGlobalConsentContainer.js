@@ -2,12 +2,22 @@ import GlobalConsentContainer from './GlobalConsentContainer'
 import {VENDOR_CONSENTS_CREATED} from '../../../domain/vendor_consents/vendorConsentsCreated'
 import {OBSERVER_ERROR_THROWN} from '../../../domain/event_bus/observerErrorThrown'
 import DomainEventBus from '../../../domain/event_bus/DomainEventBus'
-import {debugHandler} from '../loggerDebugHandler'
+import {debugHandler} from '../../service/log/loggerDebugHandler'
 import {debugObserverFactory} from '../../observer/debugObserverFactory'
+import {LEVEL} from '../../service/log/Log'
 
 export default class DebugGlobalConsentContainer extends GlobalConsentContainer {
   constructor({config, window, iframe}) {
-    super({config, window, iframe})
+    super({
+      config: {
+        ...config,
+        log: {
+          level: LEVEL.debug
+        }
+      },
+      window,
+      iframe
+    })
   }
 
   getInstance({key}) {
