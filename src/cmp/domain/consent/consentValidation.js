@@ -10,12 +10,11 @@
  */
 const consentHasAllInStatus = ({
   acceptedVendorIds,
-  globalVendorList,
+  globalVendorIds,
   allowedVendorIds
 }) =>
   Promise.resolve()
-    .then(() => globalVendorList.vendors.map(vendor => vendor.id))
-    .then(globalVendorIds =>
+    .then(() =>
       globalVendorIds.filter(
         id =>
           !allowedVendorIds ||

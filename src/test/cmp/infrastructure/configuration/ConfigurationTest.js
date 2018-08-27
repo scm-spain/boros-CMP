@@ -15,6 +15,10 @@ import {
   latestVendorListLocator,
   versionVendorListLocator
 } from '../../../../cmp/domain/vendor_list/iabVendorListLocator'
+import {
+  OPTION_ALL_ALLOW,
+  OPTION_USE_SAME_THAN_ALL_CUSTOM_IS_TRUE
+} from '../../../../cmp/domain/vendor_consents/NewVendorsStatusFactory'
 
 describe('Configuration', () => {
   describe('given an empty configuration objects', () => {
@@ -30,7 +34,9 @@ describe('Configuration', () => {
           cmpId: CMP_ID,
           cmpVersion: CMP_VERSION,
           consentScreen: DEFAULT_CONSENT_SCREEN,
-          consentLanguage: DEFAULT_CONSENT_LANGUAGE
+          consentLanguage: DEFAULT_CONSENT_LANGUAGE,
+          allowedVendorIds: undefined,
+          newVendorsStatusOption: OPTION_USE_SAME_THAN_ALL_CUSTOM_IS_TRUE
         },
         httpVendorList: {
           latestLocator: latestVendorListLocator,
@@ -67,7 +73,9 @@ describe('Configuration', () => {
       }
       const givenConsent = {
         consentScreen: 3,
-        consentLanguage: 'es'
+        consentLanguage: 'es',
+        allowedVendorIds: [1],
+        newVendorsStatusOption: OPTION_ALL_ALLOW
       }
       const givenHttpVendorList = {
         latestLocator: () => '',
@@ -88,7 +96,9 @@ describe('Configuration', () => {
           cmpId: CMP_ID,
           cmpVersion: CMP_VERSION,
           consentScreen: givenConsent.consentScreen,
-          consentLanguage: givenConsent.consentLanguage
+          consentLanguage: givenConsent.consentLanguage,
+          allowedVendorIds: givenConsent.allowedVendorIds,
+          newVendorsStatusOption: givenConsent.newVendorsStatusOption
         },
         httpVendorList: givenHttpVendorList,
         log: givenLog
@@ -110,7 +120,7 @@ describe('Configuration', () => {
         'log should have been initialized with received values'
       ).to.deep.equal(expectedConfiguration.log)
     })
-    it('Should be fill missing values with defaults', () => {
+    it('Should fill missing values with defaults', () => {
       const givenGdpr = {
         storeConsentGlobally: true,
         globalConsentLocation: 'https://what.ever.com/iframe.html'
@@ -132,7 +142,9 @@ describe('Configuration', () => {
           cmpId: CMP_ID,
           cmpVersion: CMP_VERSION,
           consentScreen: DEFAULT_CONSENT_SCREEN,
-          consentLanguage: givenConsent.consentLanguage
+          consentLanguage: givenConsent.consentLanguage,
+          allowedVendorIds: undefined,
+          newVendorsStatusOption: OPTION_USE_SAME_THAN_ALL_CUSTOM_IS_TRUE
         },
         httpVendorList: {
           latestLocator: latestVendorListLocator,

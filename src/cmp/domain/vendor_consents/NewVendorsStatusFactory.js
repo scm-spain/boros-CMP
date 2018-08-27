@@ -4,7 +4,7 @@ import {
   CUSTOM_ALLOWED
 } from '../consent/consentValidation'
 
-export default class NewVendorsStatusFactory {
+class NewVendorsStatusFactory {
   constructor({option = OPTION_USE_SAME_THAN_ALL_CUSTOM_IS_TRUE} = {}) {
     this._option = option
   }
@@ -48,3 +48,11 @@ const OPTION_USE_SAME_THAN_ALL_CUSTOM_IS_FALSE =
   'OPTION_USE_SAME_THAN_ALL_CUSTOM_IS_FALSE'
 const OPTION_ALL_DISMISS = 'OPTION_ALL_DISMISS'
 const OPTION_ALL_ALLOW = 'OPTION_ALL_ALLOW'
+
+export {
+  NewVendorsStatusFactory,
+  OPTION_USE_SAME_THAN_ALL_CUSTOM_IS_TRUE,
+  OPTION_USE_SAME_THAN_ALL_CUSTOM_IS_FALSE,
+  OPTION_ALL_DISMISS,
+  OPTION_ALL_ALLOW
+}

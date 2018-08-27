@@ -3,6 +3,7 @@ import {
   versionVendorListLocator
 } from '../../domain/vendor_list/iabVendorListLocator'
 import {LEVEL} from '../Log'
+import {OPTION_USE_SAME_THAN_ALL_CUSTOM_IS_TRUE} from '../../domain/vendor_consents/NewVendorsStatusFactory'
 
 const DEFAULT_CONSENT_SCREEN = 1
 const DEFAULT_CONSENT_LANGUAGE = 'en'
@@ -12,6 +13,7 @@ const DEFAULT_GDPR_STORE_CONSENT_GLOBALLY = false
 const DEFAULT_VENDOR_LIST_LATEST_LOCATOR = latestVendorListLocator
 const DEFAULT_VENDOR_LIST_VERSION_LOCATOR = versionVendorListLocator
 const DEFAULT_DEBUG_KEYWORD = 'cmp_debug'
+const DEFAULT_NEW_VENDORS_STATUS_OPTION = OPTION_USE_SAME_THAN_ALL_CUSTOM_IS_TRUE
 
 export {
   DEFAULT_CONSENT_SCREEN,
@@ -21,5 +23,6 @@ export {
   DEFAULT_GDPR_STORE_CONSENT_GLOBALLY,
   DEFAULT_VENDOR_LIST_LATEST_LOCATOR,
   DEFAULT_VENDOR_LIST_VERSION_LOCATOR,
-  DEFAULT_DEBUG_KEYWORD
+  DEFAULT_DEBUG_KEYWORD,
+  DEFAULT_NEW_VENDORS_STATUS_OPTION
 }

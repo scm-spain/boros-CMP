@@ -1,3 +1,4 @@
+import DomainEventBus from '../../domain/event_bus/DomainEventBus'
 import GetConsentDataUseCase from '../../application/services/GetConsentDataUseCase'
 import ChainedVendorListRepository from '../repository/ChainedVendorListRepository'
 import InMemoryVendorListRepository from '../repository/InMemoryVendorListRepository'
@@ -12,6 +13,10 @@ import SetVendorConsentsUseCase from '../../application/services/SetVendorConsen
 import Configuration from '../configuration/Configuration'
 import ConsentFactory from '../../domain/consent/ConsentFactory'
 import VendorConsentsFactory from '../../domain/vendor_consents/VendorConsentsFactory'
+import {OBSOLETE_VENDORS_LIST_VERSION} from '../../domain/consent/obsoleteVendorsListVersion'
+import {obsoleteVendorsListVersionObserverFactory} from '../observer/obsoleteVendorsListVersionObserverFactory'
+import UpdateConsentVendorsService from '../../domain/consent/UpdateConsentVendorsService'
+import {NewVendorsStatusFactory} from '../../domain/vendor_consents/NewVendorsStatusFactory'
 
 export default class BaseConsentContainer {
   constructor({config, cmpVersion, window, eager = true} = {}) {
@@ -39,7 +44,9 @@ export default class BaseConsentContainer {
   }
 
   _buildConsentFactory() {
-    return new ConsentFactory()
+    return new ConsentFactory({
+      allowedVendorIds: this._config.consent.allowedVendorIds
+    })
   }
 
   _buildVendorListRepository() {
@@ -127,5 +134,33 @@ export default class BaseConsentContainer {
     })
   }
 
-  _buildEagerSingletonInstances() {}
+  _buildUpdateConsentVendorsService() {
+    return new UpdateConsentVendorsService({
+      newVendorsStatusFactory: this.getInstance({
+        key: 'NewVendorsStatusFactory'
+      }),
+      vendorListRepository: this.getInstance({key: 'VendorListRepository'}),
+      vendorConsentsRepository: this.getInstance({
+        key: 'VendorConsentsRepository'
+      })
+    })
+  }
+
+  _buildNewVendorsStatusFactory() {
+    return new NewVendorsStatusFactory({
+      option: this._config.consent.newVendorsStatusOption
+    })
+  }
+  _buildObsoleteVendorsListVersionObserver() {
+    return obsoleteVendorsListVersionObserverFactory(
+      this.getInstance({key: 'UpdateConsentVendorsService'})
+    )
+  }
+
+  _buildEagerSingletonInstances() {
+    DomainEventBus.register({
+      eventName: OBSOLETE_VENDORS_LIST_VERSION,
+      observer: this.getInstance({key: 'ObsoleteVendorsListVersionObserver'})
+    })
+  }
 }

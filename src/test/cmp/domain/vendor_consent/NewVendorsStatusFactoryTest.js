@@ -1,16 +1,22 @@
 import {expect} from 'chai'
-import NewVendorsStatusFactory from '../../../../cmp/domain/vendor_consents/NewVendorsStatusFactory'
 import {
   ALL_ALLOWED,
   ALL_DISALLOWED,
   CUSTOM_ALLOWED
 } from '../../../../cmp/domain/consent/consentValidation'
+import {
+  NewVendorsStatusFactory,
+  OPTION_ALL_ALLOW,
+  OPTION_ALL_DISMISS,
+  OPTION_USE_SAME_THAN_ALL_CUSTOM_IS_FALSE,
+  OPTION_USE_SAME_THAN_ALL_CUSTOM_IS_TRUE
+} from '../../../../cmp/domain/vendor_consents/NewVendorsStatusFactory'
 
 describe('NewVendorsStatusFactory', () => {
   describe('OPTION_USE_SAME_THAN_ALL_CUSTOM_IS_TRUE', () => {
     it('Should return true if all vendors were accepted', done => {
       const factory = new NewVendorsStatusFactory({
-        option: 'OPTION_USE_SAME_THAN_ALL_CUSTOM_IS_TRUE'
+        option: OPTION_USE_SAME_THAN_ALL_CUSTOM_IS_TRUE
       })
       factory
         .from({acceptationStatus: ALL_ALLOWED})
@@ -22,7 +28,7 @@ describe('NewVendorsStatusFactory', () => {
     })
     it('Should return true if vendors were customized, but not all rejected', done => {
       const factory = new NewVendorsStatusFactory({
-        option: 'OPTION_USE_SAME_THAN_ALL_CUSTOM_IS_TRUE'
+        option: OPTION_USE_SAME_THAN_ALL_CUSTOM_IS_TRUE
       })
       factory
         .from({acceptationStatus: CUSTOM_ALLOWED})
@@ -34,7 +40,7 @@ describe('NewVendorsStatusFactory', () => {
     })
     it('Should return false if vendors were all rejected', done => {
       const factory = new NewVendorsStatusFactory({
-        option: 'OPTION_USE_SAME_THAN_ALL_CUSTOM_IS_TRUE'
+        option: OPTION_USE_SAME_THAN_ALL_CUSTOM_IS_TRUE
       })
       factory
         .from({acceptationStatus: ALL_DISALLOWED})
@@ -48,7 +54,7 @@ describe('NewVendorsStatusFactory', () => {
   describe('OPTION_USE_SAME_THAN_ALL_CUSTOM_IS_FALSE', () => {
     it('Should return true if all vendors were accepted', done => {
       const factory = new NewVendorsStatusFactory({
-        option: 'OPTION_USE_SAME_THAN_ALL_CUSTOM_IS_FALSE'
+        option: OPTION_USE_SAME_THAN_ALL_CUSTOM_IS_FALSE
       })
       factory
         .from({acceptationStatus: ALL_ALLOWED})
@@ -60,7 +66,7 @@ describe('NewVendorsStatusFactory', () => {
     })
     it('Should return false if vendors were customized, but not all rejected', done => {
       const factory = new NewVendorsStatusFactory({
-        option: 'OPTION_USE_SAME_THAN_ALL_CUSTOM_IS_FALSE'
+        option: OPTION_USE_SAME_THAN_ALL_CUSTOM_IS_FALSE
       })
       factory
         .from({acceptationStatus: CUSTOM_ALLOWED})
@@ -72,7 +78,7 @@ describe('NewVendorsStatusFactory', () => {
     })
     it('Should return false if vendors were all rejected', done => {
       const factory = new NewVendorsStatusFactory({
-        option: 'OPTION_USE_SAME_THAN_ALL_CUSTOM_IS_FALSE'
+        option: OPTION_USE_SAME_THAN_ALL_CUSTOM_IS_FALSE
       })
       factory
         .from({acceptationStatus: ALL_DISALLOWED})
@@ -86,7 +92,7 @@ describe('NewVendorsStatusFactory', () => {
   describe('OPTION_ALL_DISMISS', () => {
     it('Should return false if all vendors were accepted', done => {
       const factory = new NewVendorsStatusFactory({
-        option: 'OPTION_ALL_DISMISS'
+        option: OPTION_ALL_DISMISS
       })
       factory
         .from({acceptationStatus: ALL_ALLOWED})
@@ -98,7 +104,7 @@ describe('NewVendorsStatusFactory', () => {
     })
     it('Should return false if vendors were customized, but not all rejected', done => {
       const factory = new NewVendorsStatusFactory({
-        option: 'OPTION_ALL_DISMISS'
+        option: OPTION_ALL_DISMISS
       })
       factory
         .from({acceptationStatus: CUSTOM_ALLOWED})
@@ -110,7 +116,7 @@ describe('NewVendorsStatusFactory', () => {
     })
     it('Should return false if vendors were all rejected', done => {
       const factory = new NewVendorsStatusFactory({
-        option: 'OPTION_ALL_DISMISS'
+        option: OPTION_ALL_DISMISS
       })
       factory
         .from({acceptationStatus: ALL_DISALLOWED})
@@ -124,7 +130,7 @@ describe('NewVendorsStatusFactory', () => {
   describe('OPTION_ALL_ALLOW', () => {
     it('Should return true if all vendors were accepted', done => {
       const factory = new NewVendorsStatusFactory({
-        option: 'OPTION_ALL_ALLOW'
+        option: OPTION_ALL_ALLOW
       })
       factory
         .from({acceptationStatus: ALL_ALLOWED})
@@ -136,7 +142,7 @@ describe('NewVendorsStatusFactory', () => {
     })
     it('Should return false if vendors were customized, but not all rejected', done => {
       const factory = new NewVendorsStatusFactory({
-        option: 'OPTION_ALL_ALLOW'
+        option: OPTION_ALL_ALLOW
       })
       factory
         .from({acceptationStatus: CUSTOM_ALLOWED})
@@ -148,7 +154,7 @@ describe('NewVendorsStatusFactory', () => {
     })
     it('Should return false if vendors were all rejected', done => {
       const factory = new NewVendorsStatusFactory({
-        option: 'OPTION_ALL_ALLOW'
+        option: OPTION_ALL_ALLOW
       })
       factory
         .from({acceptationStatus: ALL_DISALLOWED})

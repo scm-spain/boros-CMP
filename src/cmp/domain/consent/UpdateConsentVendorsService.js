@@ -30,10 +30,20 @@ export default class UpdateConsentVendorsService {
                 vendorListVersion: consentGlobalVendorListVersion
               })
                 .then(oldGlobalVendorList =>
+                  Promise.all([
+                    Promise.resolve(
+                      currentGlobalVendorList.vendors.map(vendor => vendor.id)
+                    ),
+                    Promise.resolve(
+                      oldGlobalVendorList.vendors.map(vendor => vendor.id)
+                    )
+                  ])
+                )
+                .then(([currentGlobalVendorIds, oldGlobalVendorIds]) =>
                   this._updateConsentWithNewGlobalVendorList({
                     acceptedVendorIds: consentAcceptedVendors,
-                    newGlobalVendorList: currentGlobalVendorList,
-                    oldGlobalVendorList,
+                    newGlobalVendorIds: currentGlobalVendorIds,
+                    oldGlobalVendorIds: oldGlobalVendorIds,
                     allowedVendorIds
                   })
                 )
@@ -50,27 +60,23 @@ export default class UpdateConsentVendorsService {
 
 const updateConsentWithNewGlobalVendorList = ({newVendorsStatusFactory}) => ({
   acceptedVendorIds,
-  oldGlobalVendorList,
-  newGlobalVendorList,
+  oldGlobalVendorIds,
+  newGlobalVendorIds,
   allowedVendorIds
 }) =>
   Promise.all([
     consentHasAllInStatus({
       acceptedVendorIds,
-      globalVendorList: oldGlobalVendorList,
+      globalVendorIds: oldGlobalVendorIds,
       allowedVendorIds
     }).then(acceptationStatus =>
       newVendorsStatusFactory.from({acceptationStatus})
     ),
     Promise.resolve(
-      oldGlobalVendorList.vendors
-        .map(vendor => vendor.id)
-        .filter(id => newGlobalVendorList.vendors.indexOf(id) < 0)
+      oldGlobalVendorIds.filter(id => newGlobalVendorIds.indexOf(id) < 0)
     ),
     Promise.resolve(
-      newGlobalVendorList.vendors
-        .map(vendor => vendor.id)
-        .filter(id => oldGlobalVendorList.vendors.indexOf(id) < 0)
+      newGlobalVendorIds.filter(id => oldGlobalVendorIds.indexOf(id) < 0)
     )
   ]).then(
     ([
@@ -79,15 +85,15 @@ const updateConsentWithNewGlobalVendorList = ({newVendorsStatusFactory}) => ({
       newIdsNotInOldGlobalVendors
     ]) => {
       let newAcceptedVendorIds = acceptedVendorIds.filter(
-        id =>
-          oldIdsNotInNewGlobalVendors.indexOf(id) < 0 &&
-          ((allowedVendorIds && allowedVendorIds.indexOf(id) >= 0) || true)
+        id => oldIdsNotInNewGlobalVendors.indexOf(id) < 0
       )
       if (newVendorsAcceptationStatus) {
         newIdsNotInOldGlobalVendors.forEach(id => newAcceptedVendorIds.push(id))
       }
       return newAcceptedVendorIds.filter(
-        id => (allowedVendorIds && allowedVendorIds.indexOf(id) >= 0) || true
+        id =>
+          (allowedVendorIds && allowedVendorIds.indexOf(id) >= 0) ||
+          !allowedVendorIds
       )
     }
   )
@@ -96,5 +102,8 @@ const getGlobalVendorList = ({vendorListRepository}) => ({
   vendorListVersion
 } = {}) => vendorListRepository.getGlobalVendorList({vendorListVersion})
 
-const saveVendorConsents = ({vendorConsentsRepository}) => ({vendorConsents}) =>
-  vendorConsentsRepository.saveVendorConsents({vendorConsents})
+const saveVendorConsents = ({vendorConsentsRepository}) => ({
+  vendorConsents,
+  purposeConsents
+}) =>
+  vendorConsentsRepository.saveVendorConsents({vendorConsents, purposeConsents})
