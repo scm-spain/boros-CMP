@@ -5,6 +5,7 @@ export const debugHandler = logger => ({
         propKey
       ]} from class ${target.constructor.name}`
     )
+
     return target[propKey]
   }
 })
