@@ -5,14 +5,17 @@
   "main": "dist/cmp.pro.js",
   "scripts": {
     "prepublishOnly": "npm run build",
+    "start:cmp:dev": "webpack-dev-server --config src/cmp/infrastructure/build/webpack.config.cmp.babel.js --mode=development",
     "test": "mocha --recursive --require babel-polyfill --require babel-core/register \"src/test/**/*.js\"",
     "coverage": "istanbul cover --report html _mocha -- ./test --recursive --compilers js:babel-register",
     "coverage:ci": "istanbul cover _mocha -- ./src/test --recursive --compilers js:babel-register && codecov",
     "lint": "sui-lint js",
-    "dev-cmp": "webpack --config src/cmp/infrastructure/build/webpack.config.babel.js --mode=development",
-    "build-cmp": "webpack --config src/cmp/infrastructure/build/webpack.config.babel.js --mode=production",
-    "dev-global": "webpack --config src/globalstorage/infrastructure/build/webpack.config.babel.js --mode=development",
-    "build-global": "webpack --config src/globalstorage/infrastructure/build/webpack.config.babel.js --mode=production"
+    "build:cmp": "npm run build:cmp:pro",
+    "build:cmp:dev": "webpack --config src/cmp/infrastructure/build/webpack.config.babel.js --mode=development",
+    "build:cmp:pro": "webpack --config src/cmp/infrastructure/build/webpack.config.babel.js --mode=production",
+    "build:global": "npm run build:global:pro",
+    "build:global:dev": "webpack --config src/globalstorage/infrastructure/build/webpack.config.babel.js --mode=development",
+    "build:global:pro": "webpack --config src/globalstorage/infrastructure/build/webpack.config.babel.js --mode=production"
   },
   "repository": {
     "type": "git",
@@ -38,12 +41,14 @@
     "chai": "^4.0.2",
     "clean-webpack-plugin": "^0.1.19",
     "codecov": "^3.0.2",
+    "html-webpack-plugin": "^3.2.0",
     "istanbul": "^1.1.0-alpha.1",
     "jsdom": "^11.11.0",
     "mocha": "^5.2.0",
     "sinon": "^2.3.4",
     "webpack": "^4.12.0",
-    "webpack-cli": "^3.0.8"
+    "webpack-cli": "^3.0.8",
+    "webpack-dev-server": "^3.1.5"
   },
   "pre-commit": [
     "lint",
