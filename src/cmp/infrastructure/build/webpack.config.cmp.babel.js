@@ -1,10 +1,11 @@
 import webpack from 'webpack'
 import path from 'path'
 import CleanWebpackPlugin from 'clean-webpack-plugin'
+import HtmlWebpackPlugin from 'html-webpack-plugin'
 
 const WEBPACK_MODE_PRODUCTION = 'production'
 const OUTPUT_DIST_FOLDER = 'dist'
-const ENTRY_PATH = './src/index.js'
+const ENTRY_PATH = './src/cmp/infrastructure/build/cmp.js'
 const OUTPUT_FILENAME_DEV = 'cmp.dev.js'
 const OUTPUT_FILENAME_PRO = 'cmp.pro.js'
 
@@ -37,6 +38,11 @@ let webpackConfig = {
     new CleanWebpackPlugin([OUTPUT_DIST_FOLDER], {
       verbose: true,
       root: process.cwd()
+    }),
+    new HtmlWebpackPlugin({
+      title: 'CMP Demo',
+      template: 'resources/cmp/template.html',
+      filename: 'index.html'
     })
   ]
 }

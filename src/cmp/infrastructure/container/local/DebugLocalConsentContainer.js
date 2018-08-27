@@ -1,13 +1,22 @@
 import LocalConsentContainer from './LocalConsentContainer'
-import {debugHandler} from '../loggerDebugHandler'
+import {debugHandler} from '../../service/log/loggerDebugHandler'
 import DomainEventBus from '../../../domain/event_bus/DomainEventBus'
 import {OBSERVER_ERROR_THROWN} from '../../../domain/event_bus/observerErrorThrown'
 import {VENDOR_CONSENTS_CREATED} from '../../../domain/vendor_consents/vendorConsentsCreated'
 import {debugObserverFactory} from '../../observer/debugObserverFactory'
+import {LEVEL} from '../../service/log/Log'
 
 export default class DebugLocalConsentContainer extends LocalConsentContainer {
   constructor({config, window}) {
-    super({config, window})
+    super({
+      config: {
+        ...config,
+        log: {
+          level: LEVEL.debug
+        }
+      },
+      window
+    })
   }
 
   getInstance({key}) {

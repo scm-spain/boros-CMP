@@ -3,7 +3,6 @@ import GetConsentDataUseCase from '../../application/services/GetConsentDataUseC
 import ChainedVendorListRepository from '../repository/ChainedVendorListRepository'
 import InMemoryVendorListRepository from '../repository/InMemoryVendorListRepository'
 import HttpVendorListRepository from '../repository/HttpVendorListRepository'
-import {Log} from '../Log'
 import ConsentStringVendorConsentsRepository from '../repository/ConsentStringVendorConsentsRepository'
 import GetConsentStatusUseCase from '../../application/services/GetConsentStatusUseCase'
 import GetVendorConsentsUseCase from '../../application/services/GetVendorConsentsUseCase'
@@ -18,6 +17,7 @@ import UpdateConsentVendorsService from '../../domain/consent/UpdateConsentVendo
 import {OBSOLETE_VENDORS_LIST_VERSION} from '../../domain/consent/obsoleteVendorsListVersion'
 import ConsentFactory from '../../domain/consent/ConsentFactory'
 import VendorConsentsFactory from '../../domain/vendor_consents/VendorConsentsFactory'
+import {Log} from '../service/log/Log'
 
 export default class BaseConsentContainer {
   constructor({config, cmpVersion, window, eager = true} = {}) {
