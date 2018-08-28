@@ -7,9 +7,9 @@ import GlobalVendorListAccessError from '../../domain/vendor_list/GlobalVendorLi
  * @implements VendorListRepository
  */
 export default class HttpVendorListRepository {
-  constructor({latestLocator, versionLocator}) {
-    this._loadLatestVendorList = loadLatestVendorList({latestLocator})
-    this._loadVendorListVersion = loadVendorListVersion({versionLocator})
+  constructor({vendorListHost, vendorListFilename}) {
+    this._vendorListHost = vendorListHost
+    this._vendorListFilename = vendorListFilename
   }
 
   getGlobalVendorList({vendorListVersion} = {}) {
@@ -23,12 +23,23 @@ export default class HttpVendorListRepository {
       .then(filterOkFetchResponse)
       .then(fetchResponse => fetchResponse.json())
   }
+
+  _loadLatestVendorList() {
+    // 'https://vendorlist.consensu.org/vendorlist.json'
+    return fetch(this._vendorListHost + '/' + this._vendorListFilename)
+  }
+
+  _loadVendorListVersion({vendorListVersion}) {
+    // `https://vendorlist.consensu.org/v-${vendorListVersion}/vendorlist.json`
+    return fetch(
+      this._vendorListHost +
+        '/v-' +
+        vendorListVersion +
+        '/' +
+        this._vendorListFilename
+    )
+  }
 }
-
-const loadLatestVendorList = ({latestLocator}) => () => fetch(latestLocator())
-
-const loadVendorListVersion = ({versionLocator}) => ({vendorListVersion}) =>
-  fetch(versionLocator({vendorListVersion}))
 
 const filterOkFetchResponse = fetchResponse => {
   if (!fetchResponse.ok) {

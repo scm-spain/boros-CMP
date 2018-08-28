@@ -1,17 +1,17 @@
 import {expect} from 'chai'
 import sinon from 'sinon'
 import HttpVendorListRepository from '../../../../cmp/infrastructure/repository/HttpVendorListRepository'
-import {
-  latestVendorListLocator,
-  versionVendorListLocator
-} from '../../../../cmp/domain/vendor_list/iabVendorListLocator'
 
 describe('HttpVendorListRepository', () => {
   describe('getGlobalVendorList', () => {
-    it('Should fetch the remote vendor list JSON, using the default location if none is given', done => {
+    it('Should fetch the remote vendor list JSON, using the given vendor list location', done => {
+      const givenVendorListHost = 'http://cmp.schibsted.com'
+      const givenVendorListFilename = 'givenVendorList.json'
+      const expectedUrl = 'http://cmp.schibsted.com/givenVendorList.json'
+
       const repository = new HttpVendorListRepository({
-        latestLocator: latestVendorListLocator,
-        versionLocator: versionVendorListLocator
+        vendorListFilename: givenVendorListFilename,
+        vendorListHost: givenVendorListHost
       })
 
       const expectedResult = {
@@ -36,7 +36,7 @@ describe('HttpVendorListRepository', () => {
           expect(
             fetchSpy.args[0][0],
             'should retrieve the IAB vendor list by default'
-          ).to.equal('https://vendorlist.consensu.org/vendorlist.json')
+          ).to.equal(expectedUrl)
           expect(
             result,
             'should return the fetched value as json output format'
@@ -45,41 +45,13 @@ describe('HttpVendorListRepository', () => {
         .then(() => done())
         .catch(e => done(e))
     })
-    it('Should fetch the remote vendor list JSON, using the given vendor list location', done => {
-      const givenVendorListLocator = () =>
-        'http://whatever.consent/location/list.json'
-      const repository = new HttpVendorListRepository({
-        latestLocator: givenVendorListLocator
-      })
-
-      const fetchMock = {
-        fetch: () => ({
-          json: () => null,
-          ok: true
-        })
-      }
-      const fetchSpy = sinon.spy(fetchMock, 'fetch')
-      global.fetch = fetchMock.fetch
-
-      repository
-        .getGlobalVendorList()
-        .then(result => {
-          expect(
-            fetchSpy.calledOnce,
-            'should have called the remote fetch method'
-          ).to.be.true
-          expect(
-            fetchSpy.args[0][0],
-            'should retrieve the IAB vendor list by default'
-          ).to.equal(givenVendorListLocator())
-        })
-        .then(() => done())
-        .catch(e => done(e))
-    })
     it('Should throw a GlobalVendorListAccessError if the global vendor list cannot be fetched', done => {
+      const givenVendorListHost = 'http://cmp.schibsted.com'
+      const givenVendorListFilename = 'givenVendorList.json'
+
       const repository = new HttpVendorListRepository({
-        latestLocator: latestVendorListLocator,
-        versionLocator: versionVendorListLocator
+        vendorListFilename: givenVendorListFilename,
+        vendorListHost: givenVendorListHost
       })
 
       const fetchMock = {
