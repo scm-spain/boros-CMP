@@ -4,43 +4,42 @@ import {obsoleteVendorsListVersion} from './obsoleteVendorsListVersion'
 
 export default class ConsentFactory {
   constructor({allowedVendorIds} = {}) {
-    this._checkConsentGlobalVendorsListVersion = checkConsentGlobalVendorsListVersion(
-      {allowedVendorIds}
-    )
+    this._allowedVendorIds = allowedVendorIds
   }
+
   createConsent({encodedConsent, globalVendorList}) {
     return Promise.resolve()
       .then(() => new ConsentString(encodedConsent))
-      .then(consent => {
-        this._checkConsentGlobalVendorsListVersion({consent, globalVendorList})
-        return consent
-      })
+      .then(consent =>
+        this._checkConsentGlobalVendorsListVersion({
+          consent,
+          globalVendorList
+        })
+      )
       .then(consent => {
         consent.setGlobalVendorList(globalVendorList)
         return consent
       })
   }
-}
 
-const checkConsentGlobalVendorsListVersion = ({allowedVendorIds}) => ({
-  consent,
-  globalVendorList
-}) =>
-  Promise.resolve().then(() => {
-    if (
-      consent.vendorListVersion &&
-      consent.vendorListVersion > 0 &&
-      consent.vendorListVersion !== globalVendorList.vendorListVersion
-    ) {
-      DomainEventBus.raise({
-        domainEvent: obsoleteVendorsListVersion({
-          purposeConsents: consent.allowedPurposeIds,
-          vendorConsents: consent.allowedVendorIds,
-          oldVendorListVersion: consent.vendorListVersion,
-          newGlobalVendorList: globalVendorList,
-          allowedVendorIds: allowedVendorIds
+  _checkConsentGlobalVendorsListVersion({consent, globalVendorList}) {
+    return Promise.resolve().then(() => {
+      if (
+        consent.vendorListVersion &&
+        consent.vendorListVersion > 0 &&
+        consent.vendorListVersion !== globalVendorList.vendorListVersion
+      ) {
+        DomainEventBus.raise({
+          domainEvent: obsoleteVendorsListVersion({
+            purposeConsents: consent.allowedPurposeIds,
+            vendorConsents: consent.allowedVendorIds,
+            oldVendorListVersion: consent.vendorListVersion,
+            newGlobalVendorList: globalVendorList,
+            allowedVendorIds: this._allowedVendorIds
+          })
         })
-      })
-    }
-    return consent
-  })
+      }
+      return consent
+    })
+  }
+}
