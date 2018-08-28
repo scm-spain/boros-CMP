@@ -8,6 +8,8 @@
  * @param globalVendorList
  * @param allowedVendorIds
  */
+import {isWhitelisted} from '../vendor_consents/whitelistFilter'
+
 const getConsentVendorsContext = ({
   acceptedVendorIds,
   globalVendorIds,
@@ -15,14 +17,21 @@ const getConsentVendorsContext = ({
 }) =>
   Promise.resolve()
     .then(() =>
-      globalVendorIds.filter(
-        id => !allowedVendorIds || allowedVendorIds.indexOf(id) >= 0
+      globalVendorIds.filter(id =>
+        isWhitelisted({
+          whitelist: allowedVendorIds,
+          id
+        })
       )
     )
     .then(allowedGlobalVendorIds =>
       Promise.resolve(
-        allowedGlobalVendorIds.filter(id => acceptedVendorIds.indexOf(id) >= 0)
-          .length
+        allowedGlobalVendorIds.filter(id =>
+          isWhitelisted({
+            whitelist: acceptedVendorIds,
+            id
+          })
+        ).length
       ).then(count => {
         if (count === 0) return ALL_DISALLOWED
         if (count === allowedGlobalVendorIds.length) return ALL_ALLOWED

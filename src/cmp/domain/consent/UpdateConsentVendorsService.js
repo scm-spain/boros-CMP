@@ -1,3 +1,5 @@
+import {isWhitelisted} from '../vendor_consents/whitelistFilter'
+
 export default class UpdateConsentVendorsService {
   constructor({
     vendorListRepository,
@@ -95,9 +97,12 @@ export default class UpdateConsentVendorsService {
 
         // TODO fn does not matter if they are or not in global lists, all ids that are not allowed have to be removed
         return newAcceptedVendorIds.filter(
-          // TODO fn to filter whitelisted vendor ids
           // TODO change allowed vendor ids to withelisted vendors
-          id => !allowedVendorIds || allowedVendorIds.indexOf(id) >= 0
+          id =>
+            isWhitelisted({
+              whitelist: allowedVendorIds,
+              id
+            })
         )
       }
     )

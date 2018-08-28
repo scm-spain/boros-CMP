@@ -1,4 +1,5 @@
 import VendorConsents from './VendorConsents'
+import {isWhitelisted} from './whitelistFilter'
 
 export default class VendorConsentsFactory {
   constructor({gdprApplies = true, storeConsentGlobally = false} = {}) {
@@ -33,28 +34,33 @@ const filterAllowedVendorIdsFromGlobalList = ({
   globalVendorList,
   allowedVendorIds
 }) =>
-  Promise.resolve(
-    (allowedVendorIds &&
-      globalVendorList.vendors
-        .map(v => v.id)
-        .filter(id => allowedVendorIds.indexOf(id) !== -1)) ||
-      globalVendorList.vendors.map(v => v.id)
+  Promise.resolve().then(() =>
+    globalVendorList.vendors.map(v => v.id).filter(id =>
+      isWhitelisted({
+        whitelist: allowedVendorIds,
+        id
+      })
+    )
   )
 
 const createVendorConsents = ({consent, vendorIds = []} = {}) =>
-  Promise.resolve().then(() => {
-    let vendorConsents = {}
-    vendorIds.forEach(id => {
-      vendorConsents[id] = consent.isVendorAllowed(id)
-    })
-    return vendorConsents
-  })
+  Promise.resolve().then(() =>
+    vendorIds.reduce(
+      (accumulator, id) => ({
+        ...accumulator,
+        [`${id}`]: consent.isVendorAllowed(id)
+      }),
+      {}
+    )
+  )
 
 const createPurposeConsents = ({consent, globalVendorList}) =>
-  Promise.resolve(globalVendorList.purposes.map(p => p.id)).then(purposeIds => {
-    let purposeConsents = {}
-    purposeIds.forEach(id => {
-      purposeConsents[id] = consent.isPurposeAllowed(id)
-    })
-    return purposeConsents
-  })
+  Promise.resolve().then(() =>
+    globalVendorList.purposes.map(p => p.id).reduce(
+      (accumulator, id) => ({
+        ...accumulator,
+        [`${id}`]: consent.isPurposeAllowed(id)
+      }),
+      {}
+    )
+  )
