@@ -3,7 +3,7 @@ import sinon from 'sinon'
 import GlobalVendorList from '../../../resources/globalvendorlist.json'
 import GlobalVendorList73 from '../../../resources/globalvendorlist.73.json'
 import UpdateConsentVendorsService from '../../../../cmp/domain/consent/UpdateConsentVendorsService'
-import {NewVendorsStatusFactory} from '../../../../cmp/domain/vendor_consents/NewVendorsStatusFactory'
+import {NewVendorsStatusService} from '../../../../cmp/domain/vendor_consents/NewVendorsStatusService'
 
 describe('UpdateConsentVendorsService', () => {
   describe('Given consented vendors with a version list number that is equal to the version list number of the global vendor list', () => {
@@ -29,12 +29,12 @@ describe('UpdateConsentVendorsService', () => {
       const vendorListRepositoryMock = {
         getGlobalVendorList: () => Promise.resolve()
       }
-      const newVendorsStatusFactory = new NewVendorsStatusFactory()
+      const newVendorsStatusService = new NewVendorsStatusService()
 
       const service = new UpdateConsentVendorsService({
         vendorConsentsRepository: vendorConsentsRepositoryMock,
         vendorListRepository: vendorListRepositoryMock,
-        newVendorsStatusFactory: newVendorsStatusFactory
+        newVendorsStatusService
       })
 
       service
@@ -84,14 +84,14 @@ describe('UpdateConsentVendorsService', () => {
                 new Error('should request only the obsolete version')
               )
       }
-      const newVendorsStatusFactory = new NewVendorsStatusFactory({
+      const newVendorsStatusService = new NewVendorsStatusService({
         option: givenNewVendorsAcceptationOption
       })
 
       const service = new UpdateConsentVendorsService({
         vendorConsentsRepository: vendorConsentsRepositoryMock,
         vendorListRepository: vendorListRepositoryMock,
-        newVendorsStatusFactory: newVendorsStatusFactory
+        newVendorsStatusService
       })
 
       service
@@ -156,14 +156,14 @@ describe('UpdateConsentVendorsService', () => {
                 new Error('should request only the obsolete version')
               )
       }
-      const newVendorsStatusFactory = new NewVendorsStatusFactory({
+      const newVendorsStatusService = new NewVendorsStatusService({
         option: givenNewVendorsAcceptationOption
       })
 
       const service = new UpdateConsentVendorsService({
         vendorConsentsRepository: vendorConsentsRepositoryMock,
         vendorListRepository: vendorListRepositoryMock,
-        newVendorsStatusFactory: newVendorsStatusFactory
+        newVendorsStatusService
       })
 
       service

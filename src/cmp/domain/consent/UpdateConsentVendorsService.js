@@ -1,12 +1,10 @@
-import {getConsentVendorsContext} from './consentValidation'
-
 export default class UpdateConsentVendorsService {
   constructor({
     vendorListRepository,
-    newVendorsStatusFactory,
+    newVendorsStatusService,
     vendorConsentsRepository
   }) {
-    this._newVendorsStatusFactory = newVendorsStatusFactory
+    this._newVendorsStatusService = newVendorsStatusService
     this._getGlobalVendorList = getGlobalVendorList({vendorListRepository})
     this._saveVendorConsents = saveVendorConsents({vendorConsentsRepository})
   }
@@ -70,20 +68,16 @@ export default class UpdateConsentVendorsService {
     allowedVendorIds
   }) {
     return Promise.all([
-      getConsentVendorsContext({
+      this._newVendorsStatusService.getNewVendorsStatus({
         acceptedVendorIds,
         globalVendorIds: oldGlobalVendorIds,
         allowedVendorIds
-      }).then(consentVendorsContext =>
-        this._newVendorsStatusFactory.from({
-          acceptationStatus: consentVendorsContext
-        })
-      ),
+      }),
       oldGlobalVendorIds.filter(id => newGlobalVendorIds.indexOf(id) < 0),
       newGlobalVendorIds.filter(id => oldGlobalVendorIds.indexOf(id) < 0)
     ]).then(
       ([
-        newVendorsAcceptationStatus,
+        newVendorsStatus,
         oldIdsNotInNewGlobalVendors,
         newIdsNotInOldGlobalVendors
       ]) => {
@@ -93,7 +87,7 @@ export default class UpdateConsentVendorsService {
         )
 
         // TODO fn new ids from the global list that were not in the old list has to be added in the consent if they are accepted
-        if (newVendorsAcceptationStatus) {
+        if (newVendorsStatus) {
           newIdsNotInOldGlobalVendors.forEach(id =>
             newAcceptedVendorIds.push(id)
           )

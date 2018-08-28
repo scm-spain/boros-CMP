@@ -11,7 +11,7 @@ import PingUseCase from '../../application/services/PingUseCase'
 import SetVendorConsentsUseCase from '../../application/services/SetVendorConsentsUseCase'
 import Configuration from '../configuration/Configuration'
 import {errorObserverFactory} from '../observer/errorObserverFactory'
-import {NewVendorsStatusFactory} from '../../domain/vendor_consents/NewVendorsStatusFactory'
+import {NewVendorsStatusService} from '../../domain/vendor_consents/NewVendorsStatusService'
 import UpdateConsentVendorsService from '../../domain/consent/UpdateConsentVendorsService'
 import {GLOBAL_VENDOR_LIST_VERSION_CHANGED} from '../../domain/consent/globalVendorListVersionChanged'
 import ConsentFactory from '../../domain/consent/ConsentFactory'
@@ -144,8 +144,8 @@ export default class BaseConsentContainer {
 
   _buildUpdateConsentVendorsService() {
     return new UpdateConsentVendorsService({
-      newVendorsStatusFactory: this.getInstance({
-        key: 'NewVendorsStatusFactory'
+      newVendorsStatusService: this.getInstance({
+        key: 'NewVendorsStatusService'
       }),
       vendorListRepository: this.getInstance({key: 'VendorListRepository'}),
       vendorConsentsRepository: this.getInstance({
@@ -154,8 +154,8 @@ export default class BaseConsentContainer {
     })
   }
 
-  _buildNewVendorsStatusFactory() {
-    return new NewVendorsStatusFactory({
+  _buildNewVendorsStatusService() {
+    return new NewVendorsStatusService({
       option: this._config.consent.newVendorsStatusOption
     })
   }

@@ -18,7 +18,7 @@ import {
 import {
   OPTION_ALL_ALLOW,
   OPTION_USE_SAME_THAN_ALL_CUSTOM_IS_TRUE
-} from '../../../../cmp/domain/vendor_consents/NewVendorsStatusFactory'
+} from '../../../../cmp/domain/vendor_consents/NewVendorsStatusService'
 
 describe('Configuration', () => {
   describe('given an empty configuration objects', () => {

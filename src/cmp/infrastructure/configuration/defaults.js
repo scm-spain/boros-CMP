@@ -2,7 +2,7 @@ import {
   latestVendorListLocator,
   versionVendorListLocator
 } from '../../domain/vendor_list/iabVendorListLocator'
-import {OPTION_USE_SAME_THAN_ALL_CUSTOM_IS_TRUE} from '../../domain/vendor_consents/NewVendorsStatusFactory'
+import {OPTION_USE_SAME_THAN_ALL_CUSTOM_IS_TRUE} from '../../domain/vendor_consents/NewVendorsStatusService'
 import {LEVEL} from '../service/log/Log'
 
 const DEFAULT_CONSENT_SCREEN = 1
