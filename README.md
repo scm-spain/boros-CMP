@@ -1,69 +1,30 @@
-# Consent Management Provider (CMP)
 
-[![Build status](https://travis-ci.org/scm-spain/CMP.svg?branch=master)](https://travis-ci.org/scm-spain/CMP) [![codecov](https://codecov.io/gh/scm-spain/CMP/branch/master/graph/badge.svg)](https://codecov.io/gh/scm-spain/CMP)
+![](/resources/logo/boros_logo.png)
+
+# Boros CMP
+
+[![Build status](https://travis-ci.org/scm-spain/CMP.svg?branch=master)](https://travis-ci.org/scm-spain/CMP)
+[![codecov](https://codecov.io/gh/scm-spain/CMP/branch/master/graph/badge.svg)](https://codecov.io/gh/scm-spain/CMP)
+[![GitHub license](https://img.shields.io/github/license/scm-spain/CMP.svg)](https://github.com/scm-spain/CMP/blob/master/LICENSE)
+
+## Table of Contents
+
+* [About](#about)
+* [Features](#features)
+* [License](#license)
+* [Configuration](#configuration)
+* [CMP version](#cmp-vesion)
+
+
+## About
+Consent Management Provider (CMP)
+
+## Features
 
 ## License
 CMP is [MIT licensed](./LICENSE).
 
-## Install dependencies
-
-```bash
-npm install
-```
-
-## Tasks
-
-###  Build
-
-To generate the final distribution file of CMP application, run the following command:
-
-```bash
-npm run build-cmp
-```
-
-This command will generate a _pro_ (minified) version (cmp.pro.js) inside a cleaned _dist_ folder.
-
-To generate the final distribution file of Global Storage application, run the following command:
-
-```bash
-npm run build-global
-```
-
-This command will generate a _pro_ (minified) version (global.pro.js) inside a cleaned _dist_ folder.
-
-###  Dev
-
-To generate a development distribution file of CMP application, run the following command:
-
-```bash
-npm run dev-cmp
-```
-
-This command will generate a _dev_ (bundle) version (cmp.dev.js) inside a cleaned _dist_ folder.
-
-To generate a development distribution file of Global Storage application, run the following command:
-
-```bash
-npm run dev-global
-```
-
-This command will generate a _dev_ (bundle) version (global.dev.js) inside a cleaned _dist_ folder.
-
-###  Tests
-
-To check that everything is still ok:
-
-```bash
-npm test
-```
-
-###  Lint
-
-This project follows standard code style rules proposed by Schisbted Spain, , to check them just run this command: 
-
-```bash
-npm run lint
-```
+## Configuration
 
 ## CMP version
 
