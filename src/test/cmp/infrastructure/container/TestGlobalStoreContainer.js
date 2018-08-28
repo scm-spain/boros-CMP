@@ -1,5 +1,5 @@
 import FileVendorListRepository from '../../../integration/repository/FileVendorListRepository'
-import {LEVEL, Log} from '../../../../cmp/infrastructure/Log'
+import {LEVEL, Log} from '../../../../cmp/infrastructure/service/log/Log'
 import GlobalConsentContainer from '../../../../cmp/infrastructure/container/global/GlobalConsentContainer'
 
 export default class TestGlobalStoreContainer extends GlobalConsentContainer {

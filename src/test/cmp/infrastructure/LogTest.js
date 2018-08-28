@@ -1,6 +1,6 @@
 import {expect} from 'chai'
 import sinon from 'sinon'
-import {LEVEL, Log} from '../../../cmp/infrastructure/Log'
+import {LEVEL, Log} from '../../../cmp/infrastructure/service/log/Log'
 
 describe('Log', () => {
   describe('changeLevel', () => {
