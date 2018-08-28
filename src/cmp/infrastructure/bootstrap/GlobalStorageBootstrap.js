@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import Cmp from '../../application/Cmp'
 import registerWindowCMP from '../controller/windowCommunicationRegistry'
 import createEvent from '../createEvent'
