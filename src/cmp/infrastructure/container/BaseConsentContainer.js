@@ -24,7 +24,7 @@ export default class BaseConsentContainer {
     this._config = new Configuration({
       gdpr: config.gdpr,
       consent: config.consent,
-      httpVendorList: config.httpVendorList,
+      vendorList: config.vendorList,
       log: config.log,
       cmpVersion: cmpVersion
     })
@@ -69,8 +69,8 @@ export default class BaseConsentContainer {
 
   _buildHttpVendorListRepository() {
     return new HttpVendorListRepository({
-      latestLocator: this._config.httpVendorList.latestLocator,
-      versionLocator: this._config.httpVendorList.versionLocator
+      vendorListHost: this._config.vendorList.host,
+      vendorListFilename: this._config.vendorList.filename
     })
   }
 

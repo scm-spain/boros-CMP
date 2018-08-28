@@ -5,8 +5,8 @@ import {
   DEFAULT_GDPR_STORE_CONSENT_GLOBALLY,
   DEFAULT_LOG_LEVEL,
   DEFAULT_NEW_VENDORS_STATUS_OPTION,
-  DEFAULT_VENDOR_LIST_LATEST_LOCATOR,
-  DEFAULT_VENDOR_LIST_VERSION_LOCATOR
+  DEFAULT_VENDOR_LIST_HOST,
+  DEFAULT_VENDOR_LIST_FILENAME
 } from './defaults'
 import {CMP_ID} from './internals'
 
@@ -14,7 +14,7 @@ export default class Configuration {
   constructor({
     gdpr = {},
     consent = {},
-    httpVendorList = {},
+    vendorList = {},
     log = {},
     cmpVersion
   } = {}) {
@@ -22,7 +22,6 @@ export default class Configuration {
     this._gdpr.gdprApplies = gdpr.gdprApplies || DEFAULT_GDPR_APPLIES
     this._gdpr.storeConsentGlobally =
       gdpr.storeConsentGlobally || DEFAULT_GDPR_STORE_CONSENT_GLOBALLY
-
     this._gdpr.globalConsentLocation = gdpr.globalConsentLocation
 
     this._consent = {}
@@ -36,11 +35,9 @@ export default class Configuration {
       consent.newVendorsStatusOption || DEFAULT_NEW_VENDORS_STATUS_OPTION
     this._consent.allowedVendorIds = consent.allowedVendorIds || undefined
 
-    this._httpVendorList = {}
-    this._httpVendorList.latestLocator =
-      httpVendorList.latestLocator || DEFAULT_VENDOR_LIST_LATEST_LOCATOR
-    this._httpVendorList.versionLocator =
-      httpVendorList.versionLocator || DEFAULT_VENDOR_LIST_VERSION_LOCATOR
+    this._vendorList = {}
+    this._vendorList.host = vendorList.host || DEFAULT_VENDOR_LIST_HOST
+    this._vendorList.filename = DEFAULT_VENDOR_LIST_FILENAME
 
     this._log = {}
     this._log.level = log.level || DEFAULT_LOG_LEVEL
@@ -48,8 +45,8 @@ export default class Configuration {
   get gdpr() {
     return this._gdpr
   }
-  get httpVendorList() {
-    return this._httpVendorList
+  get vendorList() {
+    return this._vendorList
   }
   get consent() {
     return this._consent

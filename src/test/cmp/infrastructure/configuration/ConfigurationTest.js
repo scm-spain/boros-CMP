@@ -5,20 +5,15 @@ import {
   DEFAULT_CONSENT_SCREEN,
   DEFAULT_GDPR_APPLIES,
   DEFAULT_GDPR_STORE_CONSENT_GLOBALLY,
-  DEFAULT_LOG_LEVEL
+  DEFAULT_LOG_LEVEL,
+  DEFAULT_VENDOR_LIST_HOST,
+  DEFAULT_VENDOR_LIST_FILENAME
 } from '../../../../cmp/infrastructure/configuration/defaults'
-import {
-  CMP_ID,
-  CMP_VERSION
-} from '../../../../cmp/infrastructure/configuration/internals'
-import {
-  latestVendorListLocator,
-  versionVendorListLocator
-} from '../../../../cmp/domain/vendor_list/iabVendorListLocator'
 import {
   OPTION_ALL_ALLOW,
   OPTION_USE_SAME_THAN_ALL_CUSTOM_IS_TRUE
 } from '../../../../cmp/domain/vendor_consents/NewVendorsStatusService'
+import {CMP_ID} from '../../../../cmp/infrastructure/configuration/internals'
 
 describe('Configuration', () => {
   describe('given an empty configuration objects', () => {
@@ -32,15 +27,15 @@ describe('Configuration', () => {
         },
         consent: {
           cmpId: CMP_ID,
-          cmpVersion: CMP_VERSION,
+          cmpVersion: undefined,
           consentScreen: DEFAULT_CONSENT_SCREEN,
           consentLanguage: DEFAULT_CONSENT_LANGUAGE,
           allowedVendorIds: undefined,
           newVendorsStatusOption: OPTION_USE_SAME_THAN_ALL_CUSTOM_IS_TRUE
         },
-        httpVendorList: {
-          latestLocator: latestVendorListLocator,
-          versionLocator: versionVendorListLocator
+        vendorList: {
+          host: DEFAULT_VENDOR_LIST_HOST,
+          filename: DEFAULT_VENDOR_LIST_FILENAME
         },
         log: {
           level: DEFAULT_LOG_LEVEL
@@ -55,9 +50,9 @@ describe('Configuration', () => {
         'consent should have been initialized with default values'
       ).to.deep.equal(expectedConfiguration.consent)
       expect(
-        configuration.httpVendorList,
-        'httpVendorList should have been initialized with default values'
-      ).to.deep.equal(expectedConfiguration.httpVendorList)
+        configuration.vendorList,
+        'vendorList should have been initialized with default values'
+      ).to.deep.equal(expectedConfiguration.vendorList)
       expect(
         configuration.log,
         'log should have been initialized with default values'
@@ -77,9 +72,8 @@ describe('Configuration', () => {
         allowedVendorIds: [1],
         newVendorsStatusOption: OPTION_ALL_ALLOW
       }
-      const givenHttpVendorList = {
-        latestLocator: () => '',
-        versionLocator: () => ''
+      const givenVendorList = {
+        host: 'http://consents.schibsted.com'
       }
       const givenLog = {
         level: DEFAULT_LOG_LEVEL
@@ -87,20 +81,23 @@ describe('Configuration', () => {
       const configuration = new Configuration({
         gdpr: givenGdpr,
         consent: givenConsent,
-        httpVendorList: givenHttpVendorList,
+        vendorList: givenVendorList,
         log: givenLog
       })
       const expectedConfiguration = {
         gdpr: givenGdpr,
         consent: {
           cmpId: CMP_ID,
-          cmpVersion: CMP_VERSION,
+          cmpVersion: undefined,
           consentScreen: givenConsent.consentScreen,
           consentLanguage: givenConsent.consentLanguage,
           allowedVendorIds: givenConsent.allowedVendorIds,
           newVendorsStatusOption: givenConsent.newVendorsStatusOption
         },
-        httpVendorList: givenHttpVendorList,
+        vendorList: {
+          host: givenVendorList.host,
+          filename: DEFAULT_VENDOR_LIST_FILENAME
+        },
         log: givenLog
       }
       expect(
@@ -112,9 +109,9 @@ describe('Configuration', () => {
         'consent should have been initialized with received values'
       ).to.deep.equal(expectedConfiguration.consent)
       expect(
-        configuration.httpVendorList,
-        'httpVendorList should have been initialized with received values'
-      ).to.deep.equal(expectedConfiguration.httpVendorList)
+        configuration.vendorList,
+        'vendorList should have been initialized with received values'
+      ).to.deep.equal(expectedConfiguration.vendorList)
       expect(
         configuration.log,
         'log should have been initialized with received values'
@@ -140,15 +137,15 @@ describe('Configuration', () => {
         },
         consent: {
           cmpId: CMP_ID,
-          cmpVersion: CMP_VERSION,
+          cmpVersion: undefined,
           consentScreen: DEFAULT_CONSENT_SCREEN,
           consentLanguage: givenConsent.consentLanguage,
           allowedVendorIds: undefined,
           newVendorsStatusOption: OPTION_USE_SAME_THAN_ALL_CUSTOM_IS_TRUE
         },
-        httpVendorList: {
-          latestLocator: latestVendorListLocator,
-          versionLocator: versionVendorListLocator
+        vendorList: {
+          host: DEFAULT_VENDOR_LIST_HOST,
+          filename: DEFAULT_VENDOR_LIST_FILENAME
         },
         log: {
           level: DEFAULT_LOG_LEVEL
@@ -163,9 +160,9 @@ describe('Configuration', () => {
         'consent should have been filled with default values'
       ).to.deep.equal(expectedConfiguration.consent)
       expect(
-        configuration.httpVendorList,
-        'httpVendorList should have been filled with default values'
-      ).to.deep.equal(expectedConfiguration.httpVendorList)
+        configuration.vendorList,
+        'vendorList should have been filled with default values'
+      ).to.deep.equal(expectedConfiguration.vendorList)
       expect(
         configuration.log,
         'log should have been filled with default values'

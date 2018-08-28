@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import Cmp from '../../../../cmp/application/Cmp'
 import TestGlobalStoreContainer from '../container/TestGlobalStoreContainer'
 import registerWindowCMP from '../../../../cmp/infrastructure/controller/windowCommunicationRegistry'
