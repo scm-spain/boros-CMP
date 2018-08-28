@@ -1,10 +1,8 @@
+import DomainEventBus from '../../domain/event_bus/DomainEventBus'
 import GetConsentDataUseCase from '../../application/services/GetConsentDataUseCase'
-import IABConsentFactory from '../factory/IABConsentFactory'
 import ChainedVendorListRepository from '../repository/ChainedVendorListRepository'
 import InMemoryVendorListRepository from '../repository/InMemoryVendorListRepository'
 import HttpVendorListRepository from '../repository/HttpVendorListRepository'
-import {Log} from '../service/log/Log'
-import IABVendorConsentsFactory from '../factory/IABVendorConsentsFactory'
 import ConsentStringVendorConsentsRepository from '../repository/ConsentStringVendorConsentsRepository'
 import GetConsentStatusUseCase from '../../application/services/GetConsentStatusUseCase'
 import GetVendorConsentsUseCase from '../../application/services/GetVendorConsentsUseCase'
@@ -13,6 +11,13 @@ import PingUseCase from '../../application/services/PingUseCase'
 import SetVendorConsentsUseCase from '../../application/services/SetVendorConsentsUseCase'
 import Configuration from '../configuration/Configuration'
 import {errorObserverFactory} from '../observer/errorObserverFactory'
+import {NewVendorsStatusService} from '../../domain/vendor_consents/NewVendorsStatusService'
+import UpdateConsentVendorsService from '../../domain/consent/UpdateConsentVendorsService'
+import {GLOBAL_VENDOR_LIST_VERSION_CHANGED} from '../../domain/consent/globalVendorListVersionChanged'
+import ConsentFactory from '../../domain/consent/ConsentFactory'
+import VendorConsentsFactory from '../../domain/vendor_consents/VendorConsentsFactory'
+import {Log} from '../service/log/Log'
+import {globalVendorListVersionChangedObserverFactory} from '../observer/globalVendorListVersionChangedObserverFactory'
 
 export default class BaseConsentContainer {
   constructor({config, cmpVersion, window, eager = true} = {}) {
@@ -42,7 +47,9 @@ export default class BaseConsentContainer {
   }
 
   _buildConsentFactory() {
-    return new IABConsentFactory()
+    return new ConsentFactory({
+      allowedVendorIds: this._config.consent.allowedVendorIds
+    })
   }
 
   _buildVendorListRepository() {
@@ -72,7 +79,7 @@ export default class BaseConsentContainer {
   }
 
   _buildVendorConsentsFactory() {
-    return new IABVendorConsentsFactory({
+    return new VendorConsentsFactory({
       gdprApplies: this._config.gdpr.gdprApplies,
       storeConsentGlobally: this._config.gdpr.storeConsentGlobally
     })
@@ -135,5 +142,35 @@ export default class BaseConsentContainer {
     return errorObserverFactory(logger)
   }
 
-  _buildEagerSingletonInstances() {}
+  _buildUpdateConsentVendorsService() {
+    return new UpdateConsentVendorsService({
+      newVendorsStatusService: this.getInstance({
+        key: 'NewVendorsStatusService'
+      }),
+      vendorListRepository: this.getInstance({key: 'VendorListRepository'}),
+      vendorConsentsRepository: this.getInstance({
+        key: 'VendorConsentsRepository'
+      })
+    })
+  }
+
+  _buildNewVendorsStatusService() {
+    return new NewVendorsStatusService({
+      option: this._config.consent.newVendorsStatusOption
+    })
+  }
+  _buildGlobalVendorListVersionChangedObserver() {
+    return globalVendorListVersionChangedObserverFactory(
+      this.getInstance({key: 'UpdateConsentVendorsService'})
+    )
+  }
+
+  _buildEagerSingletonInstances() {
+    DomainEventBus.register({
+      eventName: GLOBAL_VENDOR_LIST_VERSION_CHANGED,
+      observer: this.getInstance({
+        key: 'GlobalVendorListVersionChangedObserver'
+      })
+    })
+  }
 }

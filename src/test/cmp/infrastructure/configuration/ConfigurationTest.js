@@ -9,6 +9,10 @@ import {
   DEFAULT_VENDOR_LIST_HOST,
   DEFAULT_VENDOR_LIST_FILENAME
 } from '../../../../cmp/infrastructure/configuration/defaults'
+import {
+  OPTION_ALL_ALLOW,
+  OPTION_USE_SAME_THAN_ALL_CUSTOM_IS_TRUE
+} from '../../../../cmp/domain/vendor_consents/NewVendorsStatusService'
 import {CMP_ID} from '../../../../cmp/infrastructure/configuration/internals'
 
 describe('Configuration', () => {
@@ -25,7 +29,9 @@ describe('Configuration', () => {
           cmpId: CMP_ID,
           cmpVersion: undefined,
           consentScreen: DEFAULT_CONSENT_SCREEN,
-          consentLanguage: DEFAULT_CONSENT_LANGUAGE
+          consentLanguage: DEFAULT_CONSENT_LANGUAGE,
+          allowedVendorIds: undefined,
+          newVendorsStatusOption: OPTION_USE_SAME_THAN_ALL_CUSTOM_IS_TRUE
         },
         vendorList: {
           host: DEFAULT_VENDOR_LIST_HOST,
@@ -62,7 +68,9 @@ describe('Configuration', () => {
       }
       const givenConsent = {
         consentScreen: 3,
-        consentLanguage: 'es'
+        consentLanguage: 'es',
+        allowedVendorIds: [1],
+        newVendorsStatusOption: OPTION_ALL_ALLOW
       }
       const givenVendorList = {
         host: 'http://consents.schibsted.com'
@@ -82,7 +90,9 @@ describe('Configuration', () => {
           cmpId: CMP_ID,
           cmpVersion: undefined,
           consentScreen: givenConsent.consentScreen,
-          consentLanguage: givenConsent.consentLanguage
+          consentLanguage: givenConsent.consentLanguage,
+          allowedVendorIds: givenConsent.allowedVendorIds,
+          newVendorsStatusOption: givenConsent.newVendorsStatusOption
         },
         vendorList: {
           host: givenVendorList.host,
@@ -107,7 +117,7 @@ describe('Configuration', () => {
         'log should have been initialized with received values'
       ).to.deep.equal(expectedConfiguration.log)
     })
-    it('Should be fill missing values with defaults', () => {
+    it('Should fill missing values with defaults', () => {
       const givenGdpr = {
         storeConsentGlobally: true,
         globalConsentLocation: 'https://what.ever.com/iframe.html'
@@ -129,7 +139,9 @@ describe('Configuration', () => {
           cmpId: CMP_ID,
           cmpVersion: undefined,
           consentScreen: DEFAULT_CONSENT_SCREEN,
-          consentLanguage: givenConsent.consentLanguage
+          consentLanguage: givenConsent.consentLanguage,
+          allowedVendorIds: undefined,
+          newVendorsStatusOption: OPTION_USE_SAME_THAN_ALL_CUSTOM_IS_TRUE
         },
         vendorList: {
           host: DEFAULT_VENDOR_LIST_HOST,

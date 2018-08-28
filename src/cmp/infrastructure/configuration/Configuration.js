@@ -4,6 +4,7 @@ import {
   DEFAULT_GDPR_APPLIES,
   DEFAULT_GDPR_STORE_CONSENT_GLOBALLY,
   DEFAULT_LOG_LEVEL,
+  DEFAULT_NEW_VENDORS_STATUS_OPTION,
   DEFAULT_VENDOR_LIST_HOST,
   DEFAULT_VENDOR_LIST_FILENAME
 } from './defaults'
@@ -30,6 +31,9 @@ export default class Configuration {
       consent.consentScreen || DEFAULT_CONSENT_SCREEN
     this._consent.consentLanguage =
       consent.consentLanguage || DEFAULT_CONSENT_LANGUAGE
+    this._consent.newVendorsStatusOption =
+      consent.newVendorsStatusOption || DEFAULT_NEW_VENDORS_STATUS_OPTION
+    this._consent.allowedVendorIds = consent.allowedVendorIds || undefined
 
     this._vendorList = {}
     this._vendorList.host = vendorList.host || DEFAULT_VENDOR_LIST_HOST

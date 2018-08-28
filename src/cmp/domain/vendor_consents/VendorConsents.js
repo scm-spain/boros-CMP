@@ -45,8 +45,8 @@ export default class VendorConsents {
         metadata: this._metadata,
         gdprApplies: this._gdprApplies,
         hasGlobalScope: this._hasGlobalScope,
-        purposeConsents: this._purposeConsents,
-        vendorConsents: this._vendorConsents
+        purposeConsents: [...this._purposeConsents],
+        vendorConsents: [...this._vendorConsents]
       })
     })
   }
