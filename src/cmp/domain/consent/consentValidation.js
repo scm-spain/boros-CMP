@@ -8,7 +8,7 @@
  * @param globalVendorList
  * @param allowedVendorIds
  */
-const consentHasAllInStatus = ({
+const getConsentVendorsContext = ({
   acceptedVendorIds,
   globalVendorIds,
   allowedVendorIds
@@ -16,20 +16,13 @@ const consentHasAllInStatus = ({
   Promise.resolve()
     .then(() =>
       globalVendorIds.filter(
-        id =>
-          !allowedVendorIds ||
-          (allowedVendorIds && allowedVendorIds.indexOf(id) >= 0)
+        id => !allowedVendorIds || allowedVendorIds.indexOf(id) >= 0
       )
     )
     .then(allowedGlobalVendorIds =>
       Promise.resolve(
-        allowedGlobalVendorIds.reduce(
-          (totalAllowed, id) =>
-            acceptedVendorIds.indexOf(id) >= 0
-              ? totalAllowed + 1
-              : totalAllowed,
-          0
-        )
+        allowedGlobalVendorIds.filter(id => acceptedVendorIds.indexOf(id) >= 0)
+          .length
       ).then(count => {
         if (count === 0) return ALL_DISALLOWED
         if (count === allowedGlobalVendorIds.length) return ALL_ALLOWED
@@ -41,4 +34,4 @@ const ALL_ALLOWED = 1
 const ALL_DISALLOWED = -1
 const CUSTOM_ALLOWED = 0
 
-export {consentHasAllInStatus, ALL_ALLOWED, ALL_DISALLOWED, CUSTOM_ALLOWED}
+export {getConsentVendorsContext, ALL_ALLOWED, ALL_DISALLOWED, CUSTOM_ALLOWED}

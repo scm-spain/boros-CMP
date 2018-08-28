@@ -1,4 +1,4 @@
-import {consentHasAllInStatus} from './consentValidation'
+import {getConsentVendorsContext} from './consentValidation'
 
 export default class UpdateConsentVendorsService {
   constructor({
@@ -6,11 +6,9 @@ export default class UpdateConsentVendorsService {
     newVendorsStatusFactory,
     vendorConsentsRepository
   }) {
+    this._newVendorsStatusFactory = newVendorsStatusFactory
     this._getGlobalVendorList = getGlobalVendorList({vendorListRepository})
     this._saveVendorConsents = saveVendorConsents({vendorConsentsRepository})
-    this._updateConsentWithNewGlobalVendorList = updateConsentWithNewGlobalVendorList(
-      {newVendorsStatusFactory}
-    )
   }
 
   updateConsentVendorList({
@@ -51,10 +49,8 @@ export default class UpdateConsentVendorsService {
     })
       .then(oldGlobalVendorList =>
         Promise.all([
-          Promise.resolve(
-            currentGlobalVendorList.vendors.map(vendor => vendor.id)
-          ),
-          Promise.resolve(oldGlobalVendorList.vendors.map(vendor => vendor.id))
+          currentGlobalVendorList.vendors.map(vendor => vendor.id),
+          oldGlobalVendorList.vendors.map(vendor => vendor.id)
         ])
       )
       .then(([currentGlobalVendorIds, oldGlobalVendorIds]) =>
@@ -66,47 +62,53 @@ export default class UpdateConsentVendorsService {
         })
       )
   }
-}
 
-const updateConsentWithNewGlobalVendorList = ({newVendorsStatusFactory}) => ({
-  acceptedVendorIds,
-  oldGlobalVendorIds,
-  newGlobalVendorIds,
-  allowedVendorIds
-}) =>
-  Promise.all([
-    consentHasAllInStatus({
-      acceptedVendorIds,
-      globalVendorIds: oldGlobalVendorIds,
-      allowedVendorIds
-    }).then(acceptationStatus =>
-      newVendorsStatusFactory.from({acceptationStatus})
-    ),
-    Promise.resolve(
-      oldGlobalVendorIds.filter(id => newGlobalVendorIds.indexOf(id) < 0)
-    ),
-    Promise.resolve(
+  _updateConsentWithNewGlobalVendorList({
+    acceptedVendorIds,
+    oldGlobalVendorIds,
+    newGlobalVendorIds,
+    allowedVendorIds
+  }) {
+    return Promise.all([
+      getConsentVendorsContext({
+        acceptedVendorIds,
+        globalVendorIds: oldGlobalVendorIds,
+        allowedVendorIds
+      }).then(consentVendorsContext =>
+        this._newVendorsStatusFactory.from({
+          acceptationStatus: consentVendorsContext
+        })
+      ),
+      oldGlobalVendorIds.filter(id => newGlobalVendorIds.indexOf(id) < 0),
       newGlobalVendorIds.filter(id => oldGlobalVendorIds.indexOf(id) < 0)
-    )
-  ]).then(
-    ([
-      newVendorsAcceptationStatus,
-      oldIdsNotInNewGlobalVendors,
-      newIdsNotInOldGlobalVendors
-    ]) => {
-      let newAcceptedVendorIds = acceptedVendorIds.filter(
-        id => oldIdsNotInNewGlobalVendors.indexOf(id) < 0
-      )
-      if (newVendorsAcceptationStatus) {
-        newIdsNotInOldGlobalVendors.forEach(id => newAcceptedVendorIds.push(id))
+    ]).then(
+      ([
+        newVendorsAcceptationStatus,
+        oldIdsNotInNewGlobalVendors,
+        newIdsNotInOldGlobalVendors
+      ]) => {
+        // TODO fn remove ids accepted in the consent that they are not anymore in the new global list
+        let newAcceptedVendorIds = acceptedVendorIds.filter(
+          id => oldIdsNotInNewGlobalVendors.indexOf(id) < 0
+        )
+
+        // TODO fn new ids from the global list that were not in the old list has to be added in the consent if they are accepted
+        if (newVendorsAcceptationStatus) {
+          newIdsNotInOldGlobalVendors.forEach(id =>
+            newAcceptedVendorIds.push(id)
+          )
+        }
+
+        // TODO fn does not matter if they are or not in global lists, all ids that are not allowed have to be removed
+        return newAcceptedVendorIds.filter(
+          // TODO fn to filter whitelisted vendor ids
+          // TODO change allowed vendor ids to withelisted vendors
+          id => !allowedVendorIds || allowedVendorIds.indexOf(id) >= 0
+        )
       }
-      return newAcceptedVendorIds.filter(
-        id =>
-          (allowedVendorIds && allowedVendorIds.indexOf(id) >= 0) ||
-          !allowedVendorIds
-      )
-    }
-  )
+    )
+  }
+}
 
 const getGlobalVendorList = ({vendorListRepository}) => ({
   vendorListVersion

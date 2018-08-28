@@ -3,19 +3,19 @@ import GlobalVendorList from '../../../resources/globalvendorlist.json'
 import {
   ALL_ALLOWED,
   ALL_DISALLOWED,
-  consentHasAllInStatus,
-  CUSTOM_ALLOWED
+  CUSTOM_ALLOWED,
+  getConsentVendorsContext
 } from '../../../../cmp/domain/consent/consentValidation'
 
 describe('consentValidation', () => {
-  describe('Given a consent and a globalVendor list, consentHasAllInStatus', () => {
+  describe('Given a consent and a globalVendor list, getConsentVendorsContext', () => {
     it('Should return ALL_ALLOWED if all vendors from the global vendor list are allowed in the consent', done => {
       const givenGlobalVendorIds = GlobalVendorList.vendors.map(
         vendor => vendor.id
       )
       const givenAcceptedVendorIds = givenGlobalVendorIds
 
-      consentHasAllInStatus({
+      getConsentVendorsContext({
         acceptedVendorIds: givenAcceptedVendorIds,
         globalVendorIds: givenAcceptedVendorIds
       })
@@ -31,7 +31,7 @@ describe('consentValidation', () => {
       )
       const givenAcceptedVendorIds = []
 
-      consentHasAllInStatus({
+      getConsentVendorsContext({
         acceptedVendorIds: givenAcceptedVendorIds,
         globalVendorIds: givenGlobalVendorIds
       })
@@ -47,7 +47,7 @@ describe('consentValidation', () => {
       )
       const givenAcceptedVendorIds = givenGlobalVendorIds.slice(0, 10)
 
-      consentHasAllInStatus({
+      getConsentVendorsContext({
         acceptedVendorIds: givenAcceptedVendorIds,
         globalVendorIds: givenGlobalVendorIds
       })
@@ -58,7 +58,7 @@ describe('consentValidation', () => {
         .catch(e => done(e))
     })
   })
-  describe('Given a consent and a globalVendor list and a subset of allowed vendor ids, consentHasAllInStatus', () => {
+  describe('Given a consent and a globalVendor list and a subset of allowed vendor ids, getConsentVendorsContext', () => {
     it('Should return ALL_ALLOWED if all accepted vendors from the global vendor list are allowed in the consent', done => {
       const givenGlobalVendorIds = GlobalVendorList.vendors.map(
         vendor => vendor.id
@@ -66,7 +66,7 @@ describe('consentValidation', () => {
       const givenAllowedVendorIds = givenGlobalVendorIds.slice(0, 10)
       const givenAcceptedVendorIds = givenAllowedVendorIds
 
-      consentHasAllInStatus({
+      getConsentVendorsContext({
         acceptedVendorIds: givenAcceptedVendorIds,
         globalVendorIds: givenGlobalVendorIds,
         allowedVendorIds: givenAllowedVendorIds
@@ -84,7 +84,7 @@ describe('consentValidation', () => {
       const givenAllowedVendorIds = givenGlobalVendorIds.slice(0, 10)
       const givenAcceptedVendorIds = []
 
-      consentHasAllInStatus({
+      getConsentVendorsContext({
         acceptedVendorIds: givenAcceptedVendorIds,
         globalVendorIds: givenGlobalVendorIds,
         allowedVendorIds: givenAllowedVendorIds
@@ -102,7 +102,7 @@ describe('consentValidation', () => {
       const givenAllowedVendorIds = givenGlobalVendorIds.slice(0, 10)
       const givenAcceptedVendorIds = givenAllowedVendorIds.slice(0, 5)
 
-      consentHasAllInStatus({
+      getConsentVendorsContext({
         acceptedVendorIds: givenAcceptedVendorIds,
         globalVendorIds: givenGlobalVendorIds,
         allowedVendorIds: givenAllowedVendorIds
