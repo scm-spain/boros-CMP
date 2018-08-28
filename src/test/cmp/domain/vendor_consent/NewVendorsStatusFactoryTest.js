@@ -1,10 +1,5 @@
 import {expect} from 'chai'
 import {
-  ALL_ALLOWED,
-  ALL_DISALLOWED,
-  CUSTOM_ALLOWED
-} from '../../../../cmp/domain/consent/consentValidation'
-import {
   NewVendorsStatusService,
   OPTION_ALL_ALLOW,
   OPTION_ALL_DISMISS,

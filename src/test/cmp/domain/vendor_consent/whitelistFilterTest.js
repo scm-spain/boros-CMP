@@ -1,11 +1,5 @@
 import {expect} from 'chai'
-import {ConsentString} from 'consent-string'
-import GlobalVendorList from '../../../resources/globalvendorlist.json'
-import VendorConsentsFactory from '../../../../cmp/domain/vendor_consents/VendorConsentsFactory'
-import {
-  isWhitelisted,
-  whitelistFilter
-} from '../../../../cmp/domain/vendor_consents/whitelistFilter'
+import {isWhitelisted} from '../../../../cmp/domain/vendor_consents/whitelistFilter'
 
 describe('whitelistFilter', () => {
   describe('isWhitelisted, given an empty whitelist', () => {
