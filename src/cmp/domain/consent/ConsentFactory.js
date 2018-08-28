@@ -1,6 +1,6 @@
 import DomainEventBus from '../event_bus/DomainEventBus'
 import {ConsentString} from 'consent-string'
-import {obsoleteVendorsListVersion} from './obsoleteVendorsListVersion'
+import {globalVendorListVersionChanged} from './globalVendorListVersionChanged'
 
 export default class ConsentFactory {
   constructor({allowedVendorIds} = {}) {
@@ -30,7 +30,7 @@ export default class ConsentFactory {
         consent.vendorListVersion !== globalVendorList.vendorListVersion
       ) {
         DomainEventBus.raise({
-          domainEvent: obsoleteVendorsListVersion({
+          domainEvent: globalVendorListVersionChanged({
             purposeConsents: consent.allowedPurposeIds,
             vendorConsents: consent.allowedVendorIds,
             oldVendorListVersion: consent.vendorListVersion,

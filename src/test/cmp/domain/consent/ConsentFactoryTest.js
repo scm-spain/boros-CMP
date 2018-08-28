@@ -3,7 +3,7 @@ import GlobalVendorList from '../../../resources/globalvendorlist.json'
 import GlobalVendorListV75 from '../../../resources/globalvendorlist.75.json'
 import ConsentFactory from '../../../../cmp/domain/consent/ConsentFactory'
 import DomainEventBus from '../../../../cmp/domain/event_bus/DomainEventBus'
-import {OBSOLETE_VENDORS_LIST_VERSION} from '../../../../cmp/domain/consent/obsoleteVendorsListVersion'
+import {GLOBAL_VENDOR_LIST_VERSION_CHANGED} from '../../../../cmp/domain/consent/globalVendorListVersionChanged'
 
 describe('ConsentFactory', () => {
   describe('createConsent', () => {
@@ -42,7 +42,7 @@ describe('ConsentFactory', () => {
       })
 
       DomainEventBus.register({
-        eventName: OBSOLETE_VENDORS_LIST_VERSION,
+        eventName: GLOBAL_VENDOR_LIST_VERSION_CHANGED,
         observer: ({payload}) => {
           Promise.resolve()
             .then(() => {

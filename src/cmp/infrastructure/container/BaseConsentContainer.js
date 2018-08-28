@@ -11,13 +11,13 @@ import PingUseCase from '../../application/services/PingUseCase'
 import SetVendorConsentsUseCase from '../../application/services/SetVendorConsentsUseCase'
 import Configuration from '../configuration/Configuration'
 import {errorObserverFactory} from '../observer/errorObserverFactory'
-import {obsoleteVendorsListVersionObserverFactory} from '../observer/obsoleteVendorsListVersionObserverFactory'
 import {NewVendorsStatusFactory} from '../../domain/vendor_consents/NewVendorsStatusFactory'
 import UpdateConsentVendorsService from '../../domain/consent/UpdateConsentVendorsService'
-import {OBSOLETE_VENDORS_LIST_VERSION} from '../../domain/consent/obsoleteVendorsListVersion'
+import {GLOBAL_VENDOR_LIST_VERSION_CHANGED} from '../../domain/consent/globalVendorListVersionChanged'
 import ConsentFactory from '../../domain/consent/ConsentFactory'
 import VendorConsentsFactory from '../../domain/vendor_consents/VendorConsentsFactory'
 import {Log} from '../service/log/Log'
+import {globalVendorListVersionChangedObserverFactory} from '../observer/globalVendorListVersionChangedObserverFactory'
 
 export default class BaseConsentContainer {
   constructor({config, cmpVersion, window, eager = true} = {}) {
@@ -159,16 +159,18 @@ export default class BaseConsentContainer {
       option: this._config.consent.newVendorsStatusOption
     })
   }
-  _buildObsoleteVendorsListVersionObserver() {
-    return obsoleteVendorsListVersionObserverFactory(
+  _buildGlobalVendorListVersionChangedObserver() {
+    return globalVendorListVersionChangedObserverFactory(
       this.getInstance({key: 'UpdateConsentVendorsService'})
     )
   }
 
   _buildEagerSingletonInstances() {
     DomainEventBus.register({
-      eventName: OBSOLETE_VENDORS_LIST_VERSION,
-      observer: this.getInstance({key: 'ObsoleteVendorsListVersionObserver'})
+      eventName: GLOBAL_VENDOR_LIST_VERSION_CHANGED,
+      observer: this.getInstance({
+        key: 'GlobalVendorListVersionChangedObserver'
+      })
     })
   }
 }
