@@ -19,7 +19,7 @@ describe('UpdateConsentVendorsService', () => {
         givenGlobalVendorList.vendorListVersion
 
       const vendorConsentsRepositoryMock = {
-        saveVendorConsents: () => null
+        saveVendorConsents: () => Promise.resolve()
       }
       const saveVendorConsentsSpy = sinon.spy(
         vendorConsentsRepositoryMock,
@@ -27,7 +27,7 @@ describe('UpdateConsentVendorsService', () => {
       )
 
       const vendorListRepositoryMock = {
-        getGlobalVendorList: () => null
+        getGlobalVendorList: () => Promise.resolve()
       }
       const newVendorsStatusFactory = new NewVendorsStatusFactory()
 
@@ -69,7 +69,7 @@ describe('UpdateConsentVendorsService', () => {
       const givenNewVendorsAcceptationOption = 'OPTION_ALL_ALLOW'
 
       const vendorConsentsRepositoryMock = {
-        saveVendorConsents: () => null
+        saveVendorConsents: () => Promise.resolve()
       }
       const saveVendorConsentsSpy = sinon.spy(
         vendorConsentsRepositoryMock,
@@ -141,7 +141,7 @@ describe('UpdateConsentVendorsService', () => {
       const givenNewVendorsAcceptationOption = 'OPTION_ALL_ALLOW'
 
       const vendorConsentsRepositoryMock = {
-        saveVendorConsents: () => null
+        saveVendorConsents: () => Promise.resolve()
       }
       const saveVendorConsentsSpy = sinon.spy(
         vendorConsentsRepositoryMock,
