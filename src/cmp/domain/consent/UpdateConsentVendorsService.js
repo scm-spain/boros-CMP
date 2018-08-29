@@ -14,19 +14,19 @@ export default class UpdateConsentVendorsService {
   updateConsentVendorList({
     consentAcceptedVendors,
     consentAcceptedPurposes,
-    consentGlobalVendorListVersion,
-    currentGlobalVendorList,
+    newGlobalVendorList,
+    oldGlobalVendorList,
     allowedVendorIds
   }) {
     return Promise.resolve()
       .then(
         () =>
-          consentGlobalVendorListVersion !==
-            currentGlobalVendorList.vendorListVersion &&
+          newGlobalVendorList.vendorListVersion !==
+            oldGlobalVendorList.vendorListVersion &&
           this._resolveNewAcceptedVendorIds({
             consentAcceptedVendors,
-            consentGlobalVendorListVersion,
-            currentGlobalVendorList,
+            newGlobalVendorList,
+            oldGlobalVendorList,
             allowedVendorIds
           }).then(newAcceptedVendorIds =>
             this._saveVendorConsents({
@@ -40,27 +40,21 @@ export default class UpdateConsentVendorsService {
 
   _resolveNewAcceptedVendorIds({
     consentAcceptedVendors,
-    consentGlobalVendorListVersion,
-    currentGlobalVendorList,
+    newGlobalVendorList,
+    oldGlobalVendorList,
     allowedVendorIds
   }) {
-    return this._getGlobalVendorList({
-      vendorListVersion: consentGlobalVendorListVersion
-    })
-      .then(oldGlobalVendorList =>
-        Promise.all([
-          currentGlobalVendorList.vendors.map(vendor => vendor.id),
-          oldGlobalVendorList.vendors.map(vendor => vendor.id)
-        ])
-      )
-      .then(([currentGlobalVendorIds, oldGlobalVendorIds]) =>
-        this._updateConsentWithNewGlobalVendorList({
-          acceptedVendorIds: consentAcceptedVendors,
-          newGlobalVendorIds: currentGlobalVendorIds,
-          oldGlobalVendorIds: oldGlobalVendorIds,
-          allowedVendorIds
-        })
-      )
+    return Promise.all([
+      newGlobalVendorList.vendors.map(vendor => vendor.id),
+      oldGlobalVendorList.vendors.map(vendor => vendor.id)
+    ]).then(([currentGlobalVendorIds, oldGlobalVendorIds]) =>
+      this._updateConsentWithNewGlobalVendorList({
+        acceptedVendorIds: consentAcceptedVendors,
+        newGlobalVendorIds: currentGlobalVendorIds,
+        oldGlobalVendorIds: oldGlobalVendorIds,
+        allowedVendorIds
+      })
+    )
   }
 
   _updateConsentWithNewGlobalVendorList({

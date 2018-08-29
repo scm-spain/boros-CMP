@@ -11,8 +11,7 @@ export default class LocalConsentContainer extends BaseConsentContainer {
   _buildConsentRepository() {
     return new CookieConsentRepository({
       cookieHandler: this.getInstance({key: 'CookieHandler'}),
-      consentFactory: this.getInstance({key: 'ConsentFactory'}),
-      vendorListRepository: this.getInstance({key: 'VendorListRepository'})
+      consentFactory: this.getInstance({key: 'ConsentFactory'})
     })
   }
 

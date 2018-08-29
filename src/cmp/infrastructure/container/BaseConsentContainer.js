@@ -31,7 +31,7 @@ export default class BaseConsentContainer {
     this._window = window
     this._instances = new Map()
     if (eager) {
-        this._buildEagerSingletonInstances()
+      this._buildEagerSingletonInstances()
     }
   }
 
@@ -50,7 +50,8 @@ export default class BaseConsentContainer {
 
   _buildConsentFactory() {
     return new ConsentFactory({
-      allowedVendorIds: this._config.consent.allowedVendorIds
+      allowedVendorIds: this._config.consent.allowedVendorIds,
+      vendorListRepository: this.getInstance({key: 'VendorListRepository'})
     })
   }
 
