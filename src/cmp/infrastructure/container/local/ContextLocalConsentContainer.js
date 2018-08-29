@@ -6,7 +6,7 @@ export default class ContextLocalConsentContainer {
   static context({config, window}) {
     if (
       window.document.location.search.indexOf(DEFAULT_DEBUG_KEYWORD) !== -1 ||
-      config.log
+      (config && config.log)
     ) {
       return new DebugLocalConsentContainer({
         config,
@@ -14,7 +14,7 @@ export default class ContextLocalConsentContainer {
       })
     } else {
       return new LocalConsentContainer({
-        config,
+        config: config || {},
         window
       })
     }

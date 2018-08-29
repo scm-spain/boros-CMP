@@ -6,7 +6,7 @@ export default class ContextGlobalConsentContainer {
   static context({window, config, iframe}) {
     if (
       window.document.location.search.indexOf(DEFAULT_DEBUG_KEYWORD) !== -1 ||
-      config.log
+      (config && config.log)
     ) {
       return new DebugGlobalConsentContainer({
         config,
@@ -15,7 +15,7 @@ export default class ContextGlobalConsentContainer {
       })
     } else {
       return new GlobalConsentContainer({
-        config,
+        config: config || {},
         window,
         iframe
       })
