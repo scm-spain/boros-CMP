@@ -37,6 +37,41 @@
 
 ## Usage
 
+Boros CMP is available as the @schibstedspain/boros-cmp package on [npm](https://www.npmjs.com/package/@schibstedspain/boros-cmp).
+
+To install the last stable version:
+
+```bash
+npm install --save @schibstedspain/boros-cmp
+```
+
+To initialize Boros CMP using default configuration values:
+
+```javascript
+import boroscmp from '@schibstedspain/boros-cmp'
+
+boroscmp.context({window})
+```
+
+To initialize Boros CMP using customized configuration values:
+
+```javascript
+import boroscmp from '@schibstedspain/boros-cmp'
+
+const customConfig = {
+  gdpr: {
+    gdprApplies: true,
+    storeConsentGlobally: false
+  },
+  consent: {
+    consentScreen: 1,
+    consentLanguage: 'es'
+  }
+}
+
+boroscmp.context({window, config: customConfig})
+```
+
 ## Configuration
 
 ## CMP version
