@@ -30,15 +30,18 @@
 * Open Source project
 * Supports the [IAB specification](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework)
 * Supports consent management for a single site or multiple sites from a single brand
+* Stand alone project (without User Interface). We also developed a [User Interface](https://github.com/SUI-Components/sui-components/tree/master/components/cmp/banner) and a [bundle project](https://github.com/scm-spain/BorosJS) including UI + CMP
 
 ## Technical features
-* Developed in Javascript (ECMAScript 6)
+* Importable as a library from NPM.
+* Developed in Javascript (ECMAScript 6) using Promises and Events
+* We :heart: Domain Driven Domain
 * Supports local storage using single site cookie
-* Supports global storage using multi site cookie via iframes
+* Supports global storage using multi site cookie via iFrames
 
 ## Usage
 
-Boros CMP is available as the @schibstedspain/boros-cmp package on [npm](https://www.npmjs.com/package/@schibstedspain/boros-cmp).
+**Boros CMP** is available as [npm](https://www.npmjs.com/package/@schibstedspain/boros-cmp) package named **@schibstedspain/boros-cmp**.
 
 To install the last stable version:
 
