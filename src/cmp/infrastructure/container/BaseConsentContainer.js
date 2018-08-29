@@ -111,7 +111,7 @@ export default class BaseConsentContainer {
     })
   }
 
-  _buildGetVendorConsentUseCase() {
+  _buildGetVendorConsentsUseCase() {
     return new GetVendorConsentsUseCase({
       vendorConsentsRepository: this.getInstance({
         key: 'VendorConsentsRepository'
