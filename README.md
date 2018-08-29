@@ -31,11 +31,12 @@
 * Supports the [IAB specification](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework)
 * Supports consent management for a single site or multiple sites from a single brand
 * Stand alone project (without User Interface). We also developed a [User Interface](https://github.com/SUI-Components/sui-components/tree/master/components/cmp/banner) and a [bundle project](https://github.com/scm-spain/BorosJS) including UI + CMP
+* Have a look at our [CMP Showcase](https://github.com/scm-spain/cmp-showcase) and try Boros
 
 ## Technical features
 * Importable as a library from NPM.
 * Developed in Javascript (ECMAScript 6) using Promises and Events
-* We :heart: Domain Driven Domain
+* We :heart: Domain Driven Design
 * Supports local storage using single site cookie
 * Supports global storage using multi site cookie via iFrames
 
