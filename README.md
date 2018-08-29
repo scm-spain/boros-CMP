@@ -12,9 +12,10 @@
 * [About](#about)
 * [Features](#features)
 * [Technical features](#technical-features)
-* [License](#license)
 * [Configuration](#configuration)
+* [Usage](#usage)
 * [CMP version](#cmp-vesion)
+* [License](#license)
 
 
 ## About
@@ -34,10 +35,12 @@
 * Supports local storage using single site cookie
 * Supports global storage using multi site cookie via iframes
 
-## License
-CMP is [MIT licensed](./LICENSE).
+## Usage
 
 ## Configuration
 
 ## CMP version
 CMP version is set according to the version defined inside the _package.json_ file. IAB standard uses only one number to define this version, so only the major version (first digit) will be used.
+
+## License
+CMP is [MIT licensed](./LICENSE).
