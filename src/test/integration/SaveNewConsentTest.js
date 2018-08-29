@@ -78,8 +78,15 @@ const filterConsentStatus = (consentStatus, status) => {
   return consentStatus
 }
 const sampleVendorConsentsEditedInAnUI = {
-  purposeConsents: [1, 2, 3, 4],
-  vendorConsents: [1, 2, 3, 6, 7, 8]
+  purposeConsents: {'1': true, '2': true, '3': true, '4': true},
+  vendorConsents: {
+    '1': true,
+    '2': true,
+    '3': true,
+    '6': true,
+    '7': true,
+    '8': true
+  }
 }
 const checkEncodedConsent = ({
   encodedConsent,
@@ -90,13 +97,11 @@ const checkEncodedConsent = ({
 
   // the allowed purposes into the encoded consent should be the edited purposes in the UI
   globalVendorList.purposes.map(p => p.id).forEach(id => {
-    if (
-      acceptedConsents.purposeConsents.includes(id) &&
-      !consent.isPurposeAllowed(id)
-    ) {
+    if (acceptedConsents.purposeConsents[id] && !consent.isPurposeAllowed(id)) {
+      console.log(consent.isPurposeAllowed(id))
       throw new Error(`Purpose ${id} should be allowed`)
     } else if (
-      !acceptedConsents.purposeConsents.includes(id) &&
+      !acceptedConsents.purposeConsents[id] &&
       consent.isPurposeAllowed(id)
     ) {
       throw new Error(`Purpose ${id} should not be allowed`)
@@ -105,13 +110,10 @@ const checkEncodedConsent = ({
 
   // the allowed vendors into the encoded consent should be the edited vendors in the UI
   globalVendorList.vendors.map(v => v.id).forEach(id => {
-    if (
-      acceptedConsents.vendorConsents.includes(id) &&
-      !consent.isVendorAllowed(id)
-    ) {
+    if (acceptedConsents.vendorConsents[id] && !consent.isVendorAllowed(id)) {
       throw new Error(`Vendor ${id} should be allowed`)
     } else if (
-      !acceptedConsents.vendorConsents.includes(id) &&
+      !acceptedConsents.vendorConsents[id] &&
       consent.isVendorAllowed(id)
     ) {
       throw new Error(`Vendor ${id} should not be allowed`)

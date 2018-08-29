@@ -5,6 +5,16 @@ import {ConsentString} from 'consent-string'
  * @implements VendorConsentsRepository
  */
 export default class ConsentStringVendorConsentsRepository {
+  /**
+   *
+   * @param cmpId {number}
+   * @param cmpVersion {number}
+   * @param consentScreen {number}
+   * @param consentLanguage {string}
+   * @param vendorConsentsFactory {VendorConsentsFactory}
+   * @param consentRepository {VendorConsentsRepository}
+   * @param vendorListRepository {VendorListRepository}
+   */
   constructor({
     cmpId = requiredArg('cmpId'),
     cmpVersion = requiredArg('cmpVersion'),
@@ -14,16 +24,13 @@ export default class ConsentStringVendorConsentsRepository {
     consentRepository,
     vendorListRepository
   } = {}) {
-    this._getStoredConsent = getStoredConsent({consentRepository})
-    this._saveConsent = saveConsent({consentRepository})
-    this._createVendorConsents = createVendorConsents({vendorConsentsFactory})
-    this._getGlobalVendorList = getGlobalVendorList({vendorListRepository})
-    this._mapVendorConsentsToConsent = mapVendorConsentsToConsent({
-      cmpId,
-      cmpVersion,
-      consentScreen,
-      consentLanguage
-    })
+    this._cmpId = cmpId
+    this._cmpVersion = cmpVersion
+    this._consentScreen = consentScreen
+    this._consentLanguage = consentLanguage
+    this._vendorConsentsFactory = vendorConsentsFactory
+    this._consentRepository = consentRepository
+    this._vendorListRepository = vendorListRepository
   }
 
   getVendorConsents({allowedVendorIds} = {}) {
@@ -56,42 +63,45 @@ export default class ConsentStringVendorConsentsRepository {
         .then(consent => this._saveConsent({consent}))
     )
   }
-}
 
-const getStoredConsent = ({consentRepository}) => () =>
-  consentRepository.getConsent()
+  _getStoredConsent() {
+    return this._consentRepository.getConsent()
+  }
 
-const saveConsent = ({consentRepository}) => ({consent}) =>
-  consentRepository.saveConsent({consent})
+  _saveConsent({consent}) {
+    return this._consentRepository.saveConsent({consent})
+  }
 
-const createVendorConsents = ({vendorConsentsFactory}) => ({
-  consent,
-  globalVendorList,
-  allowedVendorIds
-}) =>
-  vendorConsentsFactory.createFromConsent({
-    consent,
-    globalVendorList,
-    allowedVendorIds
-  })
+  _createVendorConsents({consent, globalVendorList, allowedVendorIds}) {
+    return this._vendorConsentsFactory.createVendorConsents({
+      consent,
+      globalVendorList,
+      allowedVendorIds
+    })
+  }
 
-const getGlobalVendorList = ({vendorListRepository}) => () =>
-  vendorListRepository.getGlobalVendorList()
+  _getGlobalVendorList() {
+    return this._vendorListRepository.getGlobalVendorList()
+  }
 
-const mapVendorConsentsToConsent = ({
-  cmpId,
-  cmpVersion,
-  consentScreen,
-  consentLanguage
-}) => ({vendorConsents}) => {
-  let consent = new ConsentString()
-  consent.setVendorsAllowed(vendorConsents.vendorConsents)
-  consent.setPurposesAllowed(vendorConsents.purposeConsents)
-  consent.setCmpId(cmpId)
-  consent.setCmpVersion(cmpVersion)
-  consent.setConsentScreen(consentScreen)
-  consent.setConsentLanguage(consentLanguage)
-  return consent
+  _mapVendorConsentsToConsent({vendorConsents}) {
+    let consent = new ConsentString()
+    consent.setVendorsAllowed(
+      Object.entries(vendorConsents.vendorConsents)
+        .filter(entry => entry[1])
+        .map(entry => parseInt(entry[0]))
+    )
+    consent.setPurposesAllowed(
+      Object.entries(vendorConsents.purposeConsents)
+        .filter(entry => entry[1])
+        .map(entry => parseInt(entry[0]))
+    )
+    consent.setCmpId(this._cmpId)
+    consent.setCmpVersion(this._cmpVersion)
+    consent.setConsentScreen(this._consentScreen)
+    consent.setConsentLanguage(this._consentLanguage)
+    return consent
+  }
 }
 
 const requiredArg = fieldName => {
