@@ -50,11 +50,11 @@ describe('ConsentStringVendorConsentsRepository', () => {
         test: 'object'
       }
       const vendorConsentsFactoryMock = {
-        createFromConsent: () => vendorConsentsMock
+        createVendorConsents: () => vendorConsentsMock
       }
       const createFromConsentSpy = sinon.spy(
         vendorConsentsFactoryMock,
-        'createFromConsent'
+        'createVendorConsents'
       )
       const consentRepositoryMock = {
         getConsent: () => Promise.resolve(givenConsent)
