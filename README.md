@@ -6,6 +6,7 @@
 [![Build status](https://travis-ci.org/scm-spain/CMP.svg?branch=master)](https://travis-ci.org/scm-spain/CMP)
 [![codecov](https://codecov.io/gh/scm-spain/CMP/branch/master/graph/badge.svg)](https://codecov.io/gh/scm-spain/CMP)
 [![GitHub license](https://img.shields.io/github/license/scm-spain/CMP.svg)](https://github.com/scm-spain/CMP/blob/master/LICENSE)
+[![npm version](https://img.shields.io/npm/v/@schibstedspain/boros-cmp.svg)](https://www.npmjs.com/package/@schibstedspain/boros-cmp)
 
 ## Table of Contents
 
@@ -45,7 +46,7 @@ To install the last stable version:
 npm install --save @schibstedspain/boros-cmp
 ```
 
-To initialize Boros CMP using default configuration values:
+To initialize Boros CMP using [default configuration](#configuration-properties-and-default-values) values:
 
 ```javascript
 import boroscmp from '@schibstedspain/boros-cmp'
@@ -125,32 +126,6 @@ Available log level values:
 |3|warn|
 |4|error|
 |5|off|
-
-
-### How to set custom values to configuration properties
-
-When CMP initializes it search for a config at *window.__cmp.config* if it is not present CMP uses the default values.
-
-To set custom values to configuration properties just set *window.__cmp.config* before loading CMP as follows:
-```javascript
-window.__cmp.config = {
-    "gdpr": {
-        "gdprApplies": true,
-        "storeConsentGlobally": false,
-        "globalConsentLocation": "./global.html"
-    },
-    "consent": {
-        "consentScreen": 1,
-        "consentLanguage": "es"
-    },
-    "vendorList": {
-        "host": "https://vendorlist.consensu.org"
-    },
-    "log": {
-        "level": 1
-    }
- }
-```
 
 ## CMP version
 CMP version is set according to the version defined inside the _package.json_ file. IAB standard uses only one number to define this version, so only the major version (first digit) will be used.
