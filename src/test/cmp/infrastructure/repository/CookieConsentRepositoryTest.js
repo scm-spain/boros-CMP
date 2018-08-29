@@ -2,9 +2,9 @@ import {expect} from 'chai'
 import sinon from 'sinon'
 import GlobalVendorList from '../../../resources/globalvendorlist.json'
 import CookieConsentRepository from '../../../../cmp/infrastructure/repository/CookieConsentRepository'
-import IABConsentFactory from '../../../../cmp/infrastructure/factory/IABConsentFactory'
 import CookieHandler from '../../../../cmp/infrastructure/service/CookieHandler'
 import {JSDOM} from 'jsdom'
+import ConsentFactory from '../../../../cmp/domain/consent/ConsentFactory'
 
 describe('CookieConsentRepositoryTest', () => {
   describe('getConsent', () => {
@@ -59,7 +59,7 @@ describe('CookieConsentRepositoryTest', () => {
         getGlobalVendorList: () => givenGlobalVendorList
       }
 
-      const consentFactory = new IABConsentFactory()
+      const consentFactory = new ConsentFactory()
 
       const repository = new CookieConsentRepository({
         cookieHandler: cookieHandler,
@@ -99,7 +99,7 @@ describe('CookieConsentRepositoryTest', () => {
         getConsentString: () => givenEuConsent
       }
 
-      const consentFactory = new IABConsentFactory()
+      const consentFactory = new ConsentFactory()
 
       const repository = new CookieConsentRepository({
         cookieHandler: cookieHandler,

@@ -1,9 +1,9 @@
 import {expect} from 'chai'
 import {ConsentString} from 'consent-string'
 import GlobalVendorList from '../../../resources/globalvendorlist.json'
-import IABVendorConsentsFactory from '../../../../cmp/infrastructure/factory/IABVendorConsentsFactory'
+import VendorConsentsFactory from '../../../../cmp/domain/vendor_consents/VendorConsentsFactory'
 
-describe('IABVendorConsentsFactory', () => {
+describe('VendorConsentsFactory', () => {
   describe('createVendorConsents', () => {
     it('Should return a VendorConsents with all vendors and purposes if no ids restriction is set', done => {
       const givenGdprApplies = true
@@ -16,7 +16,7 @@ describe('IABVendorConsentsFactory', () => {
       givenConsent.setPurposesAllowed(givenPurposesAllowed)
       givenConsent.setVendorsAllowed(givenVendorsAllowed)
 
-      const factory = new IABVendorConsentsFactory({
+      const factory = new VendorConsentsFactory({
         gdprApplies: givenGdprApplies,
         storeConsentGlobally: givenStoreConsentGlobally
       })
@@ -69,7 +69,7 @@ describe('IABVendorConsentsFactory', () => {
       givenConsent.setPurposesAllowed(givenPurposesAllowed)
       givenConsent.setVendorsAllowed(givenVendorsAllowed)
 
-      const factory = new IABVendorConsentsFactory({
+      const factory = new VendorConsentsFactory({
         gdprApplies: givenGdprApplies,
         storeConsentGlobally: givenStoreConsentGlobally
       })
@@ -98,7 +98,7 @@ describe('IABVendorConsentsFactory', () => {
       givenConsent.setCmpVersion(2)
       givenConsent.setConsentScreen(3)
 
-      const factory = new IABVendorConsentsFactory()
+      const factory = new VendorConsentsFactory()
 
       factory
         .createVendorConsents({
