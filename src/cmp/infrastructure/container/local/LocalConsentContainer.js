@@ -6,7 +6,6 @@ import BaseConsentContainer from '../BaseConsentContainer'
 export default class LocalConsentContainer extends BaseConsentContainer {
   constructor({config, window, cmpVersion = CMP_VERSION, eager} = {}) {
     super({config, cmpVersion, window})
-    if (eager) this._buildEagerSingletonInstances()
   }
 
   _buildConsentRepository() {
@@ -21,5 +20,7 @@ export default class LocalConsentContainer extends BaseConsentContainer {
     return new CookieHandler({dom: this._window.document})
   }
 
-  _buildEagerSingletonInstances() {}
+  _buildEagerSingletonInstances() {
+    super._buildEagerSingletonInstances()
+  }
 }
