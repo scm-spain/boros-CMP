@@ -6,53 +6,6 @@ import UpdateConsentVendorsService from '../../../../cmp/domain/consent/UpdateCo
 import {NewVendorsStatusService} from '../../../../cmp/domain/vendor_consents/NewVendorsStatusService'
 
 describe('UpdateConsentVendorsService', () => {
-  describe('Given consented vendors with a version list number that is equal to the version list number of the global vendor list', () => {
-    it('Should not change the stored consent', done => {
-      const givenNewGlobalVendorList = GlobalVendorList
-      const givenOldGlobalVendorList = GlobalVendorList
-      const givenAcceptedVendors = givenOldGlobalVendorList.vendors
-        .map(vendor => vendor.id)
-        .slice(0, 5)
-      const givenAcceptedPurposes = givenOldGlobalVendorList.purposes.map(
-        purpose => purpose.id
-      )
-
-      const vendorConsentsRepositoryMock = {
-        saveVendorConsents: () => Promise.resolve()
-      }
-      const saveVendorConsentsSpy = sinon.spy(
-        vendorConsentsRepositoryMock,
-        'saveVendorConsents'
-      )
-
-      const vendorListRepositoryMock = {
-        getGlobalVendorList: () => Promise.resolve()
-      }
-      const newVendorsStatusService = new NewVendorsStatusService()
-
-      const service = new UpdateConsentVendorsService({
-        vendorConsentsRepository: vendorConsentsRepositoryMock,
-        vendorListRepository: vendorListRepositoryMock,
-        newVendorsStatusService
-      })
-
-      service
-        .updateConsentVendorList({
-          consentAcceptedVendors: givenAcceptedVendors,
-          consentAcceptedPurposes: givenAcceptedPurposes,
-          newGlobalVendorList: givenNewGlobalVendorList,
-          oldGlobalVendorList: givenOldGlobalVendorList
-        })
-        .then(() => {
-          expect(
-            saveVendorConsentsSpy.called,
-            'should not call to save any consent when version list number does not change'
-          ).to.be.false
-          done()
-        })
-        .catch(e => done(e))
-    })
-  })
   describe('Given consented vendors with a version list number that differs to the version list number of the global vendor list, assuming that all new vendors are accepted (ALL_ALLOW option)', () => {
     it('Should save a new consent with the new vendors from the v74 list that are not in the v73', done => {
       const givenNewGlobalVendorList = GlobalVendorList
