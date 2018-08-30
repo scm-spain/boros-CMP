@@ -13,31 +13,19 @@ export default class HttpVendorListRepository {
   }
 
   getGlobalVendorList({vendorListVersion} = {}) {
-    return Promise.resolve()
-      .then(
-        () =>
-          (vendorListVersion &&
-            this._loadVendorListVersion({vendorListVersion})) ||
-          this._loadLatestVendorList()
-      )
+    return Promise.resolve(
+      this._vendorListHost +
+        (vendorListVersion ? '/v-' + vendorListVersion : '') +
+        '/' +
+        this._vendorListFilename
+    )
+      .then(this._loadURL)
       .then(filterOkFetchResponse)
       .then(fetchResponse => fetchResponse.json())
   }
 
-  _loadLatestVendorList() {
-    // 'https://vendorlist.consensu.org/vendorlist.json'
-    return fetch(this._vendorListHost + '/' + this._vendorListFilename)
-  }
-
-  _loadVendorListVersion({vendorListVersion}) {
-    // `https://vendorlist.consensu.org/v-${vendorListVersion}/vendorlist.json`
-    return fetch(
-      this._vendorListHost +
-        '/v-' +
-        vendorListVersion +
-        '/' +
-        this._vendorListFilename
-    )
+  _loadURL(url) {
+    return fetch(url)
   }
 }
 
