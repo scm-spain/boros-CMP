@@ -1,13 +1,8 @@
 import {isWhitelisted} from '../vendor_consents/whitelistFilter'
 
 export default class UpdateConsentVendorsService {
-  constructor({
-    vendorListRepository,
-    newVendorsStatusService,
-    vendorConsentsRepository
-  }) {
+  constructor({newVendorsStatusService, vendorConsentsRepository}) {
     this._newVendorsStatusService = newVendorsStatusService
-    this._vendorListRepository = vendorListRepository
     this._vendorConsentsRepository = vendorConsentsRepository
   }
 
@@ -97,16 +92,10 @@ export default class UpdateConsentVendorsService {
     )
   }
 
-  _getGlobalVendorList({vendorListVersion} = {}) {
-    return this._vendorListRepository.getGlobalVendorList({vendorListVersion})
-  }
-
   _saveVendorConsents({vendorConsents, purposeConsents}) {
     return this._vendorConsentsRepository.saveVendorConsents({
-      vendorConsents: {
-        vendorConsents,
-        purposeConsents
-      }
+      vendorConsents,
+      purposeConsents
     })
   }
 }

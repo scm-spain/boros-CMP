@@ -150,7 +150,6 @@ export default class BaseConsentContainer {
       newVendorsStatusService: this.getInstance({
         key: 'NewVendorsStatusService'
       }),
-      vendorListRepository: this.getInstance({key: 'VendorListRepository'}),
       vendorConsentsRepository: this.getInstance({
         key: 'VendorConsentsRepository'
       })

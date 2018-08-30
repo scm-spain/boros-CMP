@@ -49,10 +49,10 @@ export default class ConsentStringVendorConsentsRepository {
       )
   }
 
-  saveVendorConsents({vendorConsents}) {
+  saveVendorConsents({vendorConsents, purposeConsents}) {
     return Promise.resolve().then(() =>
       Promise.all([
-        this._mapVendorConsentsToConsent({vendorConsents}),
+        this._mapVendorConsentsToConsent({vendorConsents, purposeConsents}),
         this._getGlobalVendorList()
       ])
         .then(([consent, globalVendorList]) => {
@@ -83,18 +83,10 @@ export default class ConsentStringVendorConsentsRepository {
     return this._vendorListRepository.getGlobalVendorList()
   }
 
-  _mapVendorConsentsToConsent({vendorConsents}) {
+  _mapVendorConsentsToConsent({vendorConsents, purposeConsents}) {
     let consent = new ConsentString()
-    consent.setVendorsAllowed(
-      Object.entries(vendorConsents.vendorConsents)
-        .filter(entry => entry[1])
-        .map(entry => parseInt(entry[0]))
-    )
-    consent.setPurposesAllowed(
-      Object.entries(vendorConsents.purposeConsents)
-        .filter(entry => entry[1])
-        .map(entry => parseInt(entry[0]))
-    )
+    consent.setVendorsAllowed(vendorConsents)
+    consent.setPurposesAllowed(purposeConsents)
     consent.setCmpId(this._cmpId)
     consent.setCmpVersion(this._cmpVersion)
     consent.setConsentScreen(this._consentScreen)

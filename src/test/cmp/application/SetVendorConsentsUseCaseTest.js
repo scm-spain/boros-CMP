@@ -5,8 +5,20 @@ import SetVendorConsentsUseCase from '../../../cmp/application/services/SetVendo
 describe('SetVendorConsentsUseCase', () => {
   it('Should save the received VendorConsents', done => {
     const givenVendorConsents = {
-      what: 'ever'
+      vendorConsents: {
+        1: true,
+        2: false,
+        3: true
+      },
+      purposeConsents: {
+        1: true,
+        2: false
+      }
     }
+
+    const expectedVendorsToSave = [1, 3]
+    const expectedPurposesToSave = [1]
+
     const vendorConsentsRepositoryMock = {
       saveVendorConsents: () => Promise.resolve()
     }
@@ -28,8 +40,12 @@ describe('SetVendorConsentsUseCase', () => {
         ).to.be.true
         expect(
           saveVendorConsentsSpy.args[0][0].vendorConsents,
-          'save the vendor consents should receive the VendorConsents object'
-        ).to.deep.equal(givenVendorConsents)
+          'should receive the vendor consents array to save'
+        ).to.deep.equal(expectedVendorsToSave)
+        expect(
+          saveVendorConsentsSpy.args[0][0].purposeConsents,
+          'should receive the vendor purposes array to save'
+        ).to.deep.equal(expectedPurposesToSave)
       })
       .then(() => done())
       .catch(e => done(e))
