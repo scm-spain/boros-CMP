@@ -4,7 +4,7 @@
   "description": "Schibsted GDPR - Consent Management Provider - Standalone",
   "main": "dist/cmp.pro.js",
   "scripts": {
-    "prepublishOnly": "npm run build",
+    "prepublishOnly": "npm run build:cmp",
     "start:cmp:dev": "webpack-dev-server --config src/cmp/infrastructure/build/webpack.config.cmp.babel.js --mode=development",
     "test": "mocha --recursive --require babel-polyfill --require babel-core/register \"src/test/**/*.js\"",
     "coverage": "istanbul cover --report html _mocha -- ./test --recursive --compilers js:babel-register",
