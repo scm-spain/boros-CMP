@@ -1,16 +1,18 @@
 import {expect} from 'chai'
 import sinon from 'sinon'
 import ChainedVendorListRepository from '../../../../cmp/infrastructure/repository/ChainedVendorListRepository'
+import InMemoryVendorListRepository from '../../../../cmp/infrastructure/repository/InMemoryVendorListRepository'
 
 describe('ChainedVendorListRepository', () => {
   describe('getGlobalVendorList', () => {
     it('Should return the inmemory vendor list if it is found', done => {
-      const expectedResult = {inmemory: 'vendorlist'}
-      const inMemoryVendorListRepositoryMock = {
-        getGlobalVendorList: () => Promise.resolve(expectedResult)
-      }
+      const expectedResult = {vendorListVersion: 65}
+      const expectedVersion = 65
+      const inMemoryVendorListRepository = new InMemoryVendorListRepository({
+        initialVendorList: expectedResult
+      })
       const httpVendorListRepositoryMock = {
-        getGlobalVendorList: () => Promise.resolve({http: 'vendorlist'})
+        getGlobalVendorList: () => Promise.resolve({vendorListVersion: 90})
       }
       const httpGetGlobalVendorListSpy = sinon.spy(
         httpVendorListRepositoryMock,
@@ -18,7 +20,7 @@ describe('ChainedVendorListRepository', () => {
       )
 
       const repository = new ChainedVendorListRepository({
-        inMemoryVendorListRepository: inMemoryVendorListRepositoryMock,
+        inMemoryVendorListRepository: inMemoryVendorListRepository,
         httpVendorListRepository: httpVendorListRepositoryMock
       })
       repository
@@ -32,30 +34,31 @@ describe('ChainedVendorListRepository', () => {
             result,
             'the resulting vendor list should be the inmemory vendor list'
           ).to.deep.equal(expectedResult)
+          expect(
+            inMemoryVendorListRepository.latestVersion,
+            'the resulting latest version is not the same'
+          ).to.deep.equal(expectedVersion)
         })
         .then(() => done())
         .catch(e => done(e))
     })
     it('Should return the http vendor list if it is not found into the inmemory repository, and set it inmemory for next calls', done => {
-      const expectedResult = {http: 'vendorlist'}
-      const inMemoryVendorListRepositoryMock = {
-        getGlobalVendorList: () => Promise.resolve(undefined),
-        setGlobalVendorList: () => Promise.resolve()
-      }
+      const expectedResult = {vendorListVersion: 65}
+      const inMemoryVendorListRepository = new InMemoryVendorListRepository()
       const httpVendorListRepositoryMock = {
         getGlobalVendorList: () => Promise.resolve(expectedResult)
       }
       const inMemorySetGlobalVendorListSpy = sinon.spy(
-        inMemoryVendorListRepositoryMock,
+        inMemoryVendorListRepository,
         'setGlobalVendorList'
       )
       const inMemoryGetGlobalVendorListSpy = sinon.spy(
-        inMemoryVendorListRepositoryMock,
+        inMemoryVendorListRepository,
         'getGlobalVendorList'
       )
 
       const repository = new ChainedVendorListRepository({
-        inMemoryVendorListRepository: inMemoryVendorListRepositoryMock,
+        inMemoryVendorListRepository: inMemoryVendorListRepository,
         httpVendorListRepository: httpVendorListRepositoryMock
       })
       repository

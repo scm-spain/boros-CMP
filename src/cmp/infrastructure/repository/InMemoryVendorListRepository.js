@@ -27,4 +27,8 @@ export default class InMemoryVendorListRepository {
       this._latestVersion = Math.max(version, this._latestVersion)
     })
   }
+
+  get latestVersion() {
+    return this._latestVersion
+  }
 }
