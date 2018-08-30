@@ -12,7 +12,7 @@ export default class ConsentStringVendorConsentsRepository {
    * @param consentScreen {number}
    * @param consentLanguage {string}
    * @param vendorConsentsFactory {VendorConsentsFactory}
-   * @param consentRepository {VendorConsentsRepository}
+   * @param consentRepository {ConsentRepository}
    * @param vendorListRepository {VendorListRepository}
    */
   constructor({
@@ -35,9 +35,8 @@ export default class ConsentStringVendorConsentsRepository {
 
   getVendorConsents({allowedVendorIds} = {}) {
     return Promise.resolve()
-      .then(() =>
-        Promise.all([this._getStoredConsent(), this._getGlobalVendorList()])
-      )
+      .then(() => this._getStoredConsent())
+      .then(consent => Promise.all([consent, this._getGlobalVendorList()]))
       .then(
         ([consent, globalVendorList]) =>
           (consent &&
