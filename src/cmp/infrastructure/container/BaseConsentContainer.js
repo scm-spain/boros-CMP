@@ -30,7 +30,9 @@ export default class BaseConsentContainer {
     })
     this._window = window
     this._instances = new Map()
-    if (eager) this._buildEagerSingletonInstances()
+    if (eager) {
+      this._buildEagerSingletonInstances()
+    }
   }
 
   getInstance({key}) {
@@ -48,7 +50,8 @@ export default class BaseConsentContainer {
 
   _buildConsentFactory() {
     return new ConsentFactory({
-      allowedVendorIds: this._config.consent.allowedVendorIds
+      allowedVendorIds: this._config.consent.allowedVendorIds,
+      vendorListRepository: this.getInstance({key: 'VendorListRepository'})
     })
   }
 
@@ -160,9 +163,11 @@ export default class BaseConsentContainer {
     })
   }
   _buildGlobalVendorListVersionChangedObserver() {
-    return globalVendorListVersionChangedObserverFactory(
-      this.getInstance({key: 'UpdateConsentVendorsService'})
-    )
+    return globalVendorListVersionChangedObserverFactory({
+      updateConsentVendorsService: this.getInstance({
+        key: 'UpdateConsentVendorsService'
+      })
+    })
   }
 
   _buildEagerSingletonInstances() {

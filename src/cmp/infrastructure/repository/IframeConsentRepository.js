@@ -8,13 +8,8 @@ import {
 } from '../configuration/iframeConsentCommands'
 
 export default class IframeConsentRepository {
-  constructor({
-    iframeCommunicationClient,
-    vendorListRepository,
-    consentFactory
-  }) {
+  constructor({iframeCommunicationClient, consentFactory}) {
     this._iframeCommunicationClient = iframeCommunicationClient
-    this._vendorListRepository = vendorListRepository
     this._consentFactory = consentFactory
   }
 
@@ -25,19 +20,15 @@ export default class IframeConsentRepository {
   getConsent() {
     return Promise.resolve()
       .then(() =>
-        Promise.all([
-          this._iframeCommunicationClient.request({
-            command: READ_CONSENT_COMMAND
-          }),
-          this._vendorListRepository.getGlobalVendorList()
-        ])
+        this._iframeCommunicationClient.request({
+          command: READ_CONSENT_COMMAND
+        })
       )
       .then(
-        ([encodedConsent, globalVendorList]) =>
+        encodedConsent =>
           (encodedConsent &&
             this._consentFactory.createConsent({
-              encodedConsent,
-              globalVendorList
+              encodedConsent
             })) ||
           undefined
       )
