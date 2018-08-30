@@ -12,12 +12,12 @@ export default class InMemoryVendorListRepository {
       )
     }
     this._latestVersion =
-      (initialVendorList && initialVendorList.vendorListVersion) || undefined
+      (initialVendorList && initialVendorList.vendorListVersion) || 0
   }
 
   getGlobalVendorList({vendorListVersion = this._latestVersion} = {}) {
-    return Promise.resolve().then(
-      () => vendorListVersion && this._vendorListMap.get(vendorListVersion)
+    return Promise.resolve().then(() =>
+      this._vendorListMap.get(vendorListVersion)
     )
   }
 
