@@ -1,10 +1,7 @@
 import {expect} from 'chai'
-import sinon from 'sinon'
-import GlobalVendorList from '../../../resources/globalvendorlist.json'
 import CookieConsentRepository from '../../../../cmp/infrastructure/repository/CookieConsentRepository'
 import CookieHandler from '../../../../cmp/infrastructure/service/CookieHandler'
 import {JSDOM} from 'jsdom'
-import ConsentFactory from '../../../../cmp/domain/consent/ConsentFactory'
 
 describe('CookieConsentRepositoryTest', () => {
   describe('getConsent', () => {
@@ -17,15 +14,13 @@ describe('CookieConsentRepositoryTest', () => {
       const cookieHandler = new CookieHandler({
         dom: documentMock
       })
-      const vendorListRepositoryMock = {
-        getGlobalVendorList: sinon.spy()
+      const consentFactoryMock = {
+        createConsent: () => Promise.resolve({})
       }
-      const consentFactoryMock = {}
 
       const repository = new CookieConsentRepository({
         cookieHandler: cookieHandler,
-        consentFactory: consentFactoryMock,
-        vendorListRepository: vendorListRepositoryMock
+        consentFactory: consentFactoryMock
       })
 
       repository
@@ -41,7 +36,6 @@ describe('CookieConsentRepositoryTest', () => {
     })
     it('Should return the ConsentString restored from the cookie which consent string is the cookie value', done => {
       const givenAllowedVendorIds = [1]
-      const givenGlobalVendorList = GlobalVendorList
       const givenEuConsent =
         'BOPmXwlOQETrjABABAESBK-AAAAcd7vf____79n_____9uz_Gv_rvf__33e8_39v_h_r_-___mf-3zV4-91vV11yPg1urXIr1FpjQ6MGgA'
       const givenCookieValue =
@@ -55,16 +49,16 @@ describe('CookieConsentRepositoryTest', () => {
         dom: documentMock
       })
 
-      const vendorListRepositoryMock = {
-        getGlobalVendorList: () => givenGlobalVendorList
+      const consentFactoryMock = {
+        createConsent: () =>
+          Promise.resolve({
+            getConsentString: () => givenEuConsent
+          })
       }
-
-      const consentFactory = new ConsentFactory()
 
       const repository = new CookieConsentRepository({
         cookieHandler: cookieHandler,
-        consentFactory: consentFactory,
-        vendorListRepository: vendorListRepositoryMock
+        consentFactory: consentFactoryMock
       })
 
       repository
@@ -81,7 +75,6 @@ describe('CookieConsentRepositoryTest', () => {
   })
   describe('saveConsent', () => {
     it('Should return true after cookie consent has been stored', done => {
-      const givenGlobalVendorList = GlobalVendorList
       const givenEuConsent =
         'BOPmXwlOQETrjABABAESBK-AAAAcd7vf____79n_____9uz_Gv_rvf__33e8_39v_h_r_-___mf-3zV4-91vV11yPg1urXIr1FpjQ6MGgA'
       const givenDOM = new JSDOM(
@@ -91,20 +84,21 @@ describe('CookieConsentRepositoryTest', () => {
       const cookieHandler = new CookieHandler({
         dom: givenDOM
       })
-      const vendorListRepositoryMock = {
-        getGlobalVendorList: () => givenGlobalVendorList
-      }
 
       const consentMock = {
         getConsentString: () => givenEuConsent
       }
 
-      const consentFactory = new ConsentFactory()
+      const consentFactoryMock = {
+        createConsent: () =>
+          Promise.resolve({
+            getConsentString: () => givenEuConsent
+          })
+      }
 
       const repository = new CookieConsentRepository({
         cookieHandler: cookieHandler,
-        consentFactory: consentFactory,
-        vendorListRepository: vendorListRepositoryMock
+        consentFactory: consentFactoryMock
       })
 
       const expectedCookieValue =

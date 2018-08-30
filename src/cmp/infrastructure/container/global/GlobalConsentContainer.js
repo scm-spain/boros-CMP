@@ -18,9 +18,6 @@ export default class GlobalConsentContainer extends BaseConsentContainer {
       iframeCommunicationClient: this.getInstance({
         key: 'IframeCommunicationClient'
       }),
-      vendorListRepository: this.getInstance({
-        key: 'VendorListRepository'
-      }),
       consentFactory: this.getInstance({
         key: 'ConsentFactory'
       })
