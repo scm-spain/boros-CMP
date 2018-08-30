@@ -55,7 +55,7 @@ To initialize Boros CMP using [default configuration](#configuration-properties-
 ```javascript
 import boroscmp from '@schibstedspain/boros-cmp'
 
-boroscmp.context({window})
+boroscmp.init()
 ```
 
 To initialize Boros CMP using customized configuration values:
@@ -74,7 +74,7 @@ const customConfig = {
   }
 }
 
-boroscmp.context({window, config: customConfig})
+boroscmp.init({config: customConfig})
 ```
 
 ## Configuration

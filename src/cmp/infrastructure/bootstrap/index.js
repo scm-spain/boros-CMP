@@ -2,7 +2,7 @@ import GlobalStorageBootstrap from './GlobalStorageBootstrap'
 import LocalStorageBootstrap from './LocalStorageBootstrap'
 
 export default class Bootstrap {
-  static context({window, config}) {
+  static init({config} = {}) {
     switch (config && config.gdpr && config.gdpr.storeConsentGlobally) {
       case true:
         return GlobalStorageBootstrap.init({

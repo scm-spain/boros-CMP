@@ -1,5 +1,5 @@
 {
-  "name": "@schibstedspain/cmp",
+  "name": "@schibstedspain/boros-cmp",
   "version": "1.0.0",
   "description": "Schibsted GDPR - Consent Management Provider - Standalone",
   "main": "dist/cmp.pro.js",
@@ -28,7 +28,8 @@
     "gdpr",
     "cmp",
     "consent-string",
-    "iab"
+    "iab",
+    "boros"
   ],
   "author": "One Punch Team",
   "license": "MIT",
