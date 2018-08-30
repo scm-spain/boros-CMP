@@ -8,6 +8,13 @@ export default class ConsentFactory {
     this._vendorListRepository = vendorListRepository
   }
 
+  /**
+   * Decodes a base-64 consent string.
+   * If the decoded consent has a vendorListVersion that differs from the current global vendor list version,
+   * it will dispatch a GLOBAL_VENDOR_LIST_VERSION_CHANGED event.
+   * @param encodedConsent {string}
+   * @return {Promise.<ConsentString>}
+   */
   createConsent({encodedConsent}) {
     return Promise.resolve()
       .then(() => new ConsentString(encodedConsent))
