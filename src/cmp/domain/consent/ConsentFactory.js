@@ -51,7 +51,7 @@ export default class ConsentFactory {
     return Promise.resolve().then(() => {
       if (
         newGlobalVendorList.vendorListVersion !==
-        oldGlobalVendorList.oldGlobalVendorList
+        oldGlobalVendorList.vendorListVersion
       ) {
         DomainEventBus.raise({
           domainEvent: globalVendorListVersionChanged({
