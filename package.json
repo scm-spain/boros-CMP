@@ -1,16 +1,21 @@
 {
-  "name": "@schibstedspain/cmp",
-  "version": "0.0.1",
-  "description": "GDPR - Consent Management Provider",
-  "main": "dist/",
+  "name": "@schibstedspain/boros-cmp",
+  "version": "1.0.0",
+  "description": "Schibsted GDPR - Consent Management Provider - Standalone",
+  "main": "dist/cmp.pro.js",
   "scripts": {
-    "cleanDistFolder": "rm -Rf ./dist",
-    "prepublishOnly": "npm run cleanDistFolder && npm run build",
-    "build": "npm run cleanDistFolder && babel src --ignore test --out-dir dist ",
-    "test": "mocha --recursive --require babel-polyfill --compilers js:babel-register \"test/**/*.js\"",
+    "prepublishOnly": "npm run build",
+    "start:cmp:dev": "webpack-dev-server --config src/cmp/infrastructure/build/webpack.config.cmp.babel.js --mode=development",
+    "test": "mocha --recursive --require babel-polyfill --require babel-core/register \"src/test/**/*.js\"",
     "coverage": "istanbul cover --report html _mocha -- ./test --recursive --compilers js:babel-register",
-    "coverage:ci": "istanbul cover _mocha -- ./test --recursive --compilers js:babel-register && codecov",
-    "lint": "sui-lint js"
+    "coverage:ci": "istanbul cover _mocha -- ./src/test --recursive --compilers js:babel-register && codecov",
+    "lint": "sui-lint js",
+    "build:cmp": "npm run build:cmp:pro",
+    "build:cmp:dev": "webpack --config src/cmp/infrastructure/build/webpack.config.babel.js --mode=development",
+    "build:cmp:pro": "webpack --config src/cmp/infrastructure/build/webpack.config.babel.js --mode=production",
+    "build:global": "npm run build:global:pro",
+    "build:global:dev": "webpack --config src/globalstorage/infrastructure/build/webpack.config.babel.js --mode=development",
+    "build:global:pro": "webpack --config src/globalstorage/infrastructure/build/webpack.config.babel.js --mode=production"
   },
   "repository": {
     "type": "git",
@@ -21,10 +26,13 @@
     "advertising",
     "schibsted",
     "gdpr",
-    "cmp"
+    "cmp",
+    "consent-string",
+    "iab",
+    "boros"
   ],
-  "author": "The Mighty Ducks of Advertising",
-  "license": "ISC",
+  "author": "One Punch Team",
+  "license": "MIT",
   "devDependencies": {
     "@s-ui/lint": "^2.13.0",
     "babel-cli": "^6.24.0",
@@ -32,11 +40,16 @@
     "babel-preset-sui": "1",
     "babel-register": "^6.24.0",
     "chai": "^4.0.2",
+    "clean-webpack-plugin": "^0.1.19",
     "codecov": "^3.0.2",
+    "html-webpack-plugin": "^3.2.0",
     "istanbul": "^1.1.0-alpha.1",
     "jsdom": "^11.11.0",
-    "mocha": "^3.4.2",
-    "sinon": "^2.3.4"
+    "mocha": "^5.2.0",
+    "sinon": "^2.3.4",
+    "webpack": "^4.12.0",
+    "webpack-cli": "^3.0.8",
+    "webpack-dev-server": "^3.1.5"
   },
   "pre-commit": [
     "lint",
@@ -52,5 +65,9 @@
       "./node_modules/@s-ui/lint/eslintrc.js"
     ]
   },
-  "dependencies": {}
+  "dependencies": {
+    "consent-string": "^1.2.4",
+    "uuid": "^3.3.2",
+    "whatwg-fetch": "^2.0.4"
+  }
 }
