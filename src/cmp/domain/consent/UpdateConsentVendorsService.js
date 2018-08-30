@@ -18,24 +18,19 @@ export default class UpdateConsentVendorsService {
     oldGlobalVendorList,
     allowedVendorIds
   }) {
-    return Promise.resolve()
-      .then(
-        () =>
-          newGlobalVendorList.vendorListVersion !==
-            oldGlobalVendorList.vendorListVersion &&
-          this._resolveNewAcceptedVendorIds({
-            consentAcceptedVendors,
-            newGlobalVendorList,
-            oldGlobalVendorList,
-            allowedVendorIds
-          }).then(newAcceptedVendorIds =>
-            this._saveVendorConsents({
-              purposeConsents: consentAcceptedPurposes,
-              vendorConsents: newAcceptedVendorIds
-            })
-          )
+    return Promise.resolve().then(() =>
+      this._resolveNewAcceptedVendorIds({
+        consentAcceptedVendors,
+        newGlobalVendorList,
+        oldGlobalVendorList,
+        allowedVendorIds
+      }).then(newAcceptedVendorIds =>
+        this._saveVendorConsents({
+          purposeConsents: consentAcceptedPurposes,
+          vendorConsents: newAcceptedVendorIds
+        })
       )
-      .then(null)
+    )
   }
 
   _resolveNewAcceptedVendorIds({
