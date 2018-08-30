@@ -44,6 +44,7 @@ export default class DebugLocalConsentContainer extends LocalConsentContainer {
 
   _buildEagerSingletonInstances() {
     this.getInstance({key: 'Log'})
+    super._buildEagerSingletonInstances()
     const errorObserver = this.getInstance({key: 'ErrorObserverFactory'})
     const debugObserver = this.getInstance({key: 'DebugObserverFactory'})
     DomainEventBus.register({

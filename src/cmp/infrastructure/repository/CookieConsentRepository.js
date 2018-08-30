@@ -9,18 +9,12 @@ import {
 } from '../configuration/cookie'
 
 export default class CookieConsentRepository {
-  constructor({cookieHandler, consentFactory, vendorListRepository}) {
-    this._readVendorCookie = readCookie({
-      cookieHandler,
-      cookieName: VENDOR_CONSENT_COOKIE_NAME
-    })
-    this._writeVendorCookie = writeCookie({
-      cookieHandler,
-      cookieName: VENDOR_CONSENT_COOKIE_NAME,
-      maxAgeSeconds: VENDOR_CONSENT_COOKIE_MAX_AGE
-    })
-    this._createConsent = createConsent({consentFactory})
-    this._getGlobalVendorList = getGlobalVendorList({vendorListRepository})
+  constructor({cookieHandler, consentFactory}) {
+    this._cookieHandler = cookieHandler
+    this._consentFactory = consentFactory
+    this._cookieName = VENDOR_CONSENT_COOKIE_NAME
+    this._maxAgeSeconds = VENDOR_CONSENT_COOKIE_MAX_AGE
+    this._path = VENDOR_CONSENT_COOKIE_DEFAULT_PATH
   }
 
   /**
@@ -29,46 +23,35 @@ export default class CookieConsentRepository {
    */
   getConsent() {
     return Promise.resolve()
-      .then(() =>
-        Promise.all([this._readVendorCookie(), this._getGlobalVendorList()])
-      )
+      .then(() => this._readCookie())
       .then(
-        ([encodedConsent, globalVendorList]) =>
-          (encodedConsent &&
-            this._createConsent({encodedConsent, globalVendorList})) ||
-          undefined
+        encodedConsent =>
+          (encodedConsent && this._createConsent({encodedConsent})) || undefined
       )
   }
 
   saveConsent({consent}) {
     return Promise.resolve()
       .then(() => consent.getConsentString())
-      .then(encodedConsent => this._writeVendorCookie({value: encodedConsent}))
+      .then(encodedConsent => this._writeCookie({value: encodedConsent}))
+  }
+
+  _readCookie() {
+    return this._cookieHandler.read({cookieName: this._cookieName})
+  }
+
+  _writeCookie({value}) {
+    return this._cookieHandler
+      .write({
+        cookieName: this._cookieName,
+        maxAgeSeconds: this._maxAgeSeconds,
+        path: this._path,
+        value
+      })
+      .then(() => true)
+  }
+
+  _createConsent({encodedConsent}) {
+    return this._consentFactory.createConsent({encodedConsent})
   }
 }
-
-const readCookie = ({cookieHandler, cookieName}) => () =>
-  cookieHandler.read({cookieName})
-
-const writeCookie = ({
-  cookieHandler,
-  cookieName,
-  maxAgeSeconds,
-  path = VENDOR_CONSENT_COOKIE_DEFAULT_PATH
-} = {}) => ({value}) =>
-  cookieHandler
-    .write({
-      cookieName,
-      value,
-      maxAgeSeconds,
-      path
-    })
-    .then(() => true)
-
-const getGlobalVendorList = ({vendorListRepository}) => () =>
-  vendorListRepository.getGlobalVendorList()
-
-const createConsent = ({consentFactory}) => ({
-  encodedConsent,
-  globalVendorList
-}) => consentFactory.createConsent({encodedConsent, globalVendorList})

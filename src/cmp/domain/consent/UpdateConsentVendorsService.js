@@ -7,60 +7,49 @@ export default class UpdateConsentVendorsService {
     vendorConsentsRepository
   }) {
     this._newVendorsStatusService = newVendorsStatusService
-    this._getGlobalVendorList = getGlobalVendorList({vendorListRepository})
-    this._saveVendorConsents = saveVendorConsents({vendorConsentsRepository})
+    this._vendorListRepository = vendorListRepository
+    this._vendorConsentsRepository = vendorConsentsRepository
   }
 
   updateConsentVendorList({
     consentAcceptedVendors,
     consentAcceptedPurposes,
-    consentGlobalVendorListVersion,
-    currentGlobalVendorList,
+    newGlobalVendorList,
+    oldGlobalVendorList,
     allowedVendorIds
   }) {
-    return Promise.resolve()
-      .then(
-        () =>
-          consentGlobalVendorListVersion !==
-            currentGlobalVendorList.vendorListVersion &&
-          this._resolveNewAcceptedVendorIds({
-            consentAcceptedVendors,
-            consentGlobalVendorListVersion,
-            currentGlobalVendorList,
-            allowedVendorIds
-          }).then(newAcceptedVendorIds =>
-            this._saveVendorConsents({
-              purposeConsents: consentAcceptedPurposes,
-              vendorConsents: newAcceptedVendorIds
-            })
-          )
+    return Promise.resolve().then(() =>
+      this._resolveNewAcceptedVendorIds({
+        consentAcceptedVendors,
+        newGlobalVendorList,
+        oldGlobalVendorList,
+        allowedVendorIds
+      }).then(newAcceptedVendorIds =>
+        this._saveVendorConsents({
+          purposeConsents: consentAcceptedPurposes,
+          vendorConsents: newAcceptedVendorIds
+        })
       )
-      .then(null)
+    )
   }
 
   _resolveNewAcceptedVendorIds({
     consentAcceptedVendors,
-    consentGlobalVendorListVersion,
-    currentGlobalVendorList,
+    newGlobalVendorList,
+    oldGlobalVendorList,
     allowedVendorIds
   }) {
-    return this._getGlobalVendorList({
-      vendorListVersion: consentGlobalVendorListVersion
-    })
-      .then(oldGlobalVendorList =>
-        Promise.all([
-          currentGlobalVendorList.vendors.map(vendor => vendor.id),
-          oldGlobalVendorList.vendors.map(vendor => vendor.id)
-        ])
-      )
-      .then(([currentGlobalVendorIds, oldGlobalVendorIds]) =>
-        this._updateConsentWithNewGlobalVendorList({
-          acceptedVendorIds: consentAcceptedVendors,
-          newGlobalVendorIds: currentGlobalVendorIds,
-          oldGlobalVendorIds: oldGlobalVendorIds,
-          allowedVendorIds
-        })
-      )
+    return Promise.all([
+      newGlobalVendorList.vendors.map(vendor => vendor.id),
+      oldGlobalVendorList.vendors.map(vendor => vendor.id)
+    ]).then(([currentGlobalVendorIds, oldGlobalVendorIds]) =>
+      this._updateConsentWithNewGlobalVendorList({
+        acceptedVendorIds: consentAcceptedVendors,
+        newGlobalVendorIds: currentGlobalVendorIds,
+        oldGlobalVendorIds: oldGlobalVendorIds,
+        allowedVendorIds
+      })
+    )
   }
 
   _updateConsentWithNewGlobalVendorList({
@@ -107,14 +96,17 @@ export default class UpdateConsentVendorsService {
       }
     )
   }
+
+  _getGlobalVendorList({vendorListVersion} = {}) {
+    return this._vendorListRepository.getGlobalVendorList({vendorListVersion})
+  }
+
+  _saveVendorConsents({vendorConsents, purposeConsents}) {
+    return this._vendorConsentsRepository.saveVendorConsents({
+      vendorConsents: {
+        vendorConsents,
+        purposeConsents
+      }
+    })
+  }
 }
-
-const getGlobalVendorList = ({vendorListRepository}) => ({
-  vendorListVersion
-} = {}) => vendorListRepository.getGlobalVendorList({vendorListVersion})
-
-const saveVendorConsents = ({vendorConsentsRepository}) => ({
-  vendorConsents,
-  purposeConsents
-}) =>
-  vendorConsentsRepository.saveVendorConsents({vendorConsents, purposeConsents})

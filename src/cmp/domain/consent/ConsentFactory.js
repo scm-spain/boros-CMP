@@ -3,38 +3,62 @@ import {ConsentString} from 'consent-string'
 import {globalVendorListVersionChanged} from './globalVendorListVersionChanged'
 
 export default class ConsentFactory {
-  constructor({allowedVendorIds} = {}) {
+  constructor({allowedVendorIds, vendorListRepository} = {}) {
     this._allowedVendorIds = allowedVendorIds
+    this._vendorListRepository = vendorListRepository
   }
 
-  createConsent({encodedConsent, globalVendorList}) {
+  /**
+   * Decodes a base-64 consent string.
+   * If the decoded consent has a vendorListVersion that differs from the current global vendor list version,
+   * it will dispatch a GLOBAL_VENDOR_LIST_VERSION_CHANGED event.
+   * @param encodedConsent {string}
+   * @return {Promise.<ConsentString>}
+   */
+  createConsent({encodedConsent}) {
     return Promise.resolve()
       .then(() => new ConsentString(encodedConsent))
       .then(consent =>
+        Promise.all([
+          consent,
+          this._getGlobalVendorList(),
+          this._getGlobalVendorList({
+            vendorListVersion: consent.vendorListVersion
+          })
+        ])
+      )
+      .then(([consent, newGlobalVendorList, oldGlobalVendorList]) =>
         this._checkConsentGlobalVendorsListVersion({
           consent,
-          globalVendorList
+          newGlobalVendorList,
+          oldGlobalVendorList
+        }).then(consent => {
+          consent.setGlobalVendorList(oldGlobalVendorList)
+          return consent
         })
       )
-      .then(consent => {
-        consent.setGlobalVendorList(globalVendorList)
-        return consent
-      })
   }
 
-  _checkConsentGlobalVendorsListVersion({consent, globalVendorList}) {
+  _getGlobalVendorList({vendorListVersion} = {}) {
+    return this._vendorListRepository.getGlobalVendorList({vendorListVersion})
+  }
+
+  _checkConsentGlobalVendorsListVersion({
+    consent,
+    newGlobalVendorList,
+    oldGlobalVendorList
+  }) {
     return Promise.resolve().then(() => {
       if (
-        consent.vendorListVersion &&
-        consent.vendorListVersion > 0 &&
-        consent.vendorListVersion !== globalVendorList.vendorListVersion
+        newGlobalVendorList.vendorListVersion !==
+        oldGlobalVendorList.oldGlobalVendorList
       ) {
         DomainEventBus.raise({
           domainEvent: globalVendorListVersionChanged({
             purposeConsents: consent.allowedPurposeIds,
             vendorConsents: consent.allowedVendorIds,
-            oldVendorListVersion: consent.vendorListVersion,
-            newGlobalVendorList: globalVendorList,
+            newGlobalVendorList,
+            oldGlobalVendorList,
             allowedVendorIds: this._allowedVendorIds
           })
         })
