@@ -1,4 +1,5 @@
 import commandConsumer from './services/commandConsumer'
+import buildValidVendorConsents from './services/vendor_consents/buildValidVendorConsents'
 
 export default class Cmp {
   /**
@@ -16,9 +17,13 @@ export default class Cmp {
   }
 
   setVendorConsents(vendorConsents) {
-    return this._container
-      .getInstance({key: 'SetVendorConsentsUseCase'})
-      .setVendorConsents({vendorConsents})
+    return Promise.resolve()
+      .then(buildValidVendorConsents)
+      .then(validVendorConsents =>
+        this._container
+          .getInstance({key: 'SetVendorConsentsUseCase'})
+          .setVendorConsents({vendorConsents: validVendorConsents})
+      )
   }
 
   getConsentData(consentStringVersion) {
