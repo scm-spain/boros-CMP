@@ -3,7 +3,7 @@ import buildValidVendorConsents from '../../../../cmp/application/services/vendo
 
 describe('buildValidVendorConsents', () => {
   describe('Given a valid object populated with number keys and boolean values', () => {
-    it('Should return an array with the id keys wich values are evaluated to true', done => {
+    it('Should return an array with the id keys which values are evaluated to true', done => {
       const givenObject = {
         vendorConsents: {
           1: true,
@@ -33,7 +33,8 @@ describe('buildValidVendorConsents', () => {
     })
   })
   describe('Given an invalid object populated with data', () => {
-    it('Should return an array with the number keys wich values are boolean evaluated to true', () => {
+    it('Should reject with an invalid format error', done => {
+      const expectedError = 'VendorConsentsFormatError'
       const givenObject = {
         1: true,
         2: false,
@@ -42,24 +43,52 @@ describe('buildValidVendorConsents', () => {
         '4': true,
         5: 'not a boolean'
       }
-      const expectedResult = [1, 3, 4]
-      const result = buildValidVendorConsents(givenObject)
-      expect(result, 'should contain the true valued keys').to.deep.equal(
-        expectedResult
-      )
+      buildValidVendorConsents(givenObject)
+        .then(consents => {
+          done(new Error(`done shouldn't be called with consents ${consents}`))
+        })
+        .catch(error => {
+          expect(
+            error.name,
+            'should be of type VendorConsentsFormatError'
+          ).to.deep.equal(expectedError)
+          done()
+        })
     })
-  })
-  describe('Given an empty object', () => {
-    it('Should return an empty array for an empty object', () => {
-      const givenObject = {}
-      const expectedResult = []
-      const result = buildValidVendorConsents(givenObject)
-      expect(result, 'should be an empty array').to.deep.equal(expectedResult)
-    })
-    it('Should return an empty array for an undefined input', () => {
-      const expectedResult = []
-      const result = buildValidVendorConsents()
-      expect(result, 'should be an empty array').to.deep.equal(expectedResult)
+
+    it('Should reject with an invalid entry error', done => {
+      const expectedError = 'VendorConsentsEntryError'
+      const givenObject = {
+        vendorConsents: {
+          bad_key: true,
+          2: false,
+          3: true,
+          4: false,
+          5: true
+        },
+        purposeConsents: {
+          1: 'wrong here',
+          2: false,
+          3: true
+        }
+      }
+      buildValidVendorConsents(givenObject)
+        .then(consents => {
+          done(
+            new Error(
+              `done shouldn't be called with consents ${Object.entries(
+                consents
+              )}`
+            )
+          )
+        })
+        .catch(error => {
+          expect(
+            error.name,
+            'should be of type VendorConsentsEntryError'
+          ).to.deep.equal(expectedError)
+          done()
+        })
     })
   })
 })

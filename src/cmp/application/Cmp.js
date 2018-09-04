@@ -17,7 +17,7 @@ export default class Cmp {
   }
 
   setVendorConsents(vendorConsents) {
-    return Promise.resolve()
+    return Promise.resolve(vendorConsents)
       .then(buildValidVendorConsents)
       .then(validVendorConsents =>
         this._container

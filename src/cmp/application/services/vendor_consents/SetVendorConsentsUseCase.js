@@ -4,11 +4,9 @@ export default class SetVendorConsentsUseCase {
   }
 
   setVendorConsents({vendorConsents} = {}) {
-    return Promise.resolve().then(() =>
-      this._vendorConsentsRepository.saveVendorConsents({
-        vendorConsents: vendorConsents.vendorConsents,
-        purposeConsents: vendorConsents.purposeConsents
-      })
-    )
+    return this._vendorConsentsRepository.saveVendorConsents({
+      vendorConsents: vendorConsents.vendorConsents,
+      purposeConsents: vendorConsents.purposeConsents
+    })
   }
 }
