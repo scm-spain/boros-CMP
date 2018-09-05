@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import GetVendorConsentsUseCase from '../../../cmp/application/services/GetVendorConsentsUseCase'
+import GetVendorConsentsUseCase from '../../../cmp/application/services/vendor_consents/GetVendorConsentsUseCase'
 
 describe('Get Vendor Consents Use Case', () => {
   it('Should recover the stored VendorConsents if it was stored', done => {

@@ -1,7 +1,7 @@
 import {
   CONSENT_STATUS_ACCEPTED,
   CONSENT_STATUS_NOT_ACCEPTED
-} from '../../domain/consent/consentStatus'
+} from '../../../domain/consent/consentStatus'
 
 export default class GetConsentStatusUseCase {
   constructor({consentRepository}) {
