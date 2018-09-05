@@ -26,21 +26,12 @@ describe('UpdateConsentVendorsService', () => {
         'saveVendorConsents'
       )
 
-      const vendorListRepositoryMock = {
-        getGlobalVendorList: ({vendorListVersion}) =>
-          vendorListVersion === givenOldGlobalVendorList.vendorListVersion
-            ? Promise.resolve(givenOldGlobalVendorList)
-            : Promise.reject(
-                new Error('should request only the obsolete version')
-              )
-      }
       const newVendorsStatusService = new NewVendorsStatusService({
         option: givenNewVendorsAcceptationOption
       })
 
       const service = new UpdateConsentVendorsService({
         vendorConsentsRepository: vendorConsentsRepositoryMock,
-        vendorListRepository: vendorListRepositoryMock,
         newVendorsStatusService
       })
 
@@ -57,16 +48,15 @@ describe('UpdateConsentVendorsService', () => {
             'should call to save updated vendor consents'
           ).to.be.true
           expect(
-            saveVendorConsentsSpy.args[0][0].vendorConsents.vendorConsents,
+            saveVendorConsentsSpy.args[0][0].vendorConsents,
             'should send the accepted vendor consents containing the new ones'
           ).to.include(395)
           expect(
-            saveVendorConsentsSpy.args[0][0].vendorConsents.vendorConsents
-              .length,
+            saveVendorConsentsSpy.args[0][0].vendorConsents.length,
             'should contain 3 new accepted vendors'
           ).to.equal(givenNewGlobalVendorList.vendors.length)
           expect(
-            saveVendorConsentsSpy.args[0][0].vendorConsents.purposeConsents,
+            saveVendorConsentsSpy.args[0][0].purposeConsents,
             'should contain the same accepted purposes'
           ).to.deep.equal(givenAcceptedPurposes)
           done()
@@ -97,21 +87,12 @@ describe('UpdateConsentVendorsService', () => {
         'saveVendorConsents'
       )
 
-      const vendorListRepositoryMock = {
-        getGlobalVendorList: ({vendorListVersion}) =>
-          vendorListVersion === givenOldGlobalVendorList.vendorListVersion
-            ? Promise.resolve(givenOldGlobalVendorList)
-            : Promise.reject(
-                new Error('should request only the obsolete version')
-              )
-      }
       const newVendorsStatusService = new NewVendorsStatusService({
         option: givenNewVendorsAcceptationOption
       })
 
       const service = new UpdateConsentVendorsService({
         vendorConsentsRepository: vendorConsentsRepositoryMock,
-        vendorListRepository: vendorListRepositoryMock,
         newVendorsStatusService
       })
 
@@ -129,16 +110,15 @@ describe('UpdateConsentVendorsService', () => {
             'should call to save updated vendor consents'
           ).to.be.true
           expect(
-            saveVendorConsentsSpy.args[0][0].vendorConsents.vendorConsents,
+            saveVendorConsentsSpy.args[0][0].vendorConsents,
             'should not accept a non-allowed vendor id'
           ).to.not.include(395)
           expect(
-            saveVendorConsentsSpy.args[0][0].vendorConsents.vendorConsents
-              .length,
+            saveVendorConsentsSpy.args[0][0].vendorConsents.length,
             'should contain 2 new accepted vendors (only allowed)'
           ).to.equal(givenAllowedVendorIds.length)
           expect(
-            saveVendorConsentsSpy.args[0][0].vendorConsents.purposeConsents,
+            saveVendorConsentsSpy.args[0][0].purposeConsents,
             'should contain the same accepted purposes'
           ).to.deep.equal(givenAcceptedPurposes)
           done()

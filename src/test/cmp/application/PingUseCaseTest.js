@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import PingUseCase from '../../../cmp/application/services/PingUseCase'
+import PingUseCase from '../../../cmp/application/services/ping/PingUseCase'
 
 describe('Ping Use Case', () => {
   it('Should return directly with the IAB PingReturn specification', done => {

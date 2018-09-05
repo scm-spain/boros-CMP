@@ -139,11 +139,6 @@ describe('ConsentStringVendorConsentsRepository', () => {
         .filter(id => !givenDisallowedVendors.includes(id))
       const givenAllowedPurposes = [1, 2, 3, 4, 5]
 
-      const givenVendorConsents = {
-        vendorConsents: givenAllowedVendors,
-        purposeConsents: givenAllowedPurposes
-      }
-
       const vendorConsentsFactoryMock = {}
       const consentRepositoryMock = {
         saveConsent: () => Promise.resolve()
@@ -168,7 +163,10 @@ describe('ConsentStringVendorConsentsRepository', () => {
         'BABAESBK-AAAAcd7vf____79n_____9uz_Gv_rvf__33e8_39v_h_r_-___mf-3zV4-91vV11yPg1urXIr1FpjQ6MGgA'
 
       repository
-        .saveVendorConsents({vendorConsents: givenVendorConsents})
+        .saveVendorConsents({
+          vendorConsents: givenAllowedVendors,
+          purposeConsents: givenAllowedPurposes
+        })
         .then(() => {
           expect(
             saveConsentSpy.calledOnce,

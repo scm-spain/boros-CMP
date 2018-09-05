@@ -6,7 +6,7 @@ export default class VendorConsentsRepository {
     throw new Error('VendorConsentsRepository#getVendorConsents')
   }
 
-  saveVendorConsents({vendorConsents}) {
+  saveVendorConsents({vendorConsents, purposeConsents}) {
     throw new Error('VendorConsentsRepository#saveVendorConsents')
   }
 }

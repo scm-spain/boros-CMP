@@ -1,6 +1,6 @@
 import {expect} from 'chai'
 import sinon from 'sinon'
-import GetVendorListUseCase from '../../../cmp/application/services/GetVendorListUseCase'
+import GetVendorListUseCase from '../../../cmp/application/services/vendor_list/GetVendorListUseCase'
 
 describe('Get Vendor List Use Case', () => {
   it('Should return the global vendor list', done => {

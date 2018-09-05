@@ -1,14 +1,14 @@
 import DomainEventBus from '../../domain/event_bus/DomainEventBus'
-import GetConsentDataUseCase from '../../application/services/GetConsentDataUseCase'
+import GetConsentDataUseCase from '../../application/services/consent/GetConsentDataUseCase'
 import ChainedVendorListRepository from '../repository/ChainedVendorListRepository'
 import InMemoryVendorListRepository from '../repository/InMemoryVendorListRepository'
 import HttpVendorListRepository from '../repository/HttpVendorListRepository'
 import ConsentStringVendorConsentsRepository from '../repository/ConsentStringVendorConsentsRepository'
-import GetConsentStatusUseCase from '../../application/services/GetConsentStatusUseCase'
-import GetVendorConsentsUseCase from '../../application/services/GetVendorConsentsUseCase'
-import GetVendorListUseCase from '../../application/services/GetVendorListUseCase'
-import PingUseCase from '../../application/services/PingUseCase'
-import SetVendorConsentsUseCase from '../../application/services/SetVendorConsentsUseCase'
+import GetConsentStatusUseCase from '../../application/services/consent/GetConsentStatusUseCase'
+import GetVendorConsentsUseCase from '../../application/services/vendor_consents/GetVendorConsentsUseCase'
+import GetVendorListUseCase from '../../application/services/vendor_list/GetVendorListUseCase'
+import PingUseCase from '../../application/services/ping/PingUseCase'
+import SetVendorConsentsUseCase from '../../application/services/vendor_consents/SetVendorConsentsUseCase'
 import Configuration from '../configuration/Configuration'
 import {errorObserverFactory} from '../observer/errorObserverFactory'
 import {NewVendorsStatusService} from '../../domain/vendor_consents/NewVendorsStatusService'
@@ -150,7 +150,6 @@ export default class BaseConsentContainer {
       newVendorsStatusService: this.getInstance({
         key: 'NewVendorsStatusService'
       }),
-      vendorListRepository: this.getInstance({key: 'VendorListRepository'}),
       vendorConsentsRepository: this.getInstance({
         key: 'VendorConsentsRepository'
       })

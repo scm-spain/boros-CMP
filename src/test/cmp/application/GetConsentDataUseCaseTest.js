@@ -1,4 +1,4 @@
-import GetConsentDataUseCase from '../../../cmp/application/services/GetConsentDataUseCase'
+import GetConsentDataUseCase from '../../../cmp/application/services/consent/GetConsentDataUseCase'
 import sinon from 'sinon'
 import {expect} from 'chai'
 
