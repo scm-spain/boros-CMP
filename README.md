@@ -56,6 +56,9 @@ To initialize Boros CMP using [default configuration](#configuration-properties-
 import boroscmp from '@schibstedspain/boros-cmp'
 
 boroscmp.init()
+    .then(()=>{
+        // do your stuff ...
+    })
 ```
 
 To initialize Boros CMP using customized configuration values:
@@ -75,7 +78,24 @@ const customConfig = {
 }
 
 boroscmp.init({config: customConfig})
+    .then(()=>{
+        // do your stuff ...
+    })
 ```
+
+Notice that **init** method is returning a _Promise_ but you can subscribe to *cmpReady* event instead:
+```javascript
+import boroscmp from '@schibstedspain/boros-cmp'
+
+boroscmp.init()
+
+window.document.addEventListener("cmpReady", (event) =>{
+  // do your stuff ...
+  // like calling window.__cmp( ...
+})
+
+```
+
 
 ## Configuration
 

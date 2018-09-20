@@ -6,7 +6,7 @@ import registerCmpLocator from '../controller/registerCmpLocator'
 
 export default class LocalStorageBootstrap {
   static init({window, config}) {
-    Promise.resolve()
+    return Promise.resolve()
       .then(() =>
         Promise.all([
           new Cmp({

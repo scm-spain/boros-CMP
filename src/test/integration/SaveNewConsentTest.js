@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import {ConsentString} from 'consent-string'
 import {
   CONSENT_STATUS_ACCEPTED,
