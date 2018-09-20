@@ -10,7 +10,7 @@ const GLOBAL_CONSENT_STORE_INITIALIZATION_ERROR =
   'Error initializing global storage:'
 export default class GlobalStorageBootstrap {
   static init({window, config}) {
-    Promise.resolve(config)
+    return Promise.resolve(config)
       .then(config =>
         Promise.all([
           registerIframe(window)(config),
