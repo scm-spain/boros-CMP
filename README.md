@@ -87,12 +87,12 @@ Notice that **init** method is returning a _Promise_ but you can subscribe to *c
 ```javascript
 import boroscmp from '@schibstedspain/boros-cmp'
 
-boroscmp.init()
-
 window.document.addEventListener("cmpReady", (event) =>{
   // do your stuff ...
   // like calling window.__cmp( ...
 })
+
+boroscmp.init()
 
 ```
 
