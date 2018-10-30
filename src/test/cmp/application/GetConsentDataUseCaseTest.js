@@ -45,5 +45,37 @@ describe('GetConsentDataUseCase', () => {
         .then(() => done())
         .catch(e => done(e))
     })
+    it('Should return undefined consentData if no consent is set yet', done => {
+      const givenGdprApplies = true
+      const givenHasGlobalScope = false
+      const consentRepositoryMock = {
+        getConsent: () => Promise.resolve(undefined)
+      }
+
+      const getConsentDataUseCase = new GetConsentDataUseCase({
+        consentRepository: consentRepositoryMock,
+        gdprApplies: givenGdprApplies,
+        hasGlobalScope: givenHasGlobalScope
+      })
+
+      getConsentDataUseCase
+        .getConsentData()
+        .then(result => {
+          expect(
+            result.consentData,
+            'Value does not match with the expected.'
+          ).equal(undefined)
+          expect(
+            result.hasGlobalScope,
+            'Value does not match with the expected.'
+          ).equal(givenHasGlobalScope)
+          expect(
+            result.gdprApplies,
+            'Value does not match with the expected.'
+          ).equal(givenGdprApplies)
+        })
+        .then(() => done())
+        .catch(e => done(e))
+    })
   })
 })
