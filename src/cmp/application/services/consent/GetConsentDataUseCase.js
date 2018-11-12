@@ -1,5 +1,3 @@
-import filterConsentMustExist from '../../../domain/consent/filterConsentMustExist'
-
 export default class GetConsentDataUseCase {
   constructor({
     gdprApplies = true,
@@ -22,11 +20,10 @@ export default class GetConsentDataUseCase {
     // TODO: support consentStringVersion.
     return Promise.resolve()
       .then(this._getStoredConsent)
-      .then(filterConsentMustExist)
       .then(consent => ({
         gdprApplies: this._gdprApplies,
         hasGlobalScope: this._storeConsentGlobally,
-        consentData: consent.getConsentString(false)
+        consentData: (consent && consent.getConsentString(false)) || undefined
       }))
   }
 }
