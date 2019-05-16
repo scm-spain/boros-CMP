@@ -38,11 +38,12 @@
     "@babel/cli": "7.2.3",
     "@babel/core": "7.3.4",
     "@babel/plugin-transform-modules-commonjs": "7.2.0",
-    "@babel/polyfill": "^7.2.5",
+    "@babel/polyfill": "7.2.5",
     "@babel/register": "7.0.0",
     "@s-ui/lint": "2",
     "babel-loader": "8.0.5",
-    "babel-preset-sui": "2",
+    "babel-plugin-transform-define": "1.3.1",
+    "babel-preset-sui": "3",
     "chai": "4.0.2",
     "clean-webpack-plugin": "0.1.19",
     "codecov": "3.0.2",
@@ -64,7 +65,13 @@
       "sui"
     ],
     "plugins": [
-      "@babel/plugin-transform-modules-commonjs"
+      "@babel/plugin-transform-modules-commonjs",
+      [
+        "transform-define",
+        {
+          "CMP_VERSION": "1.0.4"
+        }
+      ]
     ]
   },
   "eslintConfig": {
@@ -74,7 +81,7 @@
   },
   "dependencies": {
     "consent-string": "^1.2.4",
-    "uuid": "^3.3.2",
-    "whatwg-fetch": "^2.0.4"
+    "isomorphic-unfetch": "3.0.0",
+    "uuid": "^3.3.2"
   }
 }
