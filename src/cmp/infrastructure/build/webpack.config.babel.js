@@ -13,7 +13,7 @@ const getMajorVersionFromPackageJsonVersion = () => {
 }
 
 let webpackConfig = {
-  entry: ENTRY_PATH,
+  entry: ['@s-ui/polyfills', ENTRY_PATH],
   output: {
     path: path.resolve(OUTPUT_DIST_FOLDER),
     filename: OUTPUT_FILENAME_DEV,
