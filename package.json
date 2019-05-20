@@ -1,10 +1,10 @@
 {
   "name": "@schibstedspain/boros-cmp",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "description": "Schibsted GDPR - Consent Management Provider - Standalone",
   "main": "dist/cmp.pro.js",
   "scripts": {
-    "prepublishOnly": "npm run build:cmp",
+    "prepack": "rm -Rf dist && rm -Rf lib && npm run build:cmp",
     "start:cmp:dev": "webpack-dev-server --config src/cmp/infrastructure/build/webpack.config.cmp.babel.js --mode=development",
     "test": "mocha --recursive --require @babel/polyfill --require @babel/register \"src/test/**/*.js\"",
     "coverage": "istanbul cover --report html _mocha -- ./src/test --recursive --compilers js:@babel/register",

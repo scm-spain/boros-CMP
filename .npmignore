@@ -1,7 +1,10 @@
 src
+lib/test
 coverage
 .travis.yml
 .idea
 .eslintignore
 .github
 resources
+package
+*.tgz
