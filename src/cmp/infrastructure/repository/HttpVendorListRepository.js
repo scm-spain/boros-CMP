@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import 'whatwg-fetch'
+import 'isomorphic-unfetch'
 import GlobalVendorListAccessError from '../../domain/vendor_list/GlobalVendorListAccessError'
 
 /**

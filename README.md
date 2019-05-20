@@ -1,4 +1,3 @@
-
 ![](/resources/logo/boros_logo.png)
 
 # Boros CMP
@@ -87,7 +86,7 @@ Notice that **init** method is returning a _Promise_ but you can subscribe to *c
 ```javascript
 import boroscmp from '@schibstedspain/boros-cmp'
 
-window.document.addEventListener("cmpReady", (event) =>{
+window.document.addEventListener("cmpReady", (event) => {
   // do your stuff ...
   // like calling window.__cmp( ...
 })
@@ -96,6 +95,16 @@ boroscmp.init()
 
 ```
 
+**You could also import directly the library instead the bundled version.** By using this, it will assume you're providing the @babel/runtime dependency, helpers and polyfills needed to get it working but it will give you a better size by reusing your packages.
+
+```javascript
+import boroscmp from '@schibstedspain/boros-cmp/lib'
+
+boroscmp.init()
+  .then(()=>{
+    // do your stuff ...
+  })
+```
 
 ## Configuration
 

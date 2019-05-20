@@ -1,6 +1,6 @@
-import webpack from 'webpack'
-import path from 'path'
-import CleanWebpackPlugin from 'clean-webpack-plugin'
+const webpack = require('webpack')
+const path = require('path')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 const WEBPACK_MODE_PRODUCTION = 'production'
 const OUTPUT_DIST_FOLDER = 'dist'
@@ -13,7 +13,7 @@ const getMajorVersionFromPackageJsonVersion = () => {
 }
 
 let webpackConfig = {
-  entry: ENTRY_PATH,
+  entry: ['@s-ui/polyfills', ENTRY_PATH],
   output: {
     path: path.resolve(OUTPUT_DIST_FOLDER),
     filename: OUTPUT_FILENAME_DEV,
