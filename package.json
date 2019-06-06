@@ -1,6 +1,6 @@
 {
   "name": "@schibstedspain/boros-cmp",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Schibsted GDPR - Consent Management Provider - Standalone",
   "main": "dist/cmp.pro.js",
   "scripts": {
