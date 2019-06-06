@@ -1,4 +1,5 @@
 import {expect} from 'chai'
+import sinon from 'sinon'
 import GlobalVendorList from '../../../resources/globalvendorlist.json'
 import GlobalVendorListV75 from '../../../resources/globalvendorlist.75.json'
 import ConsentFactory from '../../../../cmp/domain/consent/ConsentFactory'
@@ -99,6 +100,36 @@ describe('ConsentFactory', () => {
       factory
         .createConsent({
           encodedConsent: givenConsentStringData
+        })
+        .catch(e => done(e))
+    })
+
+    it('Should only download one vendorlist if the current version is the same as the actual one', done => {
+      const givenConsentStringData =
+        'BOPmXwlOQETrjABABAESBK-AAAAcd7vf____79n_____9uz_Gv_rvf__33e8_39v_h_r_-___mf-3zV4-91vV11yPg1urXIr1FpjQ6MGgA'
+      const newGlobalVendorList = GlobalVendorList
+      const vendorListRepositoryMock = {
+        getGlobalVendorList: () => {
+          return newGlobalVendorList
+        }
+      }
+      const spyGetGlobalVendorList = sinon.spy(
+        vendorListRepositoryMock,
+        'getGlobalVendorList'
+      )
+
+      const factory = new ConsentFactory({
+        vendorListRepository: vendorListRepositoryMock
+      })
+
+      factory
+        .createConsent({encodedConsent: givenConsentStringData})
+        .then(() => {
+          expect(
+            spyGetGlobalVendorList.calledOnce,
+            'the getGlobalVendorList method should be called only once'
+          ).to.be.true
+          done()
         })
         .catch(e => done(e))
     })

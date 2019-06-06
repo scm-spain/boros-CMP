@@ -7,6 +7,7 @@
     "prepack": "rm -Rf dist && rm -Rf lib && npm run build:cmp",
     "start:cmp:dev": "webpack-dev-server --config src/cmp/infrastructure/build/webpack.config.cmp.babel.js --mode=development",
     "test": "mocha --recursive --require @babel/polyfill --require @babel/register \"src/test/**/*.js\"",
+    "test:debug": "mocha --inspect-brk --recursive --require @babel/polyfill --require @babel/register \"src/test/**/*.js\"",
     "coverage": "istanbul cover --report html _mocha -- ./src/test --recursive --compilers js:@babel/register",
     "coverage:ci": "istanbul cover _mocha -- ./src/test --recursive --compilers js:@babel/register && codecov",
     "lint": "sui-lint js",
