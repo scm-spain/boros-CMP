@@ -1,4 +1,4 @@
-if (window && typeof window.CustomEvent !== 'function') {
+if (typeof window !== 'undefined' && typeof window.CustomEvent !== 'function') {
   const CustomEvent = (event, params) => {
     const eventParams = params || {
       bubbles: false,
