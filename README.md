@@ -2,9 +2,9 @@
 
 # Boros CMP
 
-[![Build status](https://travis-ci.org/scm-spain/CMP.svg?branch=master)](https://travis-ci.org/scm-spain/CMP)
-[![codecov](https://codecov.io/gh/scm-spain/CMP/branch/master/graph/badge.svg)](https://codecov.io/gh/scm-spain/CMP)
-[![GitHub license](https://img.shields.io/github/license/scm-spain/CMP.svg)](https://github.com/scm-spain/CMP/blob/master/LICENSE)
+[![Build status](https://travis-ci.org/scm-spain/Boros-CMP.svg?branch=master)](https://travis-ci.org/scm-spain/Boros-CMP)
+[![codecov](https://codecov.io/gh/scm-spain/Boros-CMP/branch/master/graph/badge.svg)](https://codecov.io/gh/scm-spain/Boros-CMP)
+[![GitHub license](https://img.shields.io/github/license/scm-spain/Boros-CMP.svg)](https://github.com/scm-spain/Boros-CMP/blob/master/LICENSE)
 [![npm version](https://img.shields.io/npm/v/@schibstedspain/boros-cmp.svg)](https://www.npmjs.com/package/@schibstedspain/boros-cmp)
 
 ## Table of Contents
