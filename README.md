@@ -135,13 +135,10 @@ The source URL of global storage html.
 Defines the Screen number in the CMP where consent was given. The screen number is CMP and CmpVersion specific, and is for logging proof of consent
 
 #### consent.consentLanguage
-This language will be used by the User interface using CMP. Language values are _ISO 639-1_ codes, like:
+This language will be used by the User interface using CMP. Language values are _ISO 639-1_ (2 letter codes).
+By default, *es* will be used.
 
-|Code|Language|Observations|
-|---|---|---|
-|es|Spanish|Default|
-|en|English|Not available yet|
-
+Check the available translations here: <https://register.consensu.org/Translation>
 
 #### vendorList.host
 To find Vendor lists, CMP tries to retrieve a JSON named _vendorlist.json_ and uses the IAB version structure, as follows:
