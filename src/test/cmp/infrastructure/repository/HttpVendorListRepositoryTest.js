@@ -9,11 +9,6 @@ describe('HttpVendorListRepository', () => {
       const givenVendorListFilename = 'givenVendorList.json'
       const expectedUrl = 'http://cmp.schibsted.com/givenVendorList.json'
 
-      const repository = new HttpVendorListRepository({
-        vendorListFilename: givenVendorListFilename,
-        vendorListHost: givenVendorListHost
-      })
-
       const expectedResult = {
         key: 'value'
       }
@@ -24,7 +19,12 @@ describe('HttpVendorListRepository', () => {
         })
       }
       const fetchSpy = sinon.spy(fetchMock, 'fetch')
-      global.fetch = fetchMock.fetch
+
+      const repository = new HttpVendorListRepository({
+        fetcher: fetchMock.fetch,
+        vendorListFilename: givenVendorListFilename,
+        vendorListHost: givenVendorListHost
+      })
 
       repository
         .getGlobalVendorList()
@@ -49,18 +49,18 @@ describe('HttpVendorListRepository', () => {
       const givenVendorListHost = 'http://cmp.schibsted.com'
       const givenVendorListFilename = 'givenVendorList.json'
 
-      const repository = new HttpVendorListRepository({
-        vendorListFilename: givenVendorListFilename,
-        vendorListHost: givenVendorListHost
-      })
-
       const fetchMock = {
         fetch: () => ({
           json: () => null,
           ok: false
         })
       }
-      global.fetch = fetchMock.fetch
+
+      const repository = new HttpVendorListRepository({
+        fetcher: fetchMock.fetch,
+        vendorListFilename: givenVendorListFilename,
+        vendorListHost: givenVendorListHost
+      })
 
       repository
         .getGlobalVendorList()

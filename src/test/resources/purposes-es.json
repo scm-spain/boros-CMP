@@ -1,0 +1,48 @@
+{
+  "vendorListVersion": 74,
+  "lastUpdated": "2018-06-27T16:20:27Z",
+  "purposes": [
+    {
+      "id": 1,
+      "name": "Almacenamiento y acceso a la información",
+      "description": "El almacenamiento de información, o el acceso a información que ya está almacenada en su dispositivo, como identificadores de publicidad, identificadores de dispositivos, cookies y tecnologías similares."
+    },
+    {
+      "id": 2,
+      "name": "Personalización",
+      "description": "La recogida y el tratamiento de información sobre su uso de este servicio para posteriormente personalizar la publicidad y/o el contenido dirigido a usted en otros contextos, como en otros sitios web o aplicaciones, a lo largo del tiempo. Normalmente, el contenido del sitio o la aplicación se usan para deducir sus intereses, que informan de selecciones futuras de publicidad y/o contenido."
+    },
+    {
+      "id": 3,
+      "name": "Selección, envío, informe de anuncio",
+      "description": "La recogida de información, y la combinación con información previamente recogida, para seleccionar y enviarle anuncios, y para medir el envío y la eficacia de dichos anuncios. Esto incluye usar información previamente recogida sobre sus intereses para seleccionar anuncios, tratar datos sobre los anuncios que se han mostrado, con qué frecuencia se han mostrado, cuándo y dónde se han mostrado y si realizó alguna acción relacionada con el anuncio, incluido, por ejemplo, hacer clic en un anuncio o hacer una compra. Esto no incluye la Personalización, que es la recogida y el tratamiento de información sobre su uso de este servicio para personalizar posteriormente la publicidad y/o el contenido dirigido a usted en otros contextos, como sitios web o aplicaciones, a lo largo del tiempo."
+    },
+    {
+      "id": 4,
+      "name": "Selección, envío, informe de contenido",
+      "description": "La recogida de información y la combinación con información previamente recogida, para seleccionar y enviarle contenido, y para medir el envío y la eficacia de dicho contenido. Esto incluye usar información previamente recogida sobre sus intereses para seleccionar contenido, tratar datos sobre qué contenido se ha mostrado, con qué frecuencia y durante cuánto tiempo se ha mostrado, cuándo y dónde se ha mostrado y si realizó alguna acción relacionada con el contenido, incluido, por ejemplo, hacer clic en el contenido. Esto no incluye la Personalización, que es la recogida y el tratamiento de información sobre su uso de este servicio para personalizar posteriormente el contenido y/o la publicidad dirigida a usted en otros contextos, como sitios web o aplicaciones, a lo largo del tiempo."
+    },
+    {
+      "id": 5,
+      "name": "Medición",
+      "description": "La recogida de información sobre el uso de contenido por su parte y la combinación con información previamente recogida, usada para medir, entender e informar sobre su utilización del contenido. Esto no incluye la Personalización, la recogida de información sobre su uso de este servicio para personalizar posteriormente el contenido y/o la publicidad dirigida a usted en otros contextos, es decir, en otros servicios, como sitios web o aplicaciones, a lo largo del tiempo."
+    }
+  ],
+  "features": [
+    {
+      "id": 1,
+      "name": "Cotejo de datos sin conexión",
+      "description": "La combinación de datos de fuentes sin conexión que se recogieron inicialmente en otros contextos con datos recogidos con conexión en apoyo de uno o más fines."
+    },
+    {
+      "id": 2,
+      "name": "Vinculación de dispositivos",
+      "description": "Tratamiento de datos para vincular múltiples dispositivos que pertenecen al mismo usuario en apoyo de uno o más fines."
+    },
+    {
+      "id": 3,
+      "name": "Datos de localización geográficos precisos",
+      "description": "Recogida y mantenimiento de datos precisos de localización geográfica en apoyo de uno o más fines."
+    }
+  ]
+}

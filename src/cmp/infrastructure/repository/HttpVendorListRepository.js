@@ -1,5 +1,3 @@
-/* eslint-disable no-undef */
-import 'isomorphic-unfetch'
 import GlobalVendorListAccessError from '../../domain/vendor_list/GlobalVendorListAccessError'
 
 /**
@@ -7,7 +5,8 @@ import GlobalVendorListAccessError from '../../domain/vendor_list/GlobalVendorLi
  * @implements VendorListRepository
  */
 export default class HttpVendorListRepository {
-  constructor({vendorListHost, vendorListFilename}) {
+  constructor({fetcher, vendorListHost, vendorListFilename}) {
+    this._fetcher = fetcher
     this._vendorListHost = vendorListHost
     this._vendorListFilename = vendorListFilename
   }
@@ -19,13 +18,9 @@ export default class HttpVendorListRepository {
         '/' +
         this._vendorListFilename
     )
-      .then(this._loadURL)
+      .then(url => this._fetcher(url))
       .then(filterOkFetchResponse)
       .then(fetchResponse => fetchResponse.json())
-  }
-
-  _loadURL(url) {
-    return fetch(url)
   }
 }
 
