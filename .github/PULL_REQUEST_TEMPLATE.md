@@ -1,18 +1,28 @@
-## Description
-<!--- Explain why this PR has to be merged, what originated this feature, ... -->
+# Background
 
-## Solves ticket/s
-<!--- Optionally, add the tickets (jira, mantis, trello, ...) that are related to this PR -->
+X
 
-## Expected behavior
-<!--- Add information of what's expected to happen when this is merged -->
+# Goal
 
-## Review steps
-<!--- Nice to have, add the steps you've reproduced for a visual test in your development environment, or loc, consider adding screenshots ... -->
+X
 
-## Further considerations
-<!--- If applies, add information of breaking changes, agreed deploy timings, ...  -->
+# Implementation
 
-## Memetized description
-<!--- Mandatory gif, try https://giphy.com/  -->
-![mandatory]()
+X
+
+# Further considerations
+
+X
+
+# Checklist
+
+- [ ] The PR relates to *only* one subject with a clear title.
+- [ ] I have performed a self-review of my own code
+- [ ] Wrote [good commit messages](http://chris.beams.io/posts/git-commit/)
+- [ ] My code is readable by someone else, and I commented the hard-to-understand areas
+- [ ] I have made corresponding changes to the documentation
+- [ ] I have added tests that prove my fix is effective or that my feature works
+
+# Visual Description
+
+![]()

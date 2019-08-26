@@ -1,4 +1,3 @@
-import fetch from 'isomorphic-unfetch'
 import DomainEventBus from '../../domain/event_bus/DomainEventBus'
 import GetConsentDataUseCase from '../../application/services/consent/GetConsentDataUseCase'
 import ChainedVendorListRepository from '../repository/ChainedVendorListRepository'
@@ -19,7 +18,6 @@ import ConsentFactory from '../../domain/consent/ConsentFactory'
 import VendorConsentsFactory from '../../domain/vendor_consents/VendorConsentsFactory'
 import {Log} from '../service/log/Log'
 import {globalVendorListVersionChangedObserverFactory} from '../observer/globalVendorListVersionChangedObserverFactory'
-import HttpTranslationVendorListRepository from '../repository/HttpTranslationVendorListRepository'
 
 export default class BaseConsentContainer {
   constructor({config, cmpVersion, window, eager = true} = {}) {
@@ -63,7 +61,7 @@ export default class BaseConsentContainer {
         key: 'InMemoryVendorListRepository'
       }),
       httpVendorListRepository: this.getInstance({
-        key: 'HttpTranslationVendorListRepository'
+        key: 'HttpVendorListRepository'
       })
     })
   }
@@ -74,17 +72,8 @@ export default class BaseConsentContainer {
 
   _buildHttpVendorListRepository() {
     return new HttpVendorListRepository({
-      fetcher: fetch,
       vendorListHost: this._config.vendorList.host,
       vendorListFilename: this._config.vendorList.filename
-    })
-  }
-
-  _buildHttpTranslationVendorListRepository() {
-    return new HttpTranslationVendorListRepository({
-      fetcher: fetch,
-      consentLanguage: this._config.consent.consentLanguage,
-      vendorListRepository: this.getInstance({key: 'HttpVendorListRepository'})
     })
   }
 
