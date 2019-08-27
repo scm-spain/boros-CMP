@@ -32,7 +32,7 @@ let webpackConfig = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      CMP_VERSION: getMajorVersionFromPackageJsonVersion()
+      _CMP_VERSION: getMajorVersionFromPackageJsonVersion()
     }),
     new CleanWebpackPlugin([OUTPUT_DIST_FOLDER], {
       verbose: true,

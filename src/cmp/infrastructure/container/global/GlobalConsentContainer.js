@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import IframeConsentRepository from '../../repository/IframeConsentRepository'
 import IframeCommunication from '../../controller/IframeCommunication'
 import BaseConsentContainer from '../BaseConsentContainer'
@@ -7,8 +6,8 @@ import UUIDV4Generator from '../../service/UUIDV4Generator'
 import uuidv4 from 'uuid/v4'
 
 export default class GlobalConsentContainer extends BaseConsentContainer {
-  constructor({config, window, iframe, cmpVersion = CMP_VERSION, eager} = {}) {
-    super({config, cmpVersion, window})
+  constructor({config, window, iframe, eager} = {}) {
+    super({config, window})
     this._iframe = iframe
     if (eager) this._buildEagerSingletonInstances()
   }

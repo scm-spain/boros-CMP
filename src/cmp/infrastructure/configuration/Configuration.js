@@ -8,16 +8,10 @@ import {
   DEFAULT_VENDOR_LIST_HOST,
   DEFAULT_VENDOR_LIST_FILENAME
 } from './defaults'
-import {CMP_ID} from './internals'
+import {CMP_ID, CMP_VERSION} from './internals'
 
 export default class Configuration {
-  constructor({
-    gdpr = {},
-    consent = {},
-    vendorList = {},
-    log = {},
-    cmpVersion
-  } = {}) {
+  constructor({gdpr = {}, consent = {}, vendorList = {}, log = {}} = {}) {
     this._gdpr = {}
     this._gdpr.gdprApplies = gdpr.gdprApplies || DEFAULT_GDPR_APPLIES
     this._gdpr.storeConsentGlobally =
@@ -26,7 +20,7 @@ export default class Configuration {
 
     this._consent = {}
     this._consent.cmpId = CMP_ID
-    this._consent.cmpVersion = cmpVersion
+    this._consent.cmpVersion = CMP_VERSION
     this._consent.consentScreen =
       consent.consentScreen || DEFAULT_CONSENT_SCREEN
     this._consent.consentLanguage =
