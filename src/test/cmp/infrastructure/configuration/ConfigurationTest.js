@@ -13,7 +13,10 @@ import {
   OPTION_ALL_ALLOW,
   OPTION_USE_SAME_THAN_ALL_CUSTOM_IS_TRUE
 } from '../../../../cmp/domain/vendor_consents/NewVendorsStatusService'
-import {CMP_ID} from '../../../../cmp/infrastructure/configuration/internals'
+import {
+  CMP_ID,
+  CMP_VERSION
+} from '../../../../cmp/infrastructure/configuration/internals'
 
 describe('Configuration', () => {
   describe('given an empty configuration objects', () => {
@@ -27,7 +30,7 @@ describe('Configuration', () => {
         },
         consent: {
           cmpId: CMP_ID,
-          cmpVersion: undefined,
+          cmpVersion: CMP_VERSION,
           consentScreen: DEFAULT_CONSENT_SCREEN,
           consentLanguage: DEFAULT_CONSENT_LANGUAGE,
           allowedVendorIds: undefined,
@@ -88,7 +91,7 @@ describe('Configuration', () => {
         gdpr: givenGdpr,
         consent: {
           cmpId: CMP_ID,
-          cmpVersion: undefined,
+          cmpVersion: CMP_VERSION,
           consentScreen: givenConsent.consentScreen,
           consentLanguage: givenConsent.consentLanguage,
           allowedVendorIds: givenConsent.allowedVendorIds,
@@ -137,7 +140,7 @@ describe('Configuration', () => {
         },
         consent: {
           cmpId: CMP_ID,
-          cmpVersion: undefined,
+          cmpVersion: CMP_VERSION,
           consentScreen: DEFAULT_CONSENT_SCREEN,
           consentLanguage: givenConsent.consentLanguage,
           allowedVendorIds: undefined,

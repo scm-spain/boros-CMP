@@ -1,11 +1,10 @@
-/* eslint-disable no-undef */
 import CookieConsentRepository from '../../repository/CookieConsentRepository'
 import CookieHandler from '../../service/CookieHandler'
 import BaseConsentContainer from '../BaseConsentContainer'
 
 export default class LocalConsentContainer extends BaseConsentContainer {
-  constructor({config, window, cmpVersion = CMP_VERSION, eager} = {}) {
-    super({config, cmpVersion, window})
+  constructor({config, window} = {}) {
+    super({config, window})
   }
 
   _buildConsentRepository() {

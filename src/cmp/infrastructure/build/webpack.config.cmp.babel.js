@@ -10,7 +10,7 @@ const OUTPUT_FILENAME_DEV = 'cmp.dev.js'
 const OUTPUT_FILENAME_PRO = 'cmp.pro.js'
 
 const getMajorVersionFromPackageJsonVersion = () => {
-  return JSON.stringify(process.env.npm_package_version.split('.')[0])
+  return parseInt(JSON.stringify(process.env.npm_package_version.split('.')[0]))
 }
 
 let webpackConfig = {
@@ -33,7 +33,7 @@ let webpackConfig = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      CMP_VERSION: getMajorVersionFromPackageJsonVersion()
+      _CMP_VERSION: getMajorVersionFromPackageJsonVersion()
     }),
     new CleanWebpackPlugin([OUTPUT_DIST_FOLDER], {
       verbose: true,

@@ -22,13 +22,12 @@ import HttpTranslationVendorListRepository from '../repository/HttpTranslationVe
 import {fetcherFactory} from '../service/fetcher'
 
 export default class BaseConsentContainer {
-  constructor({config, cmpVersion, window, eager = true} = {}) {
+  constructor({config, window, eager = true} = {}) {
     this._config = new Configuration({
       gdpr: config.gdpr,
       consent: config.consent,
       vendorList: config.vendorList,
-      log: config.log,
-      cmpVersion: cmpVersion
+      log: config.log
     })
     this._window = window
     this._instances = new Map()
