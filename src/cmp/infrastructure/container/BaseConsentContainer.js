@@ -82,6 +82,7 @@ export default class BaseConsentContainer {
   _buildHttpTranslationVendorListRepository() {
     return new HttpTranslationVendorListRepository({
       fetcher: this.getInstance({key: 'Fetcher'}),
+      vendorListHost: this._config.vendorList.host,
       consentLanguage: this._config.consent.consentLanguage,
       vendorListRepository: this.getInstance({key: 'HttpVendorListRepository'})
     })
