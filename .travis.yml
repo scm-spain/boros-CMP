@@ -8,8 +8,7 @@ cache:
 before_install:
   - npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
 script:
-  - npm run lint
-  - npm test
+  - npm run check
   - npm run coverage:ci
   - |
     echo TRAVIS_BRANCH=$TRAVIS_BRANCH - TRAVIS_PULL_REQUEST=$TRAVIS_PULL_REQUEST - TRAVIS_TAG=$TRAVIS_TAG

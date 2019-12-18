@@ -5,3 +5,4 @@ coverage
 lib
 *.tgz
 .DS_Store
+package-lock.json
