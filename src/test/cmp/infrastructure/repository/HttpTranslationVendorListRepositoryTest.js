@@ -9,8 +9,8 @@ describe('HttpTranslationVendorListRepository', () => {
     it('should load the remote vendor list and the translation file for the vendor list version and the specified language', done => {
       const givenConsentLanguage = 'es'
       const givenVendorListVersion = 74
-      const expectedTranslationsUrl =
-        'https://vendorlist.consensu.org/v-74/purposes-es.json'
+      const givenVendorListHost = 'https://vendorlist.consensu.org'
+      const expectedTranslationsUrl = `${givenVendorListHost}/v-74/purposes-es.json`
       const fetchTranslationMock = {
         fetch: () => ({
           json: () => TranslationES,
@@ -23,6 +23,7 @@ describe('HttpTranslationVendorListRepository', () => {
       }
       const repository = new HttpTranslationVendorListRepository({
         fetcher: fetchTranslationMock.fetch,
+        vendorListHost: givenVendorListHost,
         vendorListRepository: vendorListMock,
         consentLanguage: givenConsentLanguage
       })
@@ -72,8 +73,8 @@ describe('HttpTranslationVendorListRepository', () => {
     it('should load the no-version translations if no vendor list version is specified', done => {
       const givenConsentLanguage = 'es'
       const givenVendorListVersion = undefined
-      const expectedTranslationsUrl =
-        'https://vendorlist.consensu.org/purposes-es.json'
+      const givenVendorListHost = 'https://vendorlist.consensu.org'
+      const expectedTranslationsUrl = `${givenVendorListHost}/purposes-es.json`
       const fetchTranslationMock = {
         fetch: () => ({
           json: () => TranslationES,
@@ -86,6 +87,7 @@ describe('HttpTranslationVendorListRepository', () => {
       }
       const repository = new HttpTranslationVendorListRepository({
         fetcher: fetchTranslationMock.fetch,
+        vendorListHost: givenVendorListHost,
         vendorListRepository: vendorListMock,
         consentLanguage: givenConsentLanguage
       })

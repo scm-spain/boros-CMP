@@ -1,6 +1,12 @@
 export default class HttpTranslationVendorListRepository {
-  constructor({fetcher, vendorListRepository, consentLanguage} = {}) {
+  constructor({
+    fetcher,
+    vendorListHost,
+    vendorListRepository,
+    consentLanguage
+  } = {}) {
     this._fetcher = fetcher
+    this._vendorListHost = vendorListHost
     this._vendorListRepository = vendorListRepository
     this._consentLanguage = consentLanguage
     this._acceptedLanguage = ACCEPTED_LANGUAGES.has(this._consentLanguage)
@@ -22,7 +28,7 @@ export default class HttpTranslationVendorListRepository {
     return Promise.resolve()
       .then(
         () =>
-          `${PURPOSES_HOST}/${
+          `${this._vendorListHost}/${
             vendorListVersion ? 'v-' + vendorListVersion + '/' : ''
           }${PURPOSES_FILENAME}-${this._consentLanguage}${PURPOSES_EXTENSION}`
       )
@@ -64,6 +70,5 @@ const ACCEPTED_LANGUAGES = new Set([
   'sl',
   'sv'
 ])
-const PURPOSES_HOST = 'https://vendorlist.consensu.org'
 const PURPOSES_FILENAME = 'purposes'
 const PURPOSES_EXTENSION = '.json'
