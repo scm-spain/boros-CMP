@@ -1,6 +1,6 @@
 {
   "name": "@schibstedspain/boros-cmp",
-  "version": "1.3.4",
+  "version": "1.3.5",
   "description": "Schibsted GDPR - Consent Management Provider - Standalone",
   "main": "dist/cmp.pro.js",
   "scripts": {
@@ -19,7 +19,8 @@
     "build:global": "npm run build:global:pro",
     "build:global:dev": "webpack --config src/globalstorage/infrastructure/build/webpack.config.babel.js --mode=development",
     "build:global:pro": "webpack --config src/globalstorage/infrastructure/build/webpack.config.babel.js --mode=production",
-    "lib:cmp": "babel src --out-dir lib"
+    "lib:cmp": "babel src --out-dir lib",
+    "versiona": "node versiona.js"
   },
   "repository": {
     "type": "git",
@@ -55,6 +56,7 @@
     "jsdom": "11.11.0",
     "mocha": "5.2.0",
     "sinon": "2.3.4",
+    "versiona": "^4.2.1",
     "webpack": "4.12.0",
     "webpack-cli": "3.0.8",
     "webpack-dev-server": "3.1.5"
