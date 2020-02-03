@@ -10,16 +10,27 @@ export default class CookieHandler {
    * @param {number} maxAgeSeconds
    * @param {string} path
    * @param {string} domain
+   * @param {string} sameSite
+   * @param {string} secure
    * @returns {Promise<string>}
    */
-  write({cookieName, value, maxAgeSeconds, path = '/', cookieDomain} = {}) {
+  write = ({
+    cookieName,
+    value,
+    maxAgeSeconds,
+    path = '/',
+    cookieDomain,
+    sameSite,
+    secure
+  } = {}) => {
     return Promise.all([
       Promise.resolve(maxAgeSeconds ? `;max-age=${maxAgeSeconds}` : ''),
-      Promise.resolve(cookieDomain ? `;domain=${cookieDomain}` : '')
+      Promise.resolve(cookieDomain ? `;domain=${cookieDomain}` : ''),
+      Promise.resolve(secure ? `;${secure}` : '')
     ])
       .then(
-        ([maxAge, domain]) =>
-          `${cookieName}=${value}${domain};path=${path}${maxAge}; SameSite=Lax`
+        ([maxAge, domain, secure]) =>
+          `${cookieName}=${value}${domain};path=${path}${maxAge};SameSite=${sameSite}${secure}`
       )
       .then(cookieValue => (this._dom.cookie = cookieValue))
   }
