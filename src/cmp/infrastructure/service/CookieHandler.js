@@ -19,7 +19,7 @@ export default class CookieHandler {
     ])
       .then(
         ([maxAge, domain]) =>
-          `${cookieName}=${value}${domain};path=${path}${maxAge}`
+          `${cookieName}=${value}${domain};path=${path}${maxAge}; SameSite=Lax`
       )
       .then(cookieValue => (this._dom.cookie = cookieValue))
   }
