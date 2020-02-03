@@ -5,7 +5,8 @@
 import {
   VENDOR_CONSENT_COOKIE_DEFAULT_PATH,
   VENDOR_CONSENT_COOKIE_MAX_AGE,
-  VENDOR_CONSENT_COOKIE_NAME
+  VENDOR_CONSENT_COOKIE_NAME,
+  VENDOR_CONSENT_COOKIE_SAME_SITE_LOCAL_VALUE
 } from '../configuration/cookie'
 
 export default class CookieConsentRepository {
@@ -15,6 +16,7 @@ export default class CookieConsentRepository {
     this._cookieName = VENDOR_CONSENT_COOKIE_NAME
     this._maxAgeSeconds = VENDOR_CONSENT_COOKIE_MAX_AGE
     this._path = VENDOR_CONSENT_COOKIE_DEFAULT_PATH
+    this._sameSite = VENDOR_CONSENT_COOKIE_SAME_SITE_LOCAL_VALUE
   }
 
   /**
@@ -46,7 +48,8 @@ export default class CookieConsentRepository {
         cookieName: this._cookieName,
         maxAgeSeconds: this._maxAgeSeconds,
         path: this._path,
-        value
+        value,
+        sameSite: this._sameSite
       })
       .then(() => true)
   }
