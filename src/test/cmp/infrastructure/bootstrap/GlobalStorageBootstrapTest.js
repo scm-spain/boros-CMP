@@ -4,7 +4,7 @@ import {expect} from 'chai'
 
 describe('GlobalStorageBootstrap Test', () => {
   describe('Given a Windows and a Configuration', () => {
-    it('Should return promise when calling init method', done => {
+    it('Should return promise when calling init method', () => {
       const givenWindow = new JSDOM(
         '<!DOCTYPE html><div id="forlayo">I\'m BATMAN!</div>'
       ).window
@@ -28,7 +28,7 @@ describe('GlobalStorageBootstrap Test', () => {
       })
 
       expect(initPromise).instanceOf(Promise)
-      done()
+      return initPromise
     })
   })
 })
