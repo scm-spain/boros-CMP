@@ -1,4 +1,4 @@
-export default class  WriteCookieUseCase {
+export default class WriteCookieUseCase {
   constructor({cookieHandler, domain} = {}) {
     this._setCookieValue = setCookieValue({
       cookieHandler,
