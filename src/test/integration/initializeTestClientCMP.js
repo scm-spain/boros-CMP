@@ -27,7 +27,8 @@ const initializeLocalStoreTestClientCMP = () => {
 
 const initializeGlobalStoreTestClientCMP = () => {
   const windowMock = new JSDOM(
-    '<!DOCTYPE html><div id="forlayo">I\'m BATMAN!</div>'
+    '<!DOCTYPE html><div id="forlayo">I\'m BATMAN!</div>',
+    {url: 'https://localhost'}
   ).window
 
   return TestGlobalStoreBootstrap.init({

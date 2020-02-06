@@ -10,26 +10,24 @@ import {
 } from './initializeTestClientCMP'
 
 describe('Local Store Save New Consent', () => {
-  it('Should accept a new Vendor Consents object and then modifying it', done => {
+  it('Should accept a new Vendor Consents object and then modifying it', () => {
     Promise.resolve()
       .then(() => initializeLocalStoreTestClientCMP())
       // client should check the status of the consent
-      .then(cmpClient => doTheJob({cmpClient, done}))
-      .catch(e => done(e))
+      .then(cmpClient => doTheJob({cmpClient}))
   })
 })
 
 describe('Global Store Save New Consent', () => {
-  it('Should accept a new Vendor Consents object and then modifying it', done => {
+  it('Should accept a new Vendor Consents object and then modifying it', () => {
     Promise.resolve()
       .then(() => initializeGlobalStoreTestClientCMP())
       // client should check the status of the consent
-      .then(cmpClient => doTheJob({cmpClient, done}))
-      .catch(e => done(e))
+      .then(cmpClient => doTheJob({cmpClient}))
   })
 })
 
-const doTheJob = ({cmpClient, done}) => {
+const doTheJob = ({cmpClient}) => {
   return (
     cmpClient
       .getConsentStatus()
@@ -65,8 +63,6 @@ const doTheJob = ({cmpClient, done}) => {
             )
         )
       )
-      .then(() => done())
-      .catch(e => done(e))
   )
 }
 
