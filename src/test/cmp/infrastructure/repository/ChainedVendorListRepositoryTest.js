@@ -56,26 +56,44 @@ describe('ChainedVendorListRepository', () => {
         inMemoryVendorListRepository,
         'getGlobalVendorList'
       )
+      const getGlobalVendorListSpy = sinon.spy(
+        httpVendorListRepositoryMock,
+        'getGlobalVendorList'
+      )
 
       const repository = new ChainedVendorListRepository({
         inMemoryVendorListRepository: inMemoryVendorListRepository,
         httpVendorListRepository: httpVendorListRepositoryMock
       })
-      repository
-        .getGlobalVendorList()
-        .then(result => {
+
+      const calls = [
+        repository.getGlobalVendorList(),
+        repository.getGlobalVendorList(),
+        repository.getGlobalVendorList(),
+        repository.getGlobalVendorList(),
+        repository.getGlobalVendorList()
+      ]
+
+      Promise.allSettled(calls)
+        .then(results => {
           expect(
-            inMemoryGetGlobalVendorListSpy.calledOnce,
-            'should have called the inmemory repository -get- to try to get the vendor list from there first'
-          ).to.be.true
+            inMemoryGetGlobalVendorListSpy.callCount,
+            'should have called the inmemory repository to get the vendor list from there first'
+          ).to.be.equal(calls.length)
+          results.forEach(result =>
+            expect(
+              result.value,
+              'the resulting vendor list should be the http vendor list'
+            ).to.deep.equal(expectedResult)
+          )
           expect(
-            result,
-            'the resulting vendor list should be the http vendor list'
-          ).to.deep.equal(expectedResult)
+            getGlobalVendorListSpy.callCount,
+            'should have called only once the http resource GET'
+          ).to.equal(1)
           expect(
-            inMemorySetGlobalVendorListSpy.calledOnce,
-            'should have called the set method of the inmemory repository'
-          ).to.be.true
+            inMemorySetGlobalVendorListSpy.callCount,
+            'should have called the set method of the inmemory repository only once'
+          ).to.equal(1)
           expect(
             inMemorySetGlobalVendorListSpy.args[0][0].globalVendorList,
             'should store the http vendor list to the inmemory repository'
