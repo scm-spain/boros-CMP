@@ -200,11 +200,11 @@ describe('globalStorage', () => {
       const givenCommand = WRITE_CONSENT_COMMAND
       const givenParameter = {
         value: 'Kill!',
-        sameSite: 'none'
+        sameSite: 'None'
       }
       const givenCallId = 3
       const expectedCmpSuccess = true
-      const expectedCmpReturnValue = `euconsent=Kill!;path=${VENDOR_CONSENT_COOKIE_DEFAULT_PATH};max-age=${VENDOR_CONSENT_COOKIE_MAX_AGE};SameSite=none;Secure`
+      const expectedCmpReturnValue = `euconsent=Kill!;path=${VENDOR_CONSENT_COOKIE_DEFAULT_PATH};max-age=${VENDOR_CONSENT_COOKIE_MAX_AGE};SameSite=None;Secure`
       const expectedCookieStored = 'euconsent=Kill!'
 
       const writeCookieUseCaseMock = new WriteCookieUseCase({
