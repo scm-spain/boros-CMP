@@ -79,7 +79,7 @@ describe('ChainedVendorListRepository', () => {
           expect(
             inMemoryGetGlobalVendorListSpy.callCount,
             'should have called the inmemory repository to get the vendor list from there first'
-          ).to.be.equal(calls.length)
+          ).to.be.equal(1)
           results.forEach(result =>
             expect(
               result.value,
