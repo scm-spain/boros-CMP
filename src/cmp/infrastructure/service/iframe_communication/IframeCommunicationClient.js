@@ -35,7 +35,7 @@ export default class IframeCommunicationClient {
         }
       })
 
-      this._target.contentWindow.postMessage(
+      this._target.postMessage(
         requestBuilder({
           callId: transactionId,
           command: request.command,

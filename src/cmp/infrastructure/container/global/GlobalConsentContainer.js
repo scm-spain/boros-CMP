@@ -27,7 +27,7 @@ export default class GlobalConsentContainer extends BaseConsentContainer {
     return new IframeCommunicationClient({
       idGenerator: this.getInstance({key: 'IdGenerator'}),
       origin: this._window,
-      target: this._iframe
+      target: this._iframe.contentWindow
     })
   }
 
