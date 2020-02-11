@@ -43,10 +43,10 @@ describe('ChainedVendorListRepository', () => {
         .catch(e => done(e))
     })
     it('Should return the http vendor list if it is not found into the inmemory repository, and set it inmemory for next calls', done => {
-      const expectedResult = {vendorListVersion: 65}
       const inMemoryVendorListRepository = new InMemoryVendorListRepository()
       const httpVendorListRepositoryMock = {
-        getGlobalVendorList: () => Promise.resolve(expectedResult)
+        getGlobalVendorList: ({vendorListVersion}) =>
+          Promise.resolve({vendorListVersion})
       }
       const inMemorySetGlobalVendorListSpy = sinon.spy(
         inMemoryVendorListRepository,
@@ -67,37 +67,35 @@ describe('ChainedVendorListRepository', () => {
       })
 
       const calls = [
-        repository.getGlobalVendorList(),
-        repository.getGlobalVendorList(),
-        repository.getGlobalVendorList(),
-        repository.getGlobalVendorList(),
-        repository.getGlobalVendorList()
+        repository.getGlobalVendorList({vendorListVersion: 1}),
+        repository.getGlobalVendorList({vendorListVersion: 1}),
+        repository.getGlobalVendorList({vendorListVersion: 1}),
+        repository.getGlobalVendorList({vendorListVersion: 2}),
+        repository.getGlobalVendorList({vendorListVersion: 2}),
+        repository.getGlobalVendorList({vendorListVersion: 2})
       ]
 
       Promise.allSettled(calls)
         .then(results => {
           expect(
             inMemoryGetGlobalVendorListSpy.callCount,
-            'should have called the inmemory repository to get the vendor list from there first'
-          ).to.be.equal(1)
-          results.forEach(result =>
-            expect(
-              result.value,
-              'the resulting vendor list should be the http vendor list'
-            ).to.deep.equal(expectedResult)
+            'should have called the inmemory repository only once for each version, to get the vendor list from there first'
+          ).to.be.equal(2)
+          let v1 = 0
+          let v2 = 0
+          results.forEach(
+            result => (result.value.vendorListVersion === 1 ? v1++ : v2++)
           )
+          expect(v1, 'should retrive 3 vendor lists of version 1').to.equal(3)
+          expect(v2, 'should retrive 3 vendor lists of version 2').to.equal(3)
           expect(
             getGlobalVendorListSpy.callCount,
-            'should have called only once the http resource GET'
-          ).to.equal(1)
+            'should have called only once for each version the http resource GET'
+          ).to.equal(2)
           expect(
             inMemorySetGlobalVendorListSpy.callCount,
-            'should have called the set method of the inmemory repository only once'
-          ).to.equal(1)
-          expect(
-            inMemorySetGlobalVendorListSpy.args[0][0].globalVendorList,
-            'should store the http vendor list to the inmemory repository'
-          ).to.deep.equal(expectedResult)
+            'should have called only once per version the set method of the inmemory repository only once'
+          ).to.equal(2)
         })
         .then(() => done())
         .catch(e => done(e))
