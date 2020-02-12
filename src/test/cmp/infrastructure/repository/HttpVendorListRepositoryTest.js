@@ -82,5 +82,46 @@ describe('HttpVendorListRepository', () => {
         })
         .catch(e => done(e))
     })
+    it('Should fetch the remote last version of the vendor list JSON, using the given vendor list location, when vendorListVersion is set to LATEST', done => {
+      const givenVendorListHost = 'http://cmp.schibsted.com'
+      const givenVendorListFilename = 'givenVendorList.json'
+      const expectedUrl = 'http://cmp.schibsted.com/givenVendorList.json'
+
+      const expectedResult = {
+        key: 'value'
+      }
+      const fetchMock = {
+        fetch: () => ({
+          json: () => expectedResult,
+          ok: true
+        })
+      }
+      const fetchSpy = sinon.spy(fetchMock, 'fetch')
+
+      const repository = new HttpVendorListRepository({
+        fetcher: fetchMock.fetch,
+        vendorListFilename: givenVendorListFilename,
+        vendorListHost: givenVendorListHost
+      })
+
+      repository
+        .getGlobalVendorList({vendorListVersion: 'LATEST'})
+        .then(result => {
+          expect(
+            fetchSpy.calledOnce,
+            'should have called the remote fetch method'
+          ).to.be.true
+          expect(
+            fetchSpy.args[0][0],
+            'should retrieve the IAB vendor list by default'
+          ).to.equal(expectedUrl)
+          expect(
+            result,
+            'should return the fetched value as json output format'
+          ).to.deep.equal(expectedResult)
+        })
+        .then(() => done())
+        .catch(e => done(e))
+    })
   })
 })
