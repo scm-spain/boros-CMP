@@ -29,7 +29,9 @@ export default class HttpTranslationVendorListRepository {
       .then(
         () =>
           `${this._vendorListHost}/${
-            vendorListVersion ? 'v-' + vendorListVersion + '/' : ''
+            vendorListVersion && Number(vendorListVersion)
+              ? 'v-' + vendorListVersion + '/'
+              : ''
           }${PURPOSES_FILENAME}-${this._consentLanguage}${PURPOSES_EXTENSION}`
       )
       .then(url => this._fetcher(url))
