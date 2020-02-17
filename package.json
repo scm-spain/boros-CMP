@@ -1,6 +1,6 @@
 {
   "name": "@schibstedspain/boros-cmp",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Schibsted GDPR - Consent Management Provider - Standalone",
   "main": "dist/cmp.pro.js",
   "scripts": {
@@ -59,7 +59,7 @@
     "versiona": "^4.2.1",
     "webpack": "4.12.0",
     "webpack-cli": "3.0.8",
-    "webpack-dev-server": "3.1.5"
+    "webpack-dev-server": "3.10.1"
   },
   "pre-commit": [
     "lint",

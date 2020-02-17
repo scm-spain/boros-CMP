@@ -103,5 +103,38 @@ describe('HttpTranslationVendorListRepository', () => {
         .then(() => done())
         .catch(e => done(e))
     })
+    it('should load the no-version translations if vendor list version is specified as LATEST', done => {
+      const givenConsentLanguage = 'es'
+      const givenVendorListVersion = 'LATEST'
+      const givenVendorListHost = 'https://vendorlist.consensu.org'
+      const expectedTranslationsUrl = `${givenVendorListHost}/purposes-es.json`
+      const fetchTranslationMock = {
+        fetch: () => ({
+          json: () => TranslationES,
+          ok: true
+        })
+      }
+      const fetchTranslationSpy = sinon.spy(fetchTranslationMock, 'fetch')
+      const vendorListMock = {
+        getGlobalVendorList: () => Promise.resolve(GlobalVendorList)
+      }
+      const repository = new HttpTranslationVendorListRepository({
+        fetcher: fetchTranslationMock.fetch,
+        vendorListHost: givenVendorListHost,
+        vendorListRepository: vendorListMock,
+        consentLanguage: givenConsentLanguage
+      })
+      repository
+        .getGlobalVendorList({vendorListVersion: givenVendorListVersion})
+        .then(vendorList => {
+          expect(fetchTranslationSpy.calledOnce).to.be.true
+          expect(
+            fetchTranslationSpy.args[0][0],
+            'incorrect translations URL'
+          ).to.equal(expectedTranslationsUrl)
+        })
+        .then(() => done())
+        .catch(e => done(e))
+    })
   })
 })

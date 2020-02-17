@@ -14,7 +14,9 @@ export default class HttpVendorListRepository {
   getGlobalVendorList({vendorListVersion} = {}) {
     return Promise.resolve(
       this._vendorListHost +
-        (vendorListVersion ? '/v-' + vendorListVersion : '') +
+        (vendorListVersion && Number(vendorListVersion)
+          ? '/v-' + vendorListVersion
+          : '') +
         '/' +
         this._vendorListFilename
     )
