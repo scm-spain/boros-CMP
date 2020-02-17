@@ -6,9 +6,9 @@ export default class WriteCookieUseCase {
     })
   }
 
-  writeCookie({name, value, path, maxAgeSeconds}) {
+  writeCookie({name, value, path, maxAgeSeconds, sameSite, secure}) {
     return Promise.resolve().then(() =>
-      this._setCookieValue({name, value, path, maxAgeSeconds})
+      this._setCookieValue({name, value, path, maxAgeSeconds, sameSite, secure})
     )
   }
 }
@@ -17,12 +17,16 @@ const setCookieValue = ({cookieHandler, domain}) => ({
   name,
   value,
   path,
-  maxAgeSeconds
+  maxAgeSeconds,
+  sameSite,
+  secure
 } = {}) =>
   cookieHandler.write({
     cookieName: name,
     cookieDomain: domain,
     value,
     path,
-    maxAgeSeconds
+    maxAgeSeconds,
+    sameSite,
+    secure
   })

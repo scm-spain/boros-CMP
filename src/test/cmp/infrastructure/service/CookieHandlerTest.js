@@ -8,6 +8,7 @@ describe('CookieHandler', () => {
       const givenCookieName = 'cookieMonster'
       const givenCookieValue = 'nyam_nyam'
       const givenCookieMaxAgeSeconds = 100
+      const givenSameSite = 'lax'
       const givenDOM = new JSDOM(
         '<!DOCTYPE html><div id="fear">I\'m BATMAN!</div>'
       ).window.document
@@ -16,14 +17,15 @@ describe('CookieHandler', () => {
         dom: givenDOM
       })
 
-      const expectedCookieString = `${givenCookieName}=${givenCookieValue};path=/;max-age=${givenCookieMaxAgeSeconds}`
+      const expectedCookieString = `${givenCookieName}=${givenCookieValue};path=/;max-age=${givenCookieMaxAgeSeconds};SameSite=${givenSameSite}`
       const expectedCookieKeyValue = `${givenCookieName}=${givenCookieValue}`
 
       cookieHandler
         .write({
           cookieName: givenCookieName,
           value: givenCookieValue,
-          maxAgeSeconds: givenCookieMaxAgeSeconds
+          maxAgeSeconds: givenCookieMaxAgeSeconds,
+          sameSite: givenSameSite
         })
         .then(cookieString => {
           expect(cookieString).to.equal(expectedCookieString)

@@ -14,6 +14,7 @@ const getMajorVersionFromPackageJsonVersion = () => {
 }
 
 let webpackConfig = {
+  devtool: 'inline-source-map',
   entry: ENTRY_PATH,
   output: {
     path: path.resolve(OUTPUT_DIST_FOLDER),
@@ -50,6 +51,7 @@ let webpackConfig = {
 module.exports = (env, argv) => {
   if (argv.mode === WEBPACK_MODE_PRODUCTION) {
     webpackConfig.output.filename = OUTPUT_FILENAME_PRO
+    webpackConfig.devtool = false
   }
   return webpackConfig
 }

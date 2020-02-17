@@ -106,6 +106,27 @@ boroscmp.init()
   })
 ```
 
+#### Initialize Boros cmp global version
+
+Boros should be initialized with at least this custom configuration
+```javascript
+import boroscmp from '@schibstedspain/boros-cmp'
+
+const customConfig = {
+  gdpr: {
+    storeConsentGlobally: true,
+    globalConsentLocation: 'http://local.schibsted.io:8000/index.html'
+  }
+}
+
+boroscmp.init({config: customConfig})
+    .then(()=>{
+        // do your stuff ...
+    })
+```
+
+In the globalConsentLocation provided, a server should be running and it should have the boros script builded for global version on it (global.dev.js or global.pro.js).
+
 ## Configuration
 
 There are some default configuration values that can be overwritten before CMP is loaded. Following you will find all the configuration properties and their default values.

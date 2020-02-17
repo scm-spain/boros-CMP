@@ -13,7 +13,9 @@
 import {
   VENDOR_CONSENT_COOKIE_DEFAULT_PATH,
   VENDOR_CONSENT_COOKIE_MAX_AGE,
-  VENDOR_CONSENT_COOKIE_NAME
+  VENDOR_CONSENT_COOKIE_NAME,
+  VENDOR_CONSENT_COOKIE_SAME_SITE_GLOBAL_VALUE,
+  VENDOR_CONSENT_COOKIE_SECURE_GLOBAL_VALUE
 } from '../../../cmp/infrastructure/configuration/cookie'
 
 const writeCookieCommandFactory = ({writeCookieUseCase}) => ({input}) =>
@@ -23,7 +25,9 @@ const writeCookieCommandFactory = ({writeCookieUseCase}) => ({input}) =>
         name: VENDOR_CONSENT_COOKIE_NAME,
         value: input.value,
         path: VENDOR_CONSENT_COOKIE_DEFAULT_PATH,
-        maxAgeSeconds: VENDOR_CONSENT_COOKIE_MAX_AGE
+        maxAgeSeconds: VENDOR_CONSENT_COOKIE_MAX_AGE,
+        sameSite: VENDOR_CONSENT_COOKIE_SAME_SITE_GLOBAL_VALUE,
+        secure: VENDOR_CONSENT_COOKIE_SECURE_GLOBAL_VALUE
       })
     )
     .then(value => ({

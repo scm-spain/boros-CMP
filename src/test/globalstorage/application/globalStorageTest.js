@@ -20,8 +20,9 @@ describe('globalStorage', () => {
 
   beforeEach(() => {
     givenWindowHost = new JSDOM('<!DOCTYPE html><div>Hello world</div>').window
-    givenWindowIframe = new JSDOM('<!DOCTYPE html><div>Hello world</div>')
-      .window
+    givenWindowIframe = new JSDOM('<!DOCTYPE html><div>Hello world</div>', {
+      url: 'https://localhost'
+    }).window
     fixJsdomPostMessageWithEventSource({
       origin: givenWindowHost,
       target: givenWindowIframe
@@ -198,11 +199,12 @@ describe('globalStorage', () => {
     it('Should dispatch a success event with the same callId', done => {
       const givenCommand = WRITE_CONSENT_COMMAND
       const givenParameter = {
-        value: 'Kill!'
+        value: 'Kill!',
+        sameSite: 'None'
       }
       const givenCallId = 3
       const expectedCmpSuccess = true
-      const expectedCmpReturnValue = `euconsent=Kill!;path=${VENDOR_CONSENT_COOKIE_DEFAULT_PATH};max-age=${VENDOR_CONSENT_COOKIE_MAX_AGE}`
+      const expectedCmpReturnValue = `euconsent=Kill!;path=${VENDOR_CONSENT_COOKIE_DEFAULT_PATH};max-age=${VENDOR_CONSENT_COOKIE_MAX_AGE};SameSite=None;Secure`
       const expectedCookieStored = 'euconsent=Kill!'
 
       const writeCookieUseCaseMock = new WriteCookieUseCase({
