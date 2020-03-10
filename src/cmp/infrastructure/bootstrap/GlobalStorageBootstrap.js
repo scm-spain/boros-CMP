@@ -30,7 +30,7 @@ export default class GlobalStorageBootstrap {
           registerIframeCommunication(container)
         ])
       )
-      .then(([cmp, undefined]) => registerWindowCMP({cmp, window}))
+      .then(([cmp, any]) => registerWindowCMP({cmp, window}))
       .then(() => createEvent({window, name: 'cmpReady'}))
   }
 }

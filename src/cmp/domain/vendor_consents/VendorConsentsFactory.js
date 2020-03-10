@@ -6,6 +6,7 @@ export default class VendorConsentsFactory {
     this._gdprApplies = gdprApplies
     this._storeConsentGlobally = storeConsentGlobally
   }
+
   createVendorConsents({consent, globalVendorList, allowedVendorIds} = {}) {
     return Promise.resolve().then(() =>
       Promise.all([
@@ -35,12 +36,14 @@ const filterAllowedVendorIdsFromGlobalList = ({
   allowedVendorIds
 }) =>
   Promise.resolve().then(() =>
-    globalVendorList.vendors.map(v => v.id).filter(id =>
-      isWhitelisted({
-        whitelist: allowedVendorIds,
-        id
-      })
-    )
+    globalVendorList.vendors
+      .map(v => v.id)
+      .filter(id =>
+        isWhitelisted({
+          whitelist: allowedVendorIds,
+          id
+        })
+      )
   )
 
 const createVendorConsents = ({consent, vendorIds = []} = {}) =>
@@ -56,11 +59,13 @@ const createVendorConsents = ({consent, vendorIds = []} = {}) =>
 
 const createPurposeConsents = ({consent, globalVendorList}) =>
   Promise.resolve().then(() =>
-    globalVendorList.purposes.map(p => p.id).reduce(
-      (accumulator, id) => ({
-        ...accumulator,
-        [`${id}`]: consent.isPurposeAllowed(id)
-      }),
-      {}
-    )
+    globalVendorList.purposes
+      .map(p => p.id)
+      .reduce(
+        (accumulator, id) => ({
+          ...accumulator,
+          [`${id}`]: consent.isPurposeAllowed(id)
+        }),
+        {}
+      )
   )

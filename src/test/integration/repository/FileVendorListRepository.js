@@ -8,6 +8,7 @@ export default class FileVendorListRepository {
   } = {}) {
     this._globalVendorListLocation = globalVendorListLocation
   }
+
   getGlobalVendorList() {
     return Promise.resolve().then(() => require(this._globalVendorListLocation))
   }

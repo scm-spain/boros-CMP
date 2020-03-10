@@ -35,7 +35,7 @@ export default class TestGlobalStoreBootstrap {
           registerIframeCommunication(container)
         ])
       )
-      .then(([cmp, undefined]) => registerWindowCMP({cmp, window}))
+      .then(([cmp, any]) => registerWindowCMP({cmp, window}))
   }
 }
 

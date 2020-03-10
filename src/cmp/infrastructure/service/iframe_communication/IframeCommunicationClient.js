@@ -48,7 +48,7 @@ export default class IframeCommunicationClient {
 
   _timeout({transactionId}) {
     return new Promise((resolve, reject) => {
-      let wait = setTimeout(() => {
+      const wait = setTimeout(() => {
         clearTimeout(wait)
         reject(new RequestTimeoutError(transactionId))
       }, POST_MESSAGE_DEFAULT_REQUEST_TIMEOUT)

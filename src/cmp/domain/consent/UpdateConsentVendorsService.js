@@ -68,7 +68,7 @@ export default class UpdateConsentVendorsService {
         newIdsNotInOldGlobalVendors
       ]) => {
         // TODO fn remove ids accepted in the consent that they are not anymore in the new global list
-        let newAcceptedVendorIds = acceptedVendorIds.filter(
+        const newAcceptedVendorIds = acceptedVendorIds.filter(
           id => oldIdsNotInNewGlobalVendors.indexOf(id) < 0
         )
 

@@ -9,6 +9,7 @@ class NewVendorsStatusService {
   constructor({option = OPTION_USE_SAME_THAN_ALL_CUSTOM_IS_TRUE} = {}) {
     this._option = option
   }
+
   getNewVendorsStatus({acceptedVendorIds, globalVendorIds, allowedVendorIds}) {
     return Promise.resolve()
       .then(() =>

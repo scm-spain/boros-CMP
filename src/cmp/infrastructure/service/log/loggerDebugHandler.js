@@ -5,9 +5,7 @@ export const debugHandler = logger => ({
       case 'function':
         return (...args) => {
           logger.debug(
-            `Function ${propKey} called from class ${
-              target.constructor.name
-            } with arguments:`,
+            `Function ${propKey} called from class ${target.constructor.name} with arguments:`,
             Object.entries(args)
           )
           return target[propKey].apply(target, args)

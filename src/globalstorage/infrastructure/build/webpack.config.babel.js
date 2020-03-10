@@ -7,7 +7,7 @@ const ENTRY_PATH = './src/global.js'
 const OUTPUT_FILENAME_DEV = 'global.dev.js'
 const OUTPUT_FILENAME_PRO = 'global.pro.js'
 
-let webpackConfig = {
+const webpackConfig = {
   entry: ENTRY_PATH,
   output: {
     path: path.resolve(OUTPUT_DIST_FOLDER),

@@ -6,6 +6,7 @@ export default class TestGlobalStoreContainer extends GlobalConsentContainer {
   constructor({config, window, iframe}) {
     super({config, window, iframe, cmpVersion: 42, eager: false})
   }
+
   _buildVendorListRepository() {
     return new FileVendorListRepository()
   }
