@@ -36,15 +36,19 @@ export default class Configuration {
     this._log = {}
     this._log.level = log.level || DEFAULT_LOG_LEVEL
   }
+
   get gdpr() {
     return this._gdpr
   }
+
   get vendorList() {
     return this._vendorList
   }
+
   get consent() {
     return this._consent
   }
+
   get log() {
     return this._log
   }

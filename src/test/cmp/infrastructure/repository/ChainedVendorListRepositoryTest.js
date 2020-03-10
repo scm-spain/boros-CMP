@@ -83,8 +83,8 @@ describe('ChainedVendorListRepository', () => {
           ).to.be.equal(2)
           let v1 = 0
           let v2 = 0
-          results.forEach(
-            result => (result.value.vendorListVersion === 1 ? v1++ : v2++)
+          results.forEach(result =>
+            result.value.vendorListVersion === 1 ? v1++ : v2++
           )
           expect(v1, 'should retrive 3 vendor lists of version 1').to.equal(3)
           expect(v2, 'should retrive 3 vendor lists of version 2').to.equal(3)

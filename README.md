@@ -5,7 +5,7 @@
 [![Build status](https://travis-ci.org/scm-spain/Boros-CMP.svg?branch=master)](https://travis-ci.org/scm-spain/Boros-CMP)
 [![codecov](https://codecov.io/gh/scm-spain/Boros-CMP/branch/master/graph/badge.svg)](https://codecov.io/gh/scm-spain/Boros-CMP)
 [![GitHub license](https://img.shields.io/github/license/scm-spain/Boros-CMP.svg)](https://github.com/scm-spain/Boros-CMP/blob/master/LICENSE)
-[![npm version](https://img.shields.io/npm/v/@schibstedspain/boros-cmp.svg)](https://www.npmjs.com/package/@schibstedspain/boros-cmp)
+[![npm version](https://img.shields.io/npm/v/@adv-ui/boros-cmp.svg)](https://www.npmjs.com/package/@adv-ui/boros-cmp)
 
 ## Table of Contents
 
@@ -41,18 +41,18 @@
 
 ## Usage
 
-**Boros CMP** is available as [npm](https://www.npmjs.com/package/@schibstedspain/boros-cmp) package named **@schibstedspain/boros-cmp**.
+**Boros CMP** is available as [npm](https://www.npmjs.com/package/@adv-ui/boros-cmp) package named **@adv-ui/boros-cmp**.
 
 To install the last stable version:
 
 ```bash
-npm install --save @schibstedspain/boros-cmp
+npm install --save @adv-ui/boros-cmp
 ```
 
 To initialize Boros CMP using [default configuration](#configuration-properties-and-default-values) values:
 
 ```javascript
-import boroscmp from '@schibstedspain/boros-cmp'
+import boroscmp from '@adv-ui/boros-cmp'
 
 boroscmp.init()
     .then(()=>{
@@ -63,7 +63,7 @@ boroscmp.init()
 To initialize Boros CMP using customized configuration values:
 
 ```javascript
-import boroscmp from '@schibstedspain/boros-cmp'
+import boroscmp from '@adv-ui/boros-cmp'
 
 const customConfig = {
   gdpr: {
@@ -84,7 +84,7 @@ boroscmp.init({config: customConfig})
 
 Notice that **init** method is returning a _Promise_ but you can subscribe to *cmpReady* event instead:
 ```javascript
-import boroscmp from '@schibstedspain/boros-cmp'
+import boroscmp from '@adv-ui/boros-cmp'
 
 window.document.addEventListener("cmpReady", (event) => {
   // do your stuff ...
@@ -98,7 +98,7 @@ boroscmp.init()
 **You could also import directly the library instead the bundled version.** By using this, it will assume you're providing the @babel/runtime dependency, helpers and polyfills needed to get it working but it will give you a better size by reusing your packages.
 
 ```javascript
-import boroscmp from '@schibstedspain/boros-cmp/lib'
+import boroscmp from '@adv-ui/boros-cmp/lib'
 
 boroscmp.init()
   .then(()=>{
@@ -110,7 +110,7 @@ boroscmp.init()
 
 Boros should be initialized with at least this custom configuration
 ```javascript
-import boroscmp from '@schibstedspain/boros-cmp'
+import boroscmp from '@adv-ui/boros-cmp'
 
 const customConfig = {
   gdpr: {

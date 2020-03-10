@@ -16,11 +16,10 @@ export default class HttpTranslationVendorListRepository {
     return Promise.all([
       this._vendorListRepository.getGlobalVendorList({vendorListVersion}),
       this._acceptedLanguage ? this._getTranslation({vendorListVersion}) : null
-    ]).then(
-      ([vendorList, translation]) =>
-        translation
-          ? this._mergeTranslation({vendorList, translation})
-          : vendorList
+    ]).then(([vendorList, translation]) =>
+      translation
+        ? this._mergeTranslation({vendorList, translation})
+        : vendorList
     )
   }
 

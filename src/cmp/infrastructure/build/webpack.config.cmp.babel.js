@@ -13,7 +13,7 @@ const getMajorVersionFromPackageJsonVersion = () => {
   return parseInt(JSON.stringify(process.env.npm_package_version.split('.')[0]))
 }
 
-let webpackConfig = {
+const webpackConfig = {
   devtool: 'inline-source-map',
   entry: ENTRY_PATH,
   output: {

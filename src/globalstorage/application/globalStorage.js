@@ -55,13 +55,10 @@ const filterEventFormatIsValid = event =>
 const filterCommandIsValid = event => commands =>
   Promise.resolve(event)
     .then(event => event.data.__cmpCall.command)
-    .then(
-      command =>
-        typeof commands[command] === 'function'
-          ? command
-          : Promise.reject(
-              new CommandNotFoundError(event.data.__cmpCall.callId)
-            )
+    .then(command =>
+      typeof commands[command] === 'function'
+        ? command
+        : Promise.reject(new CommandNotFoundError(event.data.__cmpCall.callId))
     )
 
 const sendError = ({error, event}) =>

@@ -6,6 +6,7 @@ export default class TestLocalStoreContainer extends LocalConsentContainer {
   constructor({config, window}) {
     super({config, window, cmpVersion: 42, eager: false})
   }
+
   _buildVendorListRepository() {
     return new FileVendorListRepository()
   }

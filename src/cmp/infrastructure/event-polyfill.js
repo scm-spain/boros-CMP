@@ -5,7 +5,7 @@ if (typeof window !== 'undefined' && typeof window.CustomEvent !== 'function') {
       cancelable: false,
       detail: undefined
     }
-    let evt = document.createEvent('CustomEvent')
+    const evt = document.createEvent('CustomEvent')
     evt.initCustomEvent(
       event,
       eventParams.bubbles,

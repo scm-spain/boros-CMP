@@ -21,11 +21,12 @@ export default class ChainedVendorListRepository {
         .then(
           globalVendorList =>
             globalVendorList ||
-            this._getRemoteVendorList({vendorListVersion}).then(
-              globalVendorList =>
-                this._saveRemoteVendorListToLocal({globalVendorList}).then(
-                  () => globalVendorList
-                )
+            this._getRemoteVendorList({
+              vendorListVersion
+            }).then(globalVendorList =>
+              this._saveRemoteVendorListToLocal({globalVendorList}).then(
+                () => globalVendorList
+              )
             )
         )
       this._requested.set(vendorListVersion, request)

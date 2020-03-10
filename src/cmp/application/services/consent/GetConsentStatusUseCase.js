@@ -15,9 +15,8 @@ export default class GetConsentStatusUseCase {
   getConsentStatus() {
     return Promise.resolve()
       .then(() => this._consentRepository.getConsent())
-      .then(
-        consent =>
-          consent ? CONSENT_STATUS_ACCEPTED : CONSENT_STATUS_NOT_ACCEPTED
+      .then(consent =>
+        consent ? CONSENT_STATUS_ACCEPTED : CONSENT_STATUS_NOT_ACCEPTED
       )
   }
 }

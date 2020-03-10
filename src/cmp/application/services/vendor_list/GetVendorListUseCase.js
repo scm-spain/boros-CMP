@@ -2,6 +2,7 @@ export default class GetVendorListUseCase {
   constructor({vendorListRepository}) {
     this._vendorListRepository = vendorListRepository
   }
+
   /**
    * The result will be the GlobalVendorList being the vendor list object of the requested version.
    * If the vendorListVersion is null, the vendor list for the VendorListVersion in the current consent string is returned.

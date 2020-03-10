@@ -84,7 +84,7 @@ export default class ConsentStringVendorConsentsRepository {
   }
 
   _mapVendorConsentsToConsent({vendorConsents, purposeConsents}) {
-    let consent = new ConsentString()
+    const consent = new ConsentString()
     consent.setVendorsAllowed(vendorConsents)
     consent.setPurposesAllowed(purposeConsents)
     consent.setCmpId(this._cmpId)

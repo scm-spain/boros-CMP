@@ -176,6 +176,7 @@ export default class BaseConsentContainer {
       option: this._config.consent.newVendorsStatusOption
     })
   }
+
   _buildGlobalVendorListVersionChangedObserver() {
     return globalVendorListVersionChangedObserverFactory({
       updateConsentVendorsService: this.getInstance({
