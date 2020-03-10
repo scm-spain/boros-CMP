@@ -1,6 +1,6 @@
 {
   "name": "@adv-ui/boros-cmp",
-  "version": "1.5.0",
+  "version": "2.0.0",
   "description": "Adevinta GDPR - Consent Management Provider - Standalone",
   "main": "dist/cmp.pro.js",
   "scripts": {
